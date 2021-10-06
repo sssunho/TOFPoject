@@ -13,6 +13,9 @@ namespace TOF
         public float mouseY;
 
         public bool b_Input;
+        public bool rb_Input;
+        public bool rt_Input;
+
         public bool rollFlag;
         public bool sprintFlag;
         public float rollInputTimer;
@@ -43,6 +46,7 @@ namespace TOF
         {
             MoveInput(delta);
             HandleRollInput(delta);
+            HandleAttackInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -54,10 +58,10 @@ namespace TOF
             mouseY = cameraInput.y;
         }
 
-        // ! sunho edited this method
-        private void AttackInput(float delta)
+        private void HandleAttackInput(float delta)
         {
-            
+            inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
         }
 
         private void HandleRollInput(float delta)
@@ -79,5 +83,7 @@ namespace TOF
                 rollInputTimer = 0;
             }
         }
+
+
     }
 }

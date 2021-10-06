@@ -33,6 +33,8 @@ namespace TOF
         [SerializeField]
         float movementSpeed = 5;
         [SerializeField]
+        float walkingSpeed = 1;
+        [SerializeField]
         float sprintSpeed = 7;
         [SerializeField]
         float rotationSpeed = 10;
@@ -95,7 +97,7 @@ namespace TOF
 
             float speed = movementSpeed;
 
-            if (inputHandler.sprintFlag)
+            if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5f)
             {
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
@@ -103,7 +105,16 @@ namespace TOF
             }
             else
             {
-                moveDirection *= speed;
+                if (inputHandler.moveAmount < 0.5f)
+                {
+                    moveDirection *= walkingSpeed;
+                    playerManager.isSprinting = false;
+                }
+                else
+                {
+                    moveDirection *= speed;
+                    playerManager.isSprinting = false;
+                }
             }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
@@ -142,6 +153,7 @@ namespace TOF
 
         public void HandleFalling(float delta, Vector3 moveDirection)
         {
+            Debug.DrawRay(transform.position, rigidbody.velocity);
             playerManager.isGrounded = false;
             RaycastHit hit;
             Vector3 origin = myTransform.position;
@@ -153,7 +165,7 @@ namespace TOF
             if(playerManager.isInAir)
             {
                 rigidbody.AddForce(-Vector3.up * fallingSpeed);
-                rigidbody.AddForce(moveDirection * fallingSpeed / 20.0f);
+                rigidbody.AddForce(moveDirection * fallingSpeed / 5.0f);
 
             }
 
@@ -181,6 +193,7 @@ namespace TOF
                     else
                     {
                         animatorHandler.PlayTargetAnimation("Locomotion", false);
+                        animatorHandler.PlayTargetAnimation("Empty", false);
                         inAirTimer = 0;
                     }
 
@@ -189,7 +202,6 @@ namespace TOF
             }
             else
             {
-                Debug.DrawRay(transform.position, rigidbody.velocity);
 
                 if (playerManager.isGrounded)
                     playerManager.isGrounded = false;
@@ -198,12 +210,12 @@ namespace TOF
                 {
                     if (playerManager.isInteracting == false)
                     {
-                        animatorHandler.PlayTargetAnimation("Falling", true, false);
+                        animatorHandler.PlayTargetAnimation("Falling", true);
                     }
 
                     Vector3 vel = rigidbody.velocity;
                     vel.Normalize();
-                    rigidbody.velocity = vel * (movementSpeed);
+                    rigidbody.velocity = vel * (movementSpeed / 2);
                     playerManager.isInAir = true;
                 }
             }
