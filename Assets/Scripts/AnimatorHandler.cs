@@ -85,7 +85,7 @@ namespace TOF
         }
 
         // ! sunho edited this method
-        public void PlayTargetAnimation(string name, bool flag)
+        public void _PlayTargetAnimation(string name, bool flag)
         {
 
         }

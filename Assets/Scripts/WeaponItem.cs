@@ -12,7 +12,7 @@ namespace TOF
         public bool inUnarmed;
 
         [Header("One Handed Attak Animation")]
-        public string OneHandedLightAttack1;
-        public string OneHandedHeavyAttack1;
+        public string OH_Light_Attack_1;
+        public string OH_Heavy_Attack_1;
     }
 }
