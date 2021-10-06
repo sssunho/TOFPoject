@@ -57,7 +57,7 @@ namespace TOF
         // ! sunho edited this method
         private void AttackInput(float delta)
         {
-
+            
         }
 
         private void HandleRollInput(float delta)
