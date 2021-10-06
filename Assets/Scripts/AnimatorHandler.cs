@@ -94,6 +94,13 @@ namespace TOF
             anim.CrossFade(targetAnim, 0.2f);
         }
 
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool rootMotion)
+        {
+            anim.applyRootMotion = rootMotion;
+            anim.SetBool("isInteracting", isInteracting);
+            anim.CrossFade(targetAnim, 0.2f);
+        }
+
         public void CanRotate()
         {
             canRotate = true;
