@@ -15,12 +15,12 @@ namespace TOF
 
         public void HandleLightAttack(WeaponItem weapon)
         {
-            animatorHandler._PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
+            animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
         }
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
-            animatorHandler._PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
+            animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
         }
     }
 }

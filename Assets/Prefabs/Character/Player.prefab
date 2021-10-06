@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 187121988616708604}
   - component: {fileID: 187121988616708605}
   - component: {fileID: 187121988616708578}
+  - component: {fileID: 269503889}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -82,6 +83,10 @@ MonoBehaviour:
   moveAmount: 0
   mouseX: 0
   mouseY: 0
+  b_Input: 0
+  rollFlag: 0
+  sprintFlag: 0
+  rollInputTimer: 0
 --- !u!114 &187121988616708578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +104,22 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
   movementSpeed: 5
+  sprintSpeed: 7
   rotationSpeed: 10
+--- !u!114 &269503889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187121988616708579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199c7590ca82c948856321b902fa7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteracting: 0
+  isSprinting: 0
 --- !u!114 &187121990415448142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +148,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: acf47a11eeb169b4fa2b1ef07cc4822a, type: 2}
+      objectReference: {fileID: 9100000, guid: 2a159a05c06466c4aa01685b792cd79d, type: 2}
     - target: {fileID: -6057140222963153312, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0

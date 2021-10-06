@@ -104,11 +104,6 @@ namespace TOF
             canRotate = false;
         }
 
-        // ! sunho edited this method
-        public void _PlayTargetAnimation(string name, bool flag)
-        {
-
-        }
         private void OnAnimatorMove()
         {
             if (playerManager.isInteracting == false)
