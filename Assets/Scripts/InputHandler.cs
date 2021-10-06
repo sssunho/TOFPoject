@@ -68,7 +68,7 @@ namespace TOF
         // ! sunho edited this method
         private void AttackInput(float delta)
         {
-
+            
         }
     }
 }
