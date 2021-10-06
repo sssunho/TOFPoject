@@ -83,6 +83,12 @@ namespace TOF
         {
             canRotate = false;
         }
+
+        // ! sunho edited this method
+        public void PlayTargetAnimation(string name, bool flag)
+        {
+
+        }
     }
 }
 

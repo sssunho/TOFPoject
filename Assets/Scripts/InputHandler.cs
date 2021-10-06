@@ -47,6 +47,12 @@ namespace TOF
             mouseX = cameraInput.x;
             mouseY = cameraInput.y;
         }
+
+        // ! sunho edited this method
+        private void AttackInput(float delta)
+        {
+
+        }
     }
 }
 
