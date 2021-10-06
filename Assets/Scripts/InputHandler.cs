@@ -73,7 +73,6 @@ namespace TOF
 
             if(rb_Input)
             {
-                Debug.Log(playerAttacker);
                 playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
             }
             if (rt_Input)
