@@ -21,9 +21,17 @@ namespace TOF
         public float rollInputTimer;
 
         PlayerControls inputActions;
+        PlayerAttacker playerAttacker;
+        PlayerInventory playerInventory;
 
         Vector2 movementInput;
         Vector2 cameraInput;
+
+        private void Awake()
+        {
+            playerAttacker = GetComponent<PlayerAttacker>();
+            playerInventory = GetComponent<PlayerInventory>();
+        }
 
         public void OnEnable()
         {
@@ -62,6 +70,16 @@ namespace TOF
         {
             inputActions.PlayerActions.RB.performed += i => rb_Input = true;
             inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+
+            if(rb_Input)
+            {
+                Debug.Log(playerAttacker);
+                playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+            }
+            if (rt_Input)
+            {
+                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+            }
         }
 
         private void HandleRollInput(float delta)
