@@ -153,7 +153,7 @@ namespace TOF
             if(playerManager.isInAir)
             {
                 rigidbody.AddForce(-Vector3.up * fallingSpeed);
-                rigidbody.AddForce(moveDirection * fallingSpeed / 10.0f);
+                rigidbody.AddForce(moveDirection * fallingSpeed / 20.0f);
 
             }
 
@@ -175,7 +175,6 @@ namespace TOF
                 {
                     if (inAirTimer > 0.5f)
                     {
-                        Debug.Log("asdf " + inAirTimer.ToString());
                         animatorHandler.PlayTargetAnimation("Land", true);
                         inAirTimer = 0;
                     }
@@ -190,17 +189,21 @@ namespace TOF
             }
             else
             {
+                Debug.DrawRay(transform.position, rigidbody.velocity);
+
                 if (playerManager.isGrounded)
                     playerManager.isGrounded = false;
 
                 if (playerManager.isInAir == false)
                 {
                     if (playerManager.isInteracting == false)
-                        animatorHandler.PlayTargetAnimation("Falling", true);
+                    {
+                        animatorHandler.PlayTargetAnimation("Falling", true, false);
+                    }
 
                     Vector3 vel = rigidbody.velocity;
                     vel.Normalize();
-                    rigidbody.velocity = vel * (movementSpeed / 2);
+                    rigidbody.velocity = vel * (movementSpeed);
                     playerManager.isInAir = true;
                 }
             }
