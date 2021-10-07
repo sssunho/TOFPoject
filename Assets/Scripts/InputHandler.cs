@@ -74,15 +74,13 @@ namespace TOF
 
         private void HandleQuickSlotsInput()
         {
-            inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-            inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            //inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            //inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             if (d_Pad_Right)
                 playerInventory.changeRightWeapon();
             else if (d_Pad_Left)
                 playerInventory.changeLeftWeapon();
         }
-    }
-}
 
         private void HandleAttackInput(float delta)
         {
