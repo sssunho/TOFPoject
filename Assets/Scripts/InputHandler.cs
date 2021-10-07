@@ -63,7 +63,7 @@ namespace TOF
         public void TickInput(float delta)
         {
             MoveInput(delta);
-            HandleQuickSlotsInput();
+            //HandleQuickSlotsInput();
         }
 
         private void MoveInput(float delta)
