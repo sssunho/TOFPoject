@@ -12,7 +12,16 @@ namespace TOF
         public float mouseX;
         public float mouseY;
 
+        public bool b_Input;
+        public bool rb_Input;
+        public bool rt_Input;
+        public bool d_Pad_Up;
+        public bool d_Pad_Down;
+        public bool d_Pad_Left;
+        public bool d_Pad_Right;
+
         PlayerControls inputActions;
+        PlayerInventory playerInventory;
         CameraHandler cameraHandler;
 
         Vector2 movementInput;
@@ -54,6 +63,7 @@ namespace TOF
         public void TickInput(float delta)
         {
             MoveInput(delta);
+            HandleQuickSlotsInput();
         }
 
         private void MoveInput(float delta)
@@ -63,6 +73,16 @@ namespace TOF
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
             mouseX = cameraInput.x;
             mouseY = cameraInput.y;
+        }
+
+        private void HandleQuickSlotsInput()
+        {
+            inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            if (d_Pad_Right)
+                playerInventory.changeRightWeapon();
+            else if (d_Pad_Left)
+                playerInventory.changeLeftWeapon();
         }
     }
 }
