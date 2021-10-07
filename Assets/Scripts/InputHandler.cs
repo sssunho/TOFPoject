@@ -15,6 +15,10 @@ namespace TOF
         public bool b_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool d_Pad_Up;
+        public bool d_Pad_Down;
+        public bool d_Pad_Left;
+        public bool d_Pad_Right;
 
         public bool rollFlag;
         public bool sprintFlag;
@@ -23,6 +27,7 @@ namespace TOF
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
+        CameraHandler cameraHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -53,6 +58,7 @@ namespace TOF
         public void TickInput(float delta)
         {
             MoveInput(delta);
+            //HandleQuickSlotsInput();
             HandleRollInput(delta);
             HandleAttackInput(delta);
         }
@@ -65,6 +71,18 @@ namespace TOF
             mouseX = cameraInput.x;
             mouseY = cameraInput.y;
         }
+
+        private void HandleQuickSlotsInput()
+        {
+            inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            if (d_Pad_Right)
+                playerInventory.changeRightWeapon();
+            else if (d_Pad_Left)
+                playerInventory.changeLeftWeapon();
+        }
+    }
+}
 
         private void HandleAttackInput(float delta)
         {
