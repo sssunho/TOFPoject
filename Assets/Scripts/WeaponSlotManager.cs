@@ -10,6 +10,8 @@ namespace TOF
         WeaponHolderSlot leftHandSlot;
         WeaponHolderSlot rightHandSlot;
 
+        //asdf
+
 
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
