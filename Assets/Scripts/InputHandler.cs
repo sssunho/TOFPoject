@@ -20,7 +20,12 @@ namespace TOF
         public bool d_Pad_Left;
         public bool d_Pad_Right;
 
+        public bool rollFlag;
+        public bool sprintFlag;
+        public float rollInputTimer;
+
         PlayerControls inputActions;
+        PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         CameraHandler cameraHandler;
 
@@ -29,23 +34,13 @@ namespace TOF
 
         private void Awake()
         {
-            cameraHandler = CameraHandler.singleton;
-        }
-
-        private void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
-
-            if(cameraHandler != null)
-            {
-                cameraHandler.FollowTarget(delta);
-                cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-            }
+            playerAttacker = GetComponent<PlayerAttacker>();
+            playerInventory = GetComponent<PlayerInventory>();
         }
 
         public void OnEnable()
         {
-            if(inputActions == null)
+            if (inputActions == null)
             {
                 inputActions = new PlayerControls();
                 inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
@@ -64,6 +59,8 @@ namespace TOF
         {
             MoveInput(delta);
             //HandleQuickSlotsInput();
+            HandleRollInput(delta);
+            HandleAttackInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -87,3 +84,41 @@ namespace TOF
     }
 }
 
+        private void HandleAttackInput(float delta)
+        {
+            inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+
+            if(rb_Input)
+            {
+                playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+            }
+            if (rt_Input)
+            {
+                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+            }
+        }
+
+        private void HandleRollInput(float delta)
+        {
+            b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            if(b_Input)
+            {
+                rollInputTimer += delta;
+                sprintFlag = true;
+            }
+            else
+            {
+                if(rollInputTimer > 0 && rollInputTimer < 0.5f)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                }
+
+                rollInputTimer = 0;
+            }
+        }
+
+
+    }
+}

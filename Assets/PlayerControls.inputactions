@@ -110,6 +110,13 @@
                     "name": "D-Pad Up",
                     "type": "Button",
                     "id": "aebc2a97-08ac-41c2-b9cb-6f07439d752d",
+            "name": "Player Actions",
+            "id": "b72455bf-831c-4c0c-85bb-964c9e5b39c4",
+            "actions": [
+                {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "237f960d-0e9d-4852-8e3d-086c5e56cf08",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -118,6 +125,9 @@
                     "name": "D-Pad Down",
                     "type": "Button",
                     "id": "fbf13027-9829-4317-a368-e9c7a258d96b",
+                    "name": "RB",
+                    "type": "Button",
+                    "id": "34a19378-c8ca-4b07-832a-152491e5344c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -134,6 +144,9 @@
                     "name": "D-Pad Left",
                     "type": "Button",
                     "id": "d9bb94c9-03a9-47a3-ae41-e86c9a32ecb4",
+                    "name": "RT",
+                    "type": "Button",
+                    "id": "59384f1f-f693-450e-a8f6-4d183df40283",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -192,6 +205,12 @@
                     "processors": "",
                     "groups": "Mouse & Keyboard",
                     "action": "D-Pad Right",
+                    "id": "a259b837-2cbb-4190-bb88-11a706cb1969",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -203,6 +222,12 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "D-Pad Right",
+                    "id": "526f3194-8af2-4c1c-9ee4-0ac7554c7ba8",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -214,6 +239,12 @@
                     "processors": "",
                     "groups": "Mouse & Keyboard",
                     "action": "D-Pad Left",
+                    "id": "6da11254-0cf2-48cb-9cfa-32f916bb6d42",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -225,6 +256,12 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "D-Pad Left",
+                    "id": "a78bbd82-ef8c-421a-bc2f-9e39ca40f0b9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

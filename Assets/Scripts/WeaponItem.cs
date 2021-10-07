@@ -10,5 +10,9 @@ namespace TOF
     {
         public GameObject modelPrefab;
         public bool inUnarmed;
+
+        [Header("One Handed Attak Animation")]
+        public string OH_Light_Attack_1;
+        public string OH_Heavy_Attack_1;
     }
 }
