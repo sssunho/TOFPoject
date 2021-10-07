@@ -25,12 +25,12 @@ namespace TOF
 
         private void Start()
         {
-            //weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
-            //weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
-            //rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
-            //leftWeapon = weaponsInLeftHandSlot[curLeftWeaponIndex];
-            rightWeapon = unarmed;
-            leftWeapon = unarmed;
+            weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
+            weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
+            rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
+            leftWeapon = weaponsInLeftHandSlot[curLeftWeaponIndex];
+            //rightWeapon = unarmed;
+            //leftWeapon = unarmed;
         }
 
         public void changeRightWeapon()
