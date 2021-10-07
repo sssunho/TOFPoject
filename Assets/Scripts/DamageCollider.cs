@@ -21,13 +21,11 @@ namespace TOF
         public void EnableDamageCollider()
         {
             damageCollider.enabled = true;
-            Debug.Log("open");
         }
 
         public void DisableDamageCollider()
         {
             damageCollider.enabled = false;
-            Debug.Log("close");
         }
 
         private void OnTriggerEnter(Collider collision)
