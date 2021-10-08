@@ -20,15 +20,19 @@ namespace TOF
         public bool d_Pad_Left;
         public bool d_Pad_Right;
 
+        public bool inventory_Input;
+
         public bool rollFlag;
         public bool sprintFlag;
         public bool comboFlag;
+        public bool inventoryFlag;
         public float rollInputTimer;
 
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        UIManager uiManager;
         CameraHandler cameraHandler;
 
         Vector2 movementInput;
@@ -39,6 +43,7 @@ namespace TOF
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            uiManager = FindObjectOfType<UIManager>();
         }
 
         public void OnEnable()
@@ -68,6 +73,7 @@ namespace TOF
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
+            HandleInventoryInput();
         }
 
         private void MoveInput(float delta)
@@ -81,6 +87,8 @@ namespace TOF
 
         private void HandleQuickSlotsInput()
         {
+            inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
+            inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
             if (d_Pad_Right)
                 playerInventory.changeRightWeapon();
             else if (d_Pad_Left)
@@ -131,6 +139,19 @@ namespace TOF
             }
         }
 
+        public void HandleInventoryInput()
+        {
+            inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
 
+            if(inventory_Input)
+            {
+                inventoryFlag = !inventoryFlag;
+                Debug.Log(inventoryFlag);
+                if (inventoryFlag)
+                    uiManager.OpenSelectWindow();
+                else 
+                    uiManager.CloseSelectWindow();
+            }
+        }
     }
 }
