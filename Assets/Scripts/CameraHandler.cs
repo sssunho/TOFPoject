@@ -11,12 +11,12 @@ namespace TOF
         public Transform cameraPivotTransform;
         private Transform myTransform;
         private Vector3 cameraTransformPosition;
-        private LayerMask ignoreLayer;
+        public LayerMask ignoreLayer;
         private Vector3 cameraFollowVelocity = Vector3.zero;
 
         public static CameraHandler singleton;
 
-        public float lookSpeed = 0.1f;
+        public float lookSpeed = 0.001f;
         public float followSpeed = 0.1f;
         public float pivotSpeed = 0.03f;
 

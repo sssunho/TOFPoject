@@ -13,6 +13,7 @@ namespace TOF
         public float mouseY;
 
         public bool b_Input;
+        public bool e_Input;
         public bool rb_Input;
         public bool rt_Input;
         public bool d_Pad_Up;
@@ -74,6 +75,7 @@ namespace TOF
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
             HandleInventoryInput();
+            HandleInteractiongButtonInput();
         }
 
         private void MoveInput(float delta)
@@ -146,12 +148,16 @@ namespace TOF
             if(inventory_Input)
             {
                 inventoryFlag = !inventoryFlag;
-                Debug.Log(inventoryFlag);
                 if (inventoryFlag)
                     uiManager.OpenSelectWindow();
                 else 
                     uiManager.CloseSelectWindow();
             }
+        }
+
+        private void HandleInteractiongButtonInput()
+        {
+            inputActions.PlayerActions.E.performed += i => e_Input = true;
         }
     }
 }

@@ -18,6 +18,8 @@ namespace TOF
         public int curRightWeaponIndex = 0;
         public int curLeftWeaponIndex = 0;
 
+        public List<WeaponItem> weaponsInventory;
+
         private void Awake()
         {
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();

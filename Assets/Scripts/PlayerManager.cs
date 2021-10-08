@@ -41,6 +41,7 @@ namespace TOF
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
 
+            CheckForInteractableObject();
             // ep 23에서 제거된 부분입니다.
             // HandleJump는 이 부분에 적으면 됩니다.
         }
@@ -63,6 +64,7 @@ namespace TOF
             inputHandler.d_Pad_Right = false;
             inputHandler.d_Pad_Left = false;
             inputHandler.inventory_Input = false;
+            inputHandler.e_Input = false;
 
             float delta = Time.deltaTime;
 
@@ -75,6 +77,26 @@ namespace TOF
             if (isInAir)
             {
                 playerLocomotion.inAirTimer += Time.deltaTime;
+            }
+        }
+
+        public void CheckForInteractableObject()
+        {
+            RaycastHit hit;
+
+            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayer))
+            {
+                if(hit.collider.tag == "Interactable")
+                {
+                    Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+
+                    if (interactableObject == null) return;
+
+                    string interactableText = interactableObject.interactableText;
+
+                    if (inputHandler.e_Input)
+                        hit.collider.GetComponent<Interactable>().Interact(this);
+                }
             }
         }
     }

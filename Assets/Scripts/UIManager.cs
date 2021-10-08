@@ -15,7 +15,6 @@ namespace TOF
 
         public void CloseSelectWindow()
         {
-            Debug.Log("close");
             selectWindow.SetActive(false);
         }
     }
