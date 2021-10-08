@@ -14,8 +14,7 @@ namespace TOF
             damageCollider = GetComponent<Collider>();
             damageCollider.gameObject.SetActive(true);
             damageCollider.isTrigger = true;
-            damageCollider.enabled = true;
-
+            damageCollider.enabled = false;
         }
 
         public void EnableDamageCollider()
@@ -47,7 +46,7 @@ namespace TOF
                 if (enemyStats != null)
                 {
                     enemyStats.TakeDamage(currentWeaponDamage);
-                    Debug.Log("coll");
+                    Debug.Log(this);
                 }
             }
         }
