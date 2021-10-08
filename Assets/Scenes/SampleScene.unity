@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964128, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4047,7 +4047,7 @@ PrefabInstance:
     - target: {fileID: 5868778139007946859, guid: 0c2a6648126d8224482130e2630c2bc3, type: 3}
       propertyPath: rightWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+      objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
     - target: {fileID: 5868778139007946859, guid: 0c2a6648126d8224482130e2630c2bc3, type: 3}
       propertyPath: weaponsInLeftHandSlot.Array.data[0]
       value: 
@@ -4056,6 +4056,14 @@ PrefabInstance:
       propertyPath: weaponsInLeftHandSlot.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+    - target: {fileID: 5868778139007946859, guid: 0c2a6648126d8224482130e2630c2bc3, type: 3}
+      propertyPath: weaponsInRightHandSlot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+    - target: {fileID: 5868778139007946859, guid: 0c2a6648126d8224482130e2630c2bc3, type: 3}
+      propertyPath: weaponsInRightHandSlot.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
     - target: {fileID: 6046888350526012384, guid: 0c2a6648126d8224482130e2630c2bc3, type: 3}
       propertyPath: m_Name
       value: PlayerTest
