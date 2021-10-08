@@ -48,6 +48,10 @@ namespace TOF
                 inputActions = new PlayerControls();
                 inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+                inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
+                inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
             }
 
             inputActions.Enable();
@@ -61,9 +65,9 @@ namespace TOF
         public void TickInput(float delta)
         {
             MoveInput(delta);
-            HandleQuickSlotsInput();
             HandleRollInput(delta);
             HandleAttackInput(delta);
+            HandleQuickSlotsInput();
         }
 
         private void MoveInput(float delta)
@@ -77,8 +81,6 @@ namespace TOF
 
         private void HandleQuickSlotsInput()
         {
-            inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
-            inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
             if (d_Pad_Right)
                 playerInventory.changeRightWeapon();
             else if (d_Pad_Left)
@@ -87,8 +89,6 @@ namespace TOF
 
         private void HandleAttackInput(float delta)
         {
-            inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
             if(rb_Input)
             {
@@ -112,10 +112,12 @@ namespace TOF
         private void HandleRollInput(float delta)
         {
             b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-            if(b_Input)
+            sprintFlag = b_Input;
+
+            if (b_Input)
             {
                 rollInputTimer += delta;
-                sprintFlag = true;
+                //sprintFlag = true;
             }
             else
             {
