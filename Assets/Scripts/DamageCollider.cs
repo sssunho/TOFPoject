@@ -30,15 +30,26 @@ namespace TOF
 
         private void OnTriggerEnter(Collider collision)
         {
-            //if(collision.tag == "Hittable")
-            //{
-            //    PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+            if (collision.tag == "Player")
+            {
+                PlayerStats playerStats = collision.GetComponent<PlayerStats>();
 
-            //    if(playerStats != null)
-            //    {
-            //        playerStats.TakeDamage(currentWeaponDamage);
-            //    }
-            //}
+                if (playerStats != null)
+                {
+                    playerStats.TakeDamage(currentWeaponDamage);
+                }
+            }
+            
+            if (collision.tag == "Enemy")
+            {
+                EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
+
+                if (enemyStats != null)
+                {
+                    enemyStats.TakeDamage(currentWeaponDamage);
+                    Debug.Log("coll");
+                }
+            }
         }
     }
 }
