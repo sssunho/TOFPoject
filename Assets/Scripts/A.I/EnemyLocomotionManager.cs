@@ -9,6 +9,9 @@ namespace TOF
         EnemyManager enemyManager;
         EnemyAnimationManager enemyAnimationManager;
 
+        public CapsuleCollider characterCollider;
+        public CapsuleCollider characterCollisionBlockerCollider;
+
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();

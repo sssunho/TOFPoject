@@ -12,14 +12,17 @@ namespace TOF
         {
             // #.1 Chase the target
             if (enemyManager.isPerformingAction)
+            {
+                enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                 return this;
+            }
 
-            Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
-            enemyManager.distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
-            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+            float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
 
             // if we are performing an action, stop our movement
-            if (enemyManager.distanceFromTarget > enemyManager.maximumAttackRange)
+            if (distanceFromTarget > enemyManager.maximumAttackRange)
             {
                 enemyAnimationManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
             }
@@ -29,7 +32,7 @@ namespace TOF
             enemyManager.navMeshAgent.transform.localRotation = Quaternion.identity;
 
             // #.2 If within attack range, switch to combat stance state
-            if (enemyManager.distanceFromTarget <= enemyManager.maximumAttackRange)
+            if (distanceFromTarget <= enemyManager.maximumAttackRange)
             {
                 return combatStanceState;
             }
@@ -66,7 +69,7 @@ namespace TOF
                 enemyManager.navMeshAgent.enabled = true;
                 enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
                 enemyManager.enemyRigidBody.velocity = targetVelocity;
-                transform.rotation = Quaternion.Slerp(transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
             }
         }
     }

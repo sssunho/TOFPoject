@@ -9,13 +9,15 @@ namespace TOF
         public bool isSleeping;
         public float detectionRadius = 2;
         public string sleepAnimation;
+        public string wakeAnimation;
+
         LayerMask detectionLayer;
 
         public PursueTargetState pursueTargetState;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
-            if(isSleeping && enemyManager.isPerformingAction == false)
+            if(isSleeping && enemyManager.isInteracting == false)
             {
                 enemyAnimationManager.PlayTargetAnimation(sleepAnimation, true);
             }
@@ -25,10 +27,33 @@ namespace TOF
 
             for(int i = 0; i < colliders.Length; i++)
             {
-                PlayerManager playerManager = colliders[i].transform.GetComponent<PlayerManager>();
+                CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
 
+                if(characterStats != null)
+                {
+                    Vector3 targetsDirection = characterStats.transform.position - enemyManager.transform.position;
+                    float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
+
+                    if(viewableAngle > enemyManager.minimumDetectionAngle
+                        && viewableAngle < enemyManager.maximumDetectionAngle)
+                    {
+                        enemyManager.currentTarget = characterStats;
+                        isSleeping = false;
+                        enemyAnimationManager.PlayTargetAnimation(wakeAnimation, true);
+                    }
+                }
             }
-            return this;
+            #endregion
+
+            #region Handle State Change
+            if(enemyManager.currentTarget != null)
+            {
+                return pursueTargetState;
+            }
+            else
+            {
+                return this;
+            }
             #endregion
         }
     }
