@@ -6,16 +6,12 @@ namespace TOF
 {
     public class CharacterStats : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        public int healthLevel = 10;
+        public int maxHealth;
+        public int currentHealth;
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        public int staminaLevel = 10;
+        public int maxStamina;
+        public int currentStamina;
     }
 }

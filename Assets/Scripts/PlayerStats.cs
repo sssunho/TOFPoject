@@ -28,7 +28,7 @@ namespace TOF
             return maxHealth;
         }
 
-        public void takeDamage(int damage)
+        public void TakeDamage(int damage)
         {
             curHealth -= damage;
             healthbar.setCurValue(curHealth);
