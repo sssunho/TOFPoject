@@ -12,8 +12,8 @@ namespace TOF
         public WeaponItem leftWeapon;
         public WeaponItem unarmed;
 
-        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[1];
-        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[1];
+        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[2];
+        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[2];
 
         public int curRightWeaponIndex = 0;
         public int curLeftWeaponIndex = 0;
@@ -35,35 +35,16 @@ namespace TOF
 
         public void changeRightWeapon()
         {
-            curRightWeaponIndex += 1;
-            if (curRightWeaponIndex == 0 && weaponsInRightHandSlot[0] != null)
-            {
-                rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
-                weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlot[curRightWeaponIndex], false);
-            }
-            else if(curRightWeaponIndex == 0 && weaponsInRightHandSlot[0] == null)
-                curRightWeaponIndex += 1;
+            if (weaponsInRightHandSlot[1 - curRightWeaponIndex] == null) return;
 
-            else if(curRightWeaponIndex == 1 && weaponsInRightHandSlot[1] != null)
-            {
-                rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
-                weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlot[curRightWeaponIndex], false);
-            }
-            else
-                curRightWeaponIndex += 1;
-
-            if(curRightWeaponIndex> weaponsInRightHandSlot.Length - 1)
-            {
-                curRightWeaponIndex = -1;
-                rightWeapon = unarmed;
-                weaponSlotManager.LoadWeaponOnSlot(unarmed, false);
-            }
+            curRightWeaponIndex = 1 - curRightWeaponIndex;
+            rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
+            weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlot[curRightWeaponIndex], false);
         }
 
         public void changeLeftWeapon()
         {
-            curLeftWeaponIndex += 1;
-            if (curLeftWeaponIndex == 0 && weaponsInLeftHandSlot[0] !=null) return;
+            if (weaponsInLeftHandSlot[1 - curLeftWeaponIndex] == null) return;
 
             curLeftWeaponIndex = 1 - curLeftWeaponIndex;
             leftWeapon = weaponsInLeftHandSlot[curLeftWeaponIndex];

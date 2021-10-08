@@ -10,18 +10,14 @@ namespace TOF
         WeaponHolderSlot leftHandSlot;
         WeaponHolderSlot rightHandSlot;
 
+        //asdf
+
+
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
 
-        Animator animator;
-
-        QuickSlotUI quickSlotUI;
-
         private void Awake()
         {
-            animator = GetComponent<Animator>();
-            quickSlotUI = FindObjectOfType<QuickSlotUI>();
-
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach(WeaponHolderSlot weaponSlot in weaponHolderSlots)
             {
@@ -42,13 +38,11 @@ namespace TOF
             {
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
-                quickSlotUI.UpdateWeaponQuickSlot(true, weaponItem);
             }
             else
             {
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
-                quickSlotUI.UpdateWeaponQuickSlot(false, weaponItem);
             }
         }
 

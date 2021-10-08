@@ -58,7 +58,7 @@ namespace TOF
         public void TickInput(float delta)
         {
             MoveInput(delta);
-            HandleQuickSlotsInput();
+            //HandleQuickSlotsInput();
             HandleRollInput(delta);
             HandleAttackInput(delta);
         }
@@ -74,8 +74,8 @@ namespace TOF
 
         private void HandleQuickSlotsInput()
         {
-            inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
-            inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
+            //inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            //inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
             if (d_Pad_Right)
                 playerInventory.changeRightWeapon();
             else if (d_Pad_Left)
