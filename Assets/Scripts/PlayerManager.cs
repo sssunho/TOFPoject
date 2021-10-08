@@ -95,14 +95,15 @@ namespace TOF
                 {
                     Interactable interactableObject = hit.collider.GetComponent<Interactable>();
 
-                    if (interactableObject == null) return;
+                    if (interactableObject != null)
+                    {
+                        string interactableText = interactableObject.interactableText;
+                        interactableUI.interactableText.text = interactableText;
+                        interactableUIGameObject.SetActive(true);
 
-                    string interactableText = interactableObject.interactableText;
-                    interactableUI.interactableText.text = interactableText;
-                    interactableUIGameObject.SetActive(true);
-
-                    if (inputHandler.e_Input)
-                        hit.collider.GetComponent<Interactable>().Interact(this);
+                        if (inputHandler.e_Input)
+                            hit.collider.GetComponent<Interactable>().Interact(this);
+                    }
                 }
             }
             else
