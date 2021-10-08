@@ -22,13 +22,11 @@ namespace TOF
 
         public bool rollFlag;
         public bool sprintFlag;
-        public bool comboFlag;
         public float rollInputTimer;
 
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
-        PlayerManager playerManager;
         CameraHandler cameraHandler;
 
         Vector2 movementInput;
@@ -38,7 +36,6 @@ namespace TOF
         {
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
-            playerManager = GetComponent<PlayerManager>();
         }
 
         public void OnEnable()
@@ -92,16 +89,7 @@ namespace TOF
 
             if(rb_Input)
             {
-                if(playerManager.canDoCombo)
-                {
-                    comboFlag = true;
-                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
-                    comboFlag = false;
-                }
-                else if (!playerManager.canDoCombo && !playerManager.isInteracting)
-                {
-                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-                }
+                playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
             }
             if (rt_Input)
             {

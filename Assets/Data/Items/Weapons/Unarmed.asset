@@ -16,9 +16,3 @@ MonoBehaviour:
   itemName: Unarmed
   modelPrefab: {fileID: 1937729462103552718, guid: 6a6b5d89d81010d41b07c4aed343d07a, type: 3}
   inUnarmed: 1
-  right_hand_idle: 
-  left_hand_idle: 
-  OH_Light_Attack_1: 
-  OH_Light_Attack_2: 
-  OH_Heavy_Attack_1: 
-  OH_Heavy_Attack_2: 
