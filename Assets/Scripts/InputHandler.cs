@@ -22,13 +22,11 @@ namespace TOF
 
         public bool rollFlag;
         public bool sprintFlag;
-        public bool comboFlag;
         public float rollInputTimer;
 
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
-        PlayerManager playerManager;
         CameraHandler cameraHandler;
 
         Vector2 movementInput;
@@ -38,7 +36,6 @@ namespace TOF
         {
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
-            playerManager = GetComponent<PlayerManager>();
         }
 
         public void OnEnable()
@@ -61,7 +58,7 @@ namespace TOF
         public void TickInput(float delta)
         {
             MoveInput(delta);
-            //HandleQuickSlotsInput();
+            HandleQuickSlotsInput();
             HandleRollInput(delta);
             HandleAttackInput(delta);
         }
@@ -77,8 +74,8 @@ namespace TOF
 
         private void HandleQuickSlotsInput()
         {
-            //inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-            //inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+            inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
+            inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
             if (d_Pad_Right)
                 playerInventory.changeRightWeapon();
             else if (d_Pad_Left)
@@ -92,16 +89,7 @@ namespace TOF
 
             if(rb_Input)
             {
-                if(playerManager.canDoCombo)
-                {
-                    comboFlag = true;
-                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
-                    comboFlag = false;
-                }
-                else if (!playerManager.canDoCombo && !playerManager.isInteracting)
-                {
-                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-                }
+                playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
             }
             if (rt_Input)
             {

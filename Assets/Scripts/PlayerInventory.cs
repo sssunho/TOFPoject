@@ -12,8 +12,8 @@ namespace TOF
         public WeaponItem leftWeapon;
         public WeaponItem unarmed;
 
-        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[2];
-        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[2];
+        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[1];
+        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[1];
 
         public int curRightWeaponIndex = 0;
         public int curLeftWeaponIndex = 0;
@@ -27,24 +27,43 @@ namespace TOF
         {
             weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
             weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
-            //rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
-            //leftWeapon = weaponsInLeftHandSlot[curLeftWeaponIndex];
+            rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
+            leftWeapon = weaponsInLeftHandSlot[curLeftWeaponIndex];
             //rightWeapon = unarmed;
             //leftWeapon = unarmed;
         }
 
         public void changeRightWeapon()
         {
-            if (weaponsInRightHandSlot[1 - curRightWeaponIndex] == null) return;
+            curRightWeaponIndex += 1;
+            if (curRightWeaponIndex == 0 && weaponsInRightHandSlot[0] != null)
+            {
+                rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
+                weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlot[curRightWeaponIndex], false);
+            }
+            else if(curRightWeaponIndex == 0 && weaponsInRightHandSlot[0] == null)
+                curRightWeaponIndex += 1;
 
-            curRightWeaponIndex = 1 - curRightWeaponIndex;
-            rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
-            weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlot[curRightWeaponIndex], false);
+            else if(curRightWeaponIndex == 1 && weaponsInRightHandSlot[1] != null)
+            {
+                rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
+                weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlot[curRightWeaponIndex], false);
+            }
+            else
+                curRightWeaponIndex += 1;
+
+            if(curRightWeaponIndex> weaponsInRightHandSlot.Length - 1)
+            {
+                curRightWeaponIndex = -1;
+                rightWeapon = unarmed;
+                weaponSlotManager.LoadWeaponOnSlot(unarmed, false);
+            }
         }
 
         public void changeLeftWeapon()
         {
-            if (weaponsInLeftHandSlot[1 - curLeftWeaponIndex] == null) return;
+            curLeftWeaponIndex += 1;
+            if (curLeftWeaponIndex == 0 && weaponsInLeftHandSlot[0] !=null) return;
 
             curLeftWeaponIndex = 1 - curLeftWeaponIndex;
             leftWeapon = weaponsInLeftHandSlot[curLeftWeaponIndex];

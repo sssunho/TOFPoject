@@ -17,18 +17,18 @@ namespace TOF
 
         private void Start()
         {
-            maxHealth = SetMaxHealthFromHealthLV();
+            maxHealth = setMaxHealthFromHealthLV();
             curHealth = maxHealth;
             healthbar.setMaxValue(maxHealth);
         }
 
-        private int SetMaxHealthFromHealthLV()
+        private int setMaxHealthFromHealthLV()
         {
             maxHealth = healthLV * 10;
             return maxHealth;
         }
 
-        public void TakeDamage(int damage)
+        public void takeDamage(int damage)
         {
             curHealth -= damage;
             healthbar.setCurValue(curHealth);
