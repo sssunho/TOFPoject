@@ -11,6 +11,10 @@ namespace TOF
         CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
 
+        InteractableUI interactableUI;
+        public GameObject interactableUIGameObject;
+        public GameObject itemInteractableUIGameObject;
+
         public bool isInteracting;
         public bool canDoCombo;
 
@@ -29,6 +33,7 @@ namespace TOF
             inputHandler = GetComponent<InputHandler>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
             anim = GetComponentInChildren<Animator>();
+            interactableUI = FindObjectOfType<InteractableUI>();
         }
 
         private void Update()
@@ -93,9 +98,23 @@ namespace TOF
                     if (interactableObject == null) return;
 
                     string interactableText = interactableObject.interactableText;
+                    interactableUI.interactableText.text = interactableText;
+                    interactableUIGameObject.SetActive(true);
 
                     if (inputHandler.e_Input)
                         hit.collider.GetComponent<Interactable>().Interact(this);
+                }
+            }
+            else
+            {
+                if(interactableUIGameObject != null)
+                {
+                    interactableUIGameObject.SetActive(false);
+                }
+
+                if(itemInteractableUIGameObject !=null && inputHandler.e_Input)
+                {
+                    itemInteractableUIGameObject.SetActive(false);
                 }
             }
         }
