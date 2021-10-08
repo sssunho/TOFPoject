@@ -46,7 +46,6 @@ namespace TOF
                 if (enemyStats != null)
                 {
                     enemyStats.TakeDamage(currentWeaponDamage);
-                    Debug.Log(this);
                 }
             }
         }

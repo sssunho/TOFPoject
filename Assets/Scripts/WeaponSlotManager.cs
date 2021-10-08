@@ -43,12 +43,37 @@ namespace TOF
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
                 quickSlotUI.UpdateWeaponQuickSlot(true, weaponItem);
+                #region Handle Weapon Idle Aniamations
+
+                if (weaponItem != null)
+                {
+                    animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
+                }
+                else
+                {
+                    animator.CrossFade("Left Arm Empty", 0.2f);
+                }
+
+                #endregion
             }
             else
             {
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
                 quickSlotUI.UpdateWeaponQuickSlot(false, weaponItem);
+
+                #region Handle Weapon Idle Aniamations
+
+                if (weaponItem != null)
+                {
+                    animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
+                }
+                else
+                {
+                    animator.CrossFade("Right Arm Empty", 0.2f);
+                }
+
+                #endregion
             }
         }
 
