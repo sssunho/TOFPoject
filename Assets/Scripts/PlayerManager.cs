@@ -12,6 +12,7 @@ namespace TOF
         PlayerLocomotion playerLocomotion;
 
         public bool isInteracting;
+        public bool canDoCombo;
 
         [Header("Player Flags")]
         public bool isSprinting;
@@ -35,6 +36,7 @@ namespace TOF
             float delta = Time.deltaTime;
 
             isInteracting = anim.GetBool("isInteracting");
+            canDoCombo = anim.GetBool("canDoCombo");
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleMovement(delta);

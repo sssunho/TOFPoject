@@ -61,7 +61,7 @@ namespace TOF
 
         private void LoadRightWeaponDamageCollider()
         {
-            leftHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         }
 
         public void OpenRightDamageCollider()
