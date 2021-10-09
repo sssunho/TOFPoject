@@ -9,6 +9,7 @@ namespace TOF
     {
         WeaponHolderSlot leftHandSlot;
         WeaponHolderSlot rightHandSlot;
+        WeaponHolderSlot backSlot;
 
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
@@ -36,6 +37,10 @@ namespace TOF
                 {
                     rightHandSlot = weaponSlot;
                 }
+                else if(weaponSlot.isBackSlot)
+                {
+                    backSlot = weaponSlot;
+                }
             }
         }
 
@@ -43,6 +48,7 @@ namespace TOF
         {
             if(isLeft)
             {
+                leftHandSlot.currentWeapon = weaponItem;
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
                 quickSlotUI.UpdateWeaponQuickSlot(true, weaponItem);
@@ -64,7 +70,8 @@ namespace TOF
 
                 if(inputHandler.twoHandFlag)
                 {
-                    // move current left hand wapon to the back or disable it
+                    backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
+                    leftHandSlot.UnloadWeaponAndDestory();
                     animator.CrossFade(weaponItem.th_idle, 0.2f);
                 }
                 else
@@ -73,6 +80,8 @@ namespace TOF
                     #region Handle Weapon Idle Aniamations
 
                     animator.CrossFade("Both Arm Empty", 0.1f);
+
+                    backSlot.UnloadWeaponAndDestory();
 
                     if (weaponItem != null)
                     {
@@ -86,6 +95,7 @@ namespace TOF
                     #endregion
                 }
 
+                rightHandSlot.currentWeapon = weaponItem;
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
                 quickSlotUI.UpdateWeaponQuickSlot(false, weaponItem);
