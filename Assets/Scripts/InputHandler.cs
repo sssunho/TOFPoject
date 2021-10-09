@@ -149,9 +149,17 @@ namespace TOF
             {
                 inventoryFlag = !inventoryFlag;
                 if (inventoryFlag)
+                {
                     uiManager.OpenSelectWindow();
-                else 
+                    uiManager.UpdateUI();
+                    uiManager.hudWindow.SetActive(false);
+                }
+                else
+                {
                     uiManager.CloseSelectWindow();
+                    uiManager.CloseAllInventoryWindows();
+                    uiManager.hudWindow.SetActive(false);
+                }
             }
         }
 
