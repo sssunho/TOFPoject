@@ -145,6 +145,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Y",
+                    "type": "Button",
+                    "id": "78b3c7db-c0ba-441e-bd50-1dea0dab3174",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -222,6 +230,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "E",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7eeca9b1-a644-4bd3-9a63-bc70dc5353e6",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Y",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

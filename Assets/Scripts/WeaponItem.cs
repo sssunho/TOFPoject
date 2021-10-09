@@ -14,6 +14,7 @@ namespace TOF
         [Header("Idle Animations")]
         public string right_hand_idle;
         public string left_hand_idle;
+        public string th_idle;
 
         [Header("One Handed Attak Animation")]
         public string OH_Light_Attack_1;

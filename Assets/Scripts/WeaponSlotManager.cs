@@ -17,10 +17,13 @@ namespace TOF
 
         QuickSlotUI quickSlotUI;
 
+        InputHandler inputHandler;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
+            inputHandler = GetComponentInParent<InputHandler>();
 
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach(WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -58,22 +61,34 @@ namespace TOF
             }
             else
             {
-                rightHandSlot.LoadWeaponModel(weaponItem);
-                LoadRightWeaponDamageCollider();
-                quickSlotUI.UpdateWeaponQuickSlot(false, weaponItem);
 
-                #region Handle Weapon Idle Aniamations
-
-                if (weaponItem != null)
+                if(inputHandler.twoHandFlag)
                 {
-                    animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
+                    // move current left hand wapon to the back or disable it
+                    animator.CrossFade(weaponItem.th_idle, 0.2f);
                 }
                 else
                 {
-                    animator.CrossFade("Right Arm Empty", 0.2f);
+
+                    #region Handle Weapon Idle Aniamations
+
+                    animator.CrossFade("Both Arm Empty", 0.1f);
+
+                    if (weaponItem != null)
+                    {
+                        animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
+                    }
+                    else
+                    {
+                        animator.CrossFade("Right Arm Empty", 0.2f);
+                    }
+
+                    #endregion
                 }
 
-                #endregion
+                rightHandSlot.LoadWeaponModel(weaponItem);
+                LoadRightWeaponDamageCollider();
+                quickSlotUI.UpdateWeaponQuickSlot(false, weaponItem);
             }
         }
 
