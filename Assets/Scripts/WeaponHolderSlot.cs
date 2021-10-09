@@ -57,7 +57,6 @@ namespace TOF
             }
 
             currentWeaponModel = model;
-
         }
     }
 }

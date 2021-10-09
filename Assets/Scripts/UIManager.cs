@@ -7,20 +7,28 @@ namespace TOF
     public class UIManager : MonoBehaviour
     {
         public PlayerInventory playerInventory;
+        EquipmentUI equipmentUI;
 
         [Header("UI Windows")]
         public GameObject selectWindow;
         public GameObject hudWindow;
         public GameObject weaponInventoryWindow;
+        public GameObject equipmentWindow;
 
         [Header("Weapon Inventory")]
         public GameObject weaponSlotPrefab;
         public Transform weaponInventorySlotParent;
         WeaponSlot[] weaponSlots;
 
+        private void Awake()
+        {
+            equipmentUI = FindObjectOfType<EquipmentUI>();
+        }
+
         private void Start()
         {
             weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
+            equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
 
         public void UpdateUI() 
@@ -43,7 +51,6 @@ namespace TOF
                     weaponSlots[i].ClearInventorySlot();
                 }
             }
-
             #endregion
         }
 
@@ -60,6 +67,7 @@ namespace TOF
         public void CloseAllInventoryWindows()
         {
             weaponInventoryWindow.SetActive(false);
+            equipmentWindow.SetActive(false);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace TOF
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
+        EquipmentUI equipmentUI;
         PlayerManager playerManager;
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
@@ -164,7 +165,7 @@ namespace TOF
                 {
                     uiManager.CloseSelectWindow();
                     uiManager.CloseAllInventoryWindows();
-                    uiManager.hudWindow.SetActive(false);
+                    uiManager.hudWindow.SetActive(true);
                 }
             }
         }
