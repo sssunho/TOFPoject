@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 namespace TOF
 {
-    public class PlayerStats : MonoBehaviour
+    public class PlayerStats : CharacterStats
     {
-        public int healthLV = 30;
-        public int maxHealth;
-        public int curHealth;
 
         public SliderControl healthbar;
         public SliderControl staminabar;
@@ -18,21 +15,20 @@ namespace TOF
         private void Start()
         {
             maxHealth = SetMaxHealthFromHealthLV();
-            curHealth = maxHealth;
+            currentHealth = maxHealth;
             healthbar.setMaxValue(maxHealth);
         }
 
         private int SetMaxHealthFromHealthLV()
         {
-            maxHealth = healthLV * 10;
+            maxHealth = healthLevel * 10;
             return maxHealth;
         }
 
         public void TakeDamage(int damage)
         {
-            curHealth -= damage;
-            healthbar.setCurValue(curHealth);
-            Debug.Log(curHealth);
+            currentHealth -= damage;
+            healthbar.setCurValue(currentHealth);
         }
     }
 }
