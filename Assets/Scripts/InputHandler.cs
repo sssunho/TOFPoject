@@ -36,6 +36,8 @@ namespace TOF
         public bool lockOnFlag;
         public float rollInputTimer;
 
+        public Transform criticalAttackRaycastStartPoint;
+
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;

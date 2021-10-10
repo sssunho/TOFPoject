@@ -26,6 +26,7 @@ namespace TOF
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
+            backStabCollider = GetComponentInChildren<BackStabCollider>();
         }
 
         private void Start()

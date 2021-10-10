@@ -9,13 +9,18 @@ namespace TOF
         AnimatorHandler animatorHandler;
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
+        PlayerManager playerManager;
+
         public string lastAttack;
+
+        LayerMask backStabLayer = 1 << 12;
 
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             inputHandler = GetComponent<InputHandler>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
@@ -70,6 +75,32 @@ namespace TOF
             }
             animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
             lastAttack = weapon.OH_Heavy_Attack_1;
+        }
+
+        private void AttempBackStabOrRiposte()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(inputHandler.criticalAttackRaycastStartPoint.position,
+                transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+            {
+                CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+                if(enemyCharacterManager != null)
+                {
+                    //Check for team id (so you cant back stab friend or yourself)
+                    playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                    Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
+                    rotationDirection = hit.transform.position - playerManager.transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                    playerManager.transform.rotation = targetRotation;
+                    animatorHandler.PlayTargetAnimation("Back Stab", true);
+                    enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Back Stabbed", true);
+                    //make enemy play animation
+                    //do damage
+                }
+            }
         }
     }
 }
