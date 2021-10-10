@@ -183,6 +183,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Critica Attack",
+                    "type": "Button",
+                    "id": "dbb2c217-485d-4807-9211-e43bb9570763",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "RT",
                     "type": "Button",
                     "id": "69fd5e5b-6efd-4bcb-9842-26fdd36e6a4c",
@@ -331,6 +339,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2314a54-99e2-4f31-8ebe-1728f8a80ea9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Critica Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

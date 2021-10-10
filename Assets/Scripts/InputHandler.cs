@@ -17,6 +17,7 @@ namespace TOF
         public bool y_input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool critical_Attack_Input;
         public bool d_Pad_Up;
         public bool d_Pad_Down;
         public bool d_Pad_Left;
@@ -72,6 +73,7 @@ namespace TOF
                 inputActions.PlayerActions.LockOn.performed += i => lockOn_Input = true;
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
+                inputActions.PlayerActions.CriticaAttack.performed += i => critical_Attack_Input = true;
             }
 
             inputActions.Enable();
@@ -243,6 +245,15 @@ namespace TOF
             }
 
             cameraHandler.SetCameraHeight();
+        }
+
+        private void HandleCriticalAttackInput()
+        {
+            if(critical_Attack_Input)
+            {
+                critical_Attack_Input = false;
+                //playerAttacker.AttempBackStabOrRiposte();
+            }
         }
     }
 }

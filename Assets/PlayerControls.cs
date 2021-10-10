@@ -196,6 +196,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Critica Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbb2c217-485d-4807-9211-e43bb9570763"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""RT"",
                     ""type"": ""Button"",
                     ""id"": ""69fd5e5b-6efd-4bcb-9842-26fdd36e6a4c"",
@@ -346,6 +354,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""LockOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2314a54-99e2-4f31-8ebe-1728f8a80ea9"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Critica Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -490,6 +509,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
         m_PlayerActions_Roll = m_PlayerActions.FindAction("Roll", throwIfNotFound: true);
         m_PlayerActions_RB = m_PlayerActions.FindAction("RB", throwIfNotFound: true);
+        m_PlayerActions_CriticaAttack = m_PlayerActions.FindAction("Critica Attack", throwIfNotFound: true);
         m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
         m_PlayerActions_Inventory = m_PlayerActions.FindAction("Inventory", throwIfNotFound: true);
         m_PlayerActions_E = m_PlayerActions.FindAction("E", throwIfNotFound: true);
@@ -609,6 +629,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IPlayerActionsActions m_PlayerActionsActionsCallbackInterface;
     private readonly InputAction m_PlayerActions_Roll;
     private readonly InputAction m_PlayerActions_RB;
+    private readonly InputAction m_PlayerActions_CriticaAttack;
     private readonly InputAction m_PlayerActions_RT;
     private readonly InputAction m_PlayerActions_Inventory;
     private readonly InputAction m_PlayerActions_E;
@@ -620,6 +641,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public PlayerActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Roll => m_Wrapper.m_PlayerActions_Roll;
         public InputAction @RB => m_Wrapper.m_PlayerActions_RB;
+        public InputAction @CriticaAttack => m_Wrapper.m_PlayerActions_CriticaAttack;
         public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
         public InputAction @Inventory => m_Wrapper.m_PlayerActions_Inventory;
         public InputAction @E => m_Wrapper.m_PlayerActions_E;
@@ -640,6 +662,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RB.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
                 @RB.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
                 @RB.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
+                @CriticaAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCriticaAttack;
+                @CriticaAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCriticaAttack;
+                @CriticaAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCriticaAttack;
                 @RT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
                 @RT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
                 @RT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
@@ -665,6 +690,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RB.started += instance.OnRB;
                 @RB.performed += instance.OnRB;
                 @RB.canceled += instance.OnRB;
+                @CriticaAttack.started += instance.OnCriticaAttack;
+                @CriticaAttack.performed += instance.OnCriticaAttack;
+                @CriticaAttack.canceled += instance.OnCriticaAttack;
                 @RT.started += instance.OnRT;
                 @RT.performed += instance.OnRT;
                 @RT.canceled += instance.OnRT;
@@ -752,6 +780,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnRoll(InputAction.CallbackContext context);
         void OnRB(InputAction.CallbackContext context);
+        void OnCriticaAttack(InputAction.CallbackContext context);
         void OnRT(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnE(InputAction.CallbackContext context);
