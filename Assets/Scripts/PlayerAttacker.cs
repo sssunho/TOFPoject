@@ -40,6 +40,12 @@ namespace TOF
             }
         }
 
+        public void Update()
+        {
+            Debug.DrawRay(inputHandler.criticalAttackRaycastStartPoint.position,
+                transform.TransformDirection(Vector3.forward) * 0.5f);
+        }
+
         public void HandleLightAttack(WeaponItem weapon)
         {
             // ep 29에서 바뀐 부분입니다.
@@ -77,7 +83,7 @@ namespace TOF
             lastAttack = weapon.OH_Heavy_Attack_1;
         }
 
-        private void AttempBackStabOrRiposte()
+        public void AttempBackStabOrRiposte()
         {
             RaycastHit hit;
             if (Physics.Raycast(inputHandler.criticalAttackRaycastStartPoint.position,
@@ -86,7 +92,6 @@ namespace TOF
                 CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
                 if(enemyCharacterManager != null)
                 {
-                    //Check for team id (so you cant back stab friend or yourself)
                     playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
                     Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
                     rotationDirection = hit.transform.position - playerManager.transform.position;
@@ -95,10 +100,8 @@ namespace TOF
                     Quaternion tr = Quaternion.LookRotation(rotationDirection);
                     Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                     playerManager.transform.rotation = targetRotation;
-                    animatorHandler.PlayTargetAnimation("Back Stab", true);
-                    enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Back Stabbed", true);
-                    //make enemy play animation
-                    //do damage
+                    animatorHandler.PlayTargetAnimation("BackStab", true);
+                    enemyCharacterManager.GetComponentInChildren<EnemyAnimationManager>().PlayTargetAnimation("BackStabbed", true);
                 }
             }
         }
