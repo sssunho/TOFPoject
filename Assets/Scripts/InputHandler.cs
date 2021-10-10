@@ -98,7 +98,6 @@ namespace TOF
             HandleInteractiongButtonInput();
             HandleTwoHandInput();
             HandleLockOnInput();
-            HandleCriticalAttackInput();
         }
 
         private void MoveInput(float delta)
@@ -258,7 +257,7 @@ namespace TOF
             if(critical_Attack_Input)
             {
                 critical_Attack_Input = false;
-                playerAttacker.AttempBackStabOrRiposte();
+                //playerAttacker.AttempBackStabOrRiposte();
             }
         }
     }

@@ -123,8 +123,6 @@ namespace TOF
 
         private void OnAnimatorMove()
         {
-            if (playerManager == null)
-                return;
             if (playerManager.isInteracting == false)
                 return;
 
