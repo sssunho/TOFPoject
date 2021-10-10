@@ -13,16 +13,14 @@ namespace TOF
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
-            Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
+            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-
-            HandleRotateTowardsTarget(enemyManager);
+            float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
 
             if (enemyManager.isPerformingAction)
                 return combatStanceState;
 
-            if (currentAttack == null)
+            if (currentAttack != null)
             {
                 // #.1 If we are too close to the enemy to perform current attack, get a new attack
                 if(distanceFromTarget < currentAttack.minimumDistanceNeededToAttack)
@@ -60,9 +58,9 @@ namespace TOF
         #region Attacks
         private void GetNewAttack(EnemyManager enemyManager)
         {
-            Vector3 targetsDirection = enemyManager.currentTarget.transform.position - transform.position;
-            float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, transform.position);
+            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+            float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
 
             int maxScore = 0;
 
@@ -108,36 +106,6 @@ namespace TOF
             }
         }
         #endregion
-
-        private void HandleRotateTowardsTarget(EnemyManager enemyManager)
-        {
-            // Rotate manually
-            if (enemyManager.isPerformingAction)
-            {
-                Vector3 direction = enemyManager.currentTarget.transform.position - transform.position;
-                direction.y = 0;
-                direction.Normalize();
-
-                if (direction == Vector3.zero)
-                {
-                    direction = transform.forward;
-                }
-
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManager.rotationSpeed);
-            }
-            // Rotate with pathfinding (navmesh)
-            else
-            {
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-                Vector3 targetVelocity = enemyManager.enemyRigidBody.velocity;
-
-                enemyManager.navMeshAgent.enabled = true;
-                enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-                enemyManager.enemyRigidBody.velocity = targetVelocity;
-                transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
-            }
-        }
     }
 }
 
