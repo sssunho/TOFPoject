@@ -8,11 +8,13 @@ namespace TOF
     {
         AnimatorHandler animatorHandler;
         InputHandler inputHandler;
+        WeaponSlotManager weaponSlotManager;
         public string lastAttack;
 
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             inputHandler = GetComponent<InputHandler>();
         }
 
@@ -38,7 +40,7 @@ namespace TOF
             // ep 29에서 바뀐 부분입니다.
             // weaponSlotManager.attackingWeapon = weapon; 를 추가할 때
             // 이 주석을 지우고 추가하면 됩니다.
-
+            weaponSlotManager.attackingWeapon = weapon;
             if(inputHandler.twoHandFlag)
             {
                 animatorHandler.PlayTargetAnimation(weapon.TH_Light_Attack_1, true);
@@ -57,6 +59,7 @@ namespace TOF
             // weaponSlotManager.attackingWeapon = weapon; 를 추가할 때
             // 이 주석을 지우고 추가하면 됩니다.
 
+            weaponSlotManager.attackingWeapon = weapon;
             if (inputHandler.twoHandFlag)
             {
 

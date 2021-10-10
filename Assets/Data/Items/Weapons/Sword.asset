@@ -25,3 +25,6 @@ MonoBehaviour:
   TH_Light_Attack_2: Twohanded Light 2
   OH_Heavy_Attack_1: Onehanded Heavy 1
   OH_Heavy_Attack_2: Onehanded Heavy 2
+  baseStamina: 20
+  lightAttackMultiplier: 1
+  heavyAttackMultiplier: 2
