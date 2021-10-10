@@ -12,11 +12,18 @@ namespace TOF
         public SliderControl staminabar;
         public SliderControl strengthbar;
 
+        AnimatorHandler animatorHandler;
+
         private void Start()
         {
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+
             maxHealth = SetMaxHealthFromHealthLV();
+            maxStamina = SetMaxStaminaFromHealthLV();
             currentHealth = maxHealth;
+            currentStamina = maxStamina;
             healthbar.setMaxValue(maxHealth);
+            staminabar.setMaxValue(maxStamina);
         }
 
         private int SetMaxHealthFromHealthLV()
@@ -25,10 +32,30 @@ namespace TOF
             return maxHealth;
         }
 
+        private int SetMaxStaminaFromHealthLV()
+        {
+            maxStamina = staminaLevel * 10;
+            return maxStamina;
+        }
+
         public void TakeDamage(int damage)
         {
             currentHealth -= damage;
             healthbar.setCurValue(currentHealth);
+
+            animatorHandler.PlayTargetAnimation("Damage_01", true);
+
+            if(currentHealth<=0)
+            {
+                currentHealth = 0;
+                animatorHandler.PlayTargetAnimation("Dead_01", true);
+            }
+        }
+
+        public void TakeStaminaDamage(int damage)
+        {
+            currentStamina -= damage;
+            staminabar.setCurValue(currentStamina);
         }
     }
 }
