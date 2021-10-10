@@ -12,7 +12,7 @@ namespace TOF
         public WeaponItem attackingWeapon;
         public WeaponHolderSlot leftHandSlot;
         public WeaponHolderSlot rightHandSlot;
-        WeaponHolderSlot backSlot;
+        public WeaponHolderSlot backSlot;
 
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;

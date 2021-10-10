@@ -219,6 +219,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69858945}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &187245330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6196647471106185834, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
+  m_PrefabInstance: {fileID: 6067497108133108247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba700c47cd4878d4985ad9f1ed5d4b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &265439481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6067497109261814466, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
+  m_PrefabInstance: {fileID: 6067497108133108247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba700c47cd4878d4985ad9f1ed5d4b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &286837521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1093,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812820870}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &846761156 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6067497108411532922, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
+  m_PrefabInstance: {fileID: 6067497108133108247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba700c47cd4878d4985ad9f1ed5d4b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,6 +1986,7 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  isDead: 0
 --- !u!4 &1492396781
 Transform:
   m_ObjectHideFlags: 0
@@ -1986,6 +2020,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 341335841}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  pendingCriticalDamage: 0
   currentState: {fileID: 0}
   currentTarget: {fileID: 0}
   enemyRigidBody: {fileID: 0}
@@ -3004,6 +3039,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6067497109278020041, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
+      propertyPath: backSlot
+      value: 
+      objectReference: {fileID: 846761156}
+    - target: {fileID: 6067497109278020041, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
+      propertyPath: leftHandSlot
+      value: 
+      objectReference: {fileID: 187245330}
+    - target: {fileID: 6067497109278020041, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
+      propertyPath: rightHandSlot
+      value: 
+      objectReference: {fileID: 265439481}
     - target: {fileID: 6067497110011486231, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
       propertyPath: backStabCollider
       value: 

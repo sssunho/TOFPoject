@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -346,6 +346,17 @@ MonoBehaviour:
   isRightHandSlot: 0
   isBackSlot: 0
   currentWeaponModel: {fileID: 0}
+--- !u!114 &378182010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 263314671291492225, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+  m_PrefabInstance: {fileID: 987717717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba700c47cd4878d4985ad9f1ed5d4b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &507468022
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1010,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 1876424983}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  pendingCriticalDamage: 0
   currentState: {fileID: 1533078991}
   currentTarget: {fileID: 0}
   enemyRigidBody: {fileID: 0}
@@ -1127,6 +1139,17 @@ Transform:
   m_Father: {fileID: 1779171104}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &945075632 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 174942461983176489, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+  m_PrefabInstance: {fileID: 987717717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba700c47cd4878d4985ad9f1ed5d4b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,6 +1352,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 263314671266774154, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: backSlot
+      value: 
+      objectReference: {fileID: 1189560724}
+    - target: {fileID: 263314671266774154, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: leftHandSlot
+      value: 
+      objectReference: {fileID: 945075632}
+    - target: {fileID: 263314671266774154, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: rightHandSlot
+      value: 
+      objectReference: {fileID: 378182010}
     - target: {fileID: 263314671266774154, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
       propertyPath: attackingWeapon
       value: 
@@ -2454,6 +2489,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 755276448}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  pendingCriticalDamage: 0
   currentState: {fileID: 0}
   currentTarget: {fileID: 0}
   enemyRigidBody: {fileID: 0}
@@ -2548,6 +2584,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1189560724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 263314670271376185, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+  m_PrefabInstance: {fileID: 987717717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba700c47cd4878d4985ad9f1ed5d4b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1292949946
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,6 +3220,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 848768098}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  pendingCriticalDamage: 0
   currentState: {fileID: 0}
   currentTarget: {fileID: 0}
   enemyRigidBody: {fileID: 0}
