@@ -7,6 +7,8 @@ namespace TOF
 {
     public class WeaponSlotManager : MonoBehaviour
     {
+        PlayerManager playerManager;
+
         public WeaponItem attackingWeapon;
         WeaponHolderSlot leftHandSlot;
         WeaponHolderSlot rightHandSlot;
@@ -26,27 +28,12 @@ namespace TOF
 
         private void Awake()
         {
+            playerManager = GetComponentInParent<PlayerManager>();
             animator = GetComponent<Animator>();
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerStats = GetComponentInParent<PlayerStats>();
 
-            WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-            foreach(WeaponHolderSlot weaponSlot in weaponHolderSlots)
-            {
-                if(weaponSlot.isLefthandSlot)
-                {
-                    leftHandSlot = weaponSlot;
-                }
-                else if(weaponSlot.isRightHandSlot)
-                {
-                    rightHandSlot = weaponSlot;
-                }
-                else if(weaponSlot.isBackSlot)
-                {
-                    backSlot = weaponSlot;
-                }
-            }
         }
 
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
@@ -119,20 +106,20 @@ namespace TOF
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         }
 
-        public void OpenRightDamageCollider()
+        public void OpenDamageCollider()
         {
-            rightHandDamageCollider.EnableDamageCollider();
+            if (playerManager.isUsingRightHand)
+            {
+                rightHandDamageCollider.EnableDamageCollider();
+            }
+            else if(playerManager.isUsingLeftHand)
+            {
+                leftHandDamageCollider.EnableDamageCollider();
+            }
         }
-        public void OpenLeftDamageCollider()
-        {
-            leftHandDamageCollider.EnableDamageCollider();
-        }
-        public void CloseRightDamageCollider()
+        public void CloseDamageCollider()
         {
             rightHandDamageCollider.DisableDamageCollider();
-        }
-        public void CloseLeftDamageCollider()
-        {
             leftHandDamageCollider.DisableDamageCollider();
         }
 

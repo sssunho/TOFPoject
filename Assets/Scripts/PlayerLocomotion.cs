@@ -42,6 +42,9 @@ namespace TOF
         [SerializeField]
         float fallingSpeed = 45.0f;
 
+        public CapsuleCollider characterCollider;
+        public CapsuleCollider characterCollisionBlockerCollider;
+
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
@@ -59,6 +62,7 @@ namespace TOF
 
             playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+            Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
         }
 
         #region Movement

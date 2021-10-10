@@ -40,6 +40,9 @@ namespace TOF
 
         public void TakeDamage(int damage)
         {
+            if (isDead)
+                return;
+
             currentHealth -= damage;
             healthbar.setCurValue(currentHealth);
 
@@ -49,6 +52,7 @@ namespace TOF
             {
                 currentHealth = 0;
                 animatorHandler.PlayTargetAnimation("Dead_01", true);
+                isDead = true;
             }
         }
 
