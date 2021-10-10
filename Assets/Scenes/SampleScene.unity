@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964128, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1240,6 +1240,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1617584669, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 82945031667950737, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -1345,7 +1349,19 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: leftWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
       propertyPath: rightWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInLeftHandSlot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInRightHandSlot.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
     - target: {fileID: 263314670912596127, guid: ceb59301749c8354b86e884142b17d9f, type: 3}

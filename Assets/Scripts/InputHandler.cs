@@ -23,6 +23,7 @@ namespace TOF
         public bool d_Pad_Left;
         public bool d_Pad_Right;
 
+        public bool jump_Input;
         public bool inventory_Input;
         public bool lockOn_Input;
         public bool right_Stick_Right_Input;
@@ -98,6 +99,7 @@ namespace TOF
             HandleInteractiongButtonInput();
             HandleTwoHandInput();
             HandleLockOnInput();
+            HandleJumpInput();
         }
 
         private void MoveInput(float delta)
@@ -259,6 +261,11 @@ namespace TOF
                 critical_Attack_Input = false;
                 //playerAttacker.AttempBackStabOrRiposte();
             }
+        }
+
+        private void HandleJumpInput()
+        {
+            inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
         }
     }
 }

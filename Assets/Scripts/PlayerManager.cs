@@ -45,10 +45,12 @@ namespace TOF
 
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
+            anim.SetBool("isInAir", isInAir);
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
+            playerLocomotion.HandleJump();
 
             CheckForInteractableObject();
             // ep 23에서 제거된 부분입니다.
@@ -73,6 +75,7 @@ namespace TOF
             inputHandler.d_Pad_Left = false;
             inputHandler.inventory_Input = false;
             inputHandler.e_Input = false;
+            inputHandler.jump_Input = false;
 
             float delta = Time.deltaTime;
 
