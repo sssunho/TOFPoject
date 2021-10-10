@@ -279,7 +279,8 @@ MonoBehaviour:
   combatStanceState: {fileID: 1825428324}
   enemyAttacks:
   - {fileID: 11400000, guid: 08807b0c98789534e914eecc5f05a8e8, type: 2}
-  currentAttack: {fileID: 11400000, guid: b04b14d5e59c0494f87018cfebddad8c, type: 2}
+  - {fileID: 11400000, guid: b04b14d5e59c0494f87018cfebddad8c, type: 2}
+  currentAttack: {fileID: 0}
 --- !u!1 &507468022
 GameObject:
   m_ObjectHideFlags: 0
