@@ -21,25 +21,25 @@ namespace TOF
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
         }
 
-        public void HandleDetection()
-        {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
+        //public void HandleDetection()
+        //{
+        //    Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
 
-            for(int i = 0; i < colliders.Length; i++)
-            {
-                CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+        //    for(int i = 0; i < colliders.Length; i++)
+        //    {
+        //        CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
 
-                if(characterStats != null)
-                {
-                    Vector3 targetDirection = characterStats.transform.position - transform.position;
-                    float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+        //        if(characterStats != null)
+        //        {
+        //            Vector3 targetDirection = characterStats.transform.position - transform.position;
+        //            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
-                    if(viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
-                    {
-                        currentTarget = characterStats;
-                    }
-                }
-            }
-        }
+        //            if(viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+        //            {
+        //                currentTarget = characterStats;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
