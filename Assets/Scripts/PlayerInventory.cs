@@ -27,10 +27,10 @@ namespace TOF
 
         private void Start()
         {
+            rightWeapon = weaponsInRightHandSlot[0];
+            leftWeapon = weaponsInLeftHandSlot[0];
             weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
             weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
-            //rightWeapon = weaponsInRightHandSlot[curRightWeaponIndex];
-            //leftWeapon = weaponsInLeftHandSlot[curLeftWeaponIndex];
         }
 
         public void changeRightWeapon()

@@ -7,13 +7,21 @@ namespace TOF
     public class UIManager : MonoBehaviour
     {
         public PlayerInventory playerInventory;
-        EquipmentUI equipmentUI;
+        public EquipmentUI equipmentUI;
 
         [Header("UI Windows")]
         public GameObject selectWindow;
         public GameObject hudWindow;
         public GameObject weaponInventoryWindow;
         public GameObject equipmentWindow;
+
+        [Header("Equipment Window Slot Selected")]
+        public bool rightHandSlot01Selected;
+        public bool rightHandSlot02Selected;
+        public bool rightHandSlot03Selected;
+        public bool leftHandSlot01Selected;
+        public bool leftHandSlot02Selected;
+        public bool leftHandSlot03Selected;
 
         [Header("Weapon Inventory")]
         public GameObject weaponSlotPrefab;
@@ -68,6 +76,16 @@ namespace TOF
         {
             weaponInventoryWindow.SetActive(false);
             equipmentWindow.SetActive(false);
+        }
+
+        public void ResetAllSelectedSlots()
+        {
+            rightHandSlot01Selected = false;
+            rightHandSlot02Selected = false;
+            rightHandSlot03Selected = false;
+            leftHandSlot01Selected = false;
+            leftHandSlot02Selected = false;
+            leftHandSlot03Selected = false;
         }
     }
 }
