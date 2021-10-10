@@ -23,12 +23,16 @@ namespace TOF
         public bool d_Pad_Right;
 
         public bool inventory_Input;
+        public bool lockOn_Input;
+        public bool right_Stick_Right_Input;
+        public bool right_Stick_Left_Input;
 
         public bool rollFlag;
         public bool twoHandFlag;
         public bool sprintFlag;
         public bool comboFlag;
         public bool inventoryFlag;
+        public bool lockOnFlag;
         public float rollInputTimer;
 
         PlayerControls inputActions;
@@ -50,6 +54,7 @@ namespace TOF
             playerManager = GetComponent<PlayerManager>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             uiManager = FindObjectOfType<UIManager>();
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         public void OnEnable()
@@ -64,6 +69,9 @@ namespace TOF
                 inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
                 inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
                 inputActions.PlayerActions.Y.performed += inputActions => y_input = true;
+                inputActions.PlayerActions.LockOn.performed += i => lockOn_Input = true;
+                inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
+                inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
             }
 
             inputActions.Enable();
@@ -83,6 +91,7 @@ namespace TOF
             HandleInventoryInput();
             HandleInteractiongButtonInput();
             HandleTwoHandInput();
+            HandleLockOnInput();
         }
 
         private void MoveInput(float delta)
@@ -192,6 +201,48 @@ namespace TOF
                     weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
                 }
             }
+        }
+
+        private void HandleLockOnInput()
+        {
+            if(lockOn_Input && lockOnFlag == false)
+            {
+                lockOn_Input = false;
+                cameraHandler.HandleLokOn();
+                if(cameraHandler.nearestLockOnTarget!=null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
+                    lockOnFlag = true;
+                }
+            }
+            else if(lockOn_Input && lockOnFlag)
+            {
+                lockOn_Input = false;
+                lockOnFlag = false;
+                cameraHandler.ClearLockOnTargets();
+            }
+
+            if(lockOnFlag && right_Stick_Left_Input)
+            {
+                right_Stick_Left_Input = false;
+                cameraHandler.HandleLokOn();
+                if (cameraHandler.leftLockTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.leftLockTarget;
+                }
+            }
+
+            if (lockOnFlag && right_Stick_Right_Input)
+            {
+                right_Stick_Right_Input = false;
+                cameraHandler.HandleLokOn();
+                if (cameraHandler.rightLockTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.rightLockTarget;
+                }
+            }
+
+            cameraHandler.SetCameraHeight();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TOF
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
         InputHandler inputHandler;
         Animator anim;
@@ -56,7 +56,6 @@ namespace TOF
             float delta = Time.fixedDeltaTime;
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleMovement(delta);
-
         }
 
         private void LateUpdate()

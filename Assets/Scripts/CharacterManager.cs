@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour
+namespace TOF
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CharacterManager : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public Transform lockOnTransform;
     }
 }
+
