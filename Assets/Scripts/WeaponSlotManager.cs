@@ -14,8 +14,8 @@ namespace TOF
         public WeaponHolderSlot rightHandSlot;
         public WeaponHolderSlot backSlot;
 
-        DamageCollider leftHandDamageCollider;
-        DamageCollider rightHandDamageCollider;
+        public DamageCollider leftHandDamageCollider;
+        public DamageCollider rightHandDamageCollider;
 
         Animator animator;
 
