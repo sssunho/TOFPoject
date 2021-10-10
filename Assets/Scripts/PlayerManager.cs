@@ -16,12 +16,14 @@ namespace TOF
         public GameObject itemInteractableUIGameObject;
 
         public bool isInteracting;
-        public bool canDoCombo;
 
         [Header("Player Flags")]
         public bool isSprinting;
         public bool isInAir;
         public bool isGrounded;
+        public bool canDoCombo;
+        public bool isUsingRightHand;
+        public bool isUsingLeftHand;
 
         private void Awake()
         {
@@ -43,7 +45,8 @@ namespace TOF
 
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
-
+            isUsingRightHand = anim.GetBool("isUsingRightHand");
+            isUsingLeftHand = anim.GetBool("isUsingLeftHand");
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
 

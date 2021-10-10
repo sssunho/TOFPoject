@@ -46,6 +46,7 @@ namespace TOF
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
         CameraHandler cameraHandler;
+        AnimatorHandler animatorHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -58,6 +59,7 @@ namespace TOF
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
         public void OnEnable()
@@ -131,6 +133,7 @@ namespace TOF
                 }
                 else if (!playerManager.canDoCombo && !playerManager.isInteracting)
                 {
+                    animatorHandler.anim.SetBool("isUsingRightHandler", true);
                     playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
                 }
             }
