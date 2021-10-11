@@ -198,7 +198,7 @@ namespace TOF
                 }
                 else
                 {
-                    animatorHandler.PlayTargetAnimation("Backstep", true, false);
+                    animatorHandler.PlayTargetAnimation("Backstep", true);
                 }
             }
         }
