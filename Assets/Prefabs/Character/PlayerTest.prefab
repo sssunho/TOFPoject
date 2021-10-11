@@ -223,7 +223,7 @@ MonoBehaviour:
   rotationSpeed: 10
   fallingSpeed: 45
   characterCollider: {fileID: 89985376384460486}
-  characterCollisionBlockerCollider: {fileID: 1752171508}
+  characterCollisionBlockerCollider: {fileID: 0}
 --- !u!114 &263314671070483732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +264,7 @@ MonoBehaviour:
   d_Pad_Down: 0
   d_Pad_Left: 0
   d_Pad_Right: 0
+  jump_Input: 0
   inventory_Input: 0
   lockOn_Input: 0
   right_Stick_Right_Input: 0
@@ -301,6 +302,7 @@ MonoBehaviour:
   canDoCombo: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isInvulnerable: 0
 --- !u!114 &263314670826900817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,12 +316,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
-  leftWeapon: {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+  leftWeapon: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
   unarmed: {fileID: 0}
   weaponsInRightHandSlot:
-  - {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+  - {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
   weaponsInLeftHandSlot:
-  - {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+  - {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
   curRightWeaponIndex: 0
   curLeftWeaponIndex: 0
   weaponsInventory: []
@@ -361,6 +363,8 @@ MonoBehaviour:
   healthbar: {fileID: 2507050274574540489}
   staminabar: {fileID: 3591555041531946426}
   strengthbar: {fileID: 6800026559346911708}
+  staminaRegenerationAmount: 1
+  staminaRegenTimer: 0
 --- !u!1 &131889611201276472
 GameObject:
   m_ObjectHideFlags: 0
