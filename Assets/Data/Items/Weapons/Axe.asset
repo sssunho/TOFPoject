@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 0f983900f4e7489429bd30b56777f644, type: 3}
   itemName: Axe
-  modelPrefab: {fileID: 100000, guid: 7ae5566b03df55a4cb60a0fe5fe7b3e8, type: 3}
+  modelPrefab: {fileID: 2135492169101812905, guid: 0f9aa68353a1973419bce2694b99c124, type: 3}
   inUnarmed: 0
+  baseDamage: 25
+  criticalDamageMultiplier: 4
   right_hand_idle: Right Arm Idle 01
   left_hand_idle: Left Arm Idle 01
   th_idle: 
@@ -28,3 +30,7 @@ MonoBehaviour:
   baseStamina: 30
   lightAttackMultiplier: 1
   heavyAttackMultiplier: 2
+  isSpellCaster: 0
+  isFaithCaster: 0
+  isPyroCaster: 0
+  isMeleeWeapon: 0
