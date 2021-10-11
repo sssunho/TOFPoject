@@ -223,7 +223,7 @@ MonoBehaviour:
   rotationSpeed: 10
   fallingSpeed: 45
   characterCollider: {fileID: 89985376384460486}
-  characterCollisionBlockerCollider: {fileID: 0}
+  characterCollisionBlockerCollider: {fileID: 1752171508}
 --- !u!114 &263314671070483732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +259,7 @@ MonoBehaviour:
   y_input: 0
   rb_Input: 0
   rt_Input: 0
+  lb_Input: 0
   critical_Attack_Input: 0
   d_Pad_Up: 0
   d_Pad_Down: 0
@@ -303,6 +304,7 @@ MonoBehaviour:
   isUsingRightHand: 0
   isUsingLeftHand: 0
   isInvulnerable: 0
+  isBlocking: 0
 --- !u!114 &263314670826900817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,7 +1327,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -20}
-  m_SizeDelta: {x: 10, y: 15}
+  m_SizeDelta: {x: 100, y: 15}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &3264650981277071255
 MonoBehaviour:
@@ -2611,7 +2613,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -40}
-  m_SizeDelta: {x: 10, y: 15}
+  m_SizeDelta: {x: 100, y: 15}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &7071908686286076352
 MonoBehaviour:
@@ -6223,7 +6225,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -30}
-  m_SizeDelta: {x: 10, y: 15}
+  m_SizeDelta: {x: 100, y: 15}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &3670529978241177481
 MonoBehaviour:
