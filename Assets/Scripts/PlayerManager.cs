@@ -10,6 +10,8 @@ namespace TOF
         Animator anim;
         CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
+        PlayerStats playerStats;
+        AnimatorHandler playerAnimatorManager;
 
         InteractableUI interactableUI;
         public GameObject interactableUIGameObject;
@@ -29,6 +31,8 @@ namespace TOF
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
             backStabCollider = GetComponentInChildren<BackStabCollider>();
+            playerStats = GetComponent<PlayerStats>();
+            playerAnimatorManager = GetComponentInChildren<AnimatorHandler>();
         }
 
         private void Start()
@@ -45,16 +49,17 @@ namespace TOF
 
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
-            anim.SetBool("isInAir", isInAir);
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
+            anim.SetBool("isInAir", isInAir);
+            anim.SetBool("isDead", playerStats.isDead);
+
             inputHandler.TickInput(delta);
+            playerAnimatorManager.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJump();
 
             CheckForInteractableObject();
-            // ep 23에서 제거된 부분입니다.
-            // HandleJump는 이 부분에 적으면 됩니다.
         }
 
         private void FixedUpdate()
@@ -62,6 +67,7 @@ namespace TOF
             float delta = Time.fixedDeltaTime;
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleMovement(delta);
+            playerLocomotion.HandleRotation(delta);
         }
 
         private void LateUpdate()

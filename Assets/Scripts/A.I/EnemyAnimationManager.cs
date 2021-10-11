@@ -20,7 +20,7 @@ namespace TOF
 
         public override void TakeCriticalDamageAnimationEvent()
         {
-            enemyStats.TakeDamage(enemyManager.pendingCriticalDamage);
+            enemyStats.TakeDamageNoAnimation(enemyManager.pendingCriticalDamage);
             enemyManager.pendingCriticalDamage = 0;
         }
 

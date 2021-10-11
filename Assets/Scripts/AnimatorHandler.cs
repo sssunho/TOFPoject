@@ -13,7 +13,6 @@ namespace TOF
 
         int vertical;
         int horizontal;
-        public bool canRotate;
 
         public void Initialize()
         {
@@ -97,12 +96,12 @@ namespace TOF
 
         public void CanRotate()
         {
-            canRotate = true;
+            anim.SetBool("canRotate", true);
         }
 
         public void StopRotation()
         {
-            canRotate = false;
+            anim.SetBool("canRotate", false);
         }
 
         public void EnableCombo()
@@ -117,7 +116,7 @@ namespace TOF
 
         public override void TakeCriticalDamageAnimationEvent()
         {
-            playerStats.TakeDamage(playerManager.pendingCriticalDamage);
+            playerStats.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);
             playerManager.pendingCriticalDamage = 0;
         }
 

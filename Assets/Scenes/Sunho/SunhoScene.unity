@@ -2583,6 +2583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1636135101}
+  canRotate: 0
   agent: {fileID: 0}
 --- !u!95 &1636135101 stripped
 Animator:
@@ -3113,6 +3114,10 @@ PrefabInstance:
       propertyPath: normalCamera
       value: 
       objectReference: {fileID: 963194225}
+    - target: {fileID: 6245610927137803160, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
+      propertyPath: rotationSpeed
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 6245610927137803161, guid: c07b182fa32dee64db34ca83f458a885, type: 3}
       propertyPath: m_Name
       value: PlayerTest
