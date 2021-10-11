@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace TOF
 {
-    public class BackStabCollider : MonoBehaviour
+    public class CriticalDamageCollider : MonoBehaviour
     {
-        public Transform backStabberStandPoint;
+        public Transform criticalDamageStandPosition;
     }
 
 }
