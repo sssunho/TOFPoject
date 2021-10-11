@@ -306,14 +306,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526e2609c3c5007479fc67143f31b295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell: {fileID: 0}
-  rightWeapon: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
-  leftWeapon: {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+  currentSpell: {fileID: 11400000, guid: 71d21b90da069cd4aa8b55fd742250cd, type: 2}
+  rightWeapon: {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+  leftWeapon: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
   unarmed: {fileID: 0}
   weaponsInRightHandSlot:
-  - {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
-  weaponsInLeftHandSlot:
   - {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+  weaponsInLeftHandSlot:
+  - {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
   curRightWeaponIndex: 0
   curLeftWeaponIndex: 0
   weaponsInventory: []
