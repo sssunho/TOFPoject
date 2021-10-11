@@ -73,6 +73,7 @@ namespace TOF
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
                 inputActions.PlayerActions.RB.performed += i => rb_Input = true;
                 inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerActions.RT.canceled += i => rt_Input = false;
                 inputActions.PlayerActions.LB.performed += i => lb_Input = true;
                 inputActions.PlayerActions.LB.canceled += i => lb_Input = false;
                 inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
@@ -133,7 +134,8 @@ namespace TOF
             }
             if (rt_Input)
             {
-                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                if(rb_Input)
+                    playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
             }
 
             if(lb_Input)

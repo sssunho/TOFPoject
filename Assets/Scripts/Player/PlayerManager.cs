@@ -79,7 +79,7 @@ namespace TOF
         {
             inputHandler.rollFlag = false;
             inputHandler.rb_Input = false;
-            inputHandler.rt_Input = false;
+            //inputHandler.rt_Input = false;
             inputHandler.d_Pad_Up = false;
             inputHandler.d_Pad_Down = false;
             inputHandler.d_Pad_Right = false;
