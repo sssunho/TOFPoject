@@ -10,6 +10,7 @@ namespace TOF
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
         PlayerManager playerManager;
+        PlayerStats playerStats;
         PlayerInventory playerInventory;
 
         public string lastAttack;
@@ -22,6 +23,7 @@ namespace TOF
             weaponSlotManager = GetComponent<WeaponSlotManager>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerManager = GetComponentInParent<PlayerManager>();
+            playerStats = GetComponentInParent<PlayerStats>();
             playerInventory = GetComponentInParent<PlayerInventory>();
         }
 
@@ -125,10 +127,14 @@ namespace TOF
             {
                 if(playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
                 {
-                    // Check for FP
-                    // Attempt to cast spell
+                    playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats);
                 }
             }
+        }
+
+        private void SuccessfullyCastSpell()
+        {
+            playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
         }
 
         #endregion

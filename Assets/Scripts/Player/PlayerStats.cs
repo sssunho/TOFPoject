@@ -98,7 +98,17 @@ namespace TOF
                 currentStamina += staminaRegenerationAmount + Time.deltaTime;
                 staminabar.setCurValue(Mathf.RoundToInt(currentStamina));
             }
+        }
 
+        public void HealPlayer(int healAmount)
+        {
+            currentHealth += healAmount;
+            if(currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+
+            healthbar.setCurValue(currentHealth);
         }
     }
 }
