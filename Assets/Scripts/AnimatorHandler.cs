@@ -116,11 +116,11 @@ namespace TOF
 
         public void EnableIsInvulnerable()
         {
-            anim.SetBool("IsInvulnerable", true);
+            anim.SetBool("isInvulnerable", true);
         }
         public void DisableIsInvulnerable()
         {
-            anim.SetBool("IsInvulnerable", false);
+            anim.SetBool("isInvulnerable", false);
         }
 
         public override void TakeCriticalDamageAnimationEvent()
