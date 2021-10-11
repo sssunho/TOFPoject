@@ -17,6 +17,7 @@ namespace TOF
         public bool y_input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool lb_Input;
         public bool critical_Attack_Input;
         public bool d_Pad_Up;
         public bool d_Pad_Down;
@@ -72,6 +73,8 @@ namespace TOF
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
                 inputActions.PlayerActions.RB.performed += i => rb_Input = true;
                 inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerActions.LB.performed += i => lb_Input = true;
+                inputActions.PlayerActions.LB.canceled += i => lb_Input = false;
                 inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
                 inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
                 inputActions.PlayerActions.Y.performed += inputActions => y_input = true;
@@ -93,7 +96,7 @@ namespace TOF
         {
             MoveInput(delta);
             HandleRollInput(delta);
-            HandleAttackInput(delta);
+            HandleCombatInput(delta);
             HandleQuickSlotsInput();
             HandleInventoryInput();
             HandleInteractiongButtonInput();
@@ -122,9 +125,8 @@ namespace TOF
                 playerInventory.changeLeftWeapon();
         }
 
-        private void HandleAttackInput(float delta)
+        private void HandleCombatInput(float delta)
         {
-
             if(rb_Input)
             {
                 if (playerManager.canDoCombo)
@@ -142,6 +144,15 @@ namespace TOF
             if (rt_Input)
             {
                 playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+            }
+
+            if(lb_Input)
+            {
+                playerAttacker.HandleLBAction();
+            }
+            else
+            {
+                playerManager.isBlocking = false;
             }
         }
 

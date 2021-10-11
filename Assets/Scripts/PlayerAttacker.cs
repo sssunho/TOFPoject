@@ -79,6 +79,25 @@ namespace TOF
             lastAttack = weapon.OH_Heavy_Attack_1;
         }
 
+        public void HandleLBAction()
+        {
+            PerformLBBlcokingAction();
+        }
+
+        #region Defense Actions
+
+        private void PerformLBBlcokingAction()
+        {
+            if (playerManager.isInteracting) return;
+
+            if (playerManager.isBlocking) return;
+
+            animatorHandler.PlayTargetAnimation("Block Start", false, true);
+            playerManager.isBlocking = true;
+        }
+
+        #endregion
+
         public void AttempBackStabOrRiposte()
         {
             RaycastHit hit;
