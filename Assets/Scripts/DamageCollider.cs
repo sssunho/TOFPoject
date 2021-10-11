@@ -32,6 +32,21 @@ namespace TOF
             if (collision.tag == "Player")
             {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+                CharacterManager enemycharacterManager = collision.GetComponent<CharacterManager>();
+                BlockingCollider shield = collision.transform.GetComponent<BlockingCollider>();
+
+                if(enemycharacterManager != null)
+                {
+                    if(shield!=null&& enemycharacterManager.isBlocking)
+                    {
+                        float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
+                    
+                        if(playerStats!=null)
+                        {
+                            playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
+                        }
+                    }
+                }
 
                 if (playerStats != null)
                 {
@@ -42,6 +57,18 @@ namespace TOF
             if (collision.tag == "Enemy")
             {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
+                CharacterManager enemycharacterManager = collision.GetComponent<CharacterManager>();
+                BlockingCollider shield = collision.transform.GetComponent<BlockingCollider>();
+
+                if (shield != null && enemycharacterManager.isBlocking)
+                {
+                    float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
+
+                    if (enemyStats != null)
+                    {
+                        enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
+                    }
+                }
 
                 if (enemyStats != null)
                 {

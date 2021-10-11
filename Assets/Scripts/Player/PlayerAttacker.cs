@@ -7,6 +7,7 @@ namespace TOF
     public class PlayerAttacker : MonoBehaviour
     {
         AnimatorHandler animatorHandler;
+        PlayerEquipmentManager playerEquipmentManager;
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
         PlayerManager playerManager;
@@ -20,6 +21,7 @@ namespace TOF
 
         private void Awake()
         {
+            playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             animatorHandler = GetComponent<AnimatorHandler>();
             weaponSlotManager = GetComponent<WeaponSlotManager>();
             inputHandler = GetComponentInParent<InputHandler>();
@@ -149,6 +151,7 @@ namespace TOF
             if (playerManager.isBlocking) return;
 
             animatorHandler.PlayTargetAnimation("Block Start", false, true);
+            playerEquipmentManager.OpenBlockingCollider();
             playerManager.isBlocking = true;
         }
 

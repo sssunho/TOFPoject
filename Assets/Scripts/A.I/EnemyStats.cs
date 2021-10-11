@@ -6,11 +6,12 @@ namespace TOF
 {
     public class EnemyStats : CharacterStats
     {
-
         Animator animator;
+        EnemyAnimationManager enemyAnimationManager;
 
         private void Awake()
         {
+            enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             animator = GetComponentInChildren<Animator>();
         }
 
@@ -36,12 +37,13 @@ namespace TOF
             }
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, string damageAnimation = "Damage_01")
         {
             if (isDead)
                 return;
             currentHealth = currentHealth - damage;
-            animator.Play("Damage_01");
+
+            enemyAnimationManager.PlayTargetAnimation(damageAnimation, true);
 
             if(currentHealth <= 0)
             {

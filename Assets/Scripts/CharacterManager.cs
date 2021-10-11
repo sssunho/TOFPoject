@@ -15,6 +15,7 @@ namespace TOF
 
         [Header("Combat Flags")]
         public bool canBeRiposted;
+        public bool isBlocking;
 
         public int pendingCriticalDamage;
     }

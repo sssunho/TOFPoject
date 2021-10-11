@@ -44,6 +44,7 @@ namespace TOF
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         EquipmentUI equipmentUI;
+        BlockingCollider blockingCollider;
         PlayerManager playerManager;
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
@@ -59,6 +60,7 @@ namespace TOF
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            blockingCollider = GetComponentInChildren<BlockingCollider>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -145,6 +147,11 @@ namespace TOF
             else
             {
                 playerManager.isBlocking = false;
+
+                if(blockingCollider.blockingCollider.enabled)
+                {
+                    blockingCollider.DisableBlockingCollider();
+                }
             }
         }
 

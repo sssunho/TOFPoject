@@ -66,7 +66,7 @@ namespace TOF
                 isDead = true;
             }
         }
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, string damageAnimation = "Damage_01")
         {
             if (playerManager.isInvulnerable)
                 return;
@@ -77,7 +77,7 @@ namespace TOF
             currentHealth -= damage;
             healthbar.setCurValue(currentHealth);
 
-            animatorHandler.PlayTargetAnimation("Damage_01", true);
+            animatorHandler.PlayTargetAnimation(damageAnimation, true);
 
             if(currentHealth<=0)
             {
