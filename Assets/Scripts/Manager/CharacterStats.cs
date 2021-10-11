@@ -14,6 +14,10 @@ namespace TOF
         public float maxStamina;
         public float currentStamina;
 
+        public int focusLevel = 10;
+        public float maxFocusPoints;
+        public float currentFocusPoint;
+
         public bool isDead;
     }
 }

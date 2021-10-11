@@ -11,6 +11,7 @@ namespace TOF
 
         public SliderControl healthbar;
         public SliderControl staminabar;
+        public SliderControl focusPointBar;
         public SliderControl strengthbar;
 
         public float staminaRegenerationAmount = 1;
@@ -21,18 +22,21 @@ namespace TOF
         private void Awake()
         {
             playerManager = GetComponent<PlayerManager>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
         private void Start()
         {
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
-
             maxHealth = SetMaxHealthFromHealthLV();
             maxStamina = SetMaxStaminaFromHealthLV();
+            maxFocusPoints = SetMaxFocusPointsFromFocusLevel();
             currentHealth = maxHealth;
             currentStamina = maxStamina;
+            currentFocusPoint = maxFocusPoints;
             healthbar.setMaxValue(maxHealth);
             staminabar.setMaxValue(maxStamina);
+            focusPointBar.setMaxValue(maxFocusPoints);
+            focusPointBar.setCurValue(currentFocusPoint);
         }
 
         private int SetMaxHealthFromHealthLV()
@@ -45,6 +49,12 @@ namespace TOF
         {
             maxStamina = staminaLevel * 10;
             return maxStamina;
+        }
+
+        private float SetMaxFocusPointsFromFocusLevel()
+        {
+            maxFocusPoints = focusLevel * 10;
+            return maxFocusPoints;
         }
 
         public void TakeDamageNoAnimation(int damage)
@@ -107,8 +117,17 @@ namespace TOF
             {
                 currentHealth = maxHealth;
             }
-
             healthbar.setCurValue(currentHealth);
+        }
+
+        public void DeductFocusPoints(int focusPoints)
+        {
+            currentFocusPoint -= focusPoints;
+            if(currentFocusPoint < 0)
+            {
+                currentFocusPoint = 0;
+            }
+            focusPointBar.setCurValue(currentFocusPoint);
         }
     }
 }

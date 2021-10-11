@@ -651,6 +651,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8285349588415690114, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285349588415690114, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
 --- !u!1 &987908432
@@ -1010,6 +1018,8 @@ MonoBehaviour:
   lockOnTransform: {fileID: 755276448}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  riposteCollider: {fileID: 0}
+  canBeRiposted: 0
   pendingCriticalDamage: 0
   currentState: {fileID: 0}
   currentTarget: {fileID: 0}
@@ -1058,6 +1068,9 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  focusLevel: 10
+  maxFocusPoints: 0
+  currentFocusPoint: 0
   isDead: 0
 --- !u!136 &1159528651
 CapsuleCollider:
@@ -1567,6 +1580,8 @@ MonoBehaviour:
   lockOnTransform: {fileID: 848768098}
   backStabBoxCollider: {fileID: 0}
   backStabCollider: {fileID: 0}
+  riposteCollider: {fileID: 0}
+  canBeRiposted: 0
   pendingCriticalDamage: 0
   currentState: {fileID: 0}
   currentTarget: {fileID: 0}
@@ -1615,6 +1630,9 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  focusLevel: 10
+  maxFocusPoints: 0
+  currentFocusPoint: 0
   isDead: 0
 --- !u!136 &1779171102
 CapsuleCollider:
