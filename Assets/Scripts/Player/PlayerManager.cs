@@ -32,7 +32,7 @@ namespace TOF
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
-            backStabCollider = GetComponentInChildren<BackStabCollider>();
+            backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
             playerStats = GetComponent<PlayerStats>();
             playerAnimatorManager = GetComponentInChildren<AnimatorHandler>();
         }
