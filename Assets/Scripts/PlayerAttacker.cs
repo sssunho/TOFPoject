@@ -18,11 +18,11 @@ namespace TOF
 
         private void Awake()
         {
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
-            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-            inputHandler = GetComponent<InputHandler>();
-            playerManager = GetComponent<PlayerManager>();
-            playerInventory = GetComponent<PlayerInventory>();
+            animatorHandler = GetComponent<AnimatorHandler>();
+            weaponSlotManager = GetComponent<WeaponSlotManager>();
+            inputHandler = GetComponentInParent<InputHandler>();
+            playerManager = GetComponentInParent<PlayerManager>();
+            playerInventory = GetComponentInParent<PlayerInventory>();
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
@@ -78,11 +78,60 @@ namespace TOF
             animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
             lastAttack = weapon.OH_Heavy_Attack_1;
         }
+        #region Input Action
+        public void HandleRBAction()
+        {
+            if(playerInventory.rightWeapon.isMeleeWeapon)
+            {
+                // Handle Melee Action
+                PerformRBMeleeAction();
+            }
+            else if(playerInventory.rightWeapon.isSpellCaster || playerInventory.rightWeapon.isFaithCaster || playerInventory.rightWeapon.isPyroCaster)
+            {
+                // Handle Magic Action
+                PerformRBMagicAction(playerInventory.rightWeapon);
+                // Handle Miracle Action
+
+                // Handle Pyro Action
+
+            }
+        }
 
         public void HandleLBAction()
         {
             PerformLBBlcokingAction();
         }
+        #endregion
+
+        #region Attack Actions
+        private void PerformRBMeleeAction()
+        {
+            if (playerManager.canDoCombo)
+            {
+                inputHandler.comboFlag = true;
+                HandleWeaponCombo(playerInventory.rightWeapon);
+                inputHandler.comboFlag = false;
+            }
+            else if (!playerManager.canDoCombo && !playerManager.isInteracting)
+            {
+                animatorHandler.anim.SetBool("isUsingRightHand", true);
+                HandleLightAttack(playerInventory.rightWeapon);
+            }
+        }
+
+        private void PerformRBMagicAction(WeaponItem weapon)
+        {
+            if(weapon.isFaithCaster)
+            {
+                if(playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
+                {
+                    // Check for FP
+                    // Attempt to cast spell
+                }
+            }
+        }
+
+        #endregion
 
         #region Defense Actions
 
