@@ -7,12 +7,21 @@ namespace TOF
 {
     public class PlayerStats : CharacterStats
     {
+        PlayerManager playerManager;
 
         public SliderControl healthbar;
         public SliderControl staminabar;
         public SliderControl strengthbar;
 
+        public float staminaRegenerationAmount = 1;
+        public float staminaRegenTimer;
+
         AnimatorHandler animatorHandler;
+
+        private void Awake()
+        {
+            playerManager = GetComponent<PlayerManager>();
+        }
 
         private void Start()
         {
@@ -32,7 +41,7 @@ namespace TOF
             return maxHealth;
         }
 
-        private int SetMaxStaminaFromHealthLV()
+        private float SetMaxStaminaFromHealthLV()
         {
             maxStamina = staminaLevel * 10;
             return maxStamina;
@@ -49,6 +58,9 @@ namespace TOF
         }
         public void TakeDamage(int damage)
         {
+            if (playerManager.isInvulnerable)
+                return;
+
             if (isDead)
                 return;
 
@@ -69,6 +81,24 @@ namespace TOF
         {
             currentStamina -= damage;
             staminabar.setCurValue(currentStamina);
+        }
+
+        public void RegenerateStamina()
+        {
+            if (playerManager.isInteracting)
+            {
+                staminaRegenTimer = 0;
+                return;
+            }
+
+            staminaRegenTimer += Time.deltaTime;
+
+            if (currentStamina < maxStamina && staminaRegenTimer > 1.0f)
+            {
+                currentStamina += staminaRegenerationAmount + Time.deltaTime;
+                staminabar.setCurValue(Mathf.RoundToInt(currentStamina));
+            }
+
         }
     }
 }

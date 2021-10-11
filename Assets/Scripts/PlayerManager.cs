@@ -26,6 +26,7 @@ namespace TOF
         public bool canDoCombo;
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
+        public bool isInvulnerable;
 
         private void Awake()
         {
@@ -51,6 +52,7 @@ namespace TOF
             canDoCombo = anim.GetBool("canDoCombo");
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
+            isInvulnerable = anim.GetBool("isInvulnerable");
             anim.SetBool("isInAir", isInAir);
             anim.SetBool("isDead", playerStats.isDead);
 
@@ -58,6 +60,7 @@ namespace TOF
             playerAnimatorManager.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJump();
+            playerStats.RegenerateStamina();
 
             CheckForInteractableObject();
         }

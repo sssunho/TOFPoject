@@ -114,6 +114,15 @@ namespace TOF
             anim.SetBool("canDoCombo", false);
         }
 
+        public void EnableIsInvulnerable()
+        {
+            anim.SetBool("IsInvulnerable", true);
+        }
+        public void DisableIsInvulnerable()
+        {
+            anim.SetBool("IsInvulnerable", false);
+        }
+
         public override void TakeCriticalDamageAnimationEvent()
         {
             playerStats.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);

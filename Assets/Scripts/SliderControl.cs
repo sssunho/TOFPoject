@@ -27,13 +27,13 @@ namespace TOF
             }
         }
 
-        public void setMaxValue(int maxValue)
+        public void setMaxValue(float maxValue)
         {
             slider.maxValue = maxValue;
             slider.value = maxValue;
         }
 
-        public void setCurValue(int curValue)
+        public void setCurValue(float curValue)
         {
             slider.value = curValue;
         }
