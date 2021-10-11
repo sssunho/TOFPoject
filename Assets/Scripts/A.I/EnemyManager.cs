@@ -35,7 +35,6 @@ namespace TOF
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
             enemyStats = GetComponent<EnemyStats>();
             enemyRigidBody = GetComponent<Rigidbody>();
-            backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
             navMeshAgent.enabled = false;
         }

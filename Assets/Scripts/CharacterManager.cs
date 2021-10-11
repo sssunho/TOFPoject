@@ -10,7 +10,6 @@ namespace TOF
         public Transform lockOnTransform;
 
         [Header("Combat Colliders")]
-        public BoxCollider backStabBoxCollider;
         public CriticalDamageCollider backStabCollider;
         public CriticalDamageCollider riposteCollider;
 
