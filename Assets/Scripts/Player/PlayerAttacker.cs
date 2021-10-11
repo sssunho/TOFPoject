@@ -190,10 +190,9 @@ namespace TOF
                 CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
                 DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
 
-                playerManager.transform.position = enemyCharacterManager.riposteCollider.criticalDamageStandPosition.position;
-
                 if (enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
                 {
+                    playerManager.transform.position = enemyCharacterManager.riposteCollider.criticalDamageStandPosition.position;
                     Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
                     rotationDirection = hit.transform.position - playerManager.transform.position;
                     rotationDirection.y = 0;

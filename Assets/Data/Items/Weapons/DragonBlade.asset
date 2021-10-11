@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DragonBlade
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 8f21651da0a8cf14cada4700e407e474, type: 3}
-  itemName: Sword
-  modelPrefab: {fileID: 2135492169101812905, guid: fad33208c55e7794295044f98b52d6c4, type: 3}
+  itemName: DragonBlade
+  modelPrefab: {fileID: 5988228833169867269, guid: 9e0c9085cee5d174d888d99d8f57c834, type: 3}
   inUnarmed: 0
   baseDamage: 25
   criticalDamageMultiplier: 4
