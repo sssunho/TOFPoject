@@ -61,7 +61,7 @@ namespace TOF
             animatorHandler.Initialize();
 
             playerManager.isGrounded = true;
-            ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+            ignoreForGroundCheck = ~(1 << 8 | 1 << 9 | 1 << 11);
             Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
         }
 

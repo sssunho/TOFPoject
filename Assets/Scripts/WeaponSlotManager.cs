@@ -8,6 +8,7 @@ namespace TOF
     public class WeaponSlotManager : MonoBehaviour
     {
         PlayerManager playerManager;
+        PlayerInventory playerInventory;
 
         public WeaponItem attackingWeapon;
         public WeaponHolderSlot leftHandSlot;
@@ -33,6 +34,7 @@ namespace TOF
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerStats = GetComponentInParent<PlayerStats>();
+            playerInventory = GetComponentInParent<PlayerInventory>();
 
         }
 
@@ -99,11 +101,13 @@ namespace TOF
         private void LoadLeftWeaponDamageCollider()
         {
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            leftHandDamageCollider.currentWeaponDamage = playerInventory.leftWeapon.baseDamage;
         }
 
         private void LoadRightWeaponDamageCollider()
         {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            rightHandDamageCollider.currentWeaponDamage = playerInventory.rightWeapon.baseDamage;
         }
 
         public void OpenDamageCollider()

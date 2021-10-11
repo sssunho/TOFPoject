@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace TOF
 {
-    public class AnimatorHandler : MonoBehaviour
+    public class AnimatorHandler : AnimatorManager
     {
         PlayerManager playerManager;
+        PlayerStats playerStats;
         InputHandler inputHandler;
         PlayerLocomotion playerLocomotion;
-        public Animator anim;
 
         int vertical;
         int horizontal;
@@ -21,6 +21,7 @@ namespace TOF
             inputHandler = GetComponentInParent<InputHandler>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             anim = GetComponent<Animator>();
+            playerStats = GetComponentInParent<PlayerStats>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
         }
@@ -87,13 +88,6 @@ namespace TOF
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
-        {
-            anim.applyRootMotion = isInteracting;
-            anim.SetBool("isInteracting", isInteracting);
-            anim.CrossFade(targetAnim, 0.2f);
-        }
-
         public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool rootMotion)
         {
             anim.applyRootMotion = rootMotion;
@@ -119,6 +113,12 @@ namespace TOF
         public void DisableCombo()
         {
             anim.SetBool("canDoCombo", false);
+        }
+
+        public override void TakeCriticalDamageAnimationEvent()
+        {
+            playerStats.TakeDamage(playerManager.pendingCriticalDamage);
+            playerManager.pendingCriticalDamage = 0;
         }
 
         private void OnAnimatorMove()

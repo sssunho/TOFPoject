@@ -10,6 +10,7 @@ namespace TOF
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
         PlayerManager playerManager;
+        PlayerInventory playerInventory;
 
         public string lastAttack;
 
@@ -21,6 +22,7 @@ namespace TOF
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             inputHandler = GetComponent<InputHandler>();
             playerManager = GetComponent<PlayerManager>();
+            playerInventory = GetComponent<PlayerInventory>();
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
@@ -84,6 +86,8 @@ namespace TOF
                 transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
             {
                 CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+                DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
+
                 if(enemyCharacterManager != null)
                 {
                     //Check for team id (so you cant back stab friend or yourself)
@@ -95,9 +99,12 @@ namespace TOF
                     Quaternion tr = Quaternion.LookRotation(rotationDirection);
                     Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                     playerManager.transform.rotation = targetRotation;
+
+                    int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+                    enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
                     animatorHandler.PlayTargetAnimation("Back Stab", true);
                     enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Back Stabbed", true);
-                    //make enemy play animation
                     //do damage
                 }
             }

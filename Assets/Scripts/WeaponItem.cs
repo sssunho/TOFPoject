@@ -11,6 +11,10 @@ namespace TOF
         public GameObject modelPrefab;
         public bool inUnarmed;
 
+        [Header("Damage")]
+        public int baseDamage = 25;
+        public int criticalDamageMultiplier = 4;
+
         [Header("Idle Animations")]
         public string right_hand_idle;
         public string left_hand_idle;
