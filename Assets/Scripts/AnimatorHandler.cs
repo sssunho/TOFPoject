@@ -87,13 +87,6 @@ namespace TOF
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool rootMotion)
-        {
-            anim.applyRootMotion = rootMotion;
-            anim.SetBool("isInteracting", isInteracting);
-            anim.CrossFade(targetAnim, 0.2f);
-        }
-
         public void CanRotate()
         {
             anim.SetBool("canRotate", true);
@@ -116,11 +109,11 @@ namespace TOF
 
         public void EnableIsInvulnerable()
         {
-            anim.SetBool("IsInvulnerable", true);
+            anim.SetBool("isInvulnerable", true);
         }
         public void DisableIsInvulnerable()
         {
-            anim.SetBool("IsInvulnerable", false);
+            anim.SetBool("isInvulnerable", false);
         }
 
         public override void TakeCriticalDamageAnimationEvent()
