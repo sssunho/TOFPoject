@@ -32,6 +32,8 @@ namespace TOF
             deltaPosition.y = 0;
             Vector3 velocity = deltaPosition / delta;
             enemyManager.enemyRigidBody.velocity = velocity;
+
+            if(agent)
             agent.nextPosition = anim.rootPosition;
         }
     }

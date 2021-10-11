@@ -79,7 +79,7 @@ namespace TOF
             lastAttack = weapon.OH_Heavy_Attack_1;
         }
 
-        private void AttempBackStabOrRiposte()
+        public void AttempBackStabOrRiposte()
         {
             RaycastHit hit;
             if (Physics.Raycast(inputHandler.criticalAttackRaycastStartPoint.position,
@@ -103,8 +103,8 @@ namespace TOF
                     int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
                     enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
-                    animatorHandler.PlayTargetAnimation("Back Stab", true);
-                    enemyCharacterManager.GetComponentInChildren<AnimatorHandler>().PlayTargetAnimation("Back Stabbed", true);
+                    animatorHandler.PlayTargetAnimation("BackStab", true);
+                    enemyCharacterManager.GetComponentInChildren<EnemyAnimationManager>().PlayTargetAnimation("BackStabbed", true);
                     //do damage
                 }
             }
