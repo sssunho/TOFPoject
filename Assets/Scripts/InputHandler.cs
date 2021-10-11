@@ -135,7 +135,7 @@ namespace TOF
                 }
                 else if (!playerManager.canDoCombo && !playerManager.isInteracting)
                 {
-                    animatorHandler.anim.SetBool("isUsingRightHandler", true);
+                    animatorHandler.anim.SetBool("isUsingRightHand", true);
                     playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
                 }
             }
@@ -153,7 +153,6 @@ namespace TOF
             if (b_Input)
             {
                 rollInputTimer += delta;
-                //sprintFlag = true;
             }
             else
             {

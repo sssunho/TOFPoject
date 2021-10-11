@@ -9,7 +9,7 @@ namespace TOF
         public Animator anim;
         public bool canRotate;
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
         {
             anim.applyRootMotion = isInteracting;
             anim.SetBool("canRotate", false);
