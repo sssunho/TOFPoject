@@ -18,6 +18,26 @@ namespace TOF
             enemyStats = GetComponentInParent<EnemyStats>();
         }
 
+        public void EnableCanBeRiposted()
+        {
+            enemyManager.canBeRiposted = true;
+        }
+
+        public void DisableCanBeRiposted()
+        {
+            enemyManager.canBeRiposted = false;
+        }
+
+        public void EnableIsParrying()
+        {
+            enemyManager.isParrying = true;
+        }
+
+        public void DisableIsParrying()
+        {
+            enemyManager.isParrying = false;
+        }
+
         public override void TakeCriticalDamageAnimationEvent()
         {
             enemyStats.TakeDamageNoAnimation(enemyManager.pendingCriticalDamage);

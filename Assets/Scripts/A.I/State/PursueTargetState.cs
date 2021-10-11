@@ -28,8 +28,6 @@ namespace TOF
             }
 
             HandleRotateTowardsTarget(enemyManager);
-            enemyManager.navMeshAgent.transform.localPosition = Vector3.zero;
-            enemyManager.navMeshAgent.transform.localRotation = Quaternion.identity;
 
             // #.2 If within attack range, switch to combat stance state
             if (distanceFromTarget <= enemyManager.maximumAttackRange)

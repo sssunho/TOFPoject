@@ -54,6 +54,8 @@ namespace TOF
         private void FixedUpdate()
         {
             HandleStateMachine();
+            navMeshAgent.transform.localPosition = Vector3.zero;
+            navMeshAgent.transform.localRotation = Quaternion.identity;
         }
 
         private void HandleStateMachine()

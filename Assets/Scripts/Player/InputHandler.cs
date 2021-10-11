@@ -17,6 +17,7 @@ namespace TOF
         public bool y_input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool lt_Input;
         public bool lb_Input;
         public bool critical_Attack_Input;
         public bool d_Pad_Up;
@@ -44,6 +45,7 @@ namespace TOF
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         EquipmentUI equipmentUI;
+        BlockingCollider blockingCollider;
         PlayerManager playerManager;
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
@@ -59,6 +61,7 @@ namespace TOF
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            blockingCollider = GetComponentInChildren<BlockingCollider>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -74,6 +77,7 @@ namespace TOF
                 inputActions.PlayerActions.RB.performed += i => rb_Input = true;
                 inputActions.PlayerActions.RT.performed += i => rt_Input = true;
                 inputActions.PlayerActions.RT.canceled += i => rt_Input = false;
+                inputActions.PlayerActions.LT.performed += i => lt_Input = true;
                 inputActions.PlayerActions.LB.performed += i => lb_Input = true;
                 inputActions.PlayerActions.LB.canceled += i => lb_Input = false;
                 inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
@@ -134,8 +138,23 @@ namespace TOF
             }
             if (rt_Input)
             {
-                if(rb_Input)
+                if (rb_Input)
                     playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+            }
+
+            if(lt_Input)
+            {
+                if(twoHandFlag)
+                {
+
+                    //if two handing handle weapon
+                }
+                else
+                {
+                    playerAttacker.HandleLTAction();
+                    //else handle light attack or melee weapon 
+                    //hanlde weapon art if shield 
+                }
             }
 
             if(lb_Input)
@@ -145,6 +164,11 @@ namespace TOF
             else
             {
                 playerManager.isBlocking = false;
+
+                if(blockingCollider.blockingCollider.enabled)
+                {
+                    blockingCollider.DisableBlockingCollider();
+                }
             }
         }
 

@@ -693,6 +693,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
     - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInLeftHandSlot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 722e1e73834b1f04fb13ac3b7b77536a, type: 2}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
       propertyPath: weaponsInRightHandSlot.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
@@ -2560,6 +2564,8 @@ MonoBehaviour:
   backStabCollider: {fileID: 0}
   riposteCollider: {fileID: 0}
   canBeRiposted: 0
+  canBeParried: 0
+  isParrying: 0
   pendingCriticalDamage: 0
   currentState: {fileID: 0}
   currentTarget: {fileID: 0}
@@ -3146,6 +3152,8 @@ MonoBehaviour:
   backStabCollider: {fileID: 0}
   riposteCollider: {fileID: 0}
   canBeRiposted: 0
+  canBeParried: 0
+  isParrying: 0
   pendingCriticalDamage: 0
   currentState: {fileID: 0}
   currentTarget: {fileID: 0}
@@ -3625,7 +3633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2862906456338086827, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: canBeRiposted
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2862906456338086827, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: riposteCollider

@@ -7,6 +7,7 @@ namespace TOF
     public class PlayerAttacker : MonoBehaviour
     {
         AnimatorHandler animatorHandler;
+        PlayerEquipmentManager playerEquipmentManager;
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
         PlayerManager playerManager;
@@ -20,6 +21,7 @@ namespace TOF
 
         private void Awake()
         {
+            playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             animatorHandler = GetComponent<AnimatorHandler>();
             weaponSlotManager = GetComponent<WeaponSlotManager>();
             inputHandler = GetComponentInParent<InputHandler>();
@@ -99,6 +101,19 @@ namespace TOF
 
             }
         }
+        
+        public void HandleLTAction()
+        {
+            if(playerInventory.leftWeapon.isShieldWeapon)
+            {
+                PerformLTWeaponArt(inputHandler.twoHandFlag);
+                //perform shield weapon;
+            }
+            else if(playerInventory.leftWeapon.isMeleeWeapon)
+            {
+                //do light attack
+            }
+        }
 
         public void HandleLBAction()
         {
@@ -133,6 +148,22 @@ namespace TOF
             }
         }
 
+        private void PerformLTWeaponArt(bool isTwoHanding)
+        {
+            if (playerManager.isInteracting) return;
+
+            if(isTwoHanding)
+            {
+                //if we are two handing preform weapon art for right weapon
+
+            }
+            else
+            {
+                animatorHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
+            }
+
+        }
+
         private void SuccessfullyCastSpell()
         {
             playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
@@ -149,6 +180,7 @@ namespace TOF
             if (playerManager.isBlocking) return;
 
             animatorHandler.PlayTargetAnimation("Block Start", false, true);
+            playerEquipmentManager.OpenBlockingCollider();
             playerManager.isBlocking = true;
         }
 
