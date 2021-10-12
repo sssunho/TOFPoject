@@ -45,7 +45,7 @@ namespace TOF
                         characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
                         return;
                     }
-                    else if(shield!=null&& enemycharacterManager.isBlocking)
+                    else if(shield!=null&& enemyCharacterManager.isBlocking)
                     {
                         float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
                     
@@ -65,7 +65,7 @@ namespace TOF
             if (collision.tag == "Enemy")
             {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
-                CharacterManager enemycharacterManager = collision.GetComponent<CharacterManager>();
+                CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
                 BlockingCollider shield = collision.transform.GetComponent<BlockingCollider>();
 
                 if (enemyCharacterManager != null)
@@ -75,7 +75,7 @@ namespace TOF
                         characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
                         return;
                     }
-                    else if (shield != null && enemycharacterManager.isBlocking)
+                    else if (shield != null && enemyCharacterManager.isBlocking)
                     {
                         float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
 
