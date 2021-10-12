@@ -32,7 +32,10 @@ namespace TOF
 
         public void HandleWeaponCombo(WeaponItem weapon)
         {
-            if(inputHandler.comboFlag)
+            if (playerStats.currentStamina <= 0)
+                return;
+
+            if (inputHandler.comboFlag)
             {
                 animatorHandler.anim.SetBool("canDoCombo", false);
 
@@ -52,6 +55,9 @@ namespace TOF
             // ep 29에서 바뀐 부분입니다.
             // weaponSlotManager.attackingWeapon = weapon; 를 추가할 때
             // 이 주석을 지우고 추가하면 됩니다.
+            if (playerStats.currentStamina <= 0)
+                return;
+
             weaponSlotManager.attackingWeapon = weapon;
             if(inputHandler.twoHandFlag)
             {
@@ -70,6 +76,8 @@ namespace TOF
             // ep 29에서 바뀐 부분입니다.
             // weaponSlotManager.attackingWeapon = weapon; 를 추가할 때
             // 이 주석을 지우고 추가하면 됩니다.
+            if (playerStats.currentStamina <= 0)
+                return;
 
             weaponSlotManager.attackingWeapon = weapon;
             if (inputHandler.twoHandFlag)
@@ -188,6 +196,9 @@ namespace TOF
 
         public void AttempBackStabOrRiposte()
         {
+            if (playerStats.currentStamina <= 0)
+                return;
+
             RaycastHit hit;
             if (Physics.Raycast(inputHandler.criticalAttackRaycastStartPoint.position,
                 transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))

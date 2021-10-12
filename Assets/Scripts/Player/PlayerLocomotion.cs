@@ -8,6 +8,7 @@ namespace TOF
     {
         CameraHandler cameraHandler;
         PlayerManager playerManager;
+        PlayerStats playerStats;
         Transform cameraObject;
         InputHandler inputHandler;
         public Vector3 moveDirection;
@@ -48,14 +49,15 @@ namespace TOF
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
+            playerManager = GetComponent<PlayerManager>();
+            playerStats = GetComponent<PlayerStats>();
+            rigidbody = GetComponent<Rigidbody>();
+            inputHandler = GetComponent<InputHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
         private void Start()
         {
-            playerManager = GetComponent<PlayerManager>();
-            rigidbody = GetComponent<Rigidbody>();
-            inputHandler = GetComponent<InputHandler>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
             cameraObject = Camera.main.transform;
             myTransform = this.transform;
             animatorHandler.Initialize();
@@ -184,6 +186,11 @@ namespace TOF
         {
             if (animatorHandler.anim.GetBool("isInteracting"))
                 return;
+
+            // Check if we have stamina
+            if (playerStats.currentStamina <= 0)
+                return;
+
             if (inputHandler.rollFlag)
             {
                 moveDirection = cameraObject.forward * inputHandler.vertical;
@@ -282,6 +289,9 @@ namespace TOF
         public void HandleJump()
         {
             if (playerManager.isInteracting)
+                return;
+
+            if (playerStats.currentStamina <= 0)
                 return;
 
             if (inputHandler.jump_Input)
