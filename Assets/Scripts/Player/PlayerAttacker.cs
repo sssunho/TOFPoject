@@ -19,9 +19,6 @@ namespace TOF
         LayerMask backStabLayer = 1 << 12;
         LayerMask riposteLayer = 1 << 13;
 
-        public int parryCheckDelay = 6;
-        int parryFrame = 0;
-
         private void Awake()
         {
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
@@ -271,38 +268,31 @@ namespace TOF
 
         private void ParryBehavior()
         {
-            if (parryFrame % parryCheckDelay == 0)
+            int maxColliders = 10;
+            float parryRange = 0.8f;
+
+            Collider[] hitColliders = new Collider[maxColliders];
+            int numColliders = Physics.OverlapSphereNonAlloc(transform.position, parryRange, hitColliders, 1 << 9);
+            for (int i = 0; i < numColliders; i++)
             {
-                parryFrame = 0;
-
-                int maxColliders = 10;
-                float parryRange = 0.8f;
-
-                Collider[] hitColliders = new Collider[maxColliders];
-                int numColliders = Physics.OverlapSphereNonAlloc(transform.position, parryRange, hitColliders, 1 << 9);
-                for(int i = 0; i < numColliders; i++)
+                if (hitColliders[i].tag == "Enemy")
                 {
-                    if (hitColliders[i].tag == "Enemy")
+                    EnemyManager enemyManager = hitColliders[i].gameObject.GetComponent<EnemyManager>();
+                    if (enemyManager != null)
                     {
-                        EnemyManager enemyManager = hitColliders[i].gameObject.GetComponent<EnemyManager>();
-                        if (enemyManager != null)
+                        if (IsSeeEachOther(transform, hitColliders[i].gameObject.transform) && enemyManager.canBeParried)
                         {
-                            if (IsSeeEachOther(transform, hitColliders[i].gameObject.transform) && enemyManager.canBeParried)
-                            {
-                                enemyManager.canBeParried = false;
-                                playerManager.isParrying = false;
-                                enemyManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
-                                break;
-                            }
+                            enemyManager.canBeParried = false;
+                            playerManager.isParrying = false;
+                            enemyManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                            break;
                         }
                     }
                 }
             }
-            
-            parryFrame++;
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             if (playerManager.isParrying)
             {
