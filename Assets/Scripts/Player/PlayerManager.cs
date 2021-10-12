@@ -102,6 +102,8 @@ namespace TOF
             }
         }
 
+        #region Player Interactions
+
         public void CheckForInteractableObject()
         {
             RaycastHit hit;
@@ -136,5 +138,13 @@ namespace TOF
                 }
             }
         }
+
+        public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
+        {
+            playerLocomotion.rigidbody.velocity = Vector3.zero; // Strops the player from ice staking
+            transform.position = playerStandsHereWhenOpeningChest.transform.position;
+            playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
+        }
+        #endregion
     }
 }
