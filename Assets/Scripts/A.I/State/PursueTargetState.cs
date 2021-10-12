@@ -10,6 +10,8 @@ namespace TOF
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
+            if (enemyManager.isInteracting)
+                return this;
             // #.1 Chase the target
             if (enemyManager.isPerformingAction)
             {

@@ -36,12 +36,12 @@ namespace TOF
         public float lockedPivotPosition = 2.25f;
         public float unlockedPivotPosition = 1.65f;
 
-        public Transform currentLockOnTarget;
+        public CharacterManager currentLockOnTarget;
 
         List<CharacterManager> availableTargets = new List<CharacterManager>();
-        public Transform nearestLockOnTarget;
-        public Transform leftLockTarget;
-        public Transform rightLockTarget;
+        public CharacterManager nearestLockOnTarget;
+        public CharacterManager leftLockTarget;
+        public CharacterManager rightLockTarget;
         public float maximumLockOnDistance = 30;
 
         private void Awake()
@@ -91,14 +91,14 @@ namespace TOF
             }
             else if (currentLockOnTarget != null)
             {
-                Vector3 dir = currentLockOnTarget.position - transform.position;
+                Vector3 dir = currentLockOnTarget.transform.position - transform.position;
                 dir.Normalize();
                 dir.y = 0;
 
                 Quaternion targetRotation = Quaternion.LookRotation(dir);
                 transform.rotation = targetRotation;
 
-                dir = currentLockOnTarget.position - cameraPivotTransform.position;
+                dir = currentLockOnTarget.transform.position - cameraPivotTransform.position;
                 dir.Normalize();
 
                 targetRotation = Quaternion.LookRotation(dir);
@@ -134,7 +134,7 @@ namespace TOF
         public void HandleLokOn()
         {
             float shortestDistance = Mathf.Infinity;
-            float shortestDistanceOfLeftTarget = Mathf.Infinity;
+            float shortestDistanceOfLeftTarget = -Mathf.Infinity;
             float shortestDistanceOfRightTarget = Mathf.Infinity;
 
             Collider[] colliders = Physics.OverlapSphere(targetTransform.position, 26);
@@ -177,25 +177,26 @@ namespace TOF
                 if(disatanceFromTarget<shortestDistance)
                 {
                     shortestDistance = disatanceFromTarget;
-                    nearestLockOnTarget = availableTargets[k].lockOnTransform;
+                    nearestLockOnTarget = availableTargets[k];
                 }
 
                 if (inputHandler.lockOnFlag)
                 {
-                    Vector3 relativeEnemyPositon = currentLockOnTarget.InverseTransformPoint(availableTargets[k].transform.position);
-                    var distanceFromLeftTarget = currentLockOnTarget.transform.position.x - availableTargets[k].transform.position.x;
-                    var distanceFromRightTarget = currentLockOnTarget.transform.position.x + availableTargets[k].transform.position.x;
+                    Vector3 relativeEnemyPositon = inputHandler.transform.InverseTransformPoint(availableTargets[k].transform.position);
+                    var distanceFromLeftTarget = relativeEnemyPositon.x;
+                    var distanceFromRightTarget = relativeEnemyPositon.x;
 
-                    if (relativeEnemyPositon.x > 0.00 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
+                    if (relativeEnemyPositon.x <= 0.00 && distanceFromLeftTarget > shortestDistanceOfLeftTarget
+                        && availableTargets[k] != currentLockOnTarget)
                     {
                         shortestDistanceOfLeftTarget = distanceFromLeftTarget;
-                        leftLockTarget = availableTargets[k].lockOnTransform;
+                        leftLockTarget = availableTargets[k];
                     }
-
-                    if (relativeEnemyPositon.x < 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget)
+                    else if (relativeEnemyPositon.x >= 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget
+                        && availableTargets[k] != currentLockOnTarget)
                     {
                         shortestDistanceOfRightTarget = distanceFromRightTarget;
-                        rightLockTarget = availableTargets[k].lockOnTransform;
+                        rightLockTarget = availableTargets[k];
                     }
                 }
             }

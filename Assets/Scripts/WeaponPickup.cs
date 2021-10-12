@@ -20,11 +20,11 @@ namespace TOF
         {
             PlayerInventory playerInventory;
             PlayerLocomotion playerLocomotion;
-            AnimatorHandler animatorHandler;
+            PlayerAnimationManager animatorHandler;
 
             playerInventory = playerManager.GetComponent<PlayerInventory>();
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = playerManager.GetComponentInChildren<PlayerAnimationManager>();
 
             playerLocomotion.rigidbody.velocity = Vector3.zero;
             animatorHandler.PlayTargetAnimation("Pick Up", true);

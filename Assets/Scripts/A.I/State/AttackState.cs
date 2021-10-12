@@ -14,8 +14,18 @@ namespace TOF
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {
-            if (enemyManager.isInteracting)
+            if (enemyManager.isInteracting && enemyManager.canDoCombo == false)
+            {
                 return this;
+            }
+            else if(enemyManager.isInteracting && enemyManager.canDoCombo)
+            {
+                if (willDoComboOnNextAttack)
+                {
+                    willDoComboOnNextAttack = false;
+                    enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+                }
+            }
 
             Vector3 targetDirection = enemyManager.currentTarget.transform.position - transform.position;
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
@@ -24,7 +34,9 @@ namespace TOF
             HandleRotateTowardsTarget(enemyManager);
 
             if (enemyManager.isPerformingAction)
+            {
                 return combatStanceState;
+            }
 
             if (currentAttack != null)
             {
@@ -46,9 +58,19 @@ namespace TOF
                             enemyAnimationManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
                             enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
                             enemyManager.isPerformingAction = true;
-                            enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
-                            currentAttack = null;
-                            return combatStanceState;
+                            RollForComboChance(enemyManager);
+
+                            if(currentAttack.canCombo && willDoComboOnNextAttack)
+                            {
+                                currentAttack = currentAttack.comboAction;
+                                return this;
+                            }
+                            else
+                            {
+                                enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+                                currentAttack = null;
+                                return combatStanceState;
+                            }
                         }
                     }
                 }
@@ -143,6 +165,15 @@ namespace TOF
             }
         }
 
+        private void RollForComboChance(EnemyManager enemyManager)
+        {
+            float comboChance = Random.Range(0, 100);
+
+            if(enemyManager.allowAIToPerformCombos && comboChance <= enemyManager.comboLikelyHood)
+            {
+                willDoComboOnNextAttack = true;
+            }
+        }
     }
 }
 

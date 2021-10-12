@@ -11,7 +11,7 @@ namespace TOF
         CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
         PlayerStats playerStats;
-        AnimatorHandler playerAnimatorManager;
+        PlayerAnimationManager playerAnimatorManager;
 
         InteractableUI interactableUI;
         public GameObject interactableUIGameObject;
@@ -33,7 +33,7 @@ namespace TOF
             cameraHandler = FindObjectOfType<CameraHandler>();
             backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
             playerStats = GetComponent<PlayerStats>();
-            playerAnimatorManager = GetComponentInChildren<AnimatorHandler>();
+            playerAnimatorManager = GetComponentInChildren<PlayerAnimationManager>();
         }
 
         private void Start()

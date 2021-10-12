@@ -17,12 +17,12 @@ namespace TOF
         public float staminaRegenerationAmount = 1;
         public float staminaRegenTimer;
 
-        AnimatorHandler animatorHandler;
+        PlayerAnimationManager animatorHandler;
 
         private void Awake()
         {
             playerManager = GetComponent<PlayerManager>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimationManager>();
         }
 
         private void Start()
