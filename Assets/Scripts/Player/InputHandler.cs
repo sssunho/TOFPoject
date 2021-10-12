@@ -169,7 +169,7 @@ namespace TOF
             {
                 playerManager.isBlocking = false;
 
-                if(blockingCollider.blockingCollider.enabled)
+                if(blockingCollider.enabled)
                 {
                     blockingCollider.DisableBlockingCollider();
                 }

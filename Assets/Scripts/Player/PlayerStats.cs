@@ -68,11 +68,9 @@ namespace TOF
         }
         public void TakeDamage(int damage, string damageAnimation = "Damage_01")
         {
-            if (playerManager.isInvulnerable)
-                return;
+            if (playerManager.isInvulnerable) return;
 
-            if (isDead)
-                return;
+            if (isDead) return;
 
             currentHealth -= damage;
             healthbar.setCurValue(currentHealth);
