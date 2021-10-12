@@ -11,6 +11,7 @@ namespace TOF
         public SpellItem currentSpell;
         public WeaponItem rightWeapon;
         public WeaponItem leftWeapon;
+        public ConsumableItem currentConsumable;
         public WeaponItem unarmed;
 
         public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[1];
