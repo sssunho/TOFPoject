@@ -17,7 +17,7 @@ namespace TOF
         public string consumableAnimation;
         public bool isInteracting;
 
-        public virtual void AttempToConsumeItem(AnimatorHandler animatorHandler, WeaponSlotManager weaponSlotManager, PlayerEffectManager playerEffectManager)
+        public virtual void AttempToConsumeItem(AnimatorManager animatorHandler, WeaponSlotManager weaponSlotManager, PlayerEffectManager playerEffectManager)
         {
             if(currentItemAmount >0)
             {
