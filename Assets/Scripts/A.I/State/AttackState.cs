@@ -24,6 +24,7 @@ namespace TOF
                 {
                     willDoComboOnNextAttack = false;
                     enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+                    return combatStanceState;
                 }
             }
 
