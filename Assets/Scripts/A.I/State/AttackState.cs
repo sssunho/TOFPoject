@@ -7,9 +7,10 @@ namespace TOF
     public class AttackState : State
     {
         public CombatStanceState combatStanceState;
-
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
+
+        bool willDoComboOnNextAttack = false;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimationManager enemyAnimationManager)
         {

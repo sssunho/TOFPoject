@@ -133,5 +133,10 @@ namespace TOF
             }
             focusPointBar.setCurValue(currentFocusPoint);
         }
+
+        public void AddSouls(int souls)
+        {
+            soulCount += souls;
+        }
     }
 }

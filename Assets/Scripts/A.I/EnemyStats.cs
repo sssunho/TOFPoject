@@ -6,13 +6,13 @@ namespace TOF
 {
     public class EnemyStats : CharacterStats
     {
-        Animator animator;
         EnemyAnimationManager enemyAnimationManager;
+
+        public int soulsAwardedOnDeath = 50;
 
         private void Awake()
         {
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
-            animator = GetComponentInChildren<Animator>();
         }
 
         private void Start()
@@ -47,10 +47,15 @@ namespace TOF
 
             if(currentHealth <= 0)
             {
-                currentHealth = 0;
-                animator.Play("Dead_01");
-                isDead = true;
+                HandleDeath();
             }
+        }
+
+        private void HandleDeath()
+        {
+            currentHealth = 0;
+            enemyAnimationManager.PlayTargetAnimation("Dead_01", true);
+            isDead = true;
         }
     }
 

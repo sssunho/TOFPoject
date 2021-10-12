@@ -18,6 +18,8 @@ namespace TOF
         public float maxFocusPoints;
         public float currentFocusPoint;
 
+        public int soulCount = 0;
+
         public bool isDead;
     }
 }
