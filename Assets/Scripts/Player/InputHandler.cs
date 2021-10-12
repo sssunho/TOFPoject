@@ -48,6 +48,7 @@ namespace TOF
         EquipmentUI equipmentUI;
         BlockingCollider blockingCollider;
         PlayerManager playerManager;
+        PlayerEffectManager playerEffectManager;
         PlayerStats playerStats;
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
@@ -64,6 +65,7 @@ namespace TOF
             playerManager = GetComponent<PlayerManager>();
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            playerEffectManager = GetComponentInChildren<PlayerEffectManager>();
             blockingCollider = GetComponentInChildren<BlockingCollider>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
@@ -313,7 +315,7 @@ namespace TOF
             if (r_Input)
             {
                 r_Input = false;
-
+                playerInventory.currentConsumable.AttempToConsumeItem(animatorHandler, weaponSlotManager, playerEffectManager);
             }
         }
     }
