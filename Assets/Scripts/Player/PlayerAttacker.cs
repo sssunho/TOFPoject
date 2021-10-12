@@ -6,7 +6,7 @@ namespace TOF
 {
     public class PlayerAttacker : MonoBehaviour
     {
-        AnimatorHandler animatorHandler;
+        PlayerAnimationManager animatorHandler;
         PlayerEquipmentManager playerEquipmentManager;
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
@@ -22,7 +22,7 @@ namespace TOF
         private void Awake()
         {
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
-            animatorHandler = GetComponent<AnimatorHandler>();
+            animatorHandler = GetComponent<PlayerAnimationManager>();
             weaponSlotManager = GetComponent<WeaponSlotManager>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerManager = GetComponentInParent<PlayerManager>();

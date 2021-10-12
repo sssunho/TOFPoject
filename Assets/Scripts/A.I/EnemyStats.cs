@@ -6,19 +6,22 @@ namespace TOF
 {
     public class EnemyStats : CharacterStats
     {
-        Animator animator;
         EnemyAnimationManager enemyAnimationManager;
+
+        public UIEnemyHealthBar enemyHealthBar;
+
+        public int soulsAwardedOnDeath = 50;
 
         private void Awake()
         {
             enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
-            animator = GetComponentInChildren<Animator>();
         }
 
         private void Start()
         {
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
+            enemyHealthBar.SetMaxHealth(maxHealth);
         }
 
         private int SetMaxHealthFromHealthLevel()
@@ -30,6 +33,9 @@ namespace TOF
         public void TakeDamageNoAnimation(int damage)
         {
             currentHealth = currentHealth - damage;
+
+            enemyHealthBar.SetHealth(currentHealth);
+
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
@@ -42,15 +48,20 @@ namespace TOF
             if (isDead)
                 return;
             currentHealth = currentHealth - damage;
-
+            enemyHealthBar.SetHealth(currentHealth);
             enemyAnimationManager.PlayTargetAnimation(damageAnimation, true);
 
             if(currentHealth <= 0)
             {
-                currentHealth = 0;
-                animator.Play("Dead_01");
-                isDead = true;
+                HandleDeath();
             }
+        }
+
+        private void HandleDeath()
+        {
+            currentHealth = 0;
+            enemyAnimationManager.PlayTargetAnimation("Dead_01", true);
+            isDead = true;
         }
     }
 

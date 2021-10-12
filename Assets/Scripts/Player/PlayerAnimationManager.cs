@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TOF
 {
-    public class AnimatorHandler : AnimatorManager
+    public class PlayerAnimationManager : AnimatorManager
     {
         PlayerManager playerManager;
         PlayerStats playerStats;

@@ -52,7 +52,7 @@ namespace TOF
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
         CameraHandler cameraHandler;
-        AnimatorHandler animatorHandler;
+        PlayerAnimationManager animatorHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -67,7 +67,7 @@ namespace TOF
             blockingCollider = GetComponentInChildren<BlockingCollider>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimationManager>();
         }
 
         public void OnEnable()

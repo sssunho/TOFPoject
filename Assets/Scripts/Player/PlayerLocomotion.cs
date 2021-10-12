@@ -16,7 +16,7 @@ namespace TOF
         [HideInInspector]
         public Transform myTransform;
         [HideInInspector]
-        public AnimatorHandler animatorHandler;
+        public PlayerAnimationManager playerAnimationManager;
 
         public new Rigidbody rigidbody;
         public GameObject normalCamera;
@@ -61,14 +61,14 @@ namespace TOF
             playerStats = GetComponent<PlayerStats>();
             rigidbody = GetComponent<Rigidbody>();
             inputHandler = GetComponent<InputHandler>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            playerAnimationManager = GetComponentInChildren<PlayerAnimationManager>();
         }
 
         private void Start()
         {
             cameraObject = Camera.main.transform;
             myTransform = this.transform;
-            animatorHandler.Initialize();
+            playerAnimationManager.Initialize();
 
             playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 9 | 1 << 11);
@@ -81,7 +81,7 @@ namespace TOF
 
         public void HandleRotation(float delta)
         {
-            if (animatorHandler.canRotate)
+            if (playerAnimationManager.canRotate)
             {
                 if (inputHandler.lockOnFlag)
                 {
@@ -106,7 +106,7 @@ namespace TOF
                     else
                     {
                         Vector3 rotationDirection = moveDirection;
-                        rotationDirection = cameraHandler.currentLockOnTarget.position - transform.position;
+                        rotationDirection = cameraHandler.currentLockOnTarget.transform.position - transform.position;
                         rotationDirection.y = 0;
                         rotationDirection.Normalize();
 
@@ -180,17 +180,17 @@ namespace TOF
 
             if(inputHandler.lockOnFlag && inputHandler.sprintFlag==false)
             {
-                animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
+                playerAnimationManager.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
             }
             else
             {
-                animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+                playerAnimationManager.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
             }
         }
 
         public void HandleRollingAndSprinting(float delta)
         {
-            if (animatorHandler.anim.GetBool("isInteracting"))
+            if (playerAnimationManager.anim.GetBool("isInteracting"))
                 return;
 
             // Check if we have stamina
@@ -204,7 +204,7 @@ namespace TOF
 
                 if (inputHandler.moveAmount > 0)
                 {
-                    animatorHandler.PlayTargetAnimation("Rolling", true);
+                    playerAnimationManager.PlayTargetAnimation("Rolling", true);
                     moveDirection.y = 0;
                     Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = rollRotation;
@@ -212,7 +212,7 @@ namespace TOF
                 }
                 else
                 {
-                    animatorHandler.PlayTargetAnimation("Backstep", true);
+                    playerAnimationManager.PlayTargetAnimation("Backstep", true);
                     playerStats.TakeStaminaDamage(backStepStaminaCost);
                 }
             }
@@ -254,13 +254,13 @@ namespace TOF
                 {
                     if (inAirTimer > 0.5f)
                     {
-                        animatorHandler.PlayTargetAnimation("Land", true);
+                        playerAnimationManager.PlayTargetAnimation("Land", true);
                         inAirTimer = 0;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
-                        animatorHandler.PlayTargetAnimation("Empty", false);
+                        playerAnimationManager.PlayTargetAnimation("Locomotion", false);
+                        playerAnimationManager.PlayTargetAnimation("Empty", false);
                         inAirTimer = 0;
                     }
 
@@ -277,7 +277,7 @@ namespace TOF
                 {
                     if (playerManager.isInteracting == false)
                     {
-                        animatorHandler.PlayTargetAnimation("Falling", true);
+                        playerAnimationManager.PlayTargetAnimation("Falling", true);
                     }
 
                     Vector3 vel = rigidbody.velocity;
@@ -308,7 +308,7 @@ namespace TOF
                 {
                     moveDirection = cameraObject.forward * inputHandler.vertical;
                     moveDirection += cameraObject.right * inputHandler.horizontal;
-                    animatorHandler.PlayTargetAnimation("Jump", true);
+                    playerAnimationManager.PlayTargetAnimation("Jump", true);
                     moveDirection.y = 0;
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;

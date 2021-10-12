@@ -17,12 +17,12 @@ namespace TOF
         public float staminaRegenerationAmount = 1;
         public float staminaRegenTimer;
 
-        AnimatorHandler animatorHandler;
+        PlayerAnimationManager animatorHandler;
 
         private void Awake()
         {
             playerManager = GetComponent<PlayerManager>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimationManager>();
         }
 
         private void Start()
@@ -132,6 +132,11 @@ namespace TOF
                 currentFocusPoint = 0;
             }
             focusPointBar.setCurValue(currentFocusPoint);
+        }
+
+        public void AddSouls(int souls)
+        {
+            soulCount += souls;
         }
     }
 }

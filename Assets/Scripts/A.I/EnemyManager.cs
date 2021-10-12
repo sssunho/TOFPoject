@@ -21,13 +21,19 @@ namespace TOF
         public float rotationSpeed = 15;
         public float maximumAttackRange = 1.5f;
 
+        [Header("Combat Flags")]
+        public bool canDoCombo;
+
         [Header("A.I Settings")]
         public float detectionRadius = 20;
         // The higher, and lower, respectively these angles are, the greater detection FIELD OF VIEW (basically like eye sight)
         public float maximumDetectionAngle = 50;
         public float minimumDetectionAngle = -50;
-
         public float currentRecoveryTime = 0;
+
+        [Header("A.I Combat Settings")]
+        public bool allowAIToPerformCombos;
+        public float comboLikelyHood;
 
         private void Awake()
         {
@@ -47,13 +53,15 @@ namespace TOF
         private void Update()
         {
             HandleRecoveryTimer();
+            HandleStateMachine();
+
             isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
+            canDoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
             enemyAnimationManager.anim.SetBool("isDead", enemyStats.isDead);
         }
         
         private void FixedUpdate()
         {
-            HandleStateMachine();
             navMeshAgent.transform.localPosition = Vector3.zero;
             navMeshAgent.transform.localRotation = Quaternion.identity;
         }
