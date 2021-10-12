@@ -19,6 +19,9 @@ namespace TOF
         LayerMask backStabLayer = 1 << 12;
         LayerMask riposteLayer = 1 << 13;
 
+        public int parryCheckDelay = 6;
+        int parryFrame = 0;
+
         private void Awake()
         {
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
@@ -251,6 +254,59 @@ namespace TOF
                     enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Riposted", true);
                 }
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(1, 0, 0, 0.5f);
+            if(inputHandler)
+                Gizmos.DrawSphere(inputHandler.criticalAttackRaycastStartPoint.position, 0.8f);
+        }
+
+        private bool IsSeeEachOther()
+        {
+            return false;
+        }
+
+        private void ParryBehavior()
+        {
+            if (parryFrame % parryCheckDelay == 0)
+            {
+                parryFrame = 0;
+
+                int maxColliders = 10;
+                float parryRange = 0.8f;
+
+                Collider[] hitColliders = new Collider[maxColliders];
+                int numColliders = Physics.OverlapSphereNonAlloc(transform.position, parryRange, hitColliders, 1 << 9);
+                for(int i = 0; i < numColliders; i++)
+                {
+                    if (hitColliders[i].tag == "Enemy")
+                    {
+                        Debug.Log(hitColliders[i].gameObject);
+
+                        EnemyManager enemyManager = hitColliders[i].gameObject.GetComponent<EnemyManager>();
+                        if (enemyManager != null && enemyManager.canBeParried)
+                        {
+                            enemyManager.canBeParried = false;
+                            playerManager.isParrying = false;
+                            enemyManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            parryFrame++;
+        }
+
+        private void LateUpdate()
+        {
+            ParryBehavior();
+            //if (playerManager.isParrying)
+            //{
+            //    ParryBehavior();
+            //}
         }
     }
 }
