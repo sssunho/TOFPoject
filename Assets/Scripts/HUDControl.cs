@@ -11,6 +11,7 @@ public class HUDControl : MonoBehaviour
     [Header("Health/Stamina/Strength")]
     public Slider healthSlider;
     public Slider staminaSlider;
+    public Slider focusSlider;
     public Slider strengthSlider;
     [Header("DamageHUD")]
     public Image damageImage;

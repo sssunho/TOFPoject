@@ -90,6 +90,10 @@ namespace TOF
         public void TakeStaminaDamage(int damage)
         {
             currentStamina -= damage;
+            if(currentStamina <= 0)
+            {
+                currentStamina = 0;
+            }
             staminabar.setCurValue(currentStamina);
         }
 
@@ -106,6 +110,8 @@ namespace TOF
             if (currentStamina < maxStamina && staminaRegenTimer > 1.0f)
             {
                 currentStamina += staminaRegenerationAmount + Time.deltaTime;
+                if (currentStamina > maxStamina)
+                    currentStamina = maxStamina;
                 staminabar.setCurValue(Mathf.RoundToInt(currentStamina));
             }
         }

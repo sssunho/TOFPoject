@@ -43,6 +43,14 @@ namespace TOF
         [SerializeField]
         float fallingSpeed = 45.0f;
 
+        [Header("Stamina Cost")]
+        [SerializeField]
+        int rollStaminaCost = 15;
+        [SerializeField]
+        int backStepStaminaCost = 12;
+        [SerializeField]
+        int sprintStaminaCost = 1;
+
         public CapsuleCollider characterCollider;
         public CapsuleCollider characterCollisionBlockerCollider;
 
@@ -146,11 +154,12 @@ namespace TOF
 
             float speed = movementSpeed;
 
-            if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5f)
+            if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
             {
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
                 moveDirection *= speed;
+                playerStats.TakeStaminaDamage(sprintStaminaCost);
             }
             else
             {
@@ -172,14 +181,11 @@ namespace TOF
             if(inputHandler.lockOnFlag && inputHandler.sprintFlag==false)
             {
                 animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
-
             }
             else
             {
                 animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
-
             }
-
         }
 
         public void HandleRollingAndSprinting(float delta)
@@ -202,10 +208,12 @@ namespace TOF
                     moveDirection.y = 0;
                     Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = rollRotation;
+                    playerStats.TakeStaminaDamage(rollStaminaCost);
                 }
                 else
                 {
                     animatorHandler.PlayTargetAnimation("Backstep", true);
+                    playerStats.TakeStaminaDamage(backStepStaminaCost);
                 }
             }
         }
