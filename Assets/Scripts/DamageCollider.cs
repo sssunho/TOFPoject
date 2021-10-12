@@ -36,7 +36,7 @@ namespace TOF
             {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
                 CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
-                BlockingCollider shield = collision.transform.GetComponent<BlockingCollider>();
+                BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
                 if(enemyCharacterManager != null)
                 {
@@ -56,10 +56,10 @@ namespace TOF
                     }
                 }
 
-                if (playerStats != null)
-                {
-                    playerStats.TakeDamage(currentWeaponDamage);
-                }
+                //if (playerStats != null)
+                //{
+                //    playerStats.TakeDamage(currentWeaponDamage);
+                //}
             }
             
             if (collision.tag == "Enemy")
@@ -85,10 +85,10 @@ namespace TOF
                         }
                     }
 
-                    if (enemyStats != null)
-                    {
-                        enemyStats.TakeDamage(currentWeaponDamage);
-                    }
+                    //if (enemyStats != null)
+                    //{
+                    //    enemyStats.TakeDamage(currentWeaponDamage);
+                    //}
                 }
 
             }

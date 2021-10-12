@@ -10,11 +10,11 @@ namespace TOF
         public int maxHealth;
         public int currentHealth;
 
-        public int staminaLevel = 10;
+        public int staminaLevel = 100;
         public float maxStamina;
         public float currentStamina;
 
-        public int focusLevel = 10;
+        public int focusLevel = 100;
         public float maxFocusPoints;
         public float currentFocusPoint;
 

@@ -6,7 +6,7 @@ namespace TOF
 {
     public class BlockingCollider : MonoBehaviour
     {
-        public BoxCollider blockingCollider;
+        BoxCollider blockingCollider;
 
         public float blockingPhysicalDamageAbsorption;
 
