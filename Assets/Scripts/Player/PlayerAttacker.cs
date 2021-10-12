@@ -285,6 +285,7 @@ namespace TOF
                             enemyManager.canBeParried = false;
                             playerManager.isParrying = false;
                             enemyManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                            enemyManager.GetComponentInChildren<EnemyWeaponSlotManager>().CloseDamageCollider();
                             break;
                         }
                     }
