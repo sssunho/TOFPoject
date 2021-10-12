@@ -188,7 +188,7 @@ Material:
     - _Farthest_Distance: 0
     - _GI_Intensity: 0
     - _GlossMapScale: 0
-    - _Glossiness: 0
+    - _Glossiness: 0.7
     - _GlossyReflections: 0
     - _HighColor_Power: 0
     - _Inverse_Clipping: 0
