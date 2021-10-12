@@ -263,9 +263,10 @@ namespace TOF
                 Gizmos.DrawSphere(inputHandler.criticalAttackRaycastStartPoint.position, 0.8f);
         }
 
-        private bool IsSeeEachOther()
+        private bool IsSeeEachOther(in Transform v1, in Transform v2, float limitAngle = 30.0f)
         {
-            return false;
+            Vector3 rel = v2.position - v1.position;
+            return Vector3.Angle(rel, v1.forward) < limitAngle && Vector3.Angle(rel, -v2.forward) < limitAngle && Vector3.Angle(rel, -v2.forward) < limitAngle;
         }
 
         private void ParryBehavior()
@@ -283,15 +284,16 @@ namespace TOF
                 {
                     if (hitColliders[i].tag == "Enemy")
                     {
-                        Debug.Log(hitColliders[i].gameObject);
-
                         EnemyManager enemyManager = hitColliders[i].gameObject.GetComponent<EnemyManager>();
-                        if (enemyManager != null && enemyManager.canBeParried)
+                        if (enemyManager != null)
                         {
-                            enemyManager.canBeParried = false;
-                            playerManager.isParrying = false;
-                            enemyManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
-                            break;
+                            if (IsSeeEachOther(transform, hitColliders[i].gameObject.transform) && enemyManager.canBeParried)
+                            {
+                                enemyManager.canBeParried = false;
+                                playerManager.isParrying = false;
+                                enemyManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                                break;
+                            }
                         }
                     }
                 }
@@ -302,11 +304,10 @@ namespace TOF
 
         private void LateUpdate()
         {
-            ParryBehavior();
-            //if (playerManager.isParrying)
-            //{
-            //    ParryBehavior();
-            //}
+            if (playerManager.isParrying)
+            {
+                ParryBehavior();
+            }
         }
     }
 }

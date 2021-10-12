@@ -136,6 +136,16 @@ namespace TOF
             playerManager.isParrying = false;
         }
 
+        public void EnableCanBeParried()
+        {
+            playerManager.canBeParried = true;
+        }
+
+        public void DisableCanBeParried()
+        {
+            playerManager.canBeParried = false;
+        }
+
         public override void TakeCriticalDamageAnimationEvent()
         {
             playerStats.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);

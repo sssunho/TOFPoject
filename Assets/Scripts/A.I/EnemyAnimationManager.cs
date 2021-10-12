@@ -38,6 +38,16 @@ namespace TOF
             enemyManager.isParrying = false;
         }
 
+        public void EnableCanBeParried()
+        {
+            enemyManager.canBeParried = true;
+        }
+
+        public void DisableCanBeParried()
+        {
+            enemyManager.canBeParried = false;
+        }
+
         public override void TakeCriticalDamageAnimationEvent()
         {
             enemyStats.TakeDamageNoAnimation(enemyManager.pendingCriticalDamage);
