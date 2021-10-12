@@ -266,6 +266,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""fba0a1aa-7884-4099-82db-a4a01560c526"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -422,6 +430,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""LT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6525181c-6590-4205-9d8e-51004221e401"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -575,6 +594,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_LB = m_PlayerActions.FindAction("LB", throwIfNotFound: true);
         m_PlayerActions_LT = m_PlayerActions.FindAction("LT", throwIfNotFound: true);
+        m_PlayerActions_R = m_PlayerActions.FindAction("R", throwIfNotFound: true);
         // Player Quick Slot
         m_PlayerQuickSlot = asset.FindActionMap("Player Quick Slot", throwIfNotFound: true);
         m_PlayerQuickSlot_DPadUp = m_PlayerQuickSlot.FindAction("D-Pad Up", throwIfNotFound: true);
@@ -698,6 +718,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_LB;
     private readonly InputAction m_PlayerActions_LT;
+    private readonly InputAction m_PlayerActions_R;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -713,6 +734,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @LB => m_Wrapper.m_PlayerActions_LB;
         public InputAction @LT => m_Wrapper.m_PlayerActions_LT;
+        public InputAction @R => m_Wrapper.m_PlayerActions_R;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -755,6 +777,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
                 @LT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
                 @LT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLT;
+                @R.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnR;
+                @R.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnR;
+                @R.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnR;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -792,6 +817,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LT.started += instance.OnLT;
                 @LT.performed += instance.OnLT;
                 @LT.canceled += instance.OnLT;
+                @R.started += instance.OnR;
+                @R.performed += instance.OnR;
+                @R.canceled += instance.OnR;
             }
         }
     }
@@ -873,6 +901,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLB(InputAction.CallbackContext context);
         void OnLT(InputAction.CallbackContext context);
+        void OnR(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotActions
     {

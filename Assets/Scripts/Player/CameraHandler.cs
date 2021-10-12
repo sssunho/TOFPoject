@@ -91,7 +91,6 @@ namespace TOF
             }
             else if (currentLockOnTarget != null)
             {
-                float velocity = 0;
                 Vector3 dir = currentLockOnTarget.position - transform.position;
                 dir.Normalize();
                 dir.y = 0;

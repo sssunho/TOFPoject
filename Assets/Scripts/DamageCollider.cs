@@ -49,12 +49,11 @@ namespace TOF
                             playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
                         }
                     }
+                    else if (playerStats != null)
+                    {
+                        playerStats.TakeDamage(currentWeaponDamage);
+                    }
                 }
-
-                //if (playerStats != null)
-                //{
-                //    playerStats.TakeDamage(currentWeaponDamage);
-                //}
             }
             
             if (collision.tag == "Enemy")
@@ -75,10 +74,10 @@ namespace TOF
                         }
                     }
 
-                    //if (enemyStats != null)
-                    //{
-                    //    enemyStats.TakeDamage(currentWeaponDamage);
-                    //}
+                    if (enemyStats != null)
+                    {
+                        enemyStats.TakeDamage(currentWeaponDamage);
+                    }
                 }
 
             }

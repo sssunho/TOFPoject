@@ -14,7 +14,8 @@ namespace TOF
 
         public bool b_Input;
         public bool e_Input;
-        public bool y_input;
+        public bool r_Input;
+        public bool y_Input;
         public bool rb_Input;
         public bool rt_Input;
         public bool lt_Input;
@@ -86,7 +87,8 @@ namespace TOF
                 inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
                 inputActions.PlayerQuickSlot.DPadRight.performed += i => d_Pad_Right = true;
                 inputActions.PlayerQuickSlot.DPadLeft.performed += i => d_Pad_Left = true;
-                inputActions.PlayerActions.Y.performed += inputActions => y_input = true;
+                inputActions.PlayerActions.Y.performed += inputActions => y_Input = true;
+                inputActions.PlayerActions.R.performed += inputActions => r_Input = true;
                 inputActions.PlayerActions.LockOn.performed += i => lockOn_Input = true;
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
@@ -113,6 +115,7 @@ namespace TOF
             HandleLockOnInput();
             HandleJumpInput();
             HandleCriticalAttackInput();
+            HandleUseConsumableInput();
         }
 
         private void MoveInput(float delta)
@@ -232,9 +235,9 @@ namespace TOF
 
         private void HandleTwoHandInput()
         {
-            if(y_input)
+            if(y_Input)
             {
-                y_input = false;
+                y_Input = false;
                 twoHandFlag = !twoHandFlag;
 
                 if(twoHandFlag)
@@ -303,6 +306,15 @@ namespace TOF
         private void HandleJumpInput()
         {
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+        }
+
+        private void HandleUseConsumableInput()
+        {
+            if (r_Input)
+            {
+                r_Input = false;
+
+            }
         }
     }
 }
