@@ -38,7 +38,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2275572936709142412}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -8364133111380180976}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -53,6 +54,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-8364133111380180976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3cbf4c4b5b5d545927d4c7c9bc38af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundSourceObject: {fileID: 6603579882833223980, guid: 124a5fd8ec17e994cb0bd25dfd26e7d4, type: 3}
+  audioClip: {fileID: 8300000, guid: 6f7084d9082605f408f3639d22e73e62, type: 3}
+  startTime: 0
 --- !u!1107 &-8346589622320538533
 AnimatorStateMachine:
   serializedVersion: 6
@@ -692,6 +708,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-3971102121119179853
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3cbf4c4b5b5d545927d4c7c9bc38af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundSourceObject: {fileID: 6603579882833223980, guid: 124a5fd8ec17e994cb0bd25dfd26e7d4, type: 3}
+  audioClip: {fileID: 8300000, guid: cf5a8bf37a6b604449032e7d6cd9a0c6, type: 3}
+  startTime: 0.1
 --- !u!1101 &-3958582362625667819
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1178,7 +1209,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 6649961792909805367}
   - {fileID: -7889341213886015722}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -3971102121119179853}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

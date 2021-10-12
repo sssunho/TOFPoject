@@ -34,6 +34,8 @@ namespace TOF
         {
             if (collision.tag == "Player")
             {
+                Debug.Log("asdf");
+
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
                 CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
                 BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
