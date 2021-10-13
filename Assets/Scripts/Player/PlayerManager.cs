@@ -63,6 +63,8 @@ namespace TOF
             playerLocomotion.HandleJump();
             playerStats.RegenerateStamina();
 
+            playerLocomotion.HandleMovement(delta);
+
             CheckForInteractableObject();
         }
 
@@ -89,8 +91,6 @@ namespace TOF
             inputHandler.jump_Input = false;
 
             float delta = Time.deltaTime;
-
-            playerLocomotion.HandleMovement(delta);
 
             if (cameraHandler != null)
             {

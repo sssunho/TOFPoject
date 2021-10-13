@@ -6,6 +6,10 @@ public class SunhoTestScript : StateMachineBehaviour
 {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log(animator.applyRootMotion);
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Debug.Log("asdf");
     }
 }
