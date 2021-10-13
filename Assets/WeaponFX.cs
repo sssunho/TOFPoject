@@ -14,12 +14,12 @@ namespace TOF
 
         public void PlayWeaponFX()
         {
-            normalWeaponTrail.Stop();
-
             if(normalWeaponTrail.isStopped)
             {
                 normalWeaponTrail.Play();
             }
+            else
+                normalWeaponTrail.Stop();
         }
     }
 }

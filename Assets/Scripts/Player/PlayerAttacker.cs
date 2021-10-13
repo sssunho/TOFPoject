@@ -146,8 +146,6 @@ namespace TOF
                 playerAnimationHandler.anim.SetBool("isUsingRightHand", true);
                 HandleLightAttack(playerInventory.rightWeapon);
             }
-
-            playerEffectManager.PlayWeaponFX(false);
         }
 
         private void PerformRBMagicAction(WeaponItem weapon)
@@ -199,6 +197,7 @@ namespace TOF
 
         #endregion
 
+        #region Backstab or Riposte Behaviors
         public void AttempBackStabOrRiposte()
         {
             if (playerStats.currentStamina <= 0)
@@ -258,13 +257,6 @@ namespace TOF
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = new Color(1, 0, 0, 0.5f);
-            if(inputHandler)
-                Gizmos.DrawSphere(inputHandler.criticalAttackRaycastStartPoint.position, 0.8f);
-        }
-
         private bool IsSeeEachOther(in Transform v1, in Transform v2, float limitAngle = 30.0f)
         {
             Vector3 rel = v2.position - v1.position;
@@ -296,6 +288,17 @@ namespace TOF
                     }
                 }
             }
+        }
+        #endregion
+
+        public void SetRightWeaponEffect()
+        {
+            playerEffectManager.PlayWeaponFX(false);
+        }
+
+        public void SetLeftWeaponEffect()
+        {
+            playerEffectManager.PlayWeaponFX(true);
         }
 
         private void FixedUpdate()
