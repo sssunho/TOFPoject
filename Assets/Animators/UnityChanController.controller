@@ -618,7 +618,7 @@ BlendTree:
   m_Name: Locomotion
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 68001e557f6335c4db9c2193ffc18c6e, type: 2}
+    m_Motion: {fileID: 7400000, guid: 9841d03e7c7e00346bb1b83831fb919e, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1751,7 +1751,7 @@ BlendTree:
   m_Name: Strafing Locomotion
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 68001e557f6335c4db9c2193ffc18c6e, type: 2}
+    m_Motion: {fileID: 7400000, guid: 9841d03e7c7e00346bb1b83831fb919e, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
