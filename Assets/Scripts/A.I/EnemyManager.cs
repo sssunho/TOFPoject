@@ -15,6 +15,7 @@ namespace TOF
         public CharacterStats currentTarget;
         public Rigidbody enemyRigidBody;
         public NavMeshAgent navMeshAgent;
+        public CharacterController controller;
 
         public bool isPerformingAction;
         public bool isInteracting;
@@ -42,12 +43,13 @@ namespace TOF
             enemyStats = GetComponent<EnemyStats>();
             enemyRigidBody = GetComponent<Rigidbody>();
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+            controller = GetComponent<CharacterController>();
             navMeshAgent.enabled = false;
         }
 
         private void Start()
         {
-            enemyRigidBody.isKinematic = false;
+            //enemyRigidBody.isKinematic = false;
         }
 
         private void Update()

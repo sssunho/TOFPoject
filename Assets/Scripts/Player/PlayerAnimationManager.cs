@@ -152,17 +152,17 @@ namespace TOF
             playerManager.pendingCriticalDamage = 0;
         }
 
-        public void DisableCollision()
-        {
-            playerLocomotion.characterCollider.enabled = false;
-            playerLocomotion.characterCollisionBlockerCollider.enabled = false;
-        }
+        //public void DisableCollision()
+        //{
+        //    playerLocomotion.characterCollider.enabled = false;
+        //    playerLocomotion.characterCollisionBlockerCollider.enabled = false;
+        //}
 
-        public void EnableCollision()
-        {
-            playerLocomotion.characterCollider.enabled = true;
-            playerLocomotion.characterCollisionBlockerCollider.enabled = true;
-        }
+        //public void EnableCollision()
+        //{
+        //    playerLocomotion.characterCollider.enabled = true;
+        //    playerLocomotion.characterCollisionBlockerCollider.enabled = true;
+        //}
 
         private void OnAnimatorMove()
         {
@@ -170,11 +170,10 @@ namespace TOF
                 return;
 
             float delta = Time.deltaTime;
-            playerLocomotion.rigidbody.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
-            deltaPosition.y = 0;
-            Vector3 velocity = deltaPosition / delta;
-            playerLocomotion.rigidbody.velocity = velocity;
+            deltaPosition.y -= 9.81f * Time.deltaTime;
+            playerLocomotion.controller.Move(deltaPosition);
+
         }
     }
 }

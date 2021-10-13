@@ -22,7 +22,7 @@ namespace TOF
 
         private void Start()
         {
-            Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
+            //Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
         }
     }
 }

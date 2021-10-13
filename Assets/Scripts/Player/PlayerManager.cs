@@ -141,14 +141,16 @@ namespace TOF
 
         public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
         {
-            playerLocomotion.rigidbody.velocity = Vector3.zero; // Strops the player from ice staking
+            //playerLocomotion.rigidbody.velocity = Vector3.zero; // Strops the player from ice staking
+            playerLocomotion.controller.Move(Vector3.zero);
             transform.position = playerStandsHereWhenOpeningChest.transform.position;
             playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
         }
 
         public void PassThroughFogWallInteraction(Transform fogWallEnterance)
         {
-            playerLocomotion.rigidbody.velocity = Vector3.zero;
+            //playerLocomotion.rigidbody.velocity = Vector3.zero; // Strops the player from ice staking
+            playerLocomotion.controller.Move(Vector3.zero);
 
             Vector3 rotationDirection = fogWallEnterance.transform.forward;
             Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);

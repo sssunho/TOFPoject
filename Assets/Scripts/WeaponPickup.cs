@@ -26,7 +26,8 @@ namespace TOF
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
             animatorHandler = playerManager.GetComponentInChildren<PlayerAnimationManager>();
 
-            playerLocomotion.rigidbody.velocity = Vector3.zero;
+            //playerLocomotion.rigidbody.velocity = Vector3.zero; // Strops the player from ice staking
+            playerLocomotion.controller.Move(Vector3.zero);
             animatorHandler.PlayTargetAnimation("Pick Up", true);
             playerInventory.weaponsInventory.Add(weapon);
             playerManager.itemInteractableUIGameObject.GetComponentInChildren<Text>().text = weapon.itemName;

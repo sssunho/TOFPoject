@@ -43725,15 +43725,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6
-    functionName: CloseDamageCollider
+  - time: 0.6333333
+    functionName: EnableCombo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6333333
-    functionName: EnableCombo
+  - time: 0.6666667
+    functionName: CloseDamageCollider
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

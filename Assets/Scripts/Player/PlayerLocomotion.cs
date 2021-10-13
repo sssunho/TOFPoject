@@ -19,15 +19,10 @@ namespace TOF
         public PlayerAnimationManager playerAnimationManager;
 
         public new Rigidbody rigidbody;
+        public CharacterController controller;
         public GameObject normalCamera;
 
         [Header("Ground & Air Detection")]
-        [SerializeField]
-        float groundDetectionRayStartPoint = 0.5f;
-        [SerializeField]
-        float minimumDistanceNeededToBeginFall = 1.0f;
-        [SerializeField]
-        float groundDirectionRayDistance = 0.2f;
         LayerMask ignoreForGroundCheck;
         public float inAirTimer;
 
@@ -40,8 +35,6 @@ namespace TOF
         float sprintSpeed = 7;
         [SerializeField]
         float rotationSpeed = 10;
-        [SerializeField]
-        float fallingSpeed = 45.0f;
 
         [Header("Stamina Cost")]
         [SerializeField]
@@ -62,6 +55,7 @@ namespace TOF
             rigidbody = GetComponent<Rigidbody>();
             inputHandler = GetComponent<InputHandler>();
             playerAnimationManager = GetComponentInChildren<PlayerAnimationManager>();
+            controller = GetComponent<CharacterController>();
         }
 
         private void Start()
@@ -69,10 +63,9 @@ namespace TOF
             cameraObject = Camera.main.transform;
             myTransform = this.transform;
             playerAnimationManager.Initialize();
-
             playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 9 | 1 << 11);
-            Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
+            //Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
         }
 
         #region Movement
@@ -176,7 +169,9 @@ namespace TOF
             }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-            rigidbody.velocity = projectedVelocity;
+            //rigidbody.velocity = projectedVelocity;
+            moveDirection.y -= 9.81f;
+            controller.Move(moveDirection * Time.deltaTime);
 
             if(inputHandler.lockOnFlag && inputHandler.sprintFlag==false)
             {
@@ -220,78 +215,23 @@ namespace TOF
 
         public void HandleFalling(float delta, Vector3 moveDirection)
         {
-            Debug.DrawRay(transform.position, rigidbody.velocity);
-            playerManager.isGrounded = false;
-            RaycastHit hit;
-            Vector3 origin = myTransform.position;
-            origin.y += groundDetectionRayStartPoint;
-
-            if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
-                moveDirection = Vector3.zero;
-
-            if(playerManager.isInAir)
+            if (controller.isGrounded)
             {
-                rigidbody.AddForce(-Vector3.up * fallingSpeed);
-                rigidbody.AddForce(moveDirection * fallingSpeed / 5.0f);
-
-            }
-
-            Vector3 dir = moveDirection;
-            dir.Normalize();
-            origin = origin + dir * groundDirectionRayDistance;
-
-            targetPosition = myTransform.position;
-
-            Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-            if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
-            {
-                normalVector = hit.normal;
-                Vector3 tp = hit.point;
-                playerManager.isGrounded = true;
-                targetPosition.y = tp.y;
-
-                if (playerManager.isInAir)
+                inAirTimer = 0;
+                if(!playerManager.isGrounded)
                 {
-                    if (inAirTimer > 0.5f)
-                    {
-                        playerAnimationManager.PlayTargetAnimation("Land", true);
-                        inAirTimer = 0;
-                    }
-                    else
-                    {
-                        playerAnimationManager.PlayTargetAnimation("Locomotion", false);
-                        playerAnimationManager.PlayTargetAnimation("Empty", false);
-                        inAirTimer = 0;
-                    }
-
-                    playerManager.isInAir = false;
+                    playerAnimationManager.PlayTargetAnimation("Land", true);
+                    playerManager.isGrounded = true;
                 }
+                return;
             }
-            else
+
+            inAirTimer += Time.deltaTime;
+            if(inAirTimer > 0.2f && playerManager.isGrounded)
             {
-
-                if (playerManager.isGrounded)
-                    playerManager.isGrounded = false;
-
-                if (playerManager.isInAir == false)
-                {
-                    if (playerManager.isInteracting == false)
-                    {
-                        playerAnimationManager.PlayTargetAnimation("Falling", true);
-                    }
-
-                    Vector3 vel = rigidbody.velocity;
-                    vel.Normalize();
-                    rigidbody.velocity = vel * (movementSpeed / 2);
-                    playerManager.isInAir = true;
-                }
+                playerAnimationManager.PlayTargetAnimation("Falling", true);
+                playerManager.isGrounded = false;
             }
-
-            if (playerManager.isInteracting || inputHandler.moveAmount > 0)
-                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
-            else
-                myTransform.position = targetPosition;
-
         }
 
         public void HandleJump()

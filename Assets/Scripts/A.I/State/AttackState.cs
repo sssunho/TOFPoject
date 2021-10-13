@@ -155,13 +155,21 @@ namespace TOF
             // Rotate with pathfinding (navmesh)
             else
             {
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-                Vector3 targetVelocity = enemyManager.enemyRigidBody.velocity;
-
                 enemyManager.navMeshAgent.enabled = true;
                 enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-                enemyManager.enemyRigidBody.velocity = targetVelocity;
-                enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+
+                enemyManager.navMeshAgent.updateRotation = false;
+                enemyManager.navMeshAgent.updatePosition = false;
+
+                Vector3 targetVelocity = enemyManager.navMeshAgent.desiredVelocity;
+                Vector3 lookPos = enemyManager.currentTarget.transform.position - transform.position;
+                lookPos.y = 0;
+                Quaternion targetRot = Quaternion.LookRotation(lookPos);
+
+                enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 3.0f);
+
+                enemyManager.controller.Move(targetVelocity * Time.deltaTime);
+                enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
             }
         }
 

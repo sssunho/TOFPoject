@@ -101,15 +101,16 @@ namespace TOF
 
         private void OnAnimatorMove()
         {
+            enemyManager.navMeshAgent.enabled = !enemyManager.isInteracting;
+            if (enemyManager.isInteracting == false)
+                return;
+            
             float delta = Time.deltaTime;
-            enemyManager.enemyRigidBody.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
-            deltaPosition.y = 0;
-            Vector3 velocity = deltaPosition / delta;
-            enemyManager.enemyRigidBody.velocity = velocity;
+            deltaPosition.y -= 9.81f * Time.deltaTime;
 
-            if(agent)
-            agent.nextPosition = anim.rootPosition;
+            enemyManager.controller.Move(deltaPosition);
+            enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
         }
     }
 }
