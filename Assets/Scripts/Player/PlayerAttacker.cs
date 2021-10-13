@@ -6,13 +6,14 @@ namespace TOF
 {
     public class PlayerAttacker : MonoBehaviour
     {
-        PlayerAnimationManager animatorHandler;
+        PlayerAnimationManager playerAnimationHandler;
         PlayerEquipmentManager playerEquipmentManager;
         InputHandler inputHandler;
         WeaponSlotManager weaponSlotManager;
         PlayerManager playerManager;
         PlayerStats playerStats;
         PlayerInventory playerInventory;
+        PlayerEffectManager playerEffectManager;
 
         public string lastAttack;
 
@@ -22,12 +23,13 @@ namespace TOF
         private void Awake()
         {
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
-            animatorHandler = GetComponent<PlayerAnimationManager>();
+            playerAnimationHandler = GetComponent<PlayerAnimationManager>();
             weaponSlotManager = GetComponent<WeaponSlotManager>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerManager = GetComponentInParent<PlayerManager>();
             playerStats = GetComponentInParent<PlayerStats>();
             playerInventory = GetComponentInParent<PlayerInventory>();
+            playerEffectManager = GetComponent<PlayerEffectManager>();
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
@@ -37,15 +39,15 @@ namespace TOF
 
             if (inputHandler.comboFlag)
             {
-                animatorHandler.anim.SetBool("canDoCombo", false);
+                playerAnimationHandler.anim.SetBool("canDoCombo", false);
 
                 if (lastAttack == weapon.OH_Light_Attack_1)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_2, true);
+                    playerAnimationHandler.PlayTargetAnimation(weapon.OH_Light_Attack_2, true);
                 }
                 else if(lastAttack == weapon.TH_Light_Attack_1)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.TH_Light_Attack_2, true);
+                    playerAnimationHandler.PlayTargetAnimation(weapon.TH_Light_Attack_2, true);
                 }
             }
         }
@@ -61,12 +63,12 @@ namespace TOF
             weaponSlotManager.attackingWeapon = weapon;
             if(inputHandler.twoHandFlag)
             {
-                animatorHandler.PlayTargetAnimation(weapon.TH_Light_Attack_1, true);
+                playerAnimationHandler.PlayTargetAnimation(weapon.TH_Light_Attack_1, true);
                 lastAttack = weapon.TH_Light_Attack_1;
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
+                playerAnimationHandler.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
                 lastAttack = weapon.OH_Light_Attack_1;
             }
         }
@@ -88,9 +90,10 @@ namespace TOF
             {
 
             }
-            animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
+            playerAnimationHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
             lastAttack = weapon.OH_Heavy_Attack_1;
         }
+
         #region Input Action
         public void HandleRBAction()
         {
@@ -140,9 +143,11 @@ namespace TOF
             }
             else if (!playerManager.canDoCombo && !playerManager.isInteracting)
             {
-                animatorHandler.anim.SetBool("isUsingRightHand", true);
+                playerAnimationHandler.anim.SetBool("isUsingRightHand", true);
                 HandleLightAttack(playerInventory.rightWeapon);
             }
+
+            playerEffectManager.PlayWeaponFX(false);
         }
 
         private void PerformRBMagicAction(WeaponItem weapon)
@@ -151,7 +156,7 @@ namespace TOF
             {
                 if(playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
                 {
-                    playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats);
+                    playerInventory.currentSpell.AttemptToCastSpell(playerAnimationHandler, playerStats);
                 }
             }
         }
@@ -167,14 +172,14 @@ namespace TOF
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
+                playerAnimationHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
             }
 
         }
 
         private void SuccessfullyCastSpell()
         {
-            playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
+            playerInventory.currentSpell.SuccessfullyCastSpell(playerAnimationHandler, playerStats);
         }
 
         #endregion
@@ -187,7 +192,7 @@ namespace TOF
 
             if (playerManager.isBlocking) return;
 
-            animatorHandler.PlayTargetAnimation("Block Start", false, true);
+            playerAnimationHandler.PlayTargetAnimation("Block Start", false, true);
             playerEquipmentManager.OpenBlockingCollider();
             playerManager.isBlocking = true;
         }
@@ -221,7 +226,7 @@ namespace TOF
                     int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
                     enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
-                    animatorHandler.PlayTargetAnimation("BackStab", true);
+                    playerAnimationHandler.PlayTargetAnimation("BackStab", true);
                     enemyCharacterManager.GetComponentInChildren<EnemyAnimationManager>().PlayTargetAnimation("BackStabbed", true);
                     //do damage
                 }
@@ -247,7 +252,7 @@ namespace TOF
                     int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
                     enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
-                    animatorHandler.PlayTargetAnimation("Riposte", true);
+                    playerAnimationHandler.PlayTargetAnimation("Riposte", true);
                     enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Riposted", true);
                 }
             }

@@ -17,12 +17,12 @@ namespace TOF
         public float staminaRegenerationAmount = 1;
         public float staminaRegenTimer;
 
-        PlayerAnimationManager animatorHandler;
+        PlayerAnimationManager playerAnimationHandler;
 
         private void Awake()
         {
             playerManager = GetComponent<PlayerManager>();
-            animatorHandler = GetComponentInChildren<PlayerAnimationManager>();
+            playerAnimationHandler = GetComponentInChildren<PlayerAnimationManager>();
         }
 
         private void Start()
@@ -75,12 +75,12 @@ namespace TOF
             currentHealth -= damage;
             healthbar.setCurValue(currentHealth);
 
-            animatorHandler.PlayTargetAnimation(damageAnimation, true);
+            playerAnimationHandler.PlayTargetAnimation(damageAnimation, true);
 
             if(currentHealth<=0)
             {
                 currentHealth = 0;
-                animatorHandler.PlayTargetAnimation("Dead_01", true);
+                playerAnimationHandler.PlayTargetAnimation("Dead_01", true);
                 isDead = true;
             }
         }

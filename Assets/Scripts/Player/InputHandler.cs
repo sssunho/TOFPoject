@@ -53,7 +53,7 @@ namespace TOF
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
         CameraHandler cameraHandler;
-        PlayerAnimationManager animatorHandler;
+        PlayerAnimationManager playerAnimationHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -69,7 +69,7 @@ namespace TOF
             blockingCollider = GetComponentInChildren<BlockingCollider>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
-            animatorHandler = GetComponentInChildren<PlayerAnimationManager>();
+            playerAnimationHandler = GetComponentInChildren<PlayerAnimationManager>();
         }
 
         public void OnEnable()
@@ -264,6 +264,7 @@ namespace TOF
                 {
                     cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
                     lockOnFlag = true;
+                    playerAnimationHandler.anim.SetFloat("isStrafing", 1);
                 }
             }
             else if(lockOn_Input && lockOnFlag)
@@ -271,9 +272,10 @@ namespace TOF
                 lockOn_Input = false;
                 lockOnFlag = false;
                 cameraHandler.ClearLockOnTargets();
+                playerAnimationHandler.anim.SetFloat("isStrafing", 0);
             }
 
-            if(lockOnFlag && right_Stick_Left_Input)
+            if (lockOnFlag && right_Stick_Left_Input)
             {
                 right_Stick_Left_Input = false;
                 cameraHandler.HandleLokOn();
@@ -315,7 +317,7 @@ namespace TOF
             if (r_Input)
             {
                 r_Input = false;
-                playerInventory.currentConsumable.AttempToConsumeItem(animatorHandler, weaponSlotManager, playerEffectManager);
+                playerInventory.currentConsumable.AttempToConsumeItem(playerAnimationHandler, weaponSlotManager, playerEffectManager);
             }
         }
     }

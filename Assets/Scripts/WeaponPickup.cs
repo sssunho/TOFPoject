@@ -20,15 +20,15 @@ namespace TOF
         {
             PlayerInventory playerInventory;
             PlayerLocomotion playerLocomotion;
-            PlayerAnimationManager animatorHandler;
+            PlayerAnimationManager playerAnimationHandler;
 
             playerInventory = playerManager.GetComponent<PlayerInventory>();
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            animatorHandler = playerManager.GetComponentInChildren<PlayerAnimationManager>();
+            playerAnimationHandler = playerManager.GetComponentInChildren<PlayerAnimationManager>();
 
             //playerLocomotion.rigidbody.velocity = Vector3.zero; // Strops the player from ice staking
             playerLocomotion.controller.Move(Vector3.zero);
-            animatorHandler.PlayTargetAnimation("Pick Up", true);
+            playerAnimationHandler.PlayTargetAnimation("Pick Up", true);
             playerInventory.weaponsInventory.Add(weapon);
             playerManager.itemInteractableUIGameObject.GetComponentInChildren<Text>().text = weapon.itemName;
             playerManager.itemInteractableUIGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;

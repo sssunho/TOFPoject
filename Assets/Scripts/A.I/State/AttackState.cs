@@ -57,6 +57,7 @@ namespace TOF
                             enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                             enemyAnimationManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
                             enemyAnimationManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+                            enemyAnimationManager.PlayWeaponTrailFX();
                             enemyManager.isPerformingAction = true;
                             RollForComboChance(enemyManager);
 

@@ -25,7 +25,7 @@ namespace TOF
         InputHandler inputHandler;
 
         PlayerStats playerStats;
-
+        PlayerEffectManager playerEffectManager;
 
         private void Awake()
         {
@@ -35,7 +35,7 @@ namespace TOF
             inputHandler = GetComponentInParent<InputHandler>();
             playerStats = GetComponentInParent<PlayerStats>();
             playerInventory = GetComponentInParent<PlayerInventory>();
-
+            playerEffectManager = GetComponent<PlayerEffectManager>();
         }
 
         public void LoadBotWeaponsOnSlot() 
@@ -109,6 +109,7 @@ namespace TOF
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             leftHandDamageCollider.currentWeaponDamage = playerInventory.leftWeapon.baseDamage;
             leftHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
+            playerEffectManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
 
         private void LoadRightWeaponDamageCollider()
@@ -116,6 +117,7 @@ namespace TOF
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             rightHandDamageCollider.currentWeaponDamage = playerInventory.rightWeapon.baseDamage;
             rightHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
+            playerEffectManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
 
         public void OpenDamageCollider()

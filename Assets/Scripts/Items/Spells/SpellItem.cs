@@ -22,12 +22,12 @@ namespace TOF
         [TextArea]
         public string spellDescription;
 
-        public virtual void AttemptToCastSpell(PlayerAnimationManager animatorHandler, PlayerStats playerStats)
+        public virtual void AttemptToCastSpell(PlayerAnimationManager playerAnimationHandler, PlayerStats playerStats)
         {
             Debug.Log("You attempt to cast a spell!");
         }
 
-        public virtual void SuccessfullyCastSpell(PlayerAnimationManager animatorHandler, PlayerStats playerStats)
+        public virtual void SuccessfullyCastSpell(PlayerAnimationManager playerAnimationHandler, PlayerStats playerStats)
         {
             Debug.Log("You successfully cast a spell!");
             playerStats.DeductFocusPoints(focusPointCost);

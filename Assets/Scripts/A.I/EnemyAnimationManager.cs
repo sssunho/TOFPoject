@@ -9,6 +9,7 @@ namespace TOF
     {
         EnemyManager enemyManager;
         EnemyStats enemyStats;
+        EnemyEffectManager enemyEffectManager;
         public NavMeshAgent agent;
 
         private void Awake()
@@ -16,6 +17,7 @@ namespace TOF
             anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
             enemyStats = GetComponentInParent<EnemyStats>();
+            enemyEffectManager = GetComponent<EnemyEffectManager>();
         }
         public void CanRotate()
         {
@@ -97,6 +99,11 @@ namespace TOF
                     soulCountBar.SetSoulCountText(playerStats.soulCount);
                 }
             }
+        }
+        
+        public void PlayWeaponTrailFX()
+        {
+            enemyEffectManager.PlayWeaponFX(false);
         }
 
         private void OnAnimatorMove()

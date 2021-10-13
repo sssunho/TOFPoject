@@ -19,9 +19,9 @@ namespace TOF
         [Header("Recovery FX")]
         public GameObject recoveryFX;
 
-        public override void AttempToConsumeItem(AnimatorManager animatorHandler, WeaponSlotManager weaponSlotManager, PlayerEffectManager playerEffectManager)
+        public override void AttempToConsumeItem(AnimatorManager playerAnimationHandler, WeaponSlotManager weaponSlotManager, PlayerEffectManager playerEffectManager)
         {
-            base.AttempToConsumeItem(animatorHandler, weaponSlotManager, playerEffectManager);
+            base.AttempToConsumeItem(playerAnimationHandler, weaponSlotManager, playerEffectManager);
             GameObject flask = Instantiate(itemModel, weaponSlotManager.rightHandSlot.transform);
             playerEffectManager.currentParticleFX = recoveryFX;
             playerEffectManager.amountToBeHealed = healthRecoverAmount;
