@@ -17,15 +17,15 @@ namespace TOF
         public string consumableAnimation;
         public bool isInteracting;
 
-        public virtual void AttempToConsumeItem(AnimatorManager animatorHandler, WeaponSlotManager weaponSlotManager, PlayerEffectManager playerEffectManager)
+        public virtual void AttempToConsumeItem(AnimatorManager playerAnimationHandler, WeaponSlotManager weaponSlotManager, PlayerEffectManager playerEffectManager)
         {
             if(currentItemAmount >0)
             {
-                animatorHandler.PlayTargetAnimation(consumableAnimation, isInteracting, true);
+                playerAnimationHandler.PlayTargetAnimation(consumableAnimation, isInteracting, true);
             }
             else
             {
-                animatorHandler.PlayTargetAnimation("Shrug", true);
+                playerAnimationHandler.PlayTargetAnimation("Shrug", true);
             }
         }
     }

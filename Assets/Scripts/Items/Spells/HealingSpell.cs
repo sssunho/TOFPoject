@@ -9,18 +9,18 @@ namespace TOF
     {
         public int healAmount;
 
-        public override void AttemptToCastSpell(PlayerAnimationManager animatorHandler, PlayerStats playerStats)
+        public override void AttemptToCastSpell(PlayerAnimationManager playerAnimationHandler, PlayerStats playerStats)
         {
-            base.AttemptToCastSpell(animatorHandler, playerStats);
-            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, animatorHandler.transform);
-            animatorHandler.PlayTargetAnimation(spellAnimation, true);
+            base.AttemptToCastSpell(playerAnimationHandler, playerStats);
+            GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimationHandler.transform);
+            playerAnimationHandler.PlayTargetAnimation(spellAnimation, true);
             Debug.Log("Attempting to cast spell...");
         }
 
-        public override void SuccessfullyCastSpell(PlayerAnimationManager animatorHandler, PlayerStats playerStats)
+        public override void SuccessfullyCastSpell(PlayerAnimationManager playerAnimationHandler, PlayerStats playerStats)
         {
-            base.SuccessfullyCastSpell(animatorHandler, playerStats);
-            GameObject instantiatedSpellFX = Instantiate(spellCastFX, animatorHandler.transform);
+            base.SuccessfullyCastSpell(playerAnimationHandler, playerStats);
+            GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerAnimationHandler.transform);
             playerStats.HealPlayer(healAmount);
             Debug.Log("Spell cast Successful!");
         }
