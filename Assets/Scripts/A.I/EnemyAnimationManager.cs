@@ -9,6 +9,7 @@ namespace TOF
     {
         EnemyManager enemyManager;
         EnemyStats enemyStats;
+        EnemyEffectManager enemyEffectManager;
         public NavMeshAgent agent;
 
         private void Awake()
@@ -16,6 +17,7 @@ namespace TOF
             anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
             enemyStats = GetComponentInParent<EnemyStats>();
+            enemyEffectManager = GetComponent<EnemyEffectManager>();
         }
         public void CanRotate()
         {
@@ -98,6 +100,11 @@ namespace TOF
                 }
             }
         }
+        
+        public void PlayWeaponTrailFX()
+        {
+            enemyEffectManager.PlayWeaponFX(false);
+        }
 
         private void OnAnimatorMove()
         {
@@ -111,6 +118,11 @@ namespace TOF
 
             enemyManager.controller.Move(deltaPosition);
             enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+
+            if(enemyManager.isRotatingWithRootMotion)
+            {
+                enemyManager.transform.rotation *= anim.deltaRotation;
+            }
         }
     }
 }

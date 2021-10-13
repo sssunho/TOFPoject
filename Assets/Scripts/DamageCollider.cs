@@ -34,24 +34,29 @@ namespace TOF
         {
             if (collision.tag == "Player")
             {
-
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
-                CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
+                CharacterManager playerCharacterManager = collision.GetComponent<CharacterManager>();
+                CharacterEffectManager playerEffectManager = collision.GetComponentInChildren<CharacterEffectManager>();
                 BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
-                if(enemyCharacterManager != null)
+                if(playerCharacterManager != null)
                 {
-                    if(shield!=null&& enemyCharacterManager.isBlocking)
+                    if(shield!=null&& playerCharacterManager.isBlocking)
                     {
                         float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
                     
                         if(playerStats!=null)
                         {
+                            Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                            playerEffectManager.PlayRecoilMetalFX(contactPoint);
                             playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
                         }
                     }
                     else if (playerStats != null)
                     {
+                        // Detects where on the collider our weapon first makes contact
+                        Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                        playerEffectManager.PlayBloodSplatterFX(contactPoint);
                         playerStats.TakeDamage(currentWeaponDamage);
                     }
                 }
@@ -61,6 +66,7 @@ namespace TOF
             {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
                 CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
+                CharacterEffectManager enemyEffectManager = collision.GetComponentInChildren<CharacterEffectManager>();
                 BlockingCollider shield = collision.transform.GetComponent<BlockingCollider>();
 
                 if (enemyCharacterManager != null)
@@ -71,12 +77,17 @@ namespace TOF
 
                         if (enemyStats != null)
                         {
+                            Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                            enemyEffectManager.PlayRecoilMetalFX(contactPoint);
                             enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard");
                         }
                     }
 
                     if (enemyStats != null)
                     {
+                        // Detects where on the collider our weapon first makes contact
+                        Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                        enemyEffectManager.PlayBloodSplatterFX(contactPoint);
                         enemyStats.TakeDamage(currentWeaponDamage);
                     }
                 }
