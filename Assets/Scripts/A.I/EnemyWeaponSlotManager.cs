@@ -15,7 +15,20 @@ namespace TOF
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
 
+        EnemyEffectManager enemyEffectManager;
+
         private void Awake()
+        {
+            enemyEffectManager = GetComponent<EnemyEffectManager>();
+            LoadWeaponHolderSlots();
+        }
+
+        private void Start()
+        {
+            LoadWeaponsOnBothHands();
+        }
+
+        private void LoadWeaponHolderSlots()
         {
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -29,11 +42,6 @@ namespace TOF
                     rightHandSlot = weaponSlot;
                 }
             }
-        }
-
-        private void Start()
-        {
-            LoadWeaponsOnBothHands();
         }
 
         public void LoadWeaponOnSlot(WeaponItem weapon, bool isLeft)
@@ -71,10 +79,12 @@ namespace TOF
             if (isLeft)
             {
                 leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+                enemyEffectManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
             }
             else
             {
                 rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+                enemyEffectManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
             }
         }
 

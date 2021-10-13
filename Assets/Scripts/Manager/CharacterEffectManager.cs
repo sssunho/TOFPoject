@@ -6,16 +6,29 @@ namespace TOF
 {
     public class CharacterEffectManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public WeaponFX rightWeaponFX;
+        public WeaponFX leftWeaponFX;
+
+
+
+        public virtual void PlayWeaponFX(bool isLeft)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            if(!isLeft)
+            {
+                // Play the right weapon trails
+                if(rightWeaponFX != null)
+                {
+                    rightWeaponFX.PlayWeaponFX();
+                }
+            }
+            else
+            {
+                // Play the left weapon trails
+                if(leftWeaponFX != null)
+                {
+                    leftWeaponFX.PlayWeaponFX();
+                }
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ namespace TOF
         PlayerManager playerManager;
         PlayerStats playerStats;
         PlayerInventory playerInventory;
+        PlayerEffectManager playerEffectManager;
 
         public string lastAttack;
 
@@ -28,6 +29,7 @@ namespace TOF
             playerManager = GetComponentInParent<PlayerManager>();
             playerStats = GetComponentInParent<PlayerStats>();
             playerInventory = GetComponentInParent<PlayerInventory>();
+            playerEffectManager = GetComponent<PlayerEffectManager>();
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
@@ -91,6 +93,7 @@ namespace TOF
             playerAnimationHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
             lastAttack = weapon.OH_Heavy_Attack_1;
         }
+
         #region Input Action
         public void HandleRBAction()
         {
@@ -143,6 +146,8 @@ namespace TOF
                 playerAnimationHandler.anim.SetBool("isUsingRightHand", true);
                 HandleLightAttack(playerInventory.rightWeapon);
             }
+
+            playerEffectManager.PlayWeaponFX(false);
         }
 
         private void PerformRBMagicAction(WeaponItem weapon)

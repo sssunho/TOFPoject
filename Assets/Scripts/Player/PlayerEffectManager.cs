@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TOF
 {
-    public class PlayerEffectManager : MonoBehaviour
+    public class PlayerEffectManager : CharacterEffectManager
     {
         PlayerStats playerStats;
         WeaponSlotManager weaponSlotManager;
