@@ -44,7 +44,7 @@ namespace TOF
         [SerializeField]
         int sprintStaminaCost = 1;
 
-        public CapsuleCollider characterCollider;
+        //public CapsuleCollider characterCollider;
         public CapsuleCollider characterCollisionBlockerCollider;
 
         private void Awake()
