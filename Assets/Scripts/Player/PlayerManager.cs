@@ -70,7 +70,7 @@ namespace TOF
         {
             float delta = Time.fixedDeltaTime;
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
-            playerLocomotion.HandleMovement(delta);
+            //playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRotation(delta);
         }
 
@@ -89,6 +89,8 @@ namespace TOF
             inputHandler.jump_Input = false;
 
             float delta = Time.deltaTime;
+
+            playerLocomotion.HandleMovement(delta);
 
             if (cameraHandler != null)
             {

@@ -170,8 +170,8 @@ namespace TOF
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             //rigidbody.velocity = projectedVelocity;
-            moveDirection.y -= 9.81f;
-            controller.Move(moveDirection * Time.deltaTime);
+            projectedVelocity.y -= 9.81f;
+            controller.Move(projectedVelocity * delta);
 
             if(inputHandler.lockOnFlag && inputHandler.sprintFlag==false)
             {
