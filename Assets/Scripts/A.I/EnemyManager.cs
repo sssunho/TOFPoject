@@ -20,7 +20,7 @@ namespace TOF
         public bool isPerformingAction;
         public bool isInteracting;
         public float rotationSpeed = 15;
-        public float maximumAttackRange = 1.5f;
+        public float maximumAggroRadius = 1.5f;
 
         [Header("Combat Flags")]
         public bool canDoCombo;
@@ -57,8 +57,10 @@ namespace TOF
             HandleRecoveryTimer();
             HandleStateMachine();
 
+            isRotatingWithRootMotion = enemyAnimationManager.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
             canDoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
+            canRotate = enemyAnimationManager.anim.GetBool("canRotate");
             enemyAnimationManager.anim.SetBool("isDead", enemyStats.isDead);
         }
         

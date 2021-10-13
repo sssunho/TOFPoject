@@ -118,6 +118,11 @@ namespace TOF
 
             enemyManager.controller.Move(deltaPosition);
             enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+
+            if(enemyManager.isRotatingWithRootMotion)
+            {
+                enemyManager.transform.rotation *= anim.deltaRotation;
+            }
         }
     }
 }
