@@ -6,10 +6,12 @@ namespace TOF
 {
     public class CharacterEffectManager : MonoBehaviour
     {
+        [Header("Damage FX")]
+        public GameObject bloodSplatterFX;
+        public GameObject recoilMetalFX;
+        [Header("Weapon FX")]
         public WeaponFX rightWeaponFX;
         public WeaponFX leftWeaponFX;
-
-
 
         public virtual void PlayWeaponFX(bool isLeft)
         {
@@ -30,5 +32,16 @@ namespace TOF
                 }
             }
         }
+
+        public virtual void PlayBloodSplatterFX(Vector3 bloodSplatterLocation)
+        {
+            GameObject blood = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
+        }
+
+        public virtual void PlayRecoilMetalFX(Vector3 recoilLocation)
+        {
+            GameObject recoilMetal = Instantiate(recoilMetalFX, recoilLocation, Quaternion.identity);
+        }
+
     }
 }
