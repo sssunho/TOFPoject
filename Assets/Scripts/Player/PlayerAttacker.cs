@@ -54,9 +54,6 @@ namespace TOF
 
         public void HandleLightAttack(WeaponItem weapon)
         {
-            // ep 29에서 바뀐 부분입니다.
-            // weaponSlotManager.attackingWeapon = weapon; 를 추가할 때
-            // 이 주석을 지우고 추가하면 됩니다.
             if (playerStats.currentStamina <= 0)
                 return;
 
@@ -75,12 +72,12 @@ namespace TOF
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
-            // ep 29에서 바뀐 부분입니다.
-            // weaponSlotManager.attackingWeapon = weapon; 를 추가할 때
-            // 이 주석을 지우고 추가하면 됩니다.
+            if (playerManager.isInteracting) return;
+
             if (playerStats.currentStamina <= 0)
                 return;
 
+            playerManager.isCharging = true;
             weaponSlotManager.attackingWeapon = weapon;
             if (inputHandler.twoHandFlag)
             {
@@ -130,11 +127,20 @@ namespace TOF
         {
             PerformLBBlcokingAction();
         }
+
+        public void ReleaseCharge()
+        {
+            Debug.Log("asdf");
+            playerAnimationHandler.anim.SetBool("isCharging", false);
+        }
+
         #endregion
 
         #region Attack Actions
         private void PerformRBMeleeAction()
         {
+            playerAnimationHandler.anim.SetTrigger("AttackTrigger");
+
             if (playerManager.canDoCombo)
             {
                 inputHandler.comboFlag = true;

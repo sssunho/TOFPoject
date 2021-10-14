@@ -27,6 +27,7 @@ namespace TOF
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
         public bool isInvulnerable;
+        public bool isCharging;
 
         private void Awake()
         {
@@ -54,6 +55,7 @@ namespace TOF
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
             isInvulnerable = anim.GetBool("isInvulnerable");
+            isCharging = anim.GetBool("isCharging");
             anim.SetBool("isInAir", isInAir);
             anim.SetBool("isDead", playerStats.isDead);
 

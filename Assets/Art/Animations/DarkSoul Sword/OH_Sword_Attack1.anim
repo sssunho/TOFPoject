@@ -43683,13 +43683,6 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: SetRightWeaponEffect
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.23333333
     functionName: CanRotate
     data: 
@@ -43711,8 +43704,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
-    functionName: DrainStaminaLightAttack
+  - time: 0.36666667
+    functionName: SetRightWeaponEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -43720,6 +43713,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.4
     functionName: EnableCanBeParried
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.4
+    functionName: DrainStaminaLightAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -43741,6 +43741,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.6666667
     functionName: CloseDamageCollider
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.7
+    functionName: SetRightWeaponEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

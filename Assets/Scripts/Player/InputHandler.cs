@@ -95,6 +95,7 @@ namespace TOF
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
                 inputActions.PlayerActions.CriticaAttack.performed += i => critical_Attack_Input = true;
+                inputActions.PlayerActions.CriticaAttack.canceled += i => critical_Attack_Input = false;
             }
 
             inputActions.Enable();
@@ -145,11 +146,15 @@ namespace TOF
             {
                 playerAttacker.HandleRBAction();
             }
+
             if (rt_Input)
             {
-                if (rb_Input)
+                if (critical_Attack_Input)
                     playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
             }
+
+            if (!critical_Attack_Input && playerManager.isCharging)
+                playerAttacker.ReleaseCharge();
 
             if(lt_Input)
             {
@@ -300,7 +305,9 @@ namespace TOF
 
         private void HandleCriticalAttackInput()
         {
-            if(critical_Attack_Input)
+            if (playerManager.isCharging) return;
+
+            if (critical_Attack_Input)
             {
                 critical_Attack_Input = false;
                 playerAttacker.AttempBackStabOrRiposte();

@@ -39,13 +39,13 @@ namespace TOF
                 CharacterEffectManager playerEffectManager = collision.GetComponentInChildren<CharacterEffectManager>();
                 BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
-                if(playerCharacterManager != null)
+                if (playerCharacterManager != null)
                 {
-                    if(shield!=null&& playerCharacterManager.isBlocking)
+                    if (shield != null && playerCharacterManager.isBlocking)
                     {
                         float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-                    
-                        if(playerStats!=null)
+
+                        if (playerStats != null)
                         {
                             Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                             playerEffectManager.PlayRecoilMetalFX(contactPoint);
@@ -61,12 +61,12 @@ namespace TOF
                     }
                 }
             }
-            
+
             if (collision.tag == "Enemy")
             {
-                EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
-                CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
-                CharacterEffectManager enemyEffectManager = collision.GetComponentInChildren<CharacterEffectManager>();
+                EnemyStats enemyStats = collision.GetComponentInParent<EnemyStats>();
+                CharacterManager enemyCharacterManager = collision.GetComponentInParent<CharacterManager>();
+                CharacterEffectManager enemyEffectManager = enemyStats.GetComponentInChildren<CharacterEffectManager>();
                 BlockingCollider shield = collision.transform.GetComponent<BlockingCollider>();
 
                 if (enemyCharacterManager != null)
