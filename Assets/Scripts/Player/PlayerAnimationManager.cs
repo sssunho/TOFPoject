@@ -13,6 +13,7 @@ namespace TOF
 
         int vertical;
         int horizontal;
+        int temp = 1;
 
         public void Initialize()
         {
@@ -164,6 +165,12 @@ namespace TOF
             playerLocomotion.characterCollisionBlockerCollider.enabled = true;
         }
 
+        public void EndJump()
+        {
+            playerLocomotion.isJump = false;
+            temp = 0;
+        }
+
         private void OnAnimatorMove()
         {
             if (playerManager.isInteracting == false)
@@ -171,9 +178,23 @@ namespace TOF
 
             float delta = Time.deltaTime;
             Vector3 deltaPosition = anim.deltaPosition;
-            deltaPosition.y -= 9.81f * Time.deltaTime;
+            if (playerLocomotion.isJump)
+            {
+                if(temp < 75)
+                {
+                    deltaPosition.y += 3 * Time.deltaTime;
+                    temp++;
+                }
+                else
+                {
+                    deltaPosition.y -= 3f * Time.deltaTime;
+                }
+            }
+            else
+            {
+                deltaPosition.y -= 9.81f * Time.deltaTime;
+            }
             playerLocomotion.controller.Move(deltaPosition);
-
         }
     }
 }

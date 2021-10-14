@@ -13,7 +13,7 @@ namespace TOF
         InputHandler inputHandler;
         public Vector3 moveDirection;
 
-        [HideInInspector]
+       [HideInInspector]
         public Transform myTransform;
         [HideInInspector]
         public PlayerAnimationManager playerAnimationManager;
@@ -28,6 +28,7 @@ namespace TOF
         public float fallMinHeight = 6f;
         public float heightReached;
         public float fallDamage = 10;
+        public bool isJump = false;
 
         [Header("Movement Stats")]
         [SerializeField]
@@ -46,6 +47,8 @@ namespace TOF
         int backStepStaminaCost = 12;
         [SerializeField]
         int sprintStaminaCost = 1;
+        [SerializeField]
+        int jumpStaminaCost = 10;
 
         //public CapsuleCollider characterCollider;
         public CapsuleCollider characterCollisionBlockerCollider;
@@ -155,6 +158,13 @@ namespace TOF
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
                 moveDirection *= speed;
+                // #. sprint stamina 1/10 version.
+                //if(sprintStaminaCost == 10)
+                //{
+                //    sprintStaminaCost = 1;
+                //    playerStats.TakeStaminaDamage(sprintStaminaCost);
+                //}
+                //sprintStaminaCost++;
                 playerStats.TakeStaminaDamage(sprintStaminaCost);
             }
             else
@@ -176,7 +186,7 @@ namespace TOF
             projectedVelocity.y -= 9.81f;
             controller.Move(projectedVelocity * delta);
 
-            if(inputHandler.lockOnFlag && inputHandler.sprintFlag==false)
+            if (inputHandler.lockOnFlag && inputHandler.sprintFlag==false)
             {
                 playerAnimationManager.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
             }
@@ -230,8 +240,8 @@ namespace TOF
                 }
                 return;
             }
-
-            inAirTimer += Time.deltaTime;
+            if(!isJump)
+                inAirTimer += Time.deltaTime;
             if(inAirTimer > 0.2f && playerManager.isGrounded)
             {
                 playerAnimationManager.PlayTargetAnimation("Falling", true);
@@ -270,12 +280,11 @@ namespace TOF
                     moveDirection.y = 0;
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;
+                    isJump = true;
+                    playerStats.TakeStaminaDamage(jumpStaminaCost);
                 }
             }
         }
-
         #endregion
-
-
     }
 }

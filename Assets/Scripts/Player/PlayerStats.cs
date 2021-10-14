@@ -8,7 +8,7 @@ namespace TOF
     public class PlayerStats : CharacterStats
     {
         PlayerManager playerManager;
-
+        GameManager gameManager;
         public SliderControl healthbar;
         public SliderControl staminabar;
         public SliderControl focusPointBar;
@@ -23,6 +23,7 @@ namespace TOF
         {
             playerManager = GetComponent<PlayerManager>();
             playerAnimationHandler = GetComponentInChildren<PlayerAnimationManager>();
+            gameManager = FindObjectOfType<GameManager>();
         }
 
         private void Start()
@@ -82,6 +83,7 @@ namespace TOF
                 currentHealth = 0;
                 playerAnimationHandler.PlayTargetAnimation("Dead_01", true);
                 isDead = true;
+                gameManager.OnCharacterDead(this.gameObject);
             }
         }
 
