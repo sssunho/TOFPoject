@@ -184,7 +184,6 @@ namespace TOF
                 {
                     deltaPosition.y += 3 * Time.deltaTime;
                     temp++;
-                    Debug.Log(temp);
                 }
                 else
                 {

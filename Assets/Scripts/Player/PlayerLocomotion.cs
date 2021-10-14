@@ -47,6 +47,8 @@ namespace TOF
         int backStepStaminaCost = 12;
         [SerializeField]
         int sprintStaminaCost = 1;
+        [SerializeField]
+        int jumpStaminaCost = 10;
 
         //public CapsuleCollider characterCollider;
         public CapsuleCollider characterCollisionBlockerCollider;
@@ -156,6 +158,13 @@ namespace TOF
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
                 moveDirection *= speed;
+                // #. sprint stamina 1/10 version.
+                //if(sprintStaminaCost == 10)
+                //{
+                //    sprintStaminaCost = 1;
+                //    playerStats.TakeStaminaDamage(sprintStaminaCost);
+                //}
+                //sprintStaminaCost++;
                 playerStats.TakeStaminaDamage(sprintStaminaCost);
             }
             else
@@ -272,12 +281,10 @@ namespace TOF
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;
                     isJump = true;
+                    playerStats.TakeStaminaDamage(jumpStaminaCost);
                 }
             }
         }
-
         #endregion
-
-
     }
 }

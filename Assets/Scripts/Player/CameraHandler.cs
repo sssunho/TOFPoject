@@ -51,9 +51,10 @@ namespace TOF
             defaultPosition = cameraTransform.localPosition.z;
             ignoreLayer = ~(1 << 8 | 1 << 9 | 1 << 10);
 
-            targetTransform = FindObjectOfType<PlayerManager>().transform;
-            inputHandler = FindObjectOfType<InputHandler>();
-            playerManager = FindObjectOfType<PlayerManager>();
+            FindTarget();
+            //targetTransform = FindObjectOfType<PlayerManager>().transform;
+            //inputHandler = FindObjectOfType<InputHandler>();
+            //playerManager = FindObjectOfType<PlayerManager>();
         }
 
         private void Start()
@@ -223,6 +224,13 @@ namespace TOF
             {
                 cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.localPosition, newUnLockedPositon, ref velocity, Time.deltaTime);
             }
+        }
+
+        public void FindTarget()
+        {
+            targetTransform = FindObjectOfType<PlayerManager>().transform;
+            inputHandler = FindObjectOfType<InputHandler>();
+            playerManager = FindObjectOfType<PlayerManager>();
         }
     }
 }
