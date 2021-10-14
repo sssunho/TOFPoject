@@ -130,7 +130,6 @@ namespace TOF
 
         public void ReleaseCharge()
         {
-            Debug.Log("asdf");
             playerAnimationHandler.anim.SetBool("isCharging", false);
         }
 
