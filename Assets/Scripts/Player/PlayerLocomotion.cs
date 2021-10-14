@@ -25,6 +25,9 @@ namespace TOF
         [Header("Ground & Air Detection")]
         LayerMask ignoreForGroundCheck;
         public float inAirTimer;
+        public float fallMinHeight = 6f;
+        public float heightReached;
+        public float fallDamage = 10;
 
         [Header("Movement Stats")]
         [SerializeField]
@@ -217,11 +220,13 @@ namespace TOF
         {
             if (controller.isGrounded)
             {
+                HandleFallDamage();
                 inAirTimer = 0;
                 if(!playerManager.isGrounded)
                 {
                     playerAnimationManager.PlayTargetAnimation("Land", true);
                     playerManager.isGrounded = true;
+                    heightReached = transform.position.y;
                 }
                 return;
             }
@@ -231,6 +236,19 @@ namespace TOF
             {
                 playerAnimationManager.PlayTargetAnimation("Falling", true);
                 playerManager.isGrounded = false;
+            }
+        }
+
+        public void HandleFallDamage()
+        {
+            float fallHeight = (heightReached - transform.position.y);
+            fallHeight -= fallMinHeight;
+            if(fallHeight > 0)
+            {
+                int damage = (int)(fallDamage * fallHeight);
+                playerStats.TakeDamage(damage, "Fall");
+                playerManager.isGrounded = true;
+                heightReached = transform.position.y;
             }
         }
 
