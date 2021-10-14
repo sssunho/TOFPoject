@@ -40,6 +40,7 @@ namespace TOF
             if (inputHandler.comboFlag)
             {
                 playerAnimationHandler.anim.SetBool("canDoCombo", false);
+                playerManager.isBlocking = false;
 
                 if (lastAttack == weapon.OH_Light_Attack_1)
                 {
@@ -57,6 +58,7 @@ namespace TOF
             if (playerStats.currentStamina <= 0)
                 return;
 
+            playerManager.isBlocking = false;
             weaponSlotManager.attackingWeapon = weapon;
             if(inputHandler.twoHandFlag)
             {
@@ -77,6 +79,7 @@ namespace TOF
             if (playerStats.currentStamina <= 0)
                 return;
 
+            playerManager.isBlocking = false;
             playerManager.isCharging = true;
             weaponSlotManager.attackingWeapon = weapon;
             if (inputHandler.twoHandFlag)
@@ -167,14 +170,17 @@ namespace TOF
         private void PerformLTWeaponArt(bool isTwoHanding)
         {
             if (playerManager.isInteracting) return;
+            
+            playerManager.isBlocking = false;
 
-            if(isTwoHanding)
+            if (isTwoHanding)
             {
                 //if we are two handing preform weapon art for right weapon
 
             }
             else
             {
+                playerManager.isInteracting = true;
                 playerAnimationHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
             }
 
@@ -195,7 +201,7 @@ namespace TOF
 
             if (playerManager.isBlocking) return;
 
-            playerAnimationHandler.PlayTargetAnimation("Block Start", false, true);
+            playerAnimationHandler.PlayTargetAnimation("Block", false, true);
             playerEquipmentManager.OpenBlockingCollider();
             playerManager.isBlocking = true;
         }

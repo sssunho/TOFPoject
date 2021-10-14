@@ -92,20 +92,13 @@ namespace TOF
             }
             else if (currentLockOnTarget != null)
             {
-                Vector3 dir = currentLockOnTarget.transform.position - transform.position;
-                dir.Normalize();
-                dir.y = 0;
+                Vector3 direction = currentLockOnTarget.transform.position - transform.position;
+                Vector3 right = Vector3.Cross(direction, Vector3.up).normalized;
+                Quaternion look = Quaternion.LookRotation(direction);
 
-                Quaternion targetRotation = Quaternion.LookRotation(dir);
-                transform.rotation = targetRotation;
-
-                dir = currentLockOnTarget.transform.position - cameraPivotTransform.position;
-                dir.Normalize();
-
-                targetRotation = Quaternion.LookRotation(dir);
-                Vector3 eulerAngle = targetRotation.eulerAngles;
-                eulerAngle.y = 0;
-                cameraPivotTransform.localEulerAngles = eulerAngle;
+                cameraPivotTransform.rotation = look;
+                cameraPivotTransform.RotateAround(cameraPivotTransform.position, right, -20.0f);
+                Debug.DrawRay(cameraPivotTransform.position, direction * 10.0f, Color.red);
             }
         }
 
