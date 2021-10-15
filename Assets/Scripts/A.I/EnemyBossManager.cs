@@ -6,22 +6,21 @@ namespace TOF
 {
     public class EnemyBossManager : MonoBehaviour
     {
-        public string bossName;
+        protected WorldEventManager worldEventManager;
+        public UIBossHealthBar bossHealthBar;
 
-        UIBossHealthBar bossHealthBar;
-        EnemyStats enemyStats;
+        public int _bossNum;
+        public bool bossDeafeted = false;
+        public bool isFirstTry = true;
 
         private void Awake()
         {
-            bossHealthBar = FindObjectOfType<UIBossHealthBar>();
-            enemyStats = GetComponent<EnemyStats>();
+            worldEventManager = FindObjectOfType<WorldEventManager>();
         }
 
         private void Start()
         {
-            enemyStats.isBoss = true;
-            bossHealthBar.SetBossName(bossName);
-            bossHealthBar.SetBossMaxHealth(enemyStats.maxHealth);
+            worldEventManager.bossNum = _bossNum;
         }
 
         public void UpdateBossHealthBar(int currentHealth)
