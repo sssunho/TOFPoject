@@ -143,5 +143,15 @@ namespace TOF
         {
             soulCount += souls;
         }
+
+        public void BonFireHealingPlayer()
+        {
+            currentHealth = maxHealth;
+            currentStamina = maxStamina;
+            currentFocusPoint = maxFocusPoints;
+            healthbar.setCurValue(currentHealth);
+            staminabar.setCurValue(currentStamina);
+            focusPointBar.setCurValue(currentFocusPoint);           
+        }
     }
 }

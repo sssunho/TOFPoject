@@ -184,7 +184,6 @@ namespace TOF
         {
             if (playerManager.isInteracting == false)
                 return;
-
             float delta = Time.deltaTime;
             Vector3 deltaPosition = anim.deltaPosition;
             if (playerLocomotion.isJump)

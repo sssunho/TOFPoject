@@ -8,10 +8,11 @@ namespace TOF
     {
         public GameObject light;
         public bool isIgnited = false;
+        public Transform checkPoint;
 
         public override void Interact(PlayerManager playerManager)
         {
-            playerManager.BonFireInteraction(isIgnited);
+            playerManager.BonFireInteraction(this);
             if (!isIgnited)
             {
                 Invoke("Firing", 2f);

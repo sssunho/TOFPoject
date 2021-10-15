@@ -43,7 +43,6 @@ namespace TOF
             {
                 weaponPickup.weapon = itemInChest;
             }
-
         }
 
         private IEnumerator SpawnItemInChest()
