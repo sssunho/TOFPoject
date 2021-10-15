@@ -6,9 +6,10 @@ namespace TOF
 {
     public class WorldEventManager : MonoBehaviour
     {
+        public int bossNum;
+        public List<EnemyBossManager> bosses;
         public List<FogWall> fogWalls;
         UIBossHealthBar bossHealthBar;
-        EnemyBossManager enemyBossManager;
 
         public bool bossFightIsActive;
         public bool bossHasBeenAwaked;
@@ -25,9 +26,12 @@ namespace TOF
             bossHasBeenAwaked = true;
             bossHealthBar.SetUIHealthBarToActive();
 
-            foreach (var fogwall in fogWalls)
+            if (bosses[bossNum].isFirstTry) bosses[bossNum].isFirstTry = false;
+            for (int i = 0; i < fogWalls.Count; i++)
             {
-                fogwall.ActivateFogWall();
+                Debug.Log(bosses[i].isFirstTry);
+                if (!bosses[i].bossDeafeted)
+                    fogWalls[i].ActivateFogWall();
             }
         }
 
@@ -36,9 +40,10 @@ namespace TOF
             bossHasBeenDefeated = true;
             bossFightIsActive = false;
 
-            foreach (var fogwall in fogWalls)
+            for (int i = 0; i < fogWalls.Count; i++)
             {
-                fogwall.DeactivateFogWall();
+                if (bosses[i].bossDeafeted) 
+                    fogWalls[i].DeactivateFogWall();
             }
         }
     }
