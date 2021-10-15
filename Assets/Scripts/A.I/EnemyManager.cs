@@ -26,7 +26,7 @@ namespace TOF
         public bool canDoCombo;
 
         [Header("A.I Settings")]
-        public float detectionRadius = 20;
+        public float detectionRadius = 15;
         // The higher, and lower, respectively these angles are, the greater detection FIELD OF VIEW (basically like eye sight)
         public float maximumDetectionAngle = 50;
         public float minimumDetectionAngle = -50;
@@ -54,8 +54,8 @@ namespace TOF
 
         private void Update()
         {
-            HandleRecoveryTimer();
-            HandleStateMachine();
+            //HandleRecoveryTimer();
+            //HandleStateMachine();
 
             isRotatingWithRootMotion = enemyAnimationManager.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");

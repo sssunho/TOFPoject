@@ -12,7 +12,7 @@ public class Chase : ActionBase
     }
 }
 
-public static class BehaviorTreeBuilderExtensions
+public static partial class BehaviorTreeBuilderExtensions
 {
     public static BehaviorTreeBuilder Chase(this BehaviorTreeBuilder builder, string name = "My Action")
     {
