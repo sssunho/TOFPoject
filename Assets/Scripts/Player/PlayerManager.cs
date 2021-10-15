@@ -28,6 +28,7 @@ namespace TOF
         public bool isUsingLeftHand;
         public bool isInvulnerable;
         public bool isCharging;
+        public bool isBonFire;
 
         private void Awake()
         {
@@ -58,6 +59,7 @@ namespace TOF
             isCharging = anim.GetBool("isCharging");
             anim.SetBool("isInAir", isInAir);
             anim.SetBool("isDead", playerStats.isDead);
+            anim.SetBool("isBonFire", isBonFire);
 
             inputHandler.TickInput(delta);
             playerAnimatorManager.canRotate = anim.GetBool("canRotate");
@@ -161,6 +163,20 @@ namespace TOF
             transform.rotation = turnRotation;
 
             playerAnimatorManager.PlayTargetAnimation("Pass Through Fog", true);
+        }
+
+        public void BonFireInteraction(bool isIgnited)
+        {
+            playerLocomotion.controller.Move(Vector3.zero);
+            if (isIgnited)
+            {
+                playerAnimatorManager.PlayTargetAnimation("Bonfire Start", true);
+            }
+            else
+            {
+                playerAnimatorManager.PlayTargetAnimation("Bonfire Ignite", true);
+            }
+            isBonFire = true;
         }
 
         #endregion
