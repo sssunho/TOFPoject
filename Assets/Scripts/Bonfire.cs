@@ -14,14 +14,14 @@ namespace TOF
             playerManager.BonFireInteraction(isIgnited);
             if (!isIgnited)
             {
-                isIgnited = true;
-                Invoke("Firing", 3f);
+                Invoke("Firing", 2f);
             }
         }
 
         public void Firing()
         {
             gameObject.SetActive(true);
+            isIgnited = true;
         }
     }
 }

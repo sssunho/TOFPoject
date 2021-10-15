@@ -80,7 +80,7 @@ MonoBehaviour:
   respawnTimer: 4
   destroyBodyAfterDead: 1
   displayInfoInFadeText: 1
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 2862906456338086820, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
   enemySpawnPoint: []
   OnReloadGame:
     m_PersistentCalls:

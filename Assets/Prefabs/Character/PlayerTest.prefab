@@ -88,6 +88,56 @@ Transform:
   m_Father: {fileID: 89985376384460487}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1081870707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1081870708}
+  - component: {fileID: 1081870709}
+  m_Layer: 9
+  m_Name: Holder Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1081870708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081870707}
+  m_LocalRotation: {x: -0.3967791, y: 0.57206285, z: -0.6232745, w: 0.3561451}
+  m_LocalPosition: {x: 0.115, y: -0.332, z: -0.058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8935610331268123574}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 25.498, y: 88.056, z: -95.838}
+--- !u!114 &1081870709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081870707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba700c47cd4878d4985ad9f1ed5d4b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentOverride: {fileID: 1081870708}
+  currentWeapon: {fileID: 0}
+  isLefthandSlot: 0
+  isRightHandSlot: 0
+  isBackSlot: 0
+  isHolderSlot: 1
+  currentWeaponModel: {fileID: 0}
 --- !u!1 &1215693164
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +501,10 @@ MonoBehaviour:
   controller: {fileID: 0}
   normalCamera: {fileID: 0}
   inAirTimer: 0
+  fallMinHeight: 6
+  heightReached: 0
+  fallDamage: 30
+  isJump: 0
   movementSpeed: 5
   walkingSpeed: 1
   sprintSpeed: 7
@@ -458,6 +512,7 @@ MonoBehaviour:
   rollStaminaCost: 15
   backStepStaminaCost: 12
   sprintStaminaCost: 1
+  jumpStaminaCost: 10
   characterCollisionBlockerCollider: {fileID: 1752171508}
 --- !u!114 &263314670826901163
 MonoBehaviour:
@@ -501,6 +556,7 @@ MonoBehaviour:
   inventoryFlag: 0
   lockOnFlag: 0
   rollInputTimer: 0
+  interactFlag: 0
   criticalAttackRaycastStartPoint: {fileID: 5923294287155895411}
 --- !u!114 &263314670826900820
 MonoBehaviour:
@@ -534,6 +590,8 @@ MonoBehaviour:
   isUsingRightHand: 0
   isUsingLeftHand: 0
   isInvulnerable: 0
+  isCharging: 0
+  isBonFire: 0
 --- !u!114 &263314670826900817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,6 +891,7 @@ MonoBehaviour:
   isLefthandSlot: 0
   isRightHandSlot: 1
   isBackSlot: 0
+  isHolderSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!1 &263314670271376191
 GameObject:
@@ -882,6 +941,7 @@ MonoBehaviour:
   isLefthandSlot: 0
   isRightHandSlot: 0
   isBackSlot: 1
+  isHolderSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!1 &310411263067185746
 GameObject:
@@ -1390,6 +1450,7 @@ MonoBehaviour:
   isLefthandSlot: 1
   isRightHandSlot: 0
   isBackSlot: 0
+  isHolderSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!1 &1204231894424521149
 GameObject:
@@ -7111,6 +7172,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastAttack: 
+--- !u!114 &987717719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223111327248893877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a532a6656335bdc40a2c8706c2006a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 120346, guid: b8f2fe1ee1a01724cb72f5b0e6bd2eef, type: 3}
+  recoilMetalFX: {fileID: 110090, guid: 04dd09560119f3c48ba23669eb660db1, type: 3}
+  rightWeaponFX: {fileID: 0}
+  leftWeaponFX: {fileID: 0}
+  currentParticleFX: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
+  amountToBeHealed: 0
 --- !u!114 &1670414261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7154,27 +7234,9 @@ MonoBehaviour:
   leftHandSlot: {fileID: 174942461983176489}
   rightHandSlot: {fileID: 263314671291492225}
   backSlot: {fileID: 263314670271376185}
+  HolderSlot: {fileID: 1081870709}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
---- !u!114 &987717719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8223111327248893877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a532a6656335bdc40a2c8706c2006a7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloodSplatterFX: {fileID: 120346, guid: b8f2fe1ee1a01724cb72f5b0e6bd2eef, type: 3}
-  recoilMetalFX: {fileID: 110090, guid: 04dd09560119f3c48ba23669eb660db1, type: 3}
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
-  currentParticleFX: {fileID: 0}
-  instantiatedFXModel: {fileID: 0}
-  amountToBeHealed: 0
 --- !u!1 &8428916264404473306
 GameObject:
   m_ObjectHideFlags: 0
@@ -8325,14 +8387,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
---- !u!1 &8223111327248893877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
-  m_PrefabInstance: {fileID: 89985377135632060}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &9049419978279706815 stripped
+--- !u!4 &4801598839495362371 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -240293045792571901, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4872056475455494655, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
   m_PrefabInstance: {fileID: 89985377135632060}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4919344729721648550 stripped
@@ -8340,9 +8397,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
   m_PrefabInstance: {fileID: 89985377135632060}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4801598839495362371 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4872056475455494655, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
+--- !u!1 &8223111327248893877 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
   m_PrefabInstance: {fileID: 89985377135632060}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1038675056233127892 stripped
@@ -8355,8 +8412,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -7350302855771833404, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
   m_PrefabInstance: {fileID: 89985377135632060}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &9049419978279706815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -240293045792571901, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
+  m_PrefabInstance: {fileID: 89985377135632060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &150951617357139452 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8995948452652133568, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
+  m_PrefabInstance: {fileID: 89985377135632060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8935610331268123574 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -198691124474669814, guid: f2c836f3e5c029140a0cc913d7df766a, type: 3}
   m_PrefabInstance: {fileID: 89985377135632060}
   m_PrefabAsset: {fileID: 0}

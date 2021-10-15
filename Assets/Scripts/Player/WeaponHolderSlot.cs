@@ -12,6 +12,7 @@ namespace TOF
         public bool isLefthandSlot;
         public bool isRightHandSlot;
         public bool isBackSlot;
+        public bool isHolderSlot;
 
         public GameObject currentWeaponModel;
 

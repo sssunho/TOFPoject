@@ -96,7 +96,7 @@ namespace TOF
 
             float delta = Time.deltaTime;
 
-            if (cameraHandler != null)
+            if (cameraHandler != null && !isBonFire)
             {
                 cameraHandler.FollowTarget(delta);
                 cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
@@ -168,6 +168,7 @@ namespace TOF
         public void BonFireInteraction(bool isIgnited)
         {
             playerLocomotion.controller.Move(Vector3.zero);
+            
             if (isIgnited)
             {
                 playerAnimatorManager.PlayTargetAnimation("Bonfire Start", true);
@@ -178,7 +179,6 @@ namespace TOF
             }
             isBonFire = true;
         }
-
         #endregion
     }
 }

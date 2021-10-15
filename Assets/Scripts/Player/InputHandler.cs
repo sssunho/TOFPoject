@@ -39,6 +39,7 @@ namespace TOF
         public bool inventoryFlag;
         public bool lockOnFlag;
         public float rollInputTimer;
+        public bool interactFlag;
 
         public Transform criticalAttackRaycastStartPoint;
 
@@ -238,6 +239,15 @@ namespace TOF
         private void HandleInteractiongButtonInput()
         {
             inputActions.PlayerActions.E.performed += i => e_Input = true;
+            if(interactFlag)
+            {
+                weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+            }
+            else
+            {
+                weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+            }
         }
 
         private void HandleTwoHandInput()

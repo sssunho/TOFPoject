@@ -165,6 +165,14 @@ namespace TOF
             playerLocomotion.characterCollisionBlockerCollider.enabled = true;
         }
 
+        public void EnableInteract()
+        {
+            inputHandler.interactFlag = true;
+        }
+        public void DisableInteract()
+        {
+            inputHandler.interactFlag = false;
+        }
         public void EndJump()
         {
             playerLocomotion.isJump = false;
