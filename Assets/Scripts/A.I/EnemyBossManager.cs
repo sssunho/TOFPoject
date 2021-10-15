@@ -27,5 +27,10 @@ namespace TOF
         {
             bossHealthBar.SetBossCurrentHealth(currentHealth);
         }
+
+        public virtual void SetBossInfo()
+        {
+            
+        }
     }
 }

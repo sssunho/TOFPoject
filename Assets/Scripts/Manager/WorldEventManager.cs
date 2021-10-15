@@ -29,8 +29,7 @@ namespace TOF
             if (bosses[bossNum].isFirstTry) bosses[bossNum].isFirstTry = false;
             for (int i = 0; i < fogWalls.Count; i++)
             {
-                Debug.Log(bosses[i].isFirstTry);
-                if (!bosses[i].bossDeafeted)
+                if (!bosses[i].bossDeafeted && !bosses[i].isFirstTry)
                     fogWalls[i].ActivateFogWall();
             }
         }

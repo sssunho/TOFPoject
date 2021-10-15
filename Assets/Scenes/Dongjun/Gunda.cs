@@ -16,11 +16,11 @@ namespace TOF
             enemyStats = GetComponent<EnemyStats>();
         }
 
-        public void SetBossInfo()
+        public override void SetBossInfo()
         {
             enemyStats.isBoss = true;
             bossHealthBar.SetBossMaxHealth(enemyStats.maxHealth);
-            bossHealthBar.SetBossName(bossName);
+            bossHealthBar.SetBossName(name);
             _bossNum = num;
         }
     }

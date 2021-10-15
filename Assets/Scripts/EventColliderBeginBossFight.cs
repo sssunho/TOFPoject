@@ -18,8 +18,8 @@ namespace  TOF
         {
             if(other.tag == "Player")
             {
-                Debug.Log(enemyBossManager._bossNum);
                 worldEventManager.bossNum = enemyBossManager._bossNum;
+                enemyBossManager.SetBossInfo();
                 worldEventManager.ActivateBossFight();
             }
         }
