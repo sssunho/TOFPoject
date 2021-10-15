@@ -91,7 +91,7 @@ namespace TOF
                         animator.CrossFade("Both Arm Empty", 0.1f);
 
                         backSlot.UnloadWeaponAndDestory();
-
+                        HolderSlot.UnloadWeaponAndDestory();
                         if (weaponItem != null)
                         {
                             animator.CrossFade(weaponItem.right_hand_idle, 0.2f);

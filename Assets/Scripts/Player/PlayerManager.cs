@@ -178,6 +178,8 @@ namespace TOF
                 playerAnimatorManager.PlayTargetAnimation("Bonfire Ignite", true);
             }
             isBonFire = true;
+            playerStats.HealPlayer(playerStats.maxHealth);
+
         }
 
         #endregion

@@ -172,6 +172,7 @@ namespace TOF
         public void DisableInteract()
         {
             inputHandler.interactFlag = false;
+            inputHandler.EndInteract = true;
         }
         public void EndJump()
         {

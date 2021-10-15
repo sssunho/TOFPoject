@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.6
   interactableText: BonFire
-  gameObject: {fileID: 6075782308434834070}
+  light: {fileID: 6075782308434834070}
   isIgnited: 0
 --- !u!1 &6075782308434834066
 GameObject:

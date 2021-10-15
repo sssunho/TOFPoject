@@ -40,6 +40,7 @@ namespace TOF
         public bool lockOnFlag;
         public float rollInputTimer;
         public bool interactFlag;
+        public bool EndInteract = false;
 
         public Transform criticalAttackRaycastStartPoint;
 
@@ -239,14 +240,18 @@ namespace TOF
         private void HandleInteractiongButtonInput()
         {
             inputActions.PlayerActions.E.performed += i => e_Input = true;
-            if(interactFlag)
+            if(e_Input)
             {
-                weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                if(interactFlag)
+                {
+                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                }
             }
-            else
+            if (EndInteract)
             {
                 weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
                 weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+                EndInteract = false;
             }
         }
 
