@@ -52,18 +52,18 @@ namespace TOF
             if (isDead)
                 return;
 
-            if(!isBoss)
+            currentHealth = currentHealth - damage;
+            enemyAnimationManager.PlayTargetAnimation(damageAnimation, true);
+            if (!isBoss)
             {
                 enemyHealthBar.SetHealth(currentHealth);
             }
-            else if(isBoss && enemyBossManager!=null)
+            else if (isBoss && enemyBossManager != null)
             {
                 enemyBossManager.UpdateBossHealthBar(currentHealth);
             }
-            currentHealth = currentHealth - damage;
-            enemyAnimationManager.PlayTargetAnimation(damageAnimation, true);
 
-            if(currentHealth <= 0)
+            if (currentHealth <= 0)
             {
                 HandleDeath();
             }

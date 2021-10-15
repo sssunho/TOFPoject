@@ -15,16 +15,16 @@ namespace TOF
         }
         public void UpdateScale()
         {
-            if (rectTransform && slider)
-            {
-                if (slider.maxValue != oldMaxValue)
-                {
-                    var sizeDelta = rectTransform.sizeDelta;
-                    sizeDelta.x = slider.maxValue * multipScale;
-                    rectTransform.sizeDelta = sizeDelta;
-                    oldMaxValue = slider.maxValue;
-                }
-            }
+            //if (rectTransform && slider)
+            //{
+            //    if (slider.maxValue != oldMaxValue)
+            //    {
+            //        var sizeDelta = rectTransform.sizeDelta;
+            //        sizeDelta.x = slider.maxValue * multipScale;
+            //        rectTransform.sizeDelta = sizeDelta;
+            //        oldMaxValue = slider.maxValue;
+            //    }
+            //}
         }
 
         public void setMaxValue(float maxValue)
