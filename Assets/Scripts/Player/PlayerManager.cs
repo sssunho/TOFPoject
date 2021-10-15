@@ -12,6 +12,7 @@ namespace TOF
         PlayerLocomotion playerLocomotion;
         PlayerStats playerStats;
         PlayerAnimationManager playerAnimatorManager;
+        GameManager gameManager;
 
         InteractableUI interactableUI;
         public GameObject interactableUIGameObject;
@@ -36,6 +37,7 @@ namespace TOF
             backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
             playerStats = GetComponent<PlayerStats>();
             playerAnimatorManager = GetComponentInChildren<PlayerAnimationManager>();
+            gameManager = FindObjectOfType<GameManager>();
         }
 
         private void Start()
@@ -165,21 +167,26 @@ namespace TOF
             playerAnimatorManager.PlayTargetAnimation("Pass Through Fog", true);
         }
 
-        public void BonFireInteraction(bool isIgnited)
+        public void BonFireInteraction(Bonfire bonfire)
         {
             playerLocomotion.controller.Move(Vector3.zero);
-            
-            if (isIgnited)
+            playerStats.BonFireHealingPlayer();
+            gameManager.SetSpawnSpoint(bonfire.checkPoint);
+            if (bonfire.isIgnited)
             {
                 playerAnimatorManager.PlayTargetAnimation("Bonfire Start", true);
+                isBonFire = true;
+                // UI 포탈 선택창 만들기.
+                gameManager.TeleportWindow.SetActive(true);
+                var player = FindObjectOfType<UIManager>();
+                gameManager.playerUI = player.gameObject;
+                player.gameObject.SetActive(false);
             }
             else
             {
                 playerAnimatorManager.PlayTargetAnimation("Bonfire Ignite", true);
+                gameManager.UpdateCheckPoint(bonfire.name);
             }
-            isBonFire = true;
-            playerStats.HealPlayer(playerStats.maxHealth);
-
         }
 
         #endregion

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace TOF
 {
@@ -10,16 +11,25 @@ namespace TOF
     {
         [System.Serializable]
         public class OnRealoadGame : UnityEngine.Events.UnityEvent { }
+        [Header("Player")]
         public GameObject playerPrefab;
         public CameraHandler cameraHandler;
+        public GameObject playerUI;
+
+        [Header("Enemy")]
+        public GameObject enemyPrefab;
+        public Transform[] enemySpawnPoint;
+
+        [Header("Spawn")]
+        public Bonfire[] bonfires;
+        public Button[] checkPoints;
+        public GameObject TeleportWindow;
+        public GameObject ContentWindow;
+        public Button CheckPointBTNPrefab;
         public Transform spawnPoint;
         public float respawnTimer = 4f;
         public bool destroyBodyAfterDead;
         public bool displayInfoInFadeText = true;
-
-        // #. Enemy Spawn
-        public GameObject enemyPrefab;
-        public Transform[] enemySpawnPoint;
 
         [HideInInspector]
         public OnRealoadGame OnReloadGame = new OnRealoadGame();
@@ -31,26 +41,6 @@ namespace TOF
         
         public UnityEvent onSpawn;
 
-        public void ResetHealth()
-        {
-            currentController.HealPlayer(currentController.maxHealth);            
-        }
-
-        public void ResetEnemy()
-        {
-            for (int i = 1; i < enemySpawnPoint.Length; i++)
-            {
-                var oldEnemy = enemySpawnPoint[i].GetChild(0).gameObject;
-                Destroy(oldEnemy);
-                Instantiate(enemyPrefab, enemySpawnPoint[i].position, enemySpawnPoint[i].rotation).transform.parent = enemySpawnPoint[i].transform;
-            }
-        }
-        public void SpawnEnemy()
-        {
-            enemySpawnPoint = GameObject.Find("SpawnPoint").GetComponentsInChildren<Transform>();
-            for (int i = 1; i < enemySpawnPoint.Length; i++)
-                Instantiate(enemyPrefab, enemySpawnPoint[i].position, enemySpawnPoint[i].rotation).transform.parent = enemySpawnPoint[i].transform;
-        }
         protected virtual void Start()
         {
             if (instance == null)
@@ -68,6 +58,7 @@ namespace TOF
             SceneManager.sceneLoaded += OnLevelFinishedLoading;
             FindPlayer();
             SpawnEnemy();
+            FineBonFirePoint();
         }
 
         public virtual void OnCharacterDead(GameObject _gameObject)
@@ -186,14 +177,17 @@ namespace TOF
             {
                 if (oldPlayer != null && destroyBodyAfterDead)
                 {
-
                     Destroy(oldPlayer);
                 }
                 else if (oldPlayer != null)
                 {
                     DestroyPlayerComponents(oldPlayer);
                 }
-
+                else if(oldPlayer == null)
+                {
+                    oldPlayer = currentPlayer;
+                    Destroy(oldPlayer);
+                }
                 currentPlayer = Instantiate(playerPrefab, targetPoint.position, targetPoint.rotation);
                 currentController = currentPlayer.GetComponent<PlayerStats>();
                 OnReloadGame.Invoke();
@@ -217,5 +211,67 @@ namespace TOF
             }
         }
 
+        public void ResetHealth()
+        {
+            currentController.HealPlayer(currentController.maxHealth);
+        }
+
+        public void ResetEnemy()
+        {
+            for (int i = 1; i < enemySpawnPoint.Length; i++)
+            {
+                var oldEnemy = enemySpawnPoint[i].GetChild(0).gameObject;
+                Destroy(oldEnemy);
+                Instantiate(enemyPrefab, enemySpawnPoint[i].position, enemySpawnPoint[i].rotation).transform.parent = enemySpawnPoint[i].transform;
+            }
+        }
+        public void SpawnEnemy()
+        {
+            enemySpawnPoint = GameObject.Find("SpawnPoint").GetComponentsInChildren<Transform>();
+            for (int i = 1; i < enemySpawnPoint.Length; i++)
+                Instantiate(enemyPrefab, enemySpawnPoint[i].position, enemySpawnPoint[i].rotation).transform.parent = enemySpawnPoint[i].transform;
+        }
+
+        public void FineBonFirePoint()
+        {
+            bonfires = GameObject.Find("BonFirePoint").GetComponentsInChildren<Bonfire>();
+            for (int i = 0; i < bonfires.Length; i++)
+            {
+                Button button = Instantiate(CheckPointBTNPrefab, ContentWindow.transform);
+                button.interactable = false;
+                button.transform.GetChild(0).GetComponent<Text>().text = bonfires[i].name;
+                int num = i;
+                button.onClick.AddListener(() => { SetDestination(num); });
+            }
+            checkPoints = ContentWindow.GetComponentsInChildren<Button>();
+        }
+
+        public void UpdateCheckPoint(string name)
+        {
+            for (int i = 0; i < checkPoints.Length; i++)
+            {
+                if (name.Equals(checkPoints[i].transform.GetChild(0).GetComponent<Text>().text))
+                    checkPoints[i].interactable = true;
+            }
+        }
+
+        public void SetDestination(int index)
+        {
+            Debug.Log(index);
+            SetSpawnSpoint(bonfires[index].checkPoint);
+            oldPlayer = currentPlayer;
+            TeleportWindow.SetActive(false);
+            var player = currentPlayer.GetComponent<PlayerManager>();
+            player.isBonFire = false;
+            StartCoroutine(RespawnRoutine());
+        }
+        
+        public void CancleTeleport()
+        {
+            TeleportWindow.SetActive(false);
+            var player = currentPlayer.GetComponent<PlayerManager>();
+            player.isBonFire = false;
+            playerUI.SetActive(true);
+        }
     }
 }
