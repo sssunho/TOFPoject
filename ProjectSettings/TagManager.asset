@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Interactable
+  - DeadZone
   layers:
   - Default
   - TransparentFX

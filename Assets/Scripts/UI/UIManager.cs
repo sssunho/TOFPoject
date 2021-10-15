@@ -36,7 +36,8 @@ namespace TOF
         private void Start()
         {
             weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
-            equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
+            // #. 2021.10.15 DeadZone 체크하면서 에러 발견...
+            //equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
 
         public void UpdateUI() 

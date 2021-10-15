@@ -285,6 +285,15 @@ namespace TOF
                 }
             }
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "DeadZone")
+            {
+                playerStats.TakeDamage(playerStats.maxHealth, "Fall Death");
+                cameraHandler.cameraPivotTransform.Rotate(45, 0, 0);
+            }
+        }
         #endregion
     }
 }

@@ -96,7 +96,7 @@ namespace TOF
 
             float delta = Time.deltaTime;
 
-            if (cameraHandler != null && !isBonFire)
+            if (cameraHandler != null && !isBonFire && !playerStats.isDead)
             {
                 cameraHandler.FollowTarget(delta);
                 cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
@@ -179,6 +179,7 @@ namespace TOF
             }
             isBonFire = true;
         }
+
         #endregion
     }
 }

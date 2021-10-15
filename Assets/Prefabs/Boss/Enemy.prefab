@@ -531,6 +531,7 @@ MonoBehaviour:
   isLefthandSlot: 0
   isRightHandSlot: 1
   isBackSlot: 0
+  isHolderSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!114 &2862906455816538291
 MonoBehaviour:
@@ -549,6 +550,7 @@ MonoBehaviour:
   isLefthandSlot: 1
   isRightHandSlot: 0
   isBackSlot: 0
+  isHolderSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!1 &1874050356030768381
 GameObject:
@@ -1081,6 +1083,7 @@ MonoBehaviour:
   isLefthandSlot: 0
   isRightHandSlot: 1
   isBackSlot: 0
+  isHolderSlot: 0
   currentWeaponModel: {fileID: 2862906456126973407}
 --- !u!114 &2862906456074721670
 MonoBehaviour:
@@ -1099,6 +1102,7 @@ MonoBehaviour:
   isLefthandSlot: 1
   isRightHandSlot: 0
   isBackSlot: 0
+  isHolderSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!1 &2862906456338086820
 GameObject:
@@ -1217,7 +1221,7 @@ MonoBehaviour:
   rotationSpeed: 15
   maximumAggroRadius: 1.5
   canDoCombo: 0
-  detectionRadius: 20
+  detectionRadius: 5
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0

@@ -81,7 +81,10 @@ namespace TOF
             if(currentHealth<=0)
             {
                 currentHealth = 0;
-                playerAnimationHandler.PlayTargetAnimation("Dead_01", true);
+                if (damageAnimation == "Fall Death")
+                    playerAnimationHandler.PlayTargetAnimation("Fall Death", true);
+                else
+                    playerAnimationHandler.PlayTargetAnimation("Dead_01", true);
                 isDead = true;
                 gameManager.OnCharacterDead(this.gameObject);
             }
