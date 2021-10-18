@@ -8,13 +8,7 @@ namespace TOF
     public class UIBossHealthBar : MonoBehaviour
     {
         public Text bossName;
-        Slider slider;
-
-        private void Awake()
-        {
-            slider = GetComponentInChildren<Slider>();
-            bossName = GetComponentInChildren<Text>();
-        }
+        public Slider slider;
 
         private void Start()
         {

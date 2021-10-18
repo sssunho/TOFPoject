@@ -10,17 +10,12 @@ namespace TOF
         public UIBossHealthBar bossHealthBar;
 
         public int _bossNum;
-        public bool bossDeafeted = false;
-        public bool isFirstTry = true;
+        public bool bossDeafeted;
+        public bool isFirstTry;
 
         private void Awake()
         {
             worldEventManager = FindObjectOfType<WorldEventManager>();
-        }
-
-        private void Start()
-        {
-            worldEventManager.bossNum = _bossNum;
         }
 
         public void UpdateBossHealthBar(int currentHealth)

@@ -7,7 +7,7 @@ namespace TOF
     public class Gunda : EnemyBossManager
     {
         int num = 0;
-        string bossName = "Gunda";
+        private string name = "Gunda";
 
         EnemyStats enemyStats;
 
