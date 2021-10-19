@@ -2779,8 +2779,12 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2862906456338086825, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
+      propertyPath: maxHealth
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862906456338086825, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: healthLevel
-      value: 10
+      value: 999999
       objectReference: {fileID: 0}
     - target: {fileID: 2862906456338086827, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: detectionRadius

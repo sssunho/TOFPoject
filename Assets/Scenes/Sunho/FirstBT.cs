@@ -11,7 +11,11 @@ public class FirstBT : MonoBehaviour
     int detectionCounter = 0;
     EnemyManager enemyManager;
     EnemyAnimationManager anim;
-    Quaternion lookTarget;
+
+    float patternDelay = 0.0f;
+    int normalAttackCounter = 0;
+    int normalMagicCounter = 0;
+    int AttackComboCount = 0;
 
     private void OnDrawGizmos()
     {
@@ -35,12 +39,38 @@ public class FirstBT : MonoBehaviour
 
         _tree = new BehaviorTreeBuilder(gameObject)
             .Selector()
-                .Do("Rotate To Target", RotateToTarget)
-                .Condition("Interacting", () => {
-                    return enemyManager.isInteracting; })
-                .Condition("Idle", DetectPlayer)
-                .Do("Chase", ChaseTarget)
-                .Condition("Always True", () => true)
+                .Sequence("Idle")
+                    .Condition("Have a target", () => enemyManager.currentTarget == null)
+                    .Condition("Detecting", DetectPlayer)
+                .End()
+                .Selector("Combat")
+                    .Sequence("Pattern Delay")
+                        .Condition("Delay", () => patternDelay > 0)
+                    .End()
+                    .SelectorRandom("Special")
+                        .Do("Special1", () => TaskStatus.Failure)
+                        .Do("Special2", () => TaskStatus.Failure)
+                        .Do("Special3", () => TaskStatus.Failure)
+                        .Do("Special4", () => TaskStatus.Failure)
+                    .End()
+                    .SelectorRandom("Normal")
+                        .Selector("Phase")
+                            .SelectorRandom("Phase1")
+                                .Selector("Normal Attack")
+                                    .Do("Chase", ChaseTarget)
+                                    .Do("Attack target", AttackTarget)
+                                .End()
+                                .Do("Normal2", () => TaskStatus.Failure)
+                                .Do("Normal3", () => TaskStatus.Failure)
+                            .End()
+                            .SelectorRandom("Phase2")
+                                .Do("Normal1", () => TaskStatus.Failure)
+                                .Do("Normal2", () => TaskStatus.Failure)
+                                .Do("Normal3", () => TaskStatus.Failure)
+                            .End()
+                        .End()
+                    .End()
+                .End()
             .End()
             .Build();
     }
@@ -62,7 +92,6 @@ public class FirstBT : MonoBehaviour
 
     private bool DetectPlayer()
     {
-        if (enemyManager.currentTarget != null) return false;
         if (detectionCounter++ % 10 != 0) return true;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, 1 << 11);
@@ -80,29 +109,58 @@ public class FirstBT : MonoBehaviour
         return true;
     }
 
+    private TaskStatus AttackTarget()
+    {
+        if (enemyManager.isInteracting) return TaskStatus.Continue;
+
+        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+        Quaternion look = Quaternion.LookRotation(rel);
+
+        switch(AttackComboCount)
+        {
+            case 0:
+                anim.PlayTargetAnimation("Onehanded Light 1", true);
+                transform.rotation = look;
+                AttackComboCount++;
+                return TaskStatus.Continue;
+            case 1:
+                anim.PlayTargetAnimation("Onehanded Light 2", true);
+                AttackComboCount++;
+                break;
+            default:
+                AttackComboCount = 0;
+                return TaskStatus.Success;
+        }
+        
+        return TaskStatus.Success;
+    }
+
     private TaskStatus ChaseTarget()
     {
-        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
-        Debug.DrawRay(transform.position, rel * enemyManager.detectionRadius * 1.3f);
-        if (rel.magnitude < enemyManager.maximumAggroRadius)
-        {
-            if (Vector3.Angle(rel, transform.forward) < 45.0f)
-            {
-                anim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-                anim.PlayTargetAnimation("Onehanded Light 1", true);
-                lookTarget = Quaternion.LookRotation(rel.normalized);
-                return TaskStatus.Success;
-            }
-        }
+        if (enemyManager.isInteracting) return TaskStatus.Continue;
 
-        if(rel.magnitude > enemyManager.detectionRadius * 1.3f)
-        {
-            anim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-            anim.PlayTargetAnimation("Sleep", false);
-            enemyManager.currentTarget = null;
-            enemyManager.navMeshAgent.enabled = false;
-            return TaskStatus.Success;
-        }
+        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+
+        if (rel.magnitude < enemyManager.maximumAggroRadius) return TaskStatus.Failure;
+
+        //if (rel.magnitude < enemyManager.maximumAggroRadius)
+        //{
+        //    if (Vector3.Angle(rel, transform.forward) < 45.0f)
+        //    {
+        //        anim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        //        anim.PlayTargetAnimation("Onehanded Light 1", true);
+        //        return TaskStatus.Success;
+        //    }
+        //}
+
+        //if(rel.magnitude > enemyManager.detectionRadius * 1.3f)
+        //{
+        //    anim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        //    anim.PlayTargetAnimation("Sleep", false);
+        //    enemyManager.currentTarget = null;
+        //    enemyManager.navMeshAgent.enabled = false;
+        //    return TaskStatus.Success;
+        //}
 
         anim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
 
@@ -116,7 +174,6 @@ public class FirstBT : MonoBehaviour
         Vector3 lookPos = enemyManager.currentTarget.transform.position - transform.position;
         lookPos.y = 0;
         Quaternion targetRot = Quaternion.LookRotation(lookPos);
-
         enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 10.0f);
 
         enemyManager.controller.Move(targetVelocity * Time.deltaTime);
@@ -127,12 +184,12 @@ public class FirstBT : MonoBehaviour
 
     private TaskStatus RotateToTarget()
     {
-        if (enemyManager.canRotate)
+        if (enemyManager.canRotate && enemyManager.currentTarget != null)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookTarget, 100 * Time.deltaTime);
-            return TaskStatus.Success;
+            Quaternion look = Quaternion.LookRotation(enemyManager.currentTarget.transform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, look, 100 * Time.deltaTime);
         }
-        else
-            return TaskStatus.Failure;
+
+        return TaskStatus.Success;
     }
 }
