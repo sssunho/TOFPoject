@@ -19,6 +19,10 @@ namespace TOF
         {
             bossHealthBar = FindObjectOfType<UIBossHealthBar>();
         }
+        private void Start()
+        {
+            CheckFogWalls();
+        }
 
         public void ActivateBossFight()
         {
@@ -27,11 +31,7 @@ namespace TOF
             bossHealthBar.SetUIHealthBarToActive();
 
             if (bosses[bossNum].isFirstTry) bosses[bossNum].isFirstTry = false;
-            for (int i = 0; i < fogWalls.Count; i++)
-            {
-                if (!bosses[i].bossDeafeted && !bosses[i].isFirstTry)
-                    fogWalls[i].ActivateFogWall();
-            }
+            CheckFogWalls();
         }
 
         public void BossHasBeenDefeated()
@@ -42,6 +42,19 @@ namespace TOF
             for (int i = 0; i < fogWalls.Count; i++)
             {
                 if (bosses[i].bossDeafeted) 
+                    fogWalls[i].DeactivateFogWall();
+            }
+        }
+
+        public void CheckFogWalls()
+        {
+            for (int i = 0; i < fogWalls.Count; i++)
+            {
+                if (!bosses[i].bossDeafeted && !bosses[i].isFirstTry)
+                {
+                    fogWalls[i].ActivateFogWall();
+                }
+                else
                     fogWalls[i].DeactivateFogWall();
             }
         }

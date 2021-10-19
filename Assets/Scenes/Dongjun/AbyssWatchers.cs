@@ -7,7 +7,7 @@ namespace TOF
     public class AbyssWatchers : EnemyBossManager
     {
         int num = 1;
-        string bossName = "AbyssWatchers";
+        private string name = "AbyssWatchers";
 
         EnemyStats enemyStats;
 
@@ -16,15 +16,12 @@ namespace TOF
             enemyStats = GetComponent<EnemyStats>();
         }
 
-        private void Start()
+        public override void SetBossInfo()
         {
             enemyStats.isBoss = true;
             bossHealthBar.SetBossMaxHealth(enemyStats.maxHealth);
-            bossHealthBar.SetBossName(bossName);
+            bossHealthBar.SetBossName(name);
             _bossNum = num;
         }
     }
 }
-
-
-
