@@ -12,7 +12,8 @@ public class FirstBT : MonoBehaviour
     EnemyManager enemyManager;
     EnemyAnimationManager anim;
 
-    float patternDelay = 0.0f;
+    float curPatternDelay = 0.0f;
+    float curRecoveryRotationDelay = 0.0f;
     int normalAttackCounter = 0;
     int normalMagicCounter = 0;
     int AttackComboCount = 0;
@@ -45,7 +46,9 @@ public class FirstBT : MonoBehaviour
                 .End()
                 .Selector("Combat")
                     .Sequence("Pattern Delay")
-                        .Condition("Delay", () => patternDelay > 0)
+                        .Condition("Delay", () => curPatternDelay > 0)
+                        .Do("Recovery", Recovery)
+                        .Do("RotateWithRootmotion", RotateWithRootmotion)
                     .End()
                     .SelectorRandom("Special")
                         .Do("Special1", () => TaskStatus.Failure)
@@ -116,9 +119,10 @@ public class FirstBT : MonoBehaviour
         Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
         Quaternion look = Quaternion.LookRotation(rel);
 
-        switch(AttackComboCount)
+        switch (AttackComboCount)
         {
             case 0:
+                anim.anim.SetFloat("Vertical", 0);
                 anim.PlayTargetAnimation("Onehanded Light 1", true);
                 transform.rotation = look;
                 AttackComboCount++;
@@ -126,9 +130,10 @@ public class FirstBT : MonoBehaviour
             case 1:
                 anim.PlayTargetAnimation("Onehanded Light 2", true);
                 AttackComboCount++;
-                break;
+                return TaskStatus.Continue;
             default:
                 AttackComboCount = 0;
+                curPatternDelay += 5.0f;
                 return TaskStatus.Success;
         }
         
@@ -142,25 +147,6 @@ public class FirstBT : MonoBehaviour
         Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
 
         if (rel.magnitude < enemyManager.maximumAggroRadius) return TaskStatus.Failure;
-
-        //if (rel.magnitude < enemyManager.maximumAggroRadius)
-        //{
-        //    if (Vector3.Angle(rel, transform.forward) < 45.0f)
-        //    {
-        //        anim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-        //        anim.PlayTargetAnimation("Onehanded Light 1", true);
-        //        return TaskStatus.Success;
-        //    }
-        //}
-
-        //if(rel.magnitude > enemyManager.detectionRadius * 1.3f)
-        //{
-        //    anim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-        //    anim.PlayTargetAnimation("Sleep", false);
-        //    enemyManager.currentTarget = null;
-        //    enemyManager.navMeshAgent.enabled = false;
-        //    return TaskStatus.Success;
-        //}
 
         anim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
 
@@ -190,6 +176,49 @@ public class FirstBT : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, look, 100 * Time.deltaTime);
         }
 
+        return TaskStatus.Success;
+    }
+
+    private TaskStatus Recovery()
+    {
+        if(curPatternDelay < 0)
+        {
+            curPatternDelay = 0.0f;
+            curRecoveryRotationDelay = 0.0f;
+            return TaskStatus.Failure;
+        }
+
+        curPatternDelay -= Time.deltaTime;
+
+        return TaskStatus.Success;
+    }
+
+    private TaskStatus RotateWithRootmotion()
+    {
+        if (curRecoveryRotationDelay < 0)
+        {
+            curRecoveryRotationDelay = 1.0f;
+            Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+            rel.y = 0;
+            float angle = Vector3.Angle(rel, transform.forward);
+            Vector3 cross = Vector3.Cross(rel, transform.forward);
+            if (cross.y < 0) angle *= -1;
+
+            if (angle > 45 && angle < 135)
+                anim.PlayTargetAnimation("Turn Left", true);
+            else if (angle < -45 && angle > -135)
+                anim.PlayTargetAnimation("Turn Right", true);
+            else if (angle <= -135 || angle >= 135)
+                anim.PlayTargetAnimation("Turn Behind", true);
+        }
+
+        curRecoveryRotationDelay -= Time.deltaTime;
+
+        return TaskStatus.Success;
+    }
+
+    private TaskStatus Magic1()
+    {
         return TaskStatus.Success;
     }
 }
