@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2544231524067326744}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Weapon Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3514062585197404017}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 8571243081187078730}
   - component: {fileID: 6494112049598094212}
   - component: {fileID: 1148044985697240255}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: vAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,4 +175,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292cb5f29bec87c41934ed9398624bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterManager: {fileID: 0}
   currentWeaponDamage: 25

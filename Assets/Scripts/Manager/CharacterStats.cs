@@ -8,7 +8,7 @@ namespace TOF
 
     public class CharacterStats : MonoBehaviour
     {
-        public int healthLevel = 10;
+        public int healthLevel = 100;
         public int maxHealth;
         public int currentHealth;
 
