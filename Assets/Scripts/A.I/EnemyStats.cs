@@ -47,6 +47,38 @@ namespace TOF
             }
         }
 
+        public void TakeDamage(Damage damage)
+        {
+            if (isDead)
+                return;
+
+            currentHealth = currentHealth - damage.value;
+
+            Vector3 rel = damage.hitPosition - transform.position;
+            rel.y = 0;
+            float angle = Vector3.Angle(rel, transform.forward);
+            Vector3 cross = Vector3.Cross(rel, transform.forward);
+            if (cross.y < 0) angle *= -1;
+
+            //
+            // hit reaction switch
+            //
+
+            if (!isBoss)
+            {
+                enemyHealthBar.SetHealth(currentHealth);
+            }
+            else if (isBoss && enemyBossManager != null)
+            {
+                enemyBossManager.UpdateBossHealthBar(currentHealth);
+            }
+
+            if (currentHealth <= 0)
+            {
+                HandleDeath();
+            }
+        }
+
         public void TakeDamage(int damage, string damageAnimation = "Damage_01")
         {
             if (isDead)

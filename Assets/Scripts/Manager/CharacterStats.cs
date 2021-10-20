@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace TOF
 {
+    public enum Direction4Way { FORWARD, RIGHT, LEFT, BEHIND }
+
     public class CharacterStats : MonoBehaviour
     {
         public int healthLevel = 10;
@@ -21,5 +23,22 @@ namespace TOF
         public int soulCount = 0;
 
         public bool isDead;
+
+        public void PlaySmallReaction(Direction4Way direction)
+        {
+            switch (direction)
+            {
+                case Direction4Way.FORWARD:
+                    break;
+                case Direction4Way.RIGHT:
+                    break;
+                case Direction4Way.LEFT:
+                    break;
+                case Direction4Way.BEHIND:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

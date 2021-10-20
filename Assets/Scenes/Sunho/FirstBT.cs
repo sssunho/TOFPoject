@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using CleverCrow.Fluid.BTs.Tasks;
 using CleverCrow.Fluid.BTs.Trees;
 using TOF;
@@ -7,6 +8,8 @@ public class FirstBT : MonoBehaviour
 {
     [SerializeField]
     private BehaviorTree _tree;
+    public GameObject magicPrefab;
+    public GameObject magicMissilePrefab;
 
     int detectionCounter = 0;
     EnemyManager enemyManager;
@@ -14,9 +17,12 @@ public class FirstBT : MonoBehaviour
 
     float curPatternDelay = 0.0f;
     float curRecoveryRotationDelay = 0.0f;
+    float castTimer = 0.0f;
     int normalAttackCounter = 0;
     int normalMagicCounter = 0;
     int AttackComboCount = 0;
+    List<Projectile> projectiles = new List<Projectile>();
+    MagicMissile magicMissile;
 
     private void OnDrawGizmos()
     {
@@ -63,8 +69,10 @@ public class FirstBT : MonoBehaviour
                                     .Do("Chase", ChaseTarget)
                                     .Do("Attack target", AttackTarget)
                                 .End()
-                                .Do("Normal2", () => TaskStatus.Failure)
-                                .Do("Normal3", () => TaskStatus.Failure)
+                                .SelectorRandom("Magic")
+                                    .Do("Magic1", SpawnProjectiles)
+                                    .Do("Magic2", Magic2)
+                                .End()
                             .End()
                             .SelectorRandom("Phase2")
                                 .Do("Normal1", () => TaskStatus.Failure)
@@ -133,7 +141,7 @@ public class FirstBT : MonoBehaviour
                 return TaskStatus.Continue;
             default:
                 AttackComboCount = 0;
-                curPatternDelay += 5.0f;
+                curPatternDelay += 2.0f;
                 return TaskStatus.Success;
         }
     }
@@ -163,7 +171,7 @@ public class FirstBT : MonoBehaviour
         enemyManager.controller.Move(targetVelocity * Time.deltaTime);
         enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
 
-        return TaskStatus.Success;
+        return TaskStatus.Continue;
     }
 
     private TaskStatus RotateToTarget()
@@ -215,8 +223,80 @@ public class FirstBT : MonoBehaviour
         return TaskStatus.Success;
     }
 
-    private TaskStatus Magic1()
+    private TaskStatus Magic2()
     {
+        if(magicMissile == null)
+        {
+            var inst = Instantiate(magicMissilePrefab);
+            anim.anim.ResetTrigger("endOfCasting");
+            castTimer = 0;
+            inst.transform.position = transform.position + 3.5f * Vector3.up;
+            inst.transform.rotation = transform.rotation;
+            magicMissile = inst.GetComponent<MagicMissile>();
+            magicMissile.target = enemyManager.currentTarget.gameObject;
+            magicMissile.owner = gameObject;
+            anim.PlayTargetAnimation("Cast Start", true);
+            return TaskStatus.Continue;
+        }
+        else
+        {
+            castTimer += Time.deltaTime;
+            if (castTimer > 4.0f)
+            {
+                magicMissile.Shoot();
+                curPatternDelay += 2.0f;
+                anim.anim.SetTrigger("endOfCasting");
+                return TaskStatus.Success;
+            }
+            else
+                return TaskStatus.Continue;
+        }
+    }
+
+    private TaskStatus SpawnProjectiles()
+    {
+        if (projectiles.Count > 0) return TaskStatus.Failure;
+
+        float projAngle = 60;
+
+        for (int i = 0; i < 5; i++)
+        {
+            var inst = Instantiate(magicPrefab);
+            inst.transform.position = transform.position;
+            inst.transform.Rotate(transform.forward, (projAngle / 2.0f) - ((projAngle / 4.0f) * (float)i));
+            inst.transform.parent = gameObject.transform;
+            var proj = inst.GetComponent<Projectile>();
+            proj.owner = gameObject;
+            proj.velocity = new Vector3(0, 8, 0);
+            proj.running = true;
+            projectiles.Add(proj);
+        }
+
+        Invoke("StopProjectiles", 0.3f);
+        Invoke("ShootProjectiles", 2.0f);
+
+        curPatternDelay = 3.0f;
+
         return TaskStatus.Success;
+    }
+
+    private void StopProjectiles()
+    {
+        foreach(Projectile proj in projectiles)
+            proj.running = false;
+    }
+
+    private void ShootProjectiles()
+    {
+        foreach (Projectile proj in projectiles)
+        {
+            if(enemyManager.currentTarget)
+                proj.transform.rotation = Quaternion.LookRotation(enemyManager.currentTarget.transform.position - proj.transform.position + 0.5f * Vector3.up);
+            proj.running = true;
+            proj.velocity = 20.0f * Vector3.forward;
+            proj.EnableDamageCollider();
+            Destroy(proj.gameObject, 3.0f);
+        }
+        projectiles.Clear();
     }
 }
