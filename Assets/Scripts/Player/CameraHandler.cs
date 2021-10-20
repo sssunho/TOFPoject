@@ -8,6 +8,7 @@ namespace TOF
     {
         InputHandler inputHandler;
         PlayerManager playerManager;
+        Camera camera;
         public Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
@@ -29,6 +30,12 @@ namespace TOF
         private float pivotAngle;
         public float minimumPivot = -35;
         public float maximumPivot = 35;
+
+        private bool normal = true;
+        private float zoom = 1f;
+        private float smooth = 0.3f;
+        private float minSize = 25f;
+        private float maxSize = 40f;
 
         public float cameraSphereRadius = 0.2f;
         public float cameraCollisionOffset = 0.2f;
@@ -54,12 +61,25 @@ namespace TOF
             FindTarget();
             //targetTransform = FindObjectOfType<PlayerManager>().transform;
             //inputHandler = FindObjectOfType<InputHandler>();
-            //playerManager = FindObjectOfType<PlayerManager>();
+            playerManager = FindObjectOfType<PlayerManager>();
+            camera = GetComponentInChildren<Camera>();
         }
 
         private void Start()
         {
             environmentLayer = LayerMask.NameToLayer("Environment");
+        }
+
+        private void FixedUpdate()
+        {
+            if (normal)
+            {
+            }
+            else 
+            {
+                camera.fieldOfView -= smooth;
+                camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, minSize, maxSize);
+            }
         }
 
         public void FollowTarget(float delta)
@@ -73,7 +93,10 @@ namespace TOF
 
         public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
         {
-            if (inputHandler.lockOnFlag == false && currentLockOnTarget == null)
+            if (playerManager.isPassing)
+            {
+            }
+            else if (inputHandler.lockOnFlag == false && currentLockOnTarget == null)
             {
                 lookAngle += (mouseXInput * lookSpeed) / delta;
                 pivotAngle -= (mouseYInput * pivotSpeed) / delta;
@@ -217,6 +240,19 @@ namespace TOF
             {
                 cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.localPosition, newUnLockedPositon, ref velocity, Time.deltaTime);
             }
+        }
+
+        public void PassingShot()
+        {
+            playerManager.isPassing = true;
+            normal = false;
+        }
+
+        public void NormalShot()
+        {
+            playerManager.isPassing = false;
+            camera.fieldOfView = 40;
+            normal = true;
         }
 
         public void FindTarget()

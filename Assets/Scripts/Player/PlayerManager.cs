@@ -30,6 +30,7 @@ namespace TOF
         public bool isInvulnerable;
         public bool isCharging;
         public bool isBonFire;
+        public bool isPassing;
 
         private void Awake()
         {

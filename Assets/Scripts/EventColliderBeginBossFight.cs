@@ -7,11 +7,14 @@ namespace  TOF
     public class EventColliderBeginBossFight : MonoBehaviour
     {
         WorldEventManager worldEventManager;
+        CameraHandler cameraHandler;
         public EnemyBossManager enemyBossManager;
+        public FogWall fogWall;
 
         private void Awake()
         {
             worldEventManager = FindObjectOfType<WorldEventManager>();
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -21,6 +24,8 @@ namespace  TOF
                 worldEventManager.bossNum = enemyBossManager._bossNum;
                 enemyBossManager.SetBossInfo();
                 worldEventManager.ActivateBossFight();
+                cameraHandler.NormalShot();
+                fogWall.FogPassed();
             }
         }
     }

@@ -6,6 +6,9 @@ namespace TOF
 {
     public class FogWall : MonoBehaviour
     {
+        public BoxCollider entrance;
+        public BoxCollider wall;
+
         private void Awake()
         {
             gameObject.SetActive(false);
@@ -19,6 +22,18 @@ namespace TOF
         public void DeactivateFogWall()
         {
             gameObject.SetActive(false);
+        }
+
+        public void PassFog()
+        {
+            entrance.gameObject.SetActive(false);
+            wall.gameObject.SetActive(false);
+        }
+
+        public void FogPassed()
+        {
+            entrance.gameObject.SetActive(true);
+            wall.gameObject.SetActive(true);
         }
     }
 }

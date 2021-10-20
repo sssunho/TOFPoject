@@ -7,19 +7,20 @@ namespace TOF
     public class PassFogWall : Interactable
     {
         FogWall fogWall;
+        CameraHandler cameraHandler;
 
         private void Awake()
         {
             fogWall = GetComponentInParent<FogWall>();
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         public override void Interact(PlayerManager playerManager)
         {
-
             base.Interact(playerManager);
             playerManager.PassThroughFogWallInteraction(transform);
-            fogWall.DeactivateFogWall();
+            cameraHandler.PassingShot();
+            fogWall.PassFog();
         }
     }
 }
-
