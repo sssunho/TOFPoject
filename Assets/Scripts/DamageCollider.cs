@@ -37,6 +37,9 @@ namespace TOF
             {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
                 CharacterManager playerCharacterManager = collision.GetComponent<CharacterManager>();
+
+                if (characterManager == playerCharacterManager) return;
+
                 CharacterEffectManager playerEffectManager = collision.GetComponentInChildren<CharacterEffectManager>();
                 BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
@@ -67,6 +70,9 @@ namespace TOF
             {
                 EnemyStats enemyStats = collision.GetComponentInParent<EnemyStats>();
                 CharacterManager enemyCharacterManager = collision.GetComponentInParent<CharacterManager>();
+
+                if (characterManager == enemyCharacterManager) return;
+
                 CharacterEffectManager enemyEffectManager = enemyStats.GetComponentInChildren<CharacterEffectManager>();
                 BlockingCollider shield = collision.transform.GetComponent<BlockingCollider>();
 

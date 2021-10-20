@@ -224,5 +224,7 @@ public class CFX_SpawnSystem : MonoBehaviour
 		}
 		
 		allObjectsLoaded = true;
+
+		GetNextObject(this.gameObject);
 	}
 }

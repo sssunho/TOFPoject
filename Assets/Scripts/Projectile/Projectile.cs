@@ -7,18 +7,27 @@ namespace TOF
     public class Projectile : DamageCollider
     {
         public GameObject destroyFx;
+        public GameObject owner;
 
         protected override void Awake()
         {
-            base.Awake();
+            damageCollider = GetComponent<Collider>();
+            damageCollider.gameObject.SetActive(true);
+            damageCollider.isTrigger = true;
             damageCollider.enabled = true;
+        }
+
+        private void Update()
+        {
+            //transform.Translate(Vector3.forward * Time.deltaTime);
         }
 
         protected override void OnTriggerEnter(Collider collision)
         {
             base.OnTriggerEnter(collision);
 
-            Destroy(gameObject, 0.5f);
+            damageCollider.enabled = false;
+            Destroy(gameObject);
             if(destroyFx)
             {
                 var inst = Instantiate(gameObject);
