@@ -136,8 +136,6 @@ public class FirstBT : MonoBehaviour
                 curPatternDelay += 5.0f;
                 return TaskStatus.Success;
         }
-        
-        return TaskStatus.Success;
     }
 
     private TaskStatus ChaseTarget()
