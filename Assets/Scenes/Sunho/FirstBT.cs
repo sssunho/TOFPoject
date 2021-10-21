@@ -22,7 +22,7 @@ public partial class FirstBT : MonoBehaviour
     float strafingTimer = 0.0f;
 
     [Header("Special Cool Time")]
-    public float sp_CoolTime1 = 5;
+    public float sp_CoolTime1 = 15;
     public float sp_CurTime1 = 0;
     public float sp_CoolTime2 = 7;
     public float sp_CurTime2 = 0;
@@ -81,10 +81,10 @@ public partial class FirstBT : MonoBehaviour
                                 .Do("Chase", ChaseTarget)
                                 .Do("Attack target", AttackTarget)
                             .End()
-                            .SelectorRandom("Magic")
-                                .Do("Magic1", SpawnProjectiles)
-                                .Do("Magic2", Magic2)
-                            .End()
+                            //.SelectorRandom("Magic")
+                            //    .Do("Magic1", SpawnProjectiles)
+                            //    .Do("Magic2", Magic2)
+                            //.End()
                         .End()
                             .SelectorRandom("Phase2")
                                 .Do("Normal1", () => TaskStatus.Failure)
@@ -369,20 +369,42 @@ public partial class FirstBT : MonoBehaviour
     }
 
     #region Special Attack
-    private bool Special1_Check()
-    {
-        return true;
-    }
 
     private TaskStatus Special1_Down()
     {
-        if (sp_CurTime1 < sp_CoolTime1) return TaskStatus.Failure;
         Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
-        Quaternion look = Quaternion.LookRotation(rel);
-        anim.anim.SetFloat("Vertical", 0);
-        anim.PlayTargetAnimation("Special Down", true);
-        sp_CurTime1 = 0;
-        curPatternDelay = 3.0f;
+        // 일정거리 안이거나 스킬 쿨타임인 경우 fail
+        if (rel.magnitude < enemyManager.maximumAggroRadius * 1.5 || sp_CurTime1 < sp_CoolTime1)
+            return TaskStatus.Failure;
+
+        if (rel.magnitude < enemyManager.maximumAggroRadius * 2.5 && sp_CurTime1 >= sp_CoolTime1)
+        {
+            rel = enemyManager.currentTarget.transform.position - transform.position;
+            Quaternion look = Quaternion.LookRotation(rel);
+            anim.anim.SetFloat("Vertical", 0);
+            anim.PlayTargetAnimation("Special Down", true);
+            sp_CurTime1 = 0;
+            curPatternDelay = 3.0f;
+            return TaskStatus.Failure;
+        }
+
+        anim.anim.SetFloat("Vertical", 2, 0.1f, Time.deltaTime);
+
+        enemyManager.navMeshAgent.enabled = true;
+        enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
+
+        enemyManager.navMeshAgent.updateRotation = false;
+        enemyManager.navMeshAgent.updatePosition = false;
+
+        Vector3 targetVelocity = enemyManager.navMeshAgent.desiredVelocity;
+        Vector3 lookPos = enemyManager.currentTarget.transform.position - transform.position;
+        lookPos.y = 0;
+        Quaternion targetRot = Quaternion.LookRotation(lookPos);
+        enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 10.0f);
+
+        enemyManager.controller.Move(targetVelocity * Time.deltaTime);
+        enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+
         return TaskStatus.Success;
     }
 
