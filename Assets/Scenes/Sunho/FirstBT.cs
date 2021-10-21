@@ -4,7 +4,7 @@ using CleverCrow.Fluid.BTs.Tasks;
 using CleverCrow.Fluid.BTs.Trees;
 using TOF;
 
-public class FirstBT : MonoBehaviour
+public partial class FirstBT : MonoBehaviour
 {
     [SerializeField]
     private BehaviorTree _tree;
@@ -59,22 +59,18 @@ public class FirstBT : MonoBehaviour
                         .Do("RotateWithRootmotion", RotateWithRootmotion)
                     .End()
                     .Do("Strafing", Strafing)
-                    .Sequence("HP Condition")
-                        .Condition("Special Attack Condition", () => enemyStats.currentHealth <= enemyStats.maxHealth / 2)
+                    .Selector("Special")
                         .Selector("Special1")
-                            .Condition("Special Attack 1 Condition", () => sp_CurTime1 >= sp_CoolTime1)
-                            .Do("Special1", () => TaskStatus.Failure)
+                            .Do("Special1", Special1_Down)
                         .End()
                         .Selector("Special2")
-                            .Condition("Special Attack 2 Condition", () => sp_CurTime2 >= sp_CoolTime2)
                             .Do("Special2", () => TaskStatus.Failure)
                         .End()
                         .Selector("Special3")
-                            .Condition("Special Attack 3 Condition", () => sp_CurTime3 >= sp_CoolTime3)
                             .Do("Special3", () => TaskStatus.Failure)
                         .End()
                         .Selector("Special4")
-                            .Condition("Special Attack 4 Condition", () => sp_CurTime4 >= sp_CoolTime4)
+                            //.Condition("Special Attack 4 Condition", () => sp_CurTime4 >= sp_CoolTime4 && enemyStats.currentHealth <= enemyStats.maxHealth / 2)
                             .Do("Special4", () => TaskStatus.Failure)
                         .End()
                     .End()
@@ -151,10 +147,7 @@ public class FirstBT : MonoBehaviour
 
         if (rel.magnitude < enemyManager.maximumAggroRadius) return false;
 
-        if(sp_CoolTime1 <= sp_CurTime1)
-            anim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
-        else
-            anim.anim.SetFloat("Vertical", 2, 0.1f, Time.deltaTime);
+        anim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
 
         enemyManager.navMeshAgent.enabled = true;
         enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
@@ -376,9 +369,20 @@ public class FirstBT : MonoBehaviour
     }
 
     #region Special Attack
+    private bool Special1_Check()
+    {
+        return true;
+    }
+
     private TaskStatus Special1_Down()
     {
-
+        if (sp_CurTime1 < sp_CoolTime1) return TaskStatus.Failure;
+        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+        Quaternion look = Quaternion.LookRotation(rel);
+        anim.anim.SetFloat("Vertical", 0);
+        anim.PlayTargetAnimation("Special Down", true);
+        sp_CurTime1 = 0;
+        curPatternDelay = 3.0f;
         return TaskStatus.Success;
     }
 
