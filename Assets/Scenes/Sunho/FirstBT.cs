@@ -59,6 +59,10 @@ public partial class FirstBT : MonoBehaviour
                         .Do("RotateWithRootmotion", RotateWithRootmotion)
                     .End()
                     .Do("Strafing", Strafing)
+                    .Sequence("test")
+                        .Do("trigger", TriggerHammerWind)
+                        .Do("channeling", ChannelingHammerWind)
+                    .End()
                     .Selector("Special")
                         .Selector("Special1")
                             .Do("Special1", Special1_Down)
@@ -115,6 +119,9 @@ public partial class FirstBT : MonoBehaviour
         sp_CurTime2 += Time.deltaTime;
         sp_CurTime3 += Time.deltaTime;
         sp_CurTime4 += Time.deltaTime;
+
+        hammerWindCooltime -= Time.deltaTime;
+        if (hammerWindCooltime < 0) hammerWindCooltime = 0;
     }
 
     private bool AlwaysTrue()
