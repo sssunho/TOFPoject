@@ -18,6 +18,7 @@ public class FirstBT : MonoBehaviour
     float curPatternDelay = 0.0f;
     float curRecoveryRotationDelay = 0.0f;
     float castTimer = 0.0f;
+    float strafingTimer = 0.0f;
     int normalAttackCounter = 0;
     int normalMagicCounter = 0;
     int AttackComboCount = 0;
