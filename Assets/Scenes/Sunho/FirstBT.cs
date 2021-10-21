@@ -13,12 +13,24 @@ public class FirstBT : MonoBehaviour
 
     int detectionCounter = 0;
     EnemyManager enemyManager;
+    EnemyStats enemyStats;
     EnemyAnimationManager anim;
 
     float curPatternDelay = 0.0f;
     float curRecoveryRotationDelay = 0.0f;
     float castTimer = 0.0f;
     float strafingTimer = 0.0f;
+
+    [Header("Special Cool Time")]
+    public float sp_CoolTime1 = 5;
+    public float sp_CurTime1 = 0;
+    public float sp_CoolTime2 = 7;
+    public float sp_CurTime2 = 0;
+    public float sp_CoolTime3 = 10;
+    public float sp_CurTime3 = 0;
+    public float sp_CoolTime4 = 15;
+    public float sp_CurTime4 = 0;
+
     int normalAttackCounter = 0;
     int normalMagicCounter = 0;
     int AttackComboCount = 0;
@@ -43,6 +55,7 @@ public class FirstBT : MonoBehaviour
     private void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
+        enemyStats = GetComponent<EnemyStats>();
         anim = GetComponentInChildren<EnemyAnimationManager>();
 
         _tree = new BehaviorTreeBuilder(gameObject)
@@ -57,24 +70,37 @@ public class FirstBT : MonoBehaviour
                         .Do("Recovery", Recovery)
                         .Do("RotateWithRootmotion", RotateWithRootmotion)
                     .End()
-                    .SelectorRandom("Special")
-                        .Do("Special1", () => TaskStatus.Failure)
-                        .Do("Special2", () => TaskStatus.Failure)
-                        .Do("Special3", () => TaskStatus.Failure)
-                        .Do("Special4", () => TaskStatus.Failure)
+                    .Sequence("HP Condition")
+                        .Condition("Special Attack Condition", () => enemyStats.currentHealth <= enemyStats.maxHealth / 2)
+                        .Selector("Special1")
+                            .Condition("Special Attack 1 Condition", () => sp_CurTime1 >= sp_CoolTime1)
+                            .Do("Special1", () => TaskStatus.Failure)
+                        .End()
+                        .Selector("Special2")
+                            .Condition("Special Attack 2 Condition", () => sp_CurTime2 >= sp_CoolTime2)
+                            .Do("Special2", () => TaskStatus.Failure)
+                        .End()
+                        .Selector("Special3")
+                            .Condition("Special Attack 3 Condition", () => sp_CurTime3 >= sp_CoolTime3)
+                            .Do("Special3", () => TaskStatus.Failure)
+                        .End()
+                        .Selector("Special4")
+                            .Condition("Special Attack 4 Condition", () => sp_CurTime4 >= sp_CoolTime4)
+                            .Do("Special4", () => TaskStatus.Failure)
+                        .End()
                     .End()
                     .SelectorRandom("Normal")
                         .Selector("Phase")
                             .SelectorRandom("Phase1")
                                 .Selector("Normal Attack")
-                                    .Do("Chase", ChaseTarget)
-                                    .Do("Attack target", AttackTarget)
-                                .End()
-                                .SelectorRandom("Magic")
-                                    .Do("Magic1", SpawnProjectiles)
-                                    .Do("Magic2", Magic2)
-                                .End()
+                                .Do("Chase", ChaseTarget)
+                                .Do("Attack target", AttackTarget)
                             .End()
+                            .SelectorRandom("Magic")
+                                .Do("Magic1", SpawnProjectiles)
+                                .Do("Magic2", Magic2)
+                            .End()
+                        .End()
                             .SelectorRandom("Phase2")
                                 .Do("Normal1", () => TaskStatus.Failure)
                                 .Do("Normal2", () => TaskStatus.Failure)
@@ -95,6 +121,15 @@ public class FirstBT : MonoBehaviour
     {
         // Update our tree every frame
         _tree.Tick();
+        CoolTimer();
+    }
+    
+    private void CoolTimer()
+    {
+        sp_CurTime1 += Time.deltaTime;
+        sp_CurTime2 += Time.deltaTime;
+        sp_CurTime3 += Time.deltaTime;
+        sp_CurTime4 += Time.deltaTime;
     }
 
     private bool AlwaysTrue()
@@ -117,6 +152,35 @@ public class FirstBT : MonoBehaviour
                 return false;
             }
         }
+
+        return true;
+    }
+
+    private bool ChasingPlayer()
+    {
+        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+
+        if (rel.magnitude < enemyManager.maximumAggroRadius) return false;
+
+        if(sp_CoolTime1 <= sp_CurTime1)
+            anim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        else
+            anim.anim.SetFloat("Vertical", 2, 0.1f, Time.deltaTime);
+
+        enemyManager.navMeshAgent.enabled = true;
+        enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
+
+        enemyManager.navMeshAgent.updateRotation = false;
+        enemyManager.navMeshAgent.updatePosition = false;
+
+        Vector3 targetVelocity = enemyManager.navMeshAgent.desiredVelocity;
+        Vector3 lookPos = enemyManager.currentTarget.transform.position - transform.position;
+        lookPos.y = 0;
+        Quaternion targetRot = Quaternion.LookRotation(lookPos);
+        enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 10.0f);
+
+        enemyManager.controller.Move(targetVelocity * Time.deltaTime);
+        enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
 
         return true;
     }
@@ -151,26 +215,7 @@ public class FirstBT : MonoBehaviour
     {
         if (enemyManager.isInteracting) return TaskStatus.Continue;
 
-        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
-
-        if (rel.magnitude < enemyManager.maximumAggroRadius) return TaskStatus.Failure;
-
-        anim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
-
-        enemyManager.navMeshAgent.enabled = true;
-        enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-
-        enemyManager.navMeshAgent.updateRotation = false;
-        enemyManager.navMeshAgent.updatePosition = false;
-
-        Vector3 targetVelocity = enemyManager.navMeshAgent.desiredVelocity;
-        Vector3 lookPos = enemyManager.currentTarget.transform.position - transform.position;
-        lookPos.y = 0;
-        Quaternion targetRot = Quaternion.LookRotation(lookPos);
-        enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 10.0f);
-
-        enemyManager.controller.Move(targetVelocity * Time.deltaTime);
-        enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+        if (!ChasingPlayer()) return TaskStatus.Failure;
 
         return TaskStatus.Continue;
     }
@@ -300,4 +345,28 @@ public class FirstBT : MonoBehaviour
         }
         projectiles.Clear();
     }
+
+    #region Special Attack
+    private TaskStatus Special1_Down()
+    {
+
+        return TaskStatus.Success;
+    }
+
+    private TaskStatus Special2_Debuff()
+    {
+        return TaskStatus.Success;
+    }
+
+    private TaskStatus Special3_Stun()
+    {
+        return TaskStatus.Success;
+    }
+
+    private TaskStatus Special4_Anger()
+    {
+        return TaskStatus.Success;
+    }
+
+    #endregion
 }
