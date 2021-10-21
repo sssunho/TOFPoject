@@ -26,7 +26,9 @@ namespace TOF
 
         [Header("Weapon Inventory")]
         public GameObject weaponSlotPrefab;
-        public Transform inventorySlotParent;
+        public GameObject itemSlotPrefab;
+        public Transform weaponInventorySlotParent;
+        public Transform consumableInventorySlotParent;
         WeaponSlot[] weaponSlots;
 
         private void Awake()
@@ -36,7 +38,7 @@ namespace TOF
 
         private void Start()
         {
-            weaponSlots = inventorySlotParent.GetComponentsInChildren<WeaponSlot>();
+            weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
             // #. 2021.10.15 DeadZone 체크하면서 에러 발견...
             //equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
@@ -51,8 +53,8 @@ namespace TOF
                 {
                     if (weaponSlots.Length < playerInventory.weaponsInventory.Count)
                     {
-                        Instantiate(weaponSlotPrefab, inventorySlotParent);
-                        weaponSlots = inventorySlotParent.GetComponentsInChildren<WeaponSlot>();
+                        Instantiate(weaponSlotPrefab, weaponInventorySlotParent);
+                        weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
                     }
                     weaponSlots[i].AddItem(playerInventory.weaponsInventory[i]);
                 }

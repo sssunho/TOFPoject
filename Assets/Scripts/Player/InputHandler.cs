@@ -233,6 +233,7 @@ namespace TOF
                     uiManager.CloseAllInventoryWindows();
                     uiManager.hudWindow.SetActive(true);
                     uiManager.quickSlot.SetActive(true);
+                    uiManager.ResetAllSelectedSlots();
                 }
             }
         }

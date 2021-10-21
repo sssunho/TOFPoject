@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be40fd98dd1c57d48b436a1b1d172a7b, type: 3}
   m_Name: DragonBlade
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 8f21651da0a8cf14cada4700e407e474, type: 3}
+  itemIcon: {fileID: 21300000, guid: a2aa72e2f46ea7b43933b258a535ec68, type: 3}
   itemName: DragonBlade
   modelPrefab: {fileID: 5988228833169867269, guid: 9e0c9085cee5d174d888d99d8f57c834, type: 3}
   inUnarmed: 0

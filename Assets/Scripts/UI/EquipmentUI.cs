@@ -13,12 +13,7 @@ namespace TOF
         public bool leftHandSlot02Selected;
         public bool leftHandSlot03Selected;
 
-        HandleEquipmentSlot[] handleEquipmentSlots;
-
-        private void Start()
-        {
-            handleEquipmentSlots = GetComponentsInChildren<HandleEquipmentSlot>();
-        }
+        public HandleEquipmentSlot[] handleEquipmentSlots;
 
         public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
         {

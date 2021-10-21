@@ -7,6 +7,7 @@ namespace TOF
     public class PlayerInventory : MonoBehaviour
     {
         WeaponSlotManager weaponSlotManager;
+        ConsumableSlotManager consumableSlotManager;
 
         public SpellItem currentSpell;
         public WeaponItem rightWeapon;
@@ -25,6 +26,7 @@ namespace TOF
         private void Awake()
         {
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            consumableSlotManager = GetComponentInChildren<ConsumableSlotManager>();
         }
 
         private void Start()
