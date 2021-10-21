@@ -121,7 +121,6 @@ namespace TOF
 
                 cameraPivotTransform.rotation = look;
                 cameraPivotTransform.RotateAround(cameraPivotTransform.position, right, -20.0f);
-                Debug.DrawRay(cameraPivotTransform.position, direction * 10.0f, Color.red);
             }
         }
 
@@ -172,7 +171,6 @@ namespace TOF
                     {
                         if(Physics.Linecast(playerManager.lockOnTransform.position,character.lockOnTransform.position, out hit))
                         {
-                            Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position);
 
                             if(hit.transform.gameObject.layer == environmentLayer)
                             {

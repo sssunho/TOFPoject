@@ -19,26 +19,13 @@ public class FirstBT : MonoBehaviour
     float curRecoveryRotationDelay = 0.0f;
     float castTimer = 0.0f;
     float strafingTimer = 0.0f;
+    float switchStrafingDirectionDelay = 0.0f;
     int normalAttackCounter = 0;
     int normalMagicCounter = 0;
     int AttackComboCount = 0;
+    bool isStrafingRight = true;
     List<Projectile> projectiles = new List<Projectile>();
     MagicMissile magicMissile;
-
-    private void OnDrawGizmos()
-    {
-        if (enemyManager)
-        {
-            Gizmos.color = new Color(1, 0, 0, 0.5f);
-            Gizmos.DrawSphere(transform.position, enemyManager.detectionRadius);
-            if(enemyManager.navMeshAgent.enabled)
-            {
-                var corners = enemyManager.navMeshAgent.path.corners;
-                foreach (var corner in corners)
-                    Gizmos.DrawSphere(corner, 0.05f);
-            }
-        }
-    }
 
     private void Awake()
     {
@@ -57,6 +44,7 @@ public class FirstBT : MonoBehaviour
                         .Do("Recovery", Recovery)
                         .Do("RotateWithRootmotion", RotateWithRootmotion)
                     .End()
+                    .Do("Strafing", Strafing)
                     .SelectorRandom("Special")
                         .Do("Special1", () => TaskStatus.Failure)
                         .Do("Special2", () => TaskStatus.Failure)
@@ -200,6 +188,46 @@ public class FirstBT : MonoBehaviour
         return TaskStatus.Success;
     }
 
+    private TaskStatus Strafing()
+    {
+        if (strafingTimer <= 0)
+        {
+            anim.anim.SetFloat("isStrafing", 0);
+            strafingTimer = 0;
+            return TaskStatus.Failure;
+        }
+        strafingTimer -= Time.deltaTime;
+        anim.anim.SetFloat("isStrafing", 1);
+
+        if (enemyManager.isInteracting) return TaskStatus.Continue;
+
+        float strafingSpeed = 1.0f;
+        float strafingRotSpeed = 10.0f;
+        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+        rel.y = 0;
+        transform.rotation = Quaternion.Slerp(transform.rotation,
+            Quaternion.LookRotation(rel), strafingRotSpeed * Time.deltaTime);
+        
+        if (switchStrafingDirectionDelay <= 0)
+        {
+            switchStrafingDirectionDelay = 3.0f;
+            if (Random.Range(0, 2) == 0) isStrafingRight = !isStrafingRight;
+
+            if (isStrafingRight) anim.anim.SetFloat("Horizontal", 0.4f);
+            else anim.anim.SetFloat("Horizontal", -0.4f);
+
+        }
+
+        switchStrafingDirectionDelay -= Time.deltaTime;
+
+        Vector3 moveDirection = transform.right * (isStrafingRight ? 1 : -1);
+        anim.anim.SetFloat("Vertical", 0);
+        enemyManager.controller.Move(strafingSpeed * moveDirection * Time.deltaTime);
+        enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+
+        return TaskStatus.Continue;
+    }
+
     private TaskStatus RotateWithRootmotion()
     {
         if (curRecoveryRotationDelay < 0)
@@ -245,7 +273,8 @@ public class FirstBT : MonoBehaviour
             if (castTimer > 4.0f)
             {
                 magicMissile.Shoot();
-                curPatternDelay += 2.0f;
+                curPatternDelay = 1.0f;
+                strafingTimer = 3.0f;
                 anim.anim.SetTrigger("endOfCasting");
                 return TaskStatus.Success;
             }
@@ -276,7 +305,7 @@ public class FirstBT : MonoBehaviour
         Invoke("StopProjectiles", 0.3f);
         Invoke("ShootProjectiles", 2.0f);
 
-        curPatternDelay = 3.0f;
+        strafingTimer = 3.0f;
 
         return TaskStatus.Success;
     }
