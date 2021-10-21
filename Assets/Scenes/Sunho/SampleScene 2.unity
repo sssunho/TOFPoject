@@ -577,6 +577,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicPrefab: {fileID: 0}
   magicMissilePrefab: {fileID: 0}
+  sp_CoolTime1: 5
+  sp_CurTime1: 0
+  sp_CoolTime2: 7
+  sp_CurTime2: 0
+  sp_CoolTime3: 10
+  sp_CurTime3: 0
+  sp_CoolTime4: 15
+  sp_CurTime4: 0
 --- !u!114 &545627062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3248,6 +3256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Holder
       objectReference: {fileID: 0}
+    - target: {fileID: 2843558290693091025, guid: 64a589a33da366047913b3420a026cac, type: 3}
+      propertyPath: lockedPivotPosition
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2843558290693091026, guid: 64a589a33da366047913b3420a026cac, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3394,6 +3406,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicPrefab: {fileID: 407775414338619919, guid: 18c301cdb24a98041833f973a4de87b4, type: 3}
   magicMissilePrefab: {fileID: 407775414338619919, guid: cc36a06f99450f5429e99c124c3171b0, type: 3}
+  sp_CoolTime1: 5
+  sp_CurTime1: 0
+  sp_CoolTime2: 7
+  sp_CurTime2: 0
+  sp_CoolTime3: 10
+  sp_CurTime3: 0
+  sp_CoolTime4: 15
+  sp_CurTime4: 0
 --- !u!114 &2862906455500870791
 MonoBehaviour:
   m_ObjectHideFlags: 0
