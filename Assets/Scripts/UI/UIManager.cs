@@ -12,8 +12,9 @@ namespace TOF
         [Header("UI Windows")]
         public GameObject selectWindow;
         public GameObject hudWindow;
-        public GameObject weaponInventoryWindow;
+        public GameObject inventoryWindow;
         public GameObject equipmentWindow;
+        public GameObject quickSlot;
 
         [Header("Equipment Window Slot Selected")]
         public bool rightHandSlot01Selected;
@@ -25,7 +26,7 @@ namespace TOF
 
         [Header("Weapon Inventory")]
         public GameObject weaponSlotPrefab;
-        public Transform weaponInventorySlotParent;
+        public Transform inventorySlotParent;
         WeaponSlot[] weaponSlots;
 
         private void Awake()
@@ -35,7 +36,7 @@ namespace TOF
 
         private void Start()
         {
-            weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
+            weaponSlots = inventorySlotParent.GetComponentsInChildren<WeaponSlot>();
             // #. 2021.10.15 DeadZone 체크하면서 에러 발견...
             //equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
@@ -50,8 +51,8 @@ namespace TOF
                 {
                     if (weaponSlots.Length < playerInventory.weaponsInventory.Count)
                     {
-                        Instantiate(weaponSlotPrefab, weaponInventorySlotParent);
-                        weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
+                        Instantiate(weaponSlotPrefab, inventorySlotParent);
+                        weaponSlots = inventorySlotParent.GetComponentsInChildren<WeaponSlot>();
                     }
                     weaponSlots[i].AddItem(playerInventory.weaponsInventory[i]);
                 }
@@ -75,7 +76,7 @@ namespace TOF
 
         public void CloseAllInventoryWindows()
         {
-            weaponInventoryWindow.SetActive(false);
+            inventoryWindow.SetActive(false);
             equipmentWindow.SetActive(false);
         }
 
