@@ -49,7 +49,8 @@ namespace TOF
 
         private void Start()
         {
-            //enemyRigidBody.isKinematic = false;
+            navMeshAgent.updateRotation = false;
+            navMeshAgent.updatePosition = false;
         }
 
         private void Update()
