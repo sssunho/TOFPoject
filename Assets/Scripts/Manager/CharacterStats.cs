@@ -24,6 +24,8 @@ namespace TOF
 
         public bool isDead;
 
+        int poise;
+
         public void PlaySmallReaction(Direction4Way direction)
         {
             switch (direction)

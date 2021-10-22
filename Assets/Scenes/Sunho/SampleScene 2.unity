@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f00a03c3020dd4b8a415cfe5c2afad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hammerWindFx: {fileID: 0}
   magicPrefab: {fileID: 0}
   magicMissilePrefab: {fileID: 0}
   sp_CoolTime1: 5
@@ -3404,6 +3405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f00a03c3020dd4b8a415cfe5c2afad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hammerWindFx: {fileID: 6635766205037334904, guid: ef49ec060a6c4a34c85a3e7a544d9d9b, type: 3}
   magicPrefab: {fileID: 407775414338619919, guid: 18c301cdb24a98041833f973a4de87b4, type: 3}
   magicMissilePrefab: {fileID: 407775414338619919, guid: cc36a06f99450f5429e99c124c3171b0, type: 3}
   sp_CoolTime1: 5

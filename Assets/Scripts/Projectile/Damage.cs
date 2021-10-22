@@ -10,7 +10,7 @@ namespace TOF
     ///  KNOCKBACK : interacting, knock back character with rootmotion
     ///  DOWN : interacting, knock down character
     /// </summary>
-    public enum HitReaction { SMALL, NORMAL, BIG, KNOCKBACK, DOWN }
+    public enum HitReaction { NONE, SMALL, NORMAL, BIG, KNOCKBACK, DOWN }
 
     public class Damage
     {

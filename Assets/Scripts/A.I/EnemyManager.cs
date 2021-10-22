@@ -55,9 +55,6 @@ namespace TOF
 
         private void Update()
         {
-            //HandleRecoveryTimer();
-            //HandleStateMachine();
-
             isRotatingWithRootMotion = enemyAnimationManager.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
             canDoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
@@ -65,12 +62,6 @@ namespace TOF
             enemyAnimationManager.anim.SetBool("isDead", enemyStats.isDead);
         }
         
-        private void FixedUpdate()
-        {
-            //navMeshAgent.transform.localPosition = Vector3.zero;
-            //navMeshAgent.transform.localRotation = Quaternion.identity;
-        }
-
         private void HandleStateMachine()
         {
             if(currentState != null)
