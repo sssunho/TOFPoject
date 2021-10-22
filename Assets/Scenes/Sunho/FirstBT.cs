@@ -23,13 +23,9 @@ public partial class FirstBT : MonoBehaviour
 
     [Header("Special Cool Time")]
     public float sp_CoolTime1 = 15;
-    public float sp_CurTime1 = 0;
     public float sp_CoolTime2 = 7;
-    public float sp_CurTime2 = 0;
     public float sp_CoolTime3 = 10;
-    public float sp_CurTime3 = 0;
     public float sp_CoolTime4 = 15;
-    public float sp_CurTime4 = 0;
 
     float switchStrafingDirectionDelay = 0.0f;
     int normalAttackCounter = 0;
@@ -61,14 +57,16 @@ public partial class FirstBT : MonoBehaviour
                     .Do("Strafing", Strafing)
                     .Selector("Special")
                         .Selector("Special1")
-                            .Do("Special1", Special1_Down)
+                            .Do("Chasing", () => SP_Chasing(sp_CoolTime1))
+                            .Do("Attack", SP_Attack1)
                         .End()
                         .Sequence("test")
                             .Do("trigger", TriggerHammerWind)
                             .Do("channeling", ChannelingHammerWind)
                         .End()
                         .Selector("Special3")
-                            .Do("Special3", () => TaskStatus.Failure)
+                            .Do("Chasing", () => SP_Chasing(sp_CoolTime3))
+                            .Do("Attack", SP_Attack3)
                         .End()
                         .Selector("Special4")
                             //.Condition("Special Attack 4 Condition", () => sp_CurTime4 >= sp_CoolTime4 && enemyStats.currentHealth <= enemyStats.maxHealth / 2)
@@ -113,10 +111,14 @@ public partial class FirstBT : MonoBehaviour
     
     private void CoolTimer()
     {
-        sp_CurTime1 += Time.deltaTime;
-        sp_CurTime2 += Time.deltaTime;
-        sp_CurTime3 += Time.deltaTime;
-        sp_CurTime4 += Time.deltaTime;
+        sp_CoolTime1 -= Time.deltaTime;
+        if (sp_CoolTime1 < 0) sp_CoolTime1 = 0;
+        sp_CoolTime2 -= Time.deltaTime;
+        if (sp_CoolTime2 < 0) sp_CoolTime2 = 0;
+        sp_CoolTime3 -= Time.deltaTime;
+        if (sp_CoolTime3 < 0) sp_CoolTime3 = 0;
+        sp_CoolTime4 -= Time.deltaTime;
+        if (sp_CoolTime4 < 0) sp_CoolTime4 = 0;
 
         hammerWindCooltime -= Time.deltaTime;
         if (hammerWindCooltime < 0) hammerWindCooltime = 0;
@@ -375,23 +377,12 @@ public partial class FirstBT : MonoBehaviour
 
     #region Special Attack
 
-    private TaskStatus Special1_Down()
+    // #. 1 
+
+    private bool SP_ChasingTarget()
     {
         Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
-        // 일정거리 안이거나 스킬 쿨타임인 경우 fail
-        if (rel.magnitude < enemyManager.maximumAggroRadius * 1.5 || sp_CurTime1 < sp_CoolTime1)
-            return TaskStatus.Failure;
-
-        if (rel.magnitude < enemyManager.maximumAggroRadius * 2.5 && sp_CurTime1 >= sp_CoolTime1)
-        {
-            rel = enemyManager.currentTarget.transform.position - transform.position;
-            Quaternion look = Quaternion.LookRotation(rel);
-            anim.anim.SetFloat("Vertical", 0);
-            anim.PlayTargetAnimation("Special Down", true);
-            sp_CurTime1 = 0;
-            curPatternDelay = 3.0f;
-            return TaskStatus.Failure;
-        }
+        if (rel.magnitude < enemyManager.maximumAggroRadius) return false;
 
         anim.anim.SetFloat("Vertical", 2, 0.1f, Time.deltaTime);
 
@@ -409,7 +400,34 @@ public partial class FirstBT : MonoBehaviour
 
         enemyManager.controller.Move(targetVelocity * Time.deltaTime);
         enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+        return true;
+    }
 
+    private TaskStatus SP_Chasing(float coolTime)
+    {
+        // #. 1 스킬 쿨타임인 경우 fail
+        if (coolTime > 0)
+            return TaskStatus.Failure;
+
+        if (!SP_ChasingTarget()) return TaskStatus.Failure;
+
+        return TaskStatus.Continue;
+    }
+
+    private TaskStatus SP_Attack1()
+    {
+        // #. 1 스킬 쿨타임인 경우 fail
+        if (sp_CoolTime1 > 0)
+            return TaskStatus.Failure;
+
+        // #. 2 스킬 사용 가능하면 내려찍기
+        Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+        Quaternion look = Quaternion.LookRotation(rel);
+        transform.rotation = look;
+        anim.anim.SetFloat("Vertical", 0);
+        anim.PlayTargetAnimation("Special Attack 1", true);
+        sp_CoolTime1 = 15;
+        curPatternDelay = 1.5f;
         return TaskStatus.Success;
     }
 
@@ -418,9 +436,36 @@ public partial class FirstBT : MonoBehaviour
         return TaskStatus.Success;
     }
 
-    private TaskStatus Special3_Stun()
+    private TaskStatus SP_GuardCheck(float coolTime)
     {
-        return TaskStatus.Success;
+        if (coolTime > 0)
+            return TaskStatus.Failure;
+        // #. 변경 부탁
+        var player = FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
+        if(player != null)
+        {
+            if (player.isBlocking)
+                return TaskStatus.Success;
+        }
+        return TaskStatus.Failure;
+    }
+
+    private TaskStatus SP_Attack3()
+    {
+        if (enemyManager.isInteracting) return TaskStatus.Continue;
+
+        if (SP_GuardCheck(sp_CoolTime3) == TaskStatus.Success)
+        {
+            Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+            Quaternion look = Quaternion.LookRotation(rel);
+            transform.rotation = look;
+            anim.anim.SetFloat("Vertical", 0);
+            anim.PlayTargetAnimation("Special Attack 3", true);
+            sp_CoolTime3 = 10;
+            curPatternDelay += 2.0f;
+            return TaskStatus.Success;
+        }
+        return TaskStatus.Failure;
     }
 
     private TaskStatus Special4_Anger()
