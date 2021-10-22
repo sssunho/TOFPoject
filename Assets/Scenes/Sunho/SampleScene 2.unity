@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -579,13 +579,9 @@ MonoBehaviour:
   magicPrefab: {fileID: 0}
   magicMissilePrefab: {fileID: 0}
   sp_CoolTime1: 5
-  sp_CurTime1: 0
   sp_CoolTime2: 7
-  sp_CurTime2: 0
   sp_CoolTime3: 10
-  sp_CurTime3: 0
   sp_CoolTime4: 15
-  sp_CurTime4: 0
 --- !u!114 &545627062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1766,7 +1762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a9b8f39c7407e4d8feaad3c880022c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBossManager: {fileID: 2862906455500870791}
+  enemyBossManager: {fileID: 0}
   fogWall: {fileID: 0}
 --- !u!65 &1120076772
 BoxCollider:
@@ -3088,7 +3084,7 @@ MonoBehaviour:
   bossNum: 0
   bosses:
   - {fileID: 545627062}
-  - {fileID: 2862906455500870791}
+  - {fileID: 0}
   fogWalls:
   - {fileID: 794251025}
   - {fileID: 1972378183}
@@ -3314,6 +3310,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7895021097825405721, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
+      propertyPath: sp_CoolTime1
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -7895021097825405721, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
+      propertyPath: sp_CoolTime3
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 896386690, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: m_SizeDelta.x
       value: 10
@@ -3338,6 +3342,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2862906454743645169, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
+      propertyPath: rightHandWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
     - target: {fileID: 2862906456338086820, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: m_Name
       value: Abbsy
@@ -3388,50 +3396,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
---- !u!1 &2862906455500870788 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2862906456338086820, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
-  m_PrefabInstance: {fileID: 2862906455500870787}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2862906455500870789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2862906455500870788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46f00a03c3020dd4b8a415cfe5c2afad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hammerWindFx: {fileID: 6635766205037334904, guid: ef49ec060a6c4a34c85a3e7a544d9d9b, type: 3}
-  magicPrefab: {fileID: 407775414338619919, guid: 18c301cdb24a98041833f973a4de87b4, type: 3}
-  magicMissilePrefab: {fileID: 407775414338619919, guid: cc36a06f99450f5429e99c124c3171b0, type: 3}
-  sp_CoolTime1: 5
-  sp_CurTime1: 0
-  sp_CoolTime2: 7
-  sp_CurTime2: 0
-  sp_CoolTime3: 10
-  sp_CurTime3: 0
-  sp_CoolTime4: 15
-  sp_CurTime4: 0
---- !u!114 &2862906455500870791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2862906455500870788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fd3b70c2c3c6e1478190318d98377c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bossHealthBar: {fileID: 728545857}
-  _bossNum: 1
-  bossDeafeted: 0
-  isFirstTry: 0
 --- !u!1001 &8089194119162908069
 PrefabInstance:
   m_ObjectHideFlags: 0
