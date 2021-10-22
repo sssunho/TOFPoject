@@ -180,7 +180,8 @@ namespace TOF
             else
             {
                 playerManager.isBlocking = false;
-                //playerAnimationHandler.anim.SetFloat("isStrafing", 0);
+                if(playerAnimationHandler.anim.GetFloat("isStrafing") == 2)
+                    playerAnimationHandler.anim.SetFloat("isStrafing", 0);
                 if (blockingCollider.enabled)
                 {
                     blockingCollider.DisableBlockingCollider();

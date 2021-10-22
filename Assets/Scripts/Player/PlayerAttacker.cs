@@ -201,9 +201,9 @@ namespace TOF
 
             if (playerManager.isBlocking) return;
 
-            //playerAnimationHandler.anim.SetFloat("isStrafing", 2);
+            if(playerAnimationHandler.anim.GetFloat("isStrafing") == 0)
+                playerAnimationHandler.anim.SetFloat("isStrafing", 2);
             playerAnimationHandler.PlayTargetAnimation("Block Start", false, true);
-            //playerAnimationHandler.anim.SetFloat("Vertical", 0.5f, 0.1f, Time.deltaTime);
             playerEquipmentManager.OpenBlockingCollider();
             playerManager.isBlocking = true;
         }
