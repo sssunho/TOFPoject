@@ -81,8 +81,11 @@ namespace TOF
 
         public override void TakeCriticalDamageAnimationEvent()
         {
-            enemyStats.TakeDamageNoAnimation(enemyManager.pendingCriticalDamage);
-            enemyManager.pendingCriticalDamage = 0;
+            if(!enemyStats.isBoss)
+            {
+                enemyStats.TakeDamageNoAnimation(enemyManager.pendingCriticalDamage);
+                enemyManager.pendingCriticalDamage = 0;
+            }
         }
 
         public void AwardSoulsOnDeath()

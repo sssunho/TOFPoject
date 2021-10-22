@@ -23,13 +23,17 @@ namespace TOF
         public bool leftHandSlot01Selected;
         public bool leftHandSlot02Selected;
         public bool leftHandSlot03Selected;
+        public bool consumableSlot01Selected;
+        public bool consumableSlot02Selected;
+        public bool consumableSlot03Selected;
 
         [Header("Weapon Inventory")]
         public GameObject weaponSlotPrefab;
-        public GameObject itemSlotPrefab;
+        public GameObject consumableSlotPrefab;
         public Transform weaponInventorySlotParent;
         public Transform consumableInventorySlotParent;
         WeaponSlot[] weaponSlots;
+        ConsumableSlot[] consumableSlots;
 
         private void Awake()
         {
@@ -39,6 +43,7 @@ namespace TOF
         private void Start()
         {
             weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
+            consumableSlots = consumableInventorySlotParent.GetComponentsInChildren<ConsumableSlot>();
             // #. 2021.10.15 DeadZone 체크하면서 에러 발견...
             //equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
@@ -63,6 +68,27 @@ namespace TOF
                     weaponSlots[i].ClearInventorySlot();
                 }
             }
+            #endregion
+
+            #region Consumable Slots
+
+            for (int i = 0; i < consumableSlots.Length; i++)
+            {
+                if (i < playerInventory.consumablesInventory.Count)
+                {
+                    if (consumableSlots.Length < playerInventory.consumablesInventory.Count)
+                    {
+                        Instantiate(consumableSlotPrefab, consumableInventorySlotParent);
+                        consumableSlots = consumableInventorySlotParent.GetComponentsInChildren<ConsumableSlot>();
+                    }
+                    consumableSlots[i].AddItem(playerInventory.consumablesInventory[i]);
+                }
+                else
+                {
+                    consumableSlots[i].ClearInventorySlot();
+                }
+            }
+
             #endregion
         }
 
@@ -90,6 +116,9 @@ namespace TOF
             leftHandSlot01Selected = false;
             leftHandSlot02Selected = false;
             leftHandSlot03Selected = false;
+            consumableSlot01Selected = false;
+            consumableSlot02Selected = false;
+            consumableSlot03Selected = false;
         }
     }
 }

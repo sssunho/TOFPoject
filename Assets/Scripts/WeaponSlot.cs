@@ -12,12 +12,14 @@ namespace TOF
         UIManager uiManager;
         public Image icon;
         WeaponItem item;
+        EquipmentUI equipmentUI;
 
         private void Awake()
         {
             playerInventory = FindObjectOfType<PlayerInventory>();
             weaponSlotManager = FindObjectOfType<WeaponSlotManager>();
             uiManager = FindObjectOfType<UIManager>();
+            equipmentUI = FindObjectOfType<EquipmentUI>();
         }
 
         public void AddItem(WeaponItem newItem)
@@ -84,6 +86,7 @@ namespace TOF
 
             uiManager.equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
             uiManager.ResetAllSelectedSlots();
+            equipmentUI.LoadEquipmentsIcon();
         }
     }
 }

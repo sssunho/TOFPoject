@@ -1,25 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TOF
 {
     public class EquipmentUI : MonoBehaviour
     {
-        public bool rightHandSlot01Selected;
-        public bool rightHandSlot02Selected;
-        public bool rightHandSlot03Selected;
-        public bool leftHandSlot01Selected;
-        public bool leftHandSlot02Selected;
-        public bool leftHandSlot03Selected;
+        PlayerInventory playerInventory;
+        UIManager uiManager;
+
+        public Image[] rightHandSlotIcon;
+        public Image[] leftHandSlotIcon;
+        public Image[] consumableSlotIcon;
 
         public HandleEquipmentSlot[] handleEquipmentSlots;
+        public HandleConsumableSlot[] handleConsumableSlots;
+
+        int i;
+
+        private void Awake()
+        {
+            playerInventory = GetComponentInParent<PlayerInventory>();
+            uiManager = GetComponentInParent<UIManager>();
+        }
+
+        private void Start()
+        {
+            LoadEquipmentsIcon();
+        }
+
+        public void LoadEquipmentsIcon()
+        {
+            for (i = 0; i < playerInventory.weaponsInRightHandSlot.Length-1; i++)
+            {
+                rightHandSlotIcon[i].sprite = playerInventory.weaponsInRightHandSlot[i].itemIcon;
+            }
+            for (i = 0; i < playerInventory.weaponsInLeftHandSlot.Length-1; i++)
+            {
+                leftHandSlotIcon[i].sprite = playerInventory.weaponsInLeftHandSlot[i].itemIcon;
+            }
+            for (i = 0; i < playerInventory.consumablesSlot.Length-1; i++)
+            {
+                consumableSlotIcon[i].sprite = playerInventory.consumablesSlot[i].itemIcon;
+            }
+        }
+
+        public void LoadConsumablesOnEquipmentScreen(PlayerInventory playerInventory)
+        {
+            for (int i = 0; i < handleConsumableSlots.Length-1; i++)
+            {
+                if(handleConsumableSlots[i].consumableSlot01)
+                {
+                    handleConsumableSlots[i].AddItem(playerInventory.consumablesSlot[0]);
+                }
+                else if (handleConsumableSlots[i].consumableSlot02)
+                {
+                    handleConsumableSlots[i].AddItem(playerInventory.consumablesSlot[1]);
+                }
+                else 
+                {
+                    handleConsumableSlots[i].AddItem(playerInventory.consumablesSlot[2]);
+                }
+            }
+        }
 
         public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
         {
             for (int i = 0; i < handleEquipmentSlots.Length; i++)
             {
-                if(handleEquipmentSlots[i].rightHandSlot01)
+                if (handleEquipmentSlots[i].rightHandSlot01)
                 {
                     handleEquipmentSlots[i].AddItem(playerInventory.weaponsInRightHandSlot[0]);
                 }
@@ -39,7 +89,7 @@ namespace TOF
                 {
                     handleEquipmentSlots[i].AddItem(playerInventory.weaponsInLeftHandSlot[1]);
                 }
-                else 
+                else
                 {
                     handleEquipmentSlots[i].AddItem(playerInventory.weaponsInLeftHandSlot[2]);
                 }
@@ -48,32 +98,47 @@ namespace TOF
 
         public void SelectRightHandSlot01()
         {
-            rightHandSlot01Selected = true;
+            uiManager.rightHandSlot01Selected = true;
         }
 
         public void SelectRightHandSlot02()
         {
-            rightHandSlot02Selected = true;
+            uiManager.rightHandSlot02Selected = true;
         }
 
         public void SelectRightHandSlot03()
         {
-            rightHandSlot03Selected = true;
+            uiManager.rightHandSlot03Selected = true;
         }
 
         public void SelectLeftHandSlot01()
         {
-            leftHandSlot01Selected = true;
+            uiManager.leftHandSlot01Selected = true;
         }
 
         public void SelectLeftHandSlot02()
         {
-            leftHandSlot02Selected = true;
+            uiManager.leftHandSlot02Selected = true;
         }
 
         public void SelectLeftHandSlot03()
         {
-            leftHandSlot03Selected = true;
+            uiManager.leftHandSlot03Selected = true;
+        }
+
+        public void SelectConsumalbeSlot01()
+        {
+            uiManager.consumableSlot01Selected = true;
+        }
+
+        public void SelectConsumalbeSlot02()
+        {
+            uiManager.consumableSlot02Selected = true;
+        }
+
+        public void SelectConsumalbeSlot03()
+        {
+            uiManager.consumableSlot03Selected = true;
         }
     }
 }

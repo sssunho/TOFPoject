@@ -1123,6 +1123,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTest
       objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: consumablesSlot.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInventory.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: consumablesSlot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d42882863d1b68e47816ebef811da22e, type: 2}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: consumablesSlot.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: consumablesSlot.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInventory.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d7dd98db2855ce44b8defe1e059fdd5, type: 2}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInventory.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d7dd98db2855ce44b8defe1e059fdd5, type: 2}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInLeftHandSlot.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInRightHandSlot.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInLeftHandSlot.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInLeftHandSlot.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInRightHandSlot.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 263314670826900817, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: weaponsInRightHandSlot.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4541405931947513319, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

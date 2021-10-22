@@ -32,7 +32,7 @@ namespace TOF
         public float maximumPivot = 35;
 
         private bool normal = true;
-        private float zoom = 1f;
+        //private float zoom = 1f;
         private float smooth = 0.3f;
         private float minSize = 25f;
         private float maxSize = 40f;
