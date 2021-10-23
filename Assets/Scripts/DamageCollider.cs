@@ -10,6 +10,9 @@ namespace TOF
         protected Collider damageCollider;
         public int currentWeaponDamage = 25;
 
+        [Header("Team I.D")]
+        public int teamIDNumber = 0;
+
         protected virtual void Awake()
         {
             damageCollider = GetComponent<Collider>();
@@ -19,7 +22,6 @@ namespace TOF
 
             characterManager = GetComponentInParent<CharacterManager>();
         }
-
 
         public void EnableDamageCollider()
         {
@@ -47,6 +49,9 @@ namespace TOF
 
                 if (playerCharacterManager != null)
                 {
+                    if (playerStats.teamIDNumber == teamIDNumber)
+                        return;
+
                     if (shield != null && playerCharacterManager.isBlocking)
                     {
                         float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
@@ -60,6 +65,8 @@ namespace TOF
                     }
                     else if (playerStats != null)
                     {
+                        if (playerStats.teamIDNumber == teamIDNumber)
+                            return;
                         // Detects where on the collider our weapon first makes contact
                         Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                         playerEffectManager.PlayBloodSplatterFX(contactPoint);
@@ -77,6 +84,9 @@ namespace TOF
 
                 if (enemyCharacterManager != null)
                 {
+                    if (enemyStats.teamIDNumber == teamIDNumber)
+                        return;
+
                     if (shield != null && enemyCharacterManager.isBlocking)
                     {
                         float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
@@ -91,6 +101,9 @@ namespace TOF
 
                     if (enemyStats != null)
                     {
+                        if (enemyStats.teamIDNumber == teamIDNumber)
+                            return;
+
                         // Detects where on the collider our weapon first makes contact
                         Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                         enemyEffectManager.PlayBloodSplatterFX(contactPoint);

@@ -8,6 +8,9 @@ namespace TOF
 
     public class CharacterStats : MonoBehaviour
     {
+        [Header("Team I.D")]
+        public int teamIDNumber = 0;
+
         public int healthLevel = 100;
         public int maxHealth;
         public int currentHealth;

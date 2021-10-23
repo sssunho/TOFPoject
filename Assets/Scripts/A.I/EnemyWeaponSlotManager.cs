@@ -16,10 +16,12 @@ namespace TOF
         DamageCollider rightHandDamageCollider;
 
         EnemyEffectManager enemyEffectManager;
+        EnemyStats enemyStats;
 
         private void Awake()
         {
             enemyEffectManager = GetComponent<EnemyEffectManager>();
+            enemyStats = GetComponent<EnemyStats>();
             LoadWeaponHolderSlots();
         }
 
@@ -80,11 +82,15 @@ namespace TOF
             {
                 leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
                 enemyEffectManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+
+                leftHandDamageCollider.teamIDNumber = enemyStats.teamIDNumber;
             }
             else
             {
                 rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
                 enemyEffectManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+
+                rightHandDamageCollider.teamIDNumber = enemyStats.teamIDNumber;
             }
         }
 
