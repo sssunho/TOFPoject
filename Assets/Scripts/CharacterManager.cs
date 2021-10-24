@@ -23,6 +23,8 @@ namespace TOF
         public bool isRotatingWithRootMotion;
         public bool canRotate;
 
+        public bool isInteracting;
+        public bool isInvulnerable;
         public int pendingCriticalDamage;
     }
 }

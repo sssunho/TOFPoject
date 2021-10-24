@@ -9,6 +9,7 @@ namespace TOF
     public class CharacterStats : MonoBehaviour
     {
         protected AnimatorManager animatorManager;
+        protected CharacterManager characterManager;
 
         [Header("Team I.D")]
         public int teamIDNumber = 0;
@@ -34,34 +35,52 @@ namespace TOF
         private void Awake()
         {
             animatorManager = GetComponentInChildren<AnimatorManager>();
+            characterManager = GetComponent<CharacterManager>();
         }
 
         public virtual void TakeDamage(Damage damage)
         {
             if (isDead) return;
 
-            currentHealth -= damage.value;
-
-            if (damage.reaction == HitReaction.NONE) return;
-
-            Vector3 rel = damage.hitPosition - transform.position;
+            Vector3 rel = damage.attackerPoint - transform.position;
             rel.y = 0;
             float angle = Vector3.Angle(rel, transform.forward);
             Vector3 cross = Vector3.Cross(rel, transform.forward);
             if (cross.y > 0) angle = -angle;
-            Direction4Way hitDiection = AngleToDirection4(angle);
+            Direction4Way hitDirection = AngleToDirection4(angle);
 
-            animatorManager.anim.SetInteger("reactionDirection", (int)hitDiection);
-            animatorManager.anim.SetInteger("reactionID", (int)damage.reaction);
-            animatorManager.anim.SetTrigger("reactionTrigger");
+            if(hitDirection == Direction4Way.FORWARD && characterManager.isBlocking)
+            {
+                BlockingCollider shield = transform.GetComponentInChildren<BlockingCollider>();
+                damage.reaction = HitReaction.GUARD;
+                damage.value *= Mathf.RoundToInt((1.0f - shield.blockingPhysicalDamageAbsorption));
+            }
 
-            animatorManager.SetInteraction(damage.reaction != HitReaction.SMALL);
+            currentHealth -= damage.value; 
+
+            PlayHitReaction(damage, hitDirection);
 
             if(currentHealth <= 0)
             {
                 animatorManager.PlayTargetAnimation("Dead_01", true);
                 isDead = true;
             }
+        }
+
+        private void PlayHitReaction(Damage damage, Direction4Way hitDirection)
+        {
+            if (damage.reaction == HitReaction.NONE) return;
+
+            animatorManager.anim.SetInteger("reactionDirection", (int)hitDirection);
+            animatorManager.anim.SetInteger("reactionID", (int)damage.reaction);
+            animatorManager.anim.SetTrigger("reactionTrigger");
+
+            animatorManager.SetInteraction(damage.reaction != HitReaction.SMALL);
+        }
+
+        private void PlayHitEffect(Damage damage)
+        {
+
         }
 
         protected Direction4Way AngleToDirection4(float angle)

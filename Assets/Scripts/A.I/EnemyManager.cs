@@ -18,7 +18,6 @@ namespace TOF
         public CharacterController controller;
 
         public bool isPerformingAction;
-        public bool isInteracting;
         public float rotationSpeed = 15;
         public float maximumAggroRadius = 1.5f;
 

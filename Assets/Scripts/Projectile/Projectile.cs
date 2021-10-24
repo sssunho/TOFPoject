@@ -44,7 +44,7 @@ namespace TOF
             base.OnTriggerEnter(collision);
             damageCollider.enabled = false;
             Destroy(gameObject);
-            if(destroyFx)
+            if (destroyFx)
             {
                 var inst = Instantiate(destroyFx);
                 inst.transform.position = transform.position;

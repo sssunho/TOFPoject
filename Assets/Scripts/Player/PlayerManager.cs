@@ -18,8 +18,6 @@ namespace TOF
         public GameObject interactableUIGameObject;
         public GameObject itemInteractableUIGameObject;
 
-        public bool isInteracting;
-
         [Header("Player Flags")]
         public bool isSprinting;
         public bool isInAir;
@@ -27,7 +25,6 @@ namespace TOF
         public bool canDoCombo;
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
-        public bool isInvulnerable;
         public bool isCharging;
         public bool isBonFire;
         public bool isPassing;

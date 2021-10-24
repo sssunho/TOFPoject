@@ -7,7 +7,6 @@ namespace TOF
 {
     public class PlayerStats : CharacterStats
     {
-        PlayerManager playerManager;
         GameManager gameManager;
         public SliderControl healthbar;
         public SliderControl staminabar;
@@ -19,7 +18,7 @@ namespace TOF
 
         private void Awake()
         {
-            playerManager = GetComponent<PlayerManager>();
+            characterManager = GetComponent<PlayerManager>();
             animatorManager = GetComponentInChildren<PlayerAnimationManager>();
             gameManager = FindObjectOfType<GameManager>();
         }
@@ -76,7 +75,7 @@ namespace TOF
 
         public void TakeDamage(int damage, string damageAnimation = "Damage_01")
         {
-            if (playerManager.isInvulnerable) return;
+            if (characterManager.isInvulnerable) return;
 
             if (isDead) return;
 
@@ -109,7 +108,7 @@ namespace TOF
 
         public void RegenerateStamina()
         {
-            if (playerManager.isInteracting)
+            if (characterManager.isInteracting)
             {
                 staminaRegenTimer = 0;
                 return;
