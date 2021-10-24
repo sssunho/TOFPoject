@@ -82,6 +82,7 @@ namespace TOF
             {
                 leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
                 enemyEffectManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+                leftHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
 
                 leftHandDamageCollider.teamIDNumber = enemyStats.teamIDNumber;
             }
@@ -89,6 +90,7 @@ namespace TOF
             {
                 rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
                 enemyEffectManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+                rightHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
 
                 rightHandDamageCollider.teamIDNumber = enemyStats.teamIDNumber;
             }
