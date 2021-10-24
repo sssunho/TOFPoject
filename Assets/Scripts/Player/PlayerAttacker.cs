@@ -15,17 +15,6 @@ namespace TOF
         PlayerInventory playerInventory;
         PlayerEffectManager playerEffectManager;
 
-        [Header("Attack Animations")]
-        string one_light_attack_01 = "Onehanded Light 1";
-        string one_light_attack_02 = "Onehanded Light 2";
-        string one_heavy_attack_01 = "Onehanded Heavy 1";
-        string one_heavy_attack_02 = "Heavy Attack";
-
-        string two_light_attack_01 = "Twohanded Light 1";
-        string two_light_attack_02 = "Twohanded Light 2";
-
-        string weapon_art = "Weapon Art";
-
         public string lastAttack;
 
         LayerMask backStabLayer = 1 << 12;
@@ -43,51 +32,6 @@ namespace TOF
             playerEffectManager = GetComponent<PlayerEffectManager>();
         }
 
-        #region Attack Actions
-
-        public void HandleRBAction()
-        {
-            if (playerInventory.rightWeapon.weaponType == WeaponType.StraightSword)
-            {
-                // Handle Melee Action
-                PerformRBMeleeAction();
-            }
-            else if (playerInventory.rightWeapon.weaponType == WeaponType.SpellCaster ||
-                playerInventory.rightWeapon.weaponType == WeaponType.FaithCaster ||
-                playerInventory.rightWeapon.weaponType == WeaponType.PyroMancyCaster)
-            {
-                // Handle Magic Action
-                PerformRBMagicAction(playerInventory.rightWeapon);
-                // Handle Miracle Action
-
-                // Handle Pyro Action
-
-            }
-        }
-
-        public void HandleLTAction()
-        {
-            if (playerInventory.leftWeapon.weaponType == WeaponType.Shield)
-            {
-                PerformLTWeaponArt(inputHandler.twoHandFlag);
-                //perform shield weapon;
-            }
-            else if (playerInventory.leftWeapon.weaponType == WeaponType.StraightSword)
-            {
-                //do light attack
-            }
-        }
-
-        public void HandleLBAction()
-        {
-            PerformLBBlcokingAction();
-        }
-
-        public void ReleaseCharge()
-        {
-            playerAnimationHandler.anim.SetBool("isCharging", false);
-        }
-
         public void HandleWeaponCombo(WeaponItem weapon)
         {
             if (playerStats.currentStamina <= 0)
@@ -98,13 +42,13 @@ namespace TOF
                 playerAnimationHandler.anim.SetBool("canDoCombo", false);
                 playerManager.isBlocking = false;
 
-                if (lastAttack == one_light_attack_01)
+                if (lastAttack == weapon.OH_Light_Attack_1)
                 {
-                    playerAnimationHandler.PlayTargetAnimation(one_light_attack_02, true);
+                    playerAnimationHandler.PlayTargetAnimation(weapon.OH_Light_Attack_2, true);
                 }
-                else if(lastAttack == two_light_attack_01)
+                else if (lastAttack == weapon.TH_Light_Attack_1)
                 {
-                    playerAnimationHandler.PlayTargetAnimation(two_light_attack_02, true);
+                    playerAnimationHandler.PlayTargetAnimation(weapon.TH_Light_Attack_2, true);
                 }
             }
         }
@@ -116,15 +60,15 @@ namespace TOF
 
             playerManager.isBlocking = false;
             weaponSlotManager.attackingWeapon = weapon;
-            if(inputHandler.twoHandFlag)
+            if (inputHandler.twoHandFlag)
             {
-                playerAnimationHandler.PlayTargetAnimation(two_light_attack_01, true);
-                lastAttack = two_light_attack_01;
+                playerAnimationHandler.PlayTargetAnimation(weapon.TH_Light_Attack_1, true);
+                lastAttack = weapon.TH_Light_Attack_1;
             }
             else
             {
-                playerAnimationHandler.PlayTargetAnimation(one_light_attack_01, true);
-                lastAttack = one_light_attack_01;
+                playerAnimationHandler.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
+                lastAttack = weapon.OH_Light_Attack_1;
             }
         }
 
@@ -146,11 +90,55 @@ namespace TOF
             {
 
             }
-            playerAnimationHandler.PlayTargetAnimation(one_heavy_attack_01, true);
-            lastAttack = one_heavy_attack_01;
+            playerAnimationHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
+            lastAttack = weapon.OH_Heavy_Attack_1;
         }
 
+        #region Input Action
+        public void HandleRBAction()
+        {
+            if (playerInventory.rightWeapon.isMeleeWeapon)
+            {
+                // Handle Melee Action
+                PerformRBMeleeAction();
+            }
+            else if (playerInventory.rightWeapon.isSpellCaster || playerInventory.rightWeapon.isFaithCaster || playerInventory.rightWeapon.isPyroCaster)
+            {
+                // Handle Magic Action
+                PerformRBMagicAction(playerInventory.rightWeapon);
+                // Handle Miracle Action
 
+                // Handle Pyro Action
+
+            }
+        }
+
+        public void HandleLTAction()
+        {
+            if (playerInventory.leftWeapon.isShieldWeapon)
+            {
+                PerformLTWeaponArt(inputHandler.twoHandFlag);
+                //perform shield weapon;
+            }
+            else if (playerInventory.leftWeapon.isMeleeWeapon)
+            {
+                //do light attack
+            }
+        }
+
+        public void HandleLBAction()
+        {
+            PerformLBBlcokingAction();
+        }
+
+        public void ReleaseCharge()
+        {
+            playerAnimationHandler.anim.SetBool("isCharging", false);
+        }
+
+        #endregion
+
+        #region Attack Actions
         private void PerformRBMeleeAction()
         {
             playerAnimationHandler.anim.SetTrigger("AttackTrigger");
@@ -170,11 +158,9 @@ namespace TOF
 
         private void PerformRBMagicAction(WeaponItem weapon)
         {
-            if (playerManager.isInteracting) return;
-
-            if(weapon.weaponType == WeaponType.FaithCaster)
+            if (weapon.isFaithCaster)
             {
-                if(playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
+                if (playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
                 {
                     playerInventory.currentSpell.AttemptToCastSpell(playerAnimationHandler, playerStats);
                 }
@@ -184,7 +170,7 @@ namespace TOF
         private void PerformLTWeaponArt(bool isTwoHanding)
         {
             if (playerManager.isInteracting) return;
-            
+
             playerManager.isBlocking = false;
 
             if (isTwoHanding)
@@ -195,7 +181,7 @@ namespace TOF
             else
             {
                 playerManager.isInteracting = true;
-                playerAnimationHandler.PlayTargetAnimation(weapon_art, true);
+                playerAnimationHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
             }
 
         }
@@ -215,7 +201,7 @@ namespace TOF
 
             if (playerManager.isBlocking) return;
 
-            if(playerAnimationHandler.anim.GetFloat("isStrafing") == 0)
+            if (playerAnimationHandler.anim.GetFloat("isStrafing") == 0)
                 playerAnimationHandler.anim.SetFloat("isStrafing", 2);
             playerAnimationHandler.PlayTargetAnimation("Block Start", false, true);
             playerEquipmentManager.OpenBlockingCollider();
@@ -237,7 +223,7 @@ namespace TOF
                 CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
                 DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
 
-                if(enemyCharacterManager != null)
+                if (enemyCharacterManager != null)
                 {
                     //Check for team id (so you cant back stab friend or yourself)
                     playerManager.transform.position = enemyCharacterManager.backStabCollider.criticalDamageStandPosition.position;

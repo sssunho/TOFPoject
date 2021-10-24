@@ -49,7 +49,7 @@ namespace TOF
 
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
-            if(isLeft)
+            if (isLeft)
             {
                 leftHandSlot.currentWeapon = weaponItem;
                 leftHandSlot.LoadWeaponModel(weaponItem);
@@ -59,6 +59,7 @@ namespace TOF
 
                 if (weaponItem != null)
                 {
+                    animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
                 }
                 else
                 {
@@ -69,13 +70,13 @@ namespace TOF
             }
             else
             {
-                if(inputHandler.interactFlag)
+                if (inputHandler.interactFlag)
                 {
                     HolderSlot.LoadWeaponModel(rightHandSlot.currentWeapon);
                     backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
                     rightHandSlot.UnloadWeaponAndDestory();
                     leftHandSlot.UnloadWeaponAndDestory();
-                    playerAnimationManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false);
+                    animator.CrossFade(weaponItem.th_idle, 0.2f);
                 }
                 else
                 {
@@ -83,6 +84,7 @@ namespace TOF
                     {
                         backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);
                         leftHandSlot.UnloadWeaponAndDestory();
+                        animator.CrossFade(weaponItem.th_idle, 0.2f);
                     }
                     else
                     {
@@ -94,6 +96,7 @@ namespace TOF
                         HolderSlot.UnloadWeaponAndDestory();
                         if (weaponItem != null)
                         {
+                            animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
                         }
                         else
                         {
@@ -106,7 +109,6 @@ namespace TOF
                     rightHandSlot.LoadWeaponModel(weaponItem);
                     LoadRightWeaponDamageCollider();
                     quickSlotUI.UpdateWeaponQuickSlot(false, weaponItem);
-                    playerAnimationManager.anim.runtimeAnimatorController = weaponItem.weaponController;
                 }
             }
         }
