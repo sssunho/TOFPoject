@@ -14,11 +14,9 @@ namespace TOF
 
     public class Damage
     {
-
         public int value;
         public HitReaction reaction;
         public Vector3 attackerPoint;
         public Vector3 hitPoint;
-
     }
 }

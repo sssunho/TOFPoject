@@ -3397,7 +3397,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7895021097825405721, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7895021097825405721, guid: e72644ac2e1f4894895fd34108a5cf76, type: 3}
       propertyPath: sp_CoolTime1

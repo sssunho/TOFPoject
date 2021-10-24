@@ -16,6 +16,7 @@ namespace TOF
         private void Awake()
         {
             animatorManager = GetComponentInChildren<EnemyAnimationManager>();
+            characterManager = GetComponent<EnemyManager>();
             enemyBossManager = GetComponent<EnemyBossManager>();
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;

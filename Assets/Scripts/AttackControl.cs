@@ -12,7 +12,7 @@ namespace TOF
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             animator.SetFloat("DamageModifier", damageModifier);
-            animator.GetComponentInChildren<DamageCollider>().hitReaction = reaction;
+            animator.GetComponentInParent<CharacterStats>().attackReaction = reaction;
         }
     }
 }

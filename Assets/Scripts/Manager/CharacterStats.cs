@@ -11,6 +11,8 @@ namespace TOF
         protected AnimatorManager animatorManager;
         protected CharacterManager characterManager;
 
+        public HitReaction attackReaction;
+
         [Header("Team I.D")]
         public int teamIDNumber = 0;
 
@@ -52,11 +54,14 @@ namespace TOF
             if(hitDirection == Direction4Way.FORWARD && characterManager.isBlocking)
             {
                 BlockingCollider shield = transform.GetComponentInChildren<BlockingCollider>();
-                damage.reaction = HitReaction.GUARD;
-                damage.value *= Mathf.RoundToInt((1.0f - shield.blockingPhysicalDamageAbsorption));
+                if (shield != null)
+                {
+                    damage.reaction = HitReaction.GUARD;
+                    damage.value *= Mathf.RoundToInt((1.0f - shield.blockingPhysicalDamageAbsorption));
+                }
             }
 
-            currentHealth -= damage.value; 
+            currentHealth -= damage.value;
 
             PlayHitReaction(damage, hitDirection);
 

@@ -56,6 +56,7 @@ namespace TOF
         {
             isRotatingWithRootMotion = enemyAnimationManager.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
+            isBlocking = enemyAnimationManager.anim.GetBool("isBlocking");
             canDoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
             canRotate = enemyAnimationManager.anim.GetBool("canRotate");
             enemyAnimationManager.anim.SetBool("isDead", enemyStats.isDead);
