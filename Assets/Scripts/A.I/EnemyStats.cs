@@ -18,6 +18,7 @@ namespace TOF
             animatorManager = GetComponentInChildren<EnemyAnimationManager>();
             characterManager = GetComponent<EnemyManager>();
             enemyBossManager = GetComponent<EnemyBossManager>();
+            effectManager = GetComponentInChildren<CharacterEffectManager>();
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
         }

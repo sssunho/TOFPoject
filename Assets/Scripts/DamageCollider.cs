@@ -44,7 +44,7 @@ namespace TOF
 
             Damage damage = new Damage();
             damage.value = currentWeaponDamage;
-            damage.attackerPoint = characterStat.transform.position;
+            damage.attackerPoint = characterStat ? characterStat.transform.position : transform.position;
             damage.hitPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             damage.reaction = characterStat.attackReaction;
             stats.TakeDamage(damage);

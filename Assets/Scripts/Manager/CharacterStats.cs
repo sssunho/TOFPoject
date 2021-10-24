@@ -10,6 +10,7 @@ namespace TOF
     {
         protected AnimatorManager animatorManager;
         protected CharacterManager characterManager;
+        protected CharacterEffectManager effectManager;
 
         public HitReaction attackReaction;
 
@@ -36,8 +37,7 @@ namespace TOF
 
         private void Awake()
         {
-            animatorManager = GetComponentInChildren<AnimatorManager>();
-            characterManager = GetComponent<CharacterManager>();
+            effectManager = GetComponentInChildren<CharacterEffectManager>();
         }
 
         public virtual void TakeDamage(Damage damage)
@@ -58,7 +58,12 @@ namespace TOF
                 {
                     damage.reaction = HitReaction.GUARD;
                     damage.value *= Mathf.RoundToInt((1.0f - shield.blockingPhysicalDamageAbsorption));
+                    effectManager.PlayRecoilMetalFX(damage.hitPoint);
                 }
+            }
+            else
+            {
+                effectManager.PlayBloodSplatterFX(damage.hitPoint);
             }
 
             currentHealth -= damage.value;

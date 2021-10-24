@@ -23,6 +23,9 @@ namespace TOF
         public string left_hand_idle;
         public string th_idle;
 
+        public int OnehandedWeaponID;
+        public int TwohandedWeaponID;
+
         [Header("One Handed Attak Animation")]
         public string OH_Light_Attack_1;
         public string OH_Light_Attack_2;

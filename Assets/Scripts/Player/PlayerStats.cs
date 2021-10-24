@@ -20,6 +20,7 @@ namespace TOF
         {
             characterManager = GetComponent<PlayerManager>();
             animatorManager = GetComponentInChildren<PlayerAnimationManager>();
+            effectManager = GetComponentInChildren<CharacterEffectManager>();
             gameManager = FindObjectOfType<GameManager>();
         }
 
