@@ -9,6 +9,12 @@ namespace TOF
         public Animator anim;
         public bool canRotate;
 
+        public void SetInteraction(bool flag)
+        {
+            anim.applyRootMotion = flag;
+            anim.SetBool("isInteracting", flag);
+        }
+
         public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false)
         {
             anim.applyRootMotion = isInteracting;

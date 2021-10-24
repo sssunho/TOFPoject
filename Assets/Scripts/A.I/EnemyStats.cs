@@ -6,7 +6,6 @@ namespace TOF
 {
     public class EnemyStats : CharacterStats
     {
-        EnemyAnimationManager enemyAnimationManager;
         EnemyBossManager enemyBossManager;
         public UIEnemyHealthBar enemyHealthBar;
 
@@ -16,7 +15,7 @@ namespace TOF
 
         private void Awake()
         {
-            enemyAnimationManager = GetComponentInChildren<EnemyAnimationManager>();
+            animatorManager = GetComponentInChildren<EnemyAnimationManager>();
             enemyBossManager = GetComponent<EnemyBossManager>();
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
@@ -47,22 +46,9 @@ namespace TOF
             }
         }
 
-        public void TakeDamage(Damage damage)
+        public override void TakeDamage(Damage damage)
         {
-            if (isDead)
-                return;
-
-            currentHealth = currentHealth - damage.value;
-
-            Vector3 rel = damage.hitPosition - transform.position;
-            rel.y = 0;
-            float angle = Vector3.Angle(rel, transform.forward);
-            Vector3 cross = Vector3.Cross(rel, transform.forward);
-            if (cross.y < 0) angle *= -1;
-
-            //
-            // hit reaction switch
-            //
+            base.TakeDamage(damage);
 
             if (!isBoss)
             {
@@ -85,7 +71,7 @@ namespace TOF
                 return;
 
             currentHealth = currentHealth - damage;
-            enemyAnimationManager.PlayTargetAnimation(damageAnimation, true);
+            animatorManager.PlayTargetAnimation(damageAnimation, true);
             if (!isBoss)
             {
                 enemyHealthBar.SetHealth(currentHealth);
@@ -104,7 +90,7 @@ namespace TOF
         private void HandleDeath()
         {
             currentHealth = 0;
-            enemyAnimationManager.PlayTargetAnimation("Dead_01", true);
+            animatorManager.PlayTargetAnimation("Dead_01", true);
             isDead = true;
         }
     }

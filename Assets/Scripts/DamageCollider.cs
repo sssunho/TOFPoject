@@ -107,7 +107,12 @@ namespace TOF
                         // Detects where on the collider our weapon first makes contact
                         Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                         enemyEffectManager.PlayBloodSplatterFX(contactPoint);
-                        enemyStats.TakeDamage(currentWeaponDamage);
+                        Damage damage = new Damage();
+                        damage.value = currentWeaponDamage;
+                        damage.reaction = HitReaction.NORMAL;
+                        damage.hitPosition = characterManager.transform.position;
+                        enemyStats.TakeDamage(damage);
+                        //enemyStats.TakeDamage(currentWeaponDamage);
                     }
                 }
 

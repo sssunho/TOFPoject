@@ -36,7 +36,7 @@ namespace TOF
             animatorManager = GetComponentInChildren<AnimatorManager>();
         }
 
-        public void TakeDamge(Damage damage)
+        public virtual void TakeDamage(Damage damage)
         {
             if (isDead) return;
 
@@ -47,11 +47,21 @@ namespace TOF
             Vector3 rel = damage.hitPosition - transform.position;
             rel.y = 0;
             float angle = Vector3.Angle(rel, transform.forward);
+            Vector3 cross = Vector3.Cross(rel, transform.forward);
+            if (cross.y > 0) angle = -angle;
             Direction4Way hitDiection = AngleToDirection4(angle);
 
             animatorManager.anim.SetInteger("reactionDirection", (int)hitDiection);
             animatorManager.anim.SetInteger("reactionID", (int)damage.reaction);
             animatorManager.anim.SetTrigger("reactionTrigger");
+
+            animatorManager.SetInteraction(damage.reaction != HitReaction.SMALL);
+
+            if(currentHealth <= 0)
+            {
+                animatorManager.PlayTargetAnimation("Dead_01", true);
+                isDead = true;
+            }
         }
 
         protected Direction4Way AngleToDirection4(float angle)
@@ -60,7 +70,7 @@ namespace TOF
                 return Direction4Way.FORWARD;
             else if (angle > -135 && angle <= -45)
                 return Direction4Way.LEFT;
-            else if (angle > 45 && angle < 135)
+            else if (angle > 45 && angle <= 135)
                 return Direction4Way.RIGHT;
             else
                 return Direction4Way.BEHIND;

@@ -65,6 +65,15 @@ namespace TOF
                 isDead = true;
             }
         }
+
+        public override void TakeDamage(Damage damage)
+        {
+            base.TakeDamage(damage);
+
+            healthbar.setCurValue(currentHealth);
+
+        }
+
         public void TakeDamage(int damage, string damageAnimation = "Damage_01")
         {
             if (playerManager.isInvulnerable) return;

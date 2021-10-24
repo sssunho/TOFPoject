@@ -18,7 +18,6 @@ namespace TOF
         public int value;
         public HitReaction reaction;
         public Vector3 hitPosition;
-        public Quaternion hitRotation;
 
     }
 }
