@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TOF
 {
@@ -9,6 +10,7 @@ namespace TOF
         public GameObject light;
         public bool isIgnited = false;
         public Transform checkPoint;
+        public UnityEvent ResetEnemy;
 
         public override void Interact(PlayerManager playerManager)
         {
@@ -23,6 +25,7 @@ namespace TOF
         {
             light.SetActive(true);
             isIgnited = true;
+            ResetEnemy.Invoke();
         }
     }
 }
