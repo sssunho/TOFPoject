@@ -6,7 +6,7 @@ namespace TOF
 {
     public class UIManager : MonoBehaviour
     {
-        public PlayerInventory playerInventory;
+        PlayerInventory playerInventory;
         public EquipmentUI equipmentUI;
 
         [Header("UI Windows")]
@@ -37,7 +37,7 @@ namespace TOF
 
         private void Awake()
         {
-            equipmentUI = FindObjectOfType<EquipmentUI>();
+            playerInventory = GetComponent<PlayerInventory>();
         }
 
         private void Start()

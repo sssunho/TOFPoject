@@ -28,7 +28,7 @@ namespace TOF
             inputHandler = GetComponentInParent<InputHandler>();
             playerManager = GetComponentInParent<PlayerManager>();
             playerStats = GetComponentInParent<PlayerStats>();
-            playerInventory = GetComponentInParent<PlayerInventory>();
+            playerInventory = FindObjectOfType<PlayerInventory>();
             playerEffectManager = GetComponent<PlayerEffectManager>();
         }
 
