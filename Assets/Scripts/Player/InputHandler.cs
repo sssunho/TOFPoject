@@ -63,7 +63,7 @@ namespace TOF
         private void Awake()
         {
             playerAttacker = GetComponentInChildren<PlayerAttacker>();
-            playerInventory = GetComponent<PlayerInventory>();
+            playerInventory = FindObjectOfType<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();

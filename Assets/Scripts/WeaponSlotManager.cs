@@ -36,7 +36,7 @@ namespace TOF
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerStats = GetComponentInParent<PlayerStats>();
-            playerInventory = GetComponentInParent<PlayerInventory>();
+            playerInventory = FindObjectOfType<PlayerInventory>();
             playerEffectManager = GetComponent<PlayerEffectManager>();
             playerAnimationManager = GetComponent<PlayerAnimationManager>();
         }

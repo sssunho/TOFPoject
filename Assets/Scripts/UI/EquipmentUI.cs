@@ -34,15 +34,18 @@ namespace TOF
         {
             for (i = 0; i < playerInventory.weaponsInRightHandSlot.Length - 1; i++)
             {
-                rightHandSlotIcon[i].sprite = playerInventory.weaponsInRightHandSlot[i].itemIcon;
+                if(playerInventory.weaponsInRightHandSlot[i] !=null)
+                    rightHandSlotIcon[i].sprite = playerInventory.weaponsInRightHandSlot[i].itemIcon;
             }
             for (i = 0; i < playerInventory.weaponsInLeftHandSlot.Length - 1; i++)
             {
-                leftHandSlotIcon[i].sprite = playerInventory.weaponsInLeftHandSlot[i].itemIcon;
+                if (playerInventory.weaponsInLeftHandSlot[i] != null)
+                    leftHandSlotIcon[i].sprite = playerInventory.weaponsInLeftHandSlot[i].itemIcon;
             }
             for (i = 0; i < playerInventory.consumablesSlot.Length - 1; i++)
             {
-                consumableSlotIcon[i].sprite = playerInventory.consumablesSlot[i].itemIcon;
+                if (playerInventory.consumablesSlot[i] != null)
+                    consumableSlotIcon[i].sprite = playerInventory.consumablesSlot[i].itemIcon;
             }
         }
 

@@ -22,7 +22,7 @@ namespace TOF
             PlayerLocomotion playerLocomotion;
             PlayerAnimationManager playerAnimationHandler;
 
-            playerInventory = playerManager.GetComponent<PlayerInventory>();
+            playerInventory = FindObjectOfType<PlayerInventory>();
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
             playerAnimationHandler = playerManager.GetComponentInChildren<PlayerAnimationManager>();
 

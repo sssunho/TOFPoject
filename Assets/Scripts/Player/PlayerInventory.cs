@@ -31,8 +31,8 @@ namespace TOF
 
         private void Awake()
         {
-            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-            consumableSlotManager = GetComponentInChildren<ConsumableSlotManager>();
+            weaponSlotManager = FindObjectOfType<WeaponSlotManager>();
+            consumableSlotManager = FindObjectOfType<ConsumableSlotManager>();
         }
 
         private void Start()
