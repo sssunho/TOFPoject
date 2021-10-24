@@ -32,15 +32,15 @@ namespace TOF
 
         public void LoadEquipmentsIcon()
         {
-            for (i = 0; i < playerInventory.weaponsInRightHandSlot.Length-1; i++)
+            for (i = 0; i < playerInventory.weaponsInRightHandSlot.Length - 1; i++)
             {
                 rightHandSlotIcon[i].sprite = playerInventory.weaponsInRightHandSlot[i].itemIcon;
             }
-            for (i = 0; i < playerInventory.weaponsInLeftHandSlot.Length-1; i++)
+            for (i = 0; i < playerInventory.weaponsInLeftHandSlot.Length - 1; i++)
             {
                 leftHandSlotIcon[i].sprite = playerInventory.weaponsInLeftHandSlot[i].itemIcon;
             }
-            for (i = 0; i < playerInventory.consumablesSlot.Length-1; i++)
+            for (i = 0; i < playerInventory.consumablesSlot.Length - 1; i++)
             {
                 consumableSlotIcon[i].sprite = playerInventory.consumablesSlot[i].itemIcon;
             }

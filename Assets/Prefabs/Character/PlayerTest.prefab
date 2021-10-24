@@ -580,17 +580,17 @@ MonoBehaviour:
   isBlocking: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
+  isInteracting: 0
+  isInvulnerable: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 5968797636483753183}
   itemInteractableUIGameObject: {fileID: 5968797636550818414}
-  isInteracting: 0
   isSprinting: 0
   isInAir: 0
   isGrounded: 0
   canDoCombo: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
-  isInvulnerable: 0
   isCharging: 0
   isBonFire: 0
   isPassing: 0
@@ -613,9 +613,15 @@ MonoBehaviour:
   unarmed: {fileID: 0}
   weaponsInRightHandSlot:
   - {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   weaponsInLeftHandSlot:
   - {fileID: 11400000, guid: 722e1e73834b1f04fb13ac3b7b77536a, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   consumablesSlot:
+  - {fileID: 11400000, guid: d42882863d1b68e47816ebef811da22e, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   spellsSlot:
   - {fileID: 0}
@@ -624,8 +630,6 @@ MonoBehaviour:
   curConsumableIndex: 0
   curSpellIndex: 0
   weaponsInventory:
-  - {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
-  - {fileID: 11400000, guid: 722e1e73834b1f04fb13ac3b7b77536a, type: 2}
   - {fileID: 11400000, guid: 9d7dd98db2855ce44b8defe1e059fdd5, type: 2}
   consumablesInventory:
   - {fileID: 11400000, guid: d42882863d1b68e47816ebef811da22e, type: 2}
@@ -651,6 +655,8 @@ MonoBehaviour:
   isBlocking: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
+  isInteracting: 0
+  isInvulnerable: 0
   pendingCriticalDamage: 0
 --- !u!114 &1103992513
 MonoBehaviour:
@@ -664,6 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c16e333056b0d14b91a247f140db622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamIDNumber: 0
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
@@ -4659,15 +4666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895073f709fcd014a9e00e4282f80f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandSlot01Icon: {fileID: 7158436229432932617}
-  rightHandSlot02Icon: {fileID: 8287721791352678388}
-  rightHandSlot03Icon: {fileID: 116685710830659830}
-  leftHandSlot01Icon: {fileID: 5298063578098587994}
-  leftHandSlot02Icon: {fileID: 2873057434058137799}
-  leftHandSlot03Icon: {fileID: 4741985536627524989}
-  consumableSlot01Icon: {fileID: 0}
-  consumableSlot02Icon: {fileID: 0}
-  consumableSlot03Icon: {fileID: 0}
+  rightHandSlotIcon: []
+  leftHandSlotIcon: []
+  consumableSlotIcon: []
   handleEquipmentSlots:
   - {fileID: 5702054139997546654}
   - {fileID: 1324936028653383677}
