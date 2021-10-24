@@ -21,7 +21,7 @@ namespace TOF
         private void Awake()
         {
             enemyEffectManager = GetComponent<EnemyEffectManager>();
-            enemyStats = GetComponent<EnemyStats>();
+            enemyStats = GetComponentInParent<EnemyStats>();
             LoadWeaponHolderSlots();
         }
 

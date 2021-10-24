@@ -9,6 +9,11 @@ namespace TOF
         public Animator anim;
         public bool canRotate;
 
+        private void Awake()
+        {
+            anim = GetComponent<Animator>();
+        }
+
         public void SetInteraction(bool flag)
         {
             anim.applyRootMotion = flag;
