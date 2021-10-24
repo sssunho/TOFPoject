@@ -22,6 +22,8 @@ MonoBehaviour:
   right_hand_idle: Right Arm Idle 01
   left_hand_idle: Left Arm Idle 01
   th_idle: Both Arm Idle 01
+  OnehandedWeaponID: 0
+  TwohandedWeaponID: 1
   OH_Light_Attack_1: Onehanded Light 1
   OH_Light_Attack_2: Onehanded Light 2
   TH_Light_Attack_1: Twohanded Light 1
