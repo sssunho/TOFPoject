@@ -8,10 +8,12 @@ public class HUDControl : MonoBehaviour
     #region General Variables
 
     #region Health/Stamina Variables
-    [Header("Health/Stamina/Strength")]
+    [Header("Health/Stamina/Focus/Strength")]
     public Slider healthSlider;
     public Slider staminaSlider;
     public Slider focusSlider;
+    public Slider strengthSlider;
+
     [Header("DamageHUD")]
     public Image damageImage;
     public float flashSpeed = 5f;

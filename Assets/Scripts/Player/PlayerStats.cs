@@ -8,6 +8,7 @@ namespace TOF
     public class PlayerStats : CharacterStats
     {
         GameManager gameManager;
+        HUDControl HUD;
         public SliderControl healthbar;
         public SliderControl staminabar;
         public SliderControl focusPointBar;
@@ -26,6 +27,12 @@ namespace TOF
 
         private void Start()
         {
+            HUD = FindObjectOfType<HUDControl>();
+            healthbar = HUD.healthSlider.GetComponent<SliderControl>();
+            staminabar = HUD.staminaSlider.GetComponent<SliderControl>();
+            focusPointBar = HUD.focusSlider.GetComponent<SliderControl>();
+            strengthbar = HUD.strengthSlider.GetComponent<SliderControl>();
+
             maxHealth = SetMaxHealthFromHealthLV();
             maxStamina = SetMaxStaminaFromHealthLV();
             maxFocusPoints = SetMaxFocusPointsFromFocusLevel();
