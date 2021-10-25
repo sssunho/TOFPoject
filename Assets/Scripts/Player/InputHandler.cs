@@ -56,6 +56,7 @@ namespace TOF
         UIManager uiManager;
         CameraHandler cameraHandler;
         PlayerAnimationManager playerAnimationHandler;
+        QuickSlotUI quickSlotUI;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -71,6 +72,7 @@ namespace TOF
             blockingCollider = GetComponentInChildren<BlockingCollider>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
+            quickSlotUI = FindObjectOfType<QuickSlotUI>();
             playerAnimationHandler = GetComponentInChildren<PlayerAnimationManager>();
         }
 
@@ -342,6 +344,7 @@ namespace TOF
             {
                 r_Input = false;
                 playerInventory.currentConsumable.AttempToConsumeItem(playerAnimationHandler, weaponSlotManager, playerEffectManager);
+                quickSlotUI.UpdateConsumableQuickSlot(playerInventory.currentConsumable);
             }
         }
     }

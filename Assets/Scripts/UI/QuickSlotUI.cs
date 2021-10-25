@@ -7,10 +7,18 @@ namespace TOF
 {
     public class QuickSlotUI : MonoBehaviour
     {
+        PlayerInventory playerInventory;
+        
         public Image SpellIcon;
         public Image leftWeaponIcon;
         public Image rightWeaponIcon;
         public Image ConsumableIcon;
+        public Text consumableCount;
+
+        private void Awake()
+        {
+            playerInventory = GetComponentInParent<PlayerInventory>();
+        }
 
         public void UpdateWeaponQuickSlot(bool isLeft, WeaponItem weapon)
         {
@@ -55,6 +63,7 @@ namespace TOF
             if(consumable.itemIcon!=null)
             {
                 ConsumableIcon.sprite = consumable.itemIcon;
+                consumableCount.text = playerInventory.currentConsumable.currentItemAmount.ToString();
             }
         }
     }
