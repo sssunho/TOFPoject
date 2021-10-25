@@ -164,6 +164,7 @@ public partial class FirstBT : MonoBehaviour
 
         Vector3 targetVelocity = enemyManager.navMeshAgent.desiredVelocity;
         Vector3 lookPos = enemyManager.currentTarget.transform.position - transform.position;
+        targetVelocity.y -= 9.81f;
         lookPos.y = 0;
         Quaternion targetRot = Quaternion.LookRotation(lookPos);
         enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 10.0f);
@@ -368,6 +369,7 @@ public partial class FirstBT : MonoBehaviour
         switchStrafingDirectionDelay -= Time.deltaTime;
 
         Vector3 moveDirection = transform.right * (isStrafingRight ? 1 : -1);
+        moveDirection.y -= 9.81f;
         anim.anim.SetFloat("Vertical", 0);
         enemyManager.controller.Move(strafingSpeed * moveDirection * Time.deltaTime);
         enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
@@ -394,7 +396,8 @@ public partial class FirstBT : MonoBehaviour
 
         Vector3 targetVelocity = enemyManager.navMeshAgent.desiredVelocity;
         Vector3 lookPos = enemyManager.currentTarget.transform.position - transform.position;
-        lookPos.y = 0;
+        lookPos.y = 0; 
+        targetVelocity.y -= 9.81f;
         Quaternion targetRot = Quaternion.LookRotation(lookPos);
         enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 10.0f);
 
