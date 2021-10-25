@@ -105,7 +105,7 @@ namespace TOF
             inputActions.Enable();
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             inputActions.Disable();
         }
