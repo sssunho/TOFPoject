@@ -22,6 +22,7 @@ namespace TOF
             if(currentItemAmount >0)
             {
                 playerAnimationHandler.PlayTargetAnimation(consumableAnimation, isInteracting, true);
+                currentItemAmount--;
             }
             else
             {

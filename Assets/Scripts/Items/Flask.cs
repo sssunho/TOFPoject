@@ -27,6 +27,7 @@ namespace TOF
             playerEffectManager.amountToBeHealed = healthRecoverAmount;
             playerEffectManager.instantiatedFXModel = flask;
             weaponSlotManager.rightHandSlot.UnloadWeapon();
+            //Destroy(flask, 0.5f);
         }
     }
 }
