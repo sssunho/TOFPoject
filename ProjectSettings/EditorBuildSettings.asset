@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Suhyun/New Scene.unity
+    guid: 9c2b43b4e855f0041977a3d2605826fc
+  - enabled: 1
+    path: Assets/Scenes/Suhyun/Game Title.unity
+    guid: 6442245f6a39970419f666cb2ec4eadf
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5f7e0e6d51eae044d8f750c428c7fb15, type: 2}
