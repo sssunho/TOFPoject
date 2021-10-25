@@ -13,8 +13,7 @@ namespace TOF
         private void Awake()
         {
             inputHandler = GetComponentInParent<InputHandler>();
-            playerInventory = GetComponentInParent<PlayerInventory>();
-            //blockingCollider = GetComponentInChildren<BlockingCollider>();
+            playerInventory = FindObjectOfType<PlayerInventory>();
         }
 
         public void OpenBlockingCollider()

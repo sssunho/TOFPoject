@@ -38,33 +38,33 @@ namespace TOF
             gameObject.SetActive(false);
         }
 
-        public void SelectThisSlot()
-        {
-            if (rightHandSlot01)
-            {
-                uiManager.rightHandSlot01Selected = true;
-            }
-            else if(rightHandSlot02)
-            {
-                uiManager.rightHandSlot02Selected = true;
-            }
-            else if (rightHandSlot03)
-            {
-                uiManager.rightHandSlot03Selected = true;
-            }
-            else if (leftHandSlot01)
-            {
-                uiManager.leftHandSlot01Selected = true;
-            }
-            else if (leftHandSlot02)
-            {
-                uiManager.leftHandSlot02Selected = true;
-            }
-            else
-            {
-                uiManager.leftHandSlot03Selected = true;
-            }
-        }
+        //public void SelectThisSlot()
+        //{
+        //    if (rightHandSlot01)
+        //    {
+        //        uiManager.rightHandSlot01Selected = true;
+        //    }
+        //    else if(rightHandSlot02)
+        //    {
+        //        uiManager.rightHandSlot02Selected = true;
+        //    }
+        //    else if (rightHandSlot03)
+        //    {
+        //        uiManager.rightHandSlot03Selected = true;
+        //    }
+        //    else if (leftHandSlot01)
+        //    {
+        //        uiManager.leftHandSlot01Selected = true;
+        //    }
+        //    else if (leftHandSlot02)
+        //    {
+        //        uiManager.leftHandSlot02Selected = true;
+        //    }
+        //    else
+        //    {
+        //        uiManager.leftHandSlot03Selected = true;
+        //    }
+        //}
     }
 }
 

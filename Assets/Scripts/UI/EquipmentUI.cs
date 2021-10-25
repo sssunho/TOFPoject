@@ -32,18 +32,12 @@ namespace TOF
 
         public void LoadEquipmentsIcon()
         {
-            for (i = 0; i < playerInventory.weaponsInRightHandSlot.Length - 1; i++)
+            for (i = 0; i < 3; i++)
             {
                 if(playerInventory.weaponsInRightHandSlot[i] !=null)
                     rightHandSlotIcon[i].sprite = playerInventory.weaponsInRightHandSlot[i].itemIcon;
-            }
-            for (i = 0; i < playerInventory.weaponsInLeftHandSlot.Length - 1; i++)
-            {
                 if (playerInventory.weaponsInLeftHandSlot[i] != null)
                     leftHandSlotIcon[i].sprite = playerInventory.weaponsInLeftHandSlot[i].itemIcon;
-            }
-            for (i = 0; i < playerInventory.consumablesSlot.Length - 1; i++)
-            {
                 if (playerInventory.consumablesSlot[i] != null)
                     consumableSlotIcon[i].sprite = playerInventory.consumablesSlot[i].itemIcon;
             }
@@ -51,7 +45,7 @@ namespace TOF
 
         public void LoadConsumablesOnEquipmentScreen(PlayerInventory playerInventory)
         {
-            for (int i = 0; i < handleConsumableSlots.Length-1; i++)
+            for (int i = 0; i < handleConsumableSlots.Length; i++)
             {
                 if(handleConsumableSlots[i].consumableSlot01)
                 {

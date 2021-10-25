@@ -16,6 +16,9 @@ MonoBehaviour:
   itemName: Unarmed
   modelPrefab: {fileID: 1937729462103552718, guid: 6a6b5d89d81010d41b07c4aed343d07a, type: 3}
   inUnarmed: 1
+  baseDamage: 15
+  criticalDamageMultiplier: 3
+  physicalDamageAbsorption: 0
   right_hand_idle: Right Arm Idle 01
   left_hand_idle: Left Arm Idle 01
   th_idle: 
@@ -25,6 +28,12 @@ MonoBehaviour:
   TH_Light_Attack_2: 
   OH_Heavy_Attack_1: 
   OH_Heavy_Attack_2: 
+  weapon_art: 
   baseStamina: 10
   lightAttackMultiplier: 1
   heavyAttackMultiplier: 2
+  isSpellCaster: 0
+  isFaithCaster: 0
+  isPyroCaster: 0
+  isMeleeWeapon: 0
+  isShieldWeapon: 0

@@ -12,7 +12,6 @@ public class HUDControl : MonoBehaviour
     public Slider healthSlider;
     public Slider staminaSlider;
     public Slider focusSlider;
-    public Slider strengthSlider;
     [Header("DamageHUD")]
     public Image damageImage;
     public float flashSpeed = 5f;
