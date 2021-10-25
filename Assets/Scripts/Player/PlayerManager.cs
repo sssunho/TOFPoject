@@ -44,6 +44,8 @@ namespace TOF
             playerLocomotion = GetComponent<PlayerLocomotion>();
             anim = GetComponentInChildren<Animator>();
             interactableUI = FindObjectOfType<InteractableUI>();
+            interactableUIGameObject = interactableUI.interaction_Popup;
+            itemInteractableUIGameObject = interactableUI.interaction_Item;
         }
 
         private void Update()
