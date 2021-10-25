@@ -38,7 +38,9 @@ namespace TOF
         private PlayerStats currentController;
         public static GameManager instance;
         private GameObject oldPlayer;
-        
+
+        public static bool isPause = false; // 메뉴가 호출되면 true
+
         public UnityEvent onSpawn;
 
         protected virtual void Start()
