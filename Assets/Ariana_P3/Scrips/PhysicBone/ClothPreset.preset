@@ -1,0 +1,355 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ClothPreset
+  m_TargetType:
+    m_NativeTypeID: 183
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_StretchingStiffness
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_BendingStiffness
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UseTethers
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UseGravity
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Damping
+    value: 0.05
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_ExternalAcceleration.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_ExternalAcceleration.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_ExternalAcceleration.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_RandomAcceleration.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_RandomAcceleration.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_RandomAcceleration.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_WorldVelocityScale
+    value: 0.65
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_WorldAccelerationScale
+    value: 0.005
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Friction
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_CollisionMassScale
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UseContinuousCollision
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UseVirtualParticles
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SolverFrequency
+    value: 250
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SleepThreshold
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.size
+    value: 24
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[0].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[0].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[1].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[1].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[2].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[2].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[3].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[3].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[4].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[4].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[5].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[5].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[6].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[6].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[7].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[7].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[8].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[8].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[9].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[9].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[10].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[10].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[11].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[11].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[12].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[12].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[13].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[13].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[14].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[14].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[15].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[15].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[16].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[16].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[17].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[17].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[18].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[18].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[19].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[19].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[20].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[20].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[21].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[21].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[22].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[22].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[23].maxDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Coefficients.Array.data[23].collisionSphereDistance
+    value: 3.4028235e+38
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_CapsuleColliders.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SphereColliders.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SelfCollisionDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SelfCollisionStiffness
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SelfAndInterCollisionIndices.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[0].x
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[0].y
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[0].z
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[1].x
+    value: 0.6666667
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[1].y
+    value: 0.16666667
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[1].z
+    value: 0.16666667
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[2].x
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[2].y
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleWeights.Array.data[2].z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_VirtualParticleIndices.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
