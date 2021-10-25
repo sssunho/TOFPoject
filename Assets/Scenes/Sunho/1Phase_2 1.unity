@@ -25857,6 +25857,10 @@ PrefabInstance:
       propertyPath: itemInteractableUIGameObject
       value: 
       objectReference: {fileID: 4933817436088330015}
+    - target: {fileID: 3084691100526123228, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4541405931947513319, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -43231,7 +43235,6 @@ MonoBehaviour:
   healthSlider: {fileID: 4315367392491825894}
   staminaSlider: {fileID: 2620332556576213752}
   focusSlider: {fileID: 0}
-  strengthSlider: {fileID: 8397360050623325361}
   damageImage: {fileID: 0}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}

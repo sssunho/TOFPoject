@@ -58,18 +58,23 @@ namespace TOF
             if (playerStats.currentStamina <= 0)
                 return;
 
+            playerAnimationHandler.anim.SetBool("isUsingRightHand", true);
             playerManager.isBlocking = false;
             weaponSlotManager.attackingWeapon = weapon;
-            if (inputHandler.twoHandFlag)
-            {
-                playerAnimationHandler.PlayTargetAnimation(weapon.TH_Light_Attack_1, true);
-                lastAttack = weapon.TH_Light_Attack_1;
-            }
-            else
-            {
-                playerAnimationHandler.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
-                lastAttack = weapon.OH_Light_Attack_1;
-            }
+            playerAnimationHandler.anim.SetBool("isHeavyAttack", false);
+            playerAnimationHandler.anim.SetInteger("weaponID", inputHandler.twoHandFlag ? weapon.TwohandedWeaponID : weapon.OnehandedWeaponID);
+            playerAnimationHandler.SetInteraction(true);
+
+            //if (inputHandler.twoHandFlag)
+            //{
+            //    playerAnimationHandler.PlayTargetAnimation(weapon.TH_Light_Attack_1, true);
+            //    lastAttack = weapon.TH_Light_Attack_1;
+            //}
+            //else
+            //{
+            //    playerAnimationHandler.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
+            //    lastAttack = weapon.OH_Light_Attack_1;
+            //}
         }
 
         public void HandleHeavyAttack(WeaponItem weapon)
@@ -79,19 +84,25 @@ namespace TOF
             if (playerStats.currentStamina <= 0)
                 return;
 
+            playerAnimationHandler.anim.SetBool("isUsingRightHand", true);
+            playerAnimationHandler.anim.SetTrigger("AttackTrigger");
+            playerAnimationHandler.anim.SetBool("isHeavyAttack", true);
+            playerAnimationHandler.anim.SetInteger("weaponID", inputHandler.twoHandFlag ? weapon.TwohandedWeaponID : weapon.OnehandedWeaponID);
+            playerAnimationHandler.SetInteraction(true);
+            playerManager.isUsingLeftHand = true;
             playerManager.isBlocking = false;
             playerManager.isCharging = true;
-            weaponSlotManager.attackingWeapon = weapon;
-            if (inputHandler.twoHandFlag)
-            {
+            //weaponSlotManager.attackingWeapon = weapon;
+            //if (inputHandler.twoHandFlag)
+            //{
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-            }
-            playerAnimationHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
-            lastAttack = weapon.OH_Heavy_Attack_1;
+            //}
+            //playerAnimationHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_1, true);
+            //lastAttack = weapon.OH_Heavy_Attack_1;
         }
 
         #region Input Action
@@ -142,18 +153,19 @@ namespace TOF
         private void PerformRBMeleeAction()
         {
             playerAnimationHandler.anim.SetTrigger("AttackTrigger");
+            HandleLightAttack(playerInventory.rightWeapon);
 
-            if (playerManager.canDoCombo)
-            {
-                inputHandler.comboFlag = true;
-                HandleWeaponCombo(playerInventory.rightWeapon);
-                inputHandler.comboFlag = false;
-            }
-            else if (!playerManager.canDoCombo && !playerManager.isInteracting)
-            {
-                playerAnimationHandler.anim.SetBool("isUsingRightHand", true);
-                HandleLightAttack(playerInventory.rightWeapon);
-            }
+            //if (playerManager.canDoCombo)
+            //{
+            //    inputHandler.comboFlag = true;
+            //    HandleWeaponCombo(playerInventory.rightWeapon);
+            //    inputHandler.comboFlag = false;
+            //}
+            //else if (!playerManager.canDoCombo && !playerManager.isInteracting)
+            //{
+            //    playerAnimationHandler.anim.SetBool("isUsingRightHand", true);
+            //    HandleLightAttack(playerInventory.rightWeapon);
+            //}
         }
 
         private void PerformRBMagicAction(WeaponItem weapon)
