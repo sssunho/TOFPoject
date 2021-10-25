@@ -43127,6 +43127,7 @@ MonoBehaviour:
   healthSlider: {fileID: 4315367392491825894}
   staminaSlider: {fileID: 2620332556576213752}
   focusSlider: {fileID: 4270794042864255251}
+  strengthSlider: {fileID: 0}
   damageImage: {fileID: 0}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
@@ -47730,6 +47731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f4002adab0a7e43ad9ce272086ce94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interaction_Popup: {fileID: 4933817436155623854}
+  interaction_Item: {fileID: 4933817436088330015}
   interactableText: {fileID: 4933817436514110463}
   itemText: {fileID: 4933817436325150294}
   itemImage: {fileID: 4933817436302692092}

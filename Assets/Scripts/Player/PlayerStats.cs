@@ -12,7 +12,6 @@ namespace TOF
         public SliderControl healthbar;
         public SliderControl staminabar;
         public SliderControl focusPointBar;
-        public SliderControl strengthbar;
 
         public float staminaRegenerationAmount = 1;
         public float staminaRegenTimer;
@@ -31,7 +30,6 @@ namespace TOF
             healthbar = HUD.healthSlider.GetComponent<SliderControl>();
             staminabar = HUD.staminaSlider.GetComponent<SliderControl>();
             focusPointBar = HUD.focusSlider.GetComponent<SliderControl>();
-            strengthbar = HUD.strengthSlider.GetComponent<SliderControl>();
 
             maxHealth = SetMaxHealthFromHealthLV();
             maxStamina = SetMaxStaminaFromHealthLV();
