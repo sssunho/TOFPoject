@@ -7,6 +7,7 @@ namespace TOF
     public class PauseMenu : MonoBehaviour
     {
         [SerializeField] private GameObject go_BaseUI;
+        [SerializeField] private SaveNLoadManager saveNLoad;
         InputHandler inputHandler;
 
         private void Awake()
@@ -46,11 +47,13 @@ namespace TOF
         public void ClickSave()
         {
             Debug.Log("세이브");
+            saveNLoad.SaveData();
         }
 
         public void ClickLoad()
         {
             Debug.Log("로드");
+            saveNLoad.LoadDate();
         }
         public void ClickExit()
         {

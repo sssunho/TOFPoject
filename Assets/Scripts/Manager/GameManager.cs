@@ -261,13 +261,23 @@ namespace TOF
         {
             Debug.Log(index);
             SetSpawnSpoint(bonfires[index].checkPoint);
-            oldPlayer = currentPlayer;
             TeleportWindow.SetActive(false);
             var player = currentPlayer.GetComponent<PlayerManager>();
             player.isBonFire = false;
-            StartCoroutine(RespawnRoutine());
+            StartCoroutine(Teleport());
         }
-        
+
+        protected virtual IEnumerator Teleport()
+        {
+            yield return new WaitForSeconds(3f);
+            var player = currentPlayer.GetComponent<PlayerManager>();
+            var playerController = currentPlayer.GetComponent<CharacterController>();
+            playerController.enabled = false;
+            player.transform.position = spawnPoint.position;
+            playerController.enabled = true;
+            playerUI.SetActive(true);
+        }
+
         public void CancleTeleport()
         {
             TeleportWindow.SetActive(false);

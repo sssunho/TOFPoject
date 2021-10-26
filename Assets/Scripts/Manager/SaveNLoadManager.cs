@@ -9,6 +9,7 @@ namespace TOF
     public class SaveData
     {
         public Vector3 playerPos;
+        public Vector3 playerRot;
     }
 
     public class SaveNLoadManager : MonoBehaviour
@@ -33,10 +34,33 @@ namespace TOF
         {
             player = FindObjectOfType<PlayerManager>();
             saveData.playerPos = player.transform.position;
+            saveData.playerRot = player.transform.eulerAngles;
+
             string json = JsonUtility.ToJson(saveData);
             File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
             Debug.Log("저장 완료");
             Debug.Log(json);
+        }
+
+        public void LoadDate()
+        {
+            if(File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME))
+            {
+                string loadJson = File.ReadAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME);
+                saveData = JsonUtility.FromJson<SaveData>(loadJson);
+
+                player = FindObjectOfType<PlayerManager>();
+                var playerController = player.GetComponent<CharacterController>();
+                playerController.enabled = false;
+                player.transform.position = saveData.playerPos;
+                player.transform.eulerAngles = saveData.playerRot;
+                playerController.enabled = true;
+            }
+            else
+            {
+                Debug.Log("파일이 존재하지 않습니다.");
+            }
+
         }
     }
 }

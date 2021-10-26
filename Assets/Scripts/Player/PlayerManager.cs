@@ -127,7 +127,7 @@ namespace TOF
                         string interactableText = interactableObject.interactableText;
                         interactableUI.interactableText.text = interactableText;
                         interactableUIGameObject.SetActive(true);
-
+                        inputHandler.interactFlag = true;
                         if (inputHandler.e_Input)
                             hit.collider.GetComponent<Interactable>().Interact(this);
                     }
@@ -144,6 +144,7 @@ namespace TOF
                 {
                     itemInteractableUIGameObject.SetActive(false);
                 }
+                inputHandler.interactFlag = false;
             }
         }
 
@@ -178,9 +179,7 @@ namespace TOF
                 isBonFire = true;
                 // UI 포탈 선택창 만들기.
                 gameManager.TeleportWindow.SetActive(true);
-                var player = FindObjectOfType<UIManager>();
-                gameManager.playerUI = player.gameObject;
-                player.gameObject.SetActive(false);
+                gameManager.playerUI.SetActive(false);
             }
             else
             {
