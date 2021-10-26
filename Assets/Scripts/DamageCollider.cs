@@ -6,7 +6,7 @@ namespace TOF
 {
     public class DamageCollider : MonoBehaviour
     {
-        public CharacterStats characterStat;
+        public CharacterStats senderStat;
         protected Collider damageCollider;
         public int currentWeaponDamage = 25;
 
@@ -33,21 +33,23 @@ namespace TOF
 
         protected virtual void OnTriggerEnter(Collider collision)
         {
-            CharacterStats stats = collision.GetComponent<CharacterStats>();
+            CharacterStats recieverStat = collision.GetComponent<CharacterStats>();
 
-            if (stats == null) return;
-            if (teamIDNumber == stats.teamIDNumber) return;
+            if (recieverStat == null) return;
+            if (teamIDNumber == recieverStat.teamIDNumber) return;
 
             CharacterManager manager = collision.GetComponent<CharacterManager>();
             CharacterEffectManager effect = collision.GetComponentInChildren<CharacterEffectManager>();
             BlockingCollider shield = collision.GetComponentInChildren<BlockingCollider>();
 
+            float DefReductionRate = 100.0f * (float)recieverStat.Def / ((float)recieverStat.Def + 45.0f);
+
             Damage damage = new Damage();
-            damage.value = currentWeaponDamage;
-            damage.attackerPoint = characterStat ? characterStat.transform.position : transform.position;
+            damage.value = Mathf.RoundToInt((float)senderStat.Atk * (1.0f - DefReductionRate));
+            damage.attackerPoint = senderStat ? senderStat.transform.position : transform.position;
             damage.hitPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            damage.reaction = characterStat.attackReaction;
-            stats.TakeDamage(damage);
+            damage.reaction = senderStat.attackReaction;
+            recieverStat.TakeDamage(damage);
 
         }
     }

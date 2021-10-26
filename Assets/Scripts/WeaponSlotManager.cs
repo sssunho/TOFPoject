@@ -119,7 +119,7 @@ namespace TOF
         {
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             leftHandDamageCollider.currentWeaponDamage = playerInventory.leftWeapon.baseDamage;
-            leftHandDamageCollider.characterStat = GetComponentInParent<CharacterStats>();
+            leftHandDamageCollider.senderStat = GetComponentInParent<CharacterStats>();
             leftHandDamageCollider.teamIDNumber = playerStats.teamIDNumber;
             playerEffectManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
@@ -128,7 +128,7 @@ namespace TOF
         {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             rightHandDamageCollider.currentWeaponDamage = playerInventory.rightWeapon.baseDamage;
-            rightHandDamageCollider.characterStat = GetComponentInParent<CharacterStats>();
+            rightHandDamageCollider.senderStat = GetComponentInParent<CharacterStats>();
             rightHandDamageCollider.teamIDNumber = playerStats.teamIDNumber;
 
             playerEffectManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();

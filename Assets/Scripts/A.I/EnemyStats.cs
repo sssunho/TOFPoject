@@ -6,12 +6,41 @@ namespace TOF
 {
     public class EnemyStats : CharacterStats
     {
+        EnemyWeaponSlotManager weaponSlotManager;
         EnemyBossManager enemyBossManager;
         public UIEnemyHealthBar enemyHealthBar;
 
         public int soulsAwardedOnDeath = 50;
 
         public bool isBoss;
+
+        public int atk;
+        public int def;
+        public int mov;
+        public int crit;
+
+        public override int Atk
+        {
+            get
+            {
+                if (weaponSlotManager.rightHandWeapon != null) return atk + weaponSlotManager.rightHandWeapon.baseDamage;
+                return atk;
+            }
+        }
+
+        public override int Def
+        {
+            get => def;
+        }
+
+        public override float Mov
+        {
+            get => 1.0f + (float)mov / 100.0f;
+        }
+        public override float Crit
+        {
+            get => (float)crit / 100.0f;
+        }
 
         private void Awake()
         {
@@ -20,6 +49,7 @@ namespace TOF
             enemyBossManager = GetComponent<EnemyBossManager>();
             effectManager = GetComponentInChildren<CharacterEffectManager>();
             maxHealth = SetMaxHealthFromHealthLevel();
+            weaponSlotManager = GetComponentInChildren<EnemyWeaponSlotManager>();
             currentHealth = maxHealth;
         }
 

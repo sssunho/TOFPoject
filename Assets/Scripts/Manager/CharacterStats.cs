@@ -12,6 +12,9 @@ namespace TOF
         protected CharacterManager characterManager;
         protected CharacterEffectManager effectManager;
 
+        public float AtkCoefficient = 45;
+        public float DefCoefficient = 45;
+
         public HitReaction attackReaction;
 
         [Header("Team I.D")]
@@ -33,7 +36,38 @@ namespace TOF
 
         public bool isDead;
 
-        int poise;
+        public virtual int Atk
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public virtual int Def
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public virtual float Mov
+        {
+            get
+            {
+                return 1.0f;
+            }
+        }
+        public virtual float Crit
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public int poise = 0;
 
         private void Awake()
         {

@@ -9,6 +9,8 @@ namespace TOF
     {
         GameManager gameManager;
         HUDControl HUD;
+        WeaponSlotManager weaponSlotManager;
+
         public SliderControl healthbar;
         public SliderControl staminabar;
         public SliderControl focusPointBar;
@@ -16,12 +18,54 @@ namespace TOF
         public float staminaRegenerationAmount = 1;
         public float staminaRegenTimer;
 
+        [Header("Primary Stats")]
+        public int lv = 1;
+        public int xp = 0;
+        public int hp = 0;
+        public int mp = 0;
+        public int sp = 0;
+        public int str = 0;
+        public int dex = 0;
+
+        public override int Atk
+        {
+            get
+            {
+                if (weaponSlotManager.rightHandSlot.currentWeapon == null) return str;
+                return str + weaponSlotManager.rightHandSlot.currentWeapon.baseDamage;
+            }
+        }
+
+        public override int Def
+        {
+            get
+            {
+                return str;
+            }
+        }
+
+        public override float Mov
+        {
+            get
+            {
+                return 1.0f + (float)dex / 100.0f;
+            }
+        }
+        public override float Crit
+        {
+            get
+            {
+                return (float)dex / 100.0f;
+            }
+        }
+
         private void Awake()
         {
             characterManager = GetComponent<PlayerManager>();
             animatorManager = GetComponentInChildren<PlayerAnimationManager>();
             effectManager = GetComponentInChildren<CharacterEffectManager>();
             gameManager = FindObjectOfType<GameManager>();
+            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
         }
 
         private void Start()

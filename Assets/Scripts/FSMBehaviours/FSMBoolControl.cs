@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoolControl : StateMachineBehaviour
+public class FSMBoolControl : StateMachineBehaviour
 {
     public string boolName;
 
     bool initialized = false;
     int hash;
 
-
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
         if (!initialized)
         {
@@ -19,9 +18,9 @@ public class BoolControl : StateMachineBehaviour
         }
         animator.SetBool(hash, true);
     }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)
     {
         animator.SetBool(hash, false);
     }
+
 }
