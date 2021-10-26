@@ -1007,6 +1007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5126700290381209592}
   - component: {fileID: 5126700290381209593}
+  - component: {fileID: 5126700289564934285}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1076,6 +1077,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5126700289564934285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5126700290381209594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b978079d0e0d44fbb1eb86cc350cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1401799335454647863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1130,6 +1143,34 @@ PrefabInstance:
     - target: {fileID: 6075782308434834064, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
       propertyPath: m_Name
       value: Bonfire01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5126700290381209593}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TOF.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
@@ -1193,6 +1234,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bonfire02
       objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5126700290381209593}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TOF.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
 --- !u!4 &1401799336103388649 stripped
@@ -1254,6 +1323,34 @@ PrefabInstance:
     - target: {fileID: 6075782308434834064, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
       propertyPath: m_Name
       value: Bonfire05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5126700290381209593}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TOF.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
@@ -1317,6 +1414,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bonfire04
       objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5126700290381209593}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TOF.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
 --- !u!4 &1401799336297395066 stripped
@@ -1378,6 +1503,34 @@ PrefabInstance:
     - target: {fileID: 6075782308434834064, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
       propertyPath: m_Name
       value: Bonfire03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5126700290381209593}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TOF.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075782308484098497, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}
+      propertyPath: ResetEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17020dbd4daf1a4489f22f2c78d30ba5, type: 3}

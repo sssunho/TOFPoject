@@ -70,7 +70,7 @@ namespace TOF
             }
             else
             {
-                if (inputHandler.interactFlag)
+                if (inputHandler.interactFlag && inputHandler.e_Input)
                 {
                     HolderSlot.LoadWeaponModel(rightHandSlot.currentWeapon);
                     backSlot.LoadWeaponModel(leftHandSlot.currentWeapon);

@@ -172,7 +172,7 @@ namespace TOF
         {
             if (weapon.isFaithCaster)
             {
-                if (playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
+                if (playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell && playerStats.currentFocusPoint > 0)
                 {
                     playerInventory.currentSpell.AttemptToCastSpell(playerAnimationHandler, playerStats);
                 }
