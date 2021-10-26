@@ -9,15 +9,17 @@ namespace TOF
     {
         EnemyManager enemyManager;
         EnemyStats enemyStats;
+        EnemyLocomotionManager enemyLocomotion;
         EnemyEffectManager enemyEffectManager;
         public NavMeshAgent agent;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
             enemyStats = GetComponentInParent<EnemyStats>();
             enemyEffectManager = GetComponent<EnemyEffectManager>();
+            enemyLocomotion = GetComponentInParent<EnemyLocomotionManager>();
         }
         public void CanRotate()
         {
@@ -111,13 +113,14 @@ namespace TOF
 
         private void OnAnimatorMove()
         {
-            enemyManager.navMeshAgent.enabled = !enemyManager.isInteracting;
+            //enemyManager.navMeshAgent.enabled = !enemyManager.isInteracting;
             if (enemyManager.isInteracting == false)
                 return;
             
             float delta = Time.deltaTime;
             Vector3 deltaPosition = anim.deltaPosition;
-            deltaPosition.y -= 9.81f * Time.deltaTime;
+
+            deltaPosition.y -= enemyLocomotion.ignoreGravity ? 0 : 9.81f * Time.deltaTime;
 
             enemyManager.controller.Move(deltaPosition);
             enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;

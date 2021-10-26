@@ -12,7 +12,7 @@ namespace TOF
         protected CharacterManager characterManager;
         protected CharacterEffectManager effectManager;
 
-        public float AtkCoefficient = 45;
+        public float statCoefficient = 45;
         public float DefCoefficient = 45;
 
         public HitReaction attackReaction;
@@ -85,7 +85,7 @@ namespace TOF
             if (cross.y > 0) angle = -angle;
             Direction4Way hitDirection = AngleToDirection4(angle);
 
-            if(hitDirection == Direction4Way.FORWARD && characterManager.isBlocking)
+            if(hitDirection == Direction4Way.FORWARD && characterManager.isBlocking && !damage.ignoreGuard)
             {
                 BlockingCollider shield = transform.GetComponentInChildren<BlockingCollider>();
                 if (shield != null)

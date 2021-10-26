@@ -151,11 +151,11 @@ namespace TOF
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-            float speed = movementSpeed;
+            float speed = movementSpeed * playerStats.Mov;
 
             if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
             {
-                speed = sprintSpeed;
+                speed = sprintSpeed * playerStats.Mov;
                 playerManager.isSprinting = true;
                 moveDirection *= speed;
                 // #. sprint stamina 1/10 version.
@@ -171,7 +171,7 @@ namespace TOF
             {
                 if (inputHandler.moveAmount < 0.5f)
                 {
-                    moveDirection *= walkingSpeed;
+                    moveDirection *= walkingSpeed * playerStats.Mov;
                     playerManager.isSprinting = false;
                 }
                 else

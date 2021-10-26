@@ -2733,7 +2733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &149766457
 Transform:
   m_ObjectHideFlags: 0
@@ -2806,7 +2806,7 @@ Animator:
   m_GameObject: {fileID: 149766456}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 66d7f491725636e4dad5d0b70590f996, type: 3}
-  m_Controller: {fileID: 9100000, guid: e776c3033464b064093060fe6ff3c1ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: caa1a0a498761b7459a204b6a08fb5aa, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6168,15 +6168,17 @@ GameObject:
   m_Component:
   - component: {fileID: 298207837}
   - component: {fileID: 298207840}
+  - component: {fileID: 298207841}
   - component: {fileID: 298207839}
   - component: {fileID: 298207838}
+  - component: {fileID: 298207842}
   m_Layer: 9
   m_Name: Rabbit_Anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &298207837
 Transform:
   m_ObjectHideFlags: 0
@@ -6184,30 +6186,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298207836}
-  m_LocalRotation: {x: -0, y: 0.67088497, z: -0, w: 0.7415615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1676848846}
   - {fileID: 195119958}
   m_Father: {fileID: 1401294789}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 84.271, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &298207838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 298207836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07847fa1d45bcf24182a4ec4ac5d27cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightHandWeapon: {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
-  leftHandWeapon: {fileID: 0}
---- !u!114 &298207839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6222,6 +6210,20 @@ MonoBehaviour:
   anim: {fileID: 0}
   canRotate: 0
   agent: {fileID: 0}
+--- !u!114 &298207839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298207836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07847fa1d45bcf24182a4ec4ac5d27cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHandWeapon: {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+  leftHandWeapon: {fileID: 0}
 --- !u!95 &298207840
 Animator:
   serializedVersion: 3
@@ -6232,7 +6234,7 @@ Animator:
   m_GameObject: {fileID: 298207836}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: bbd05b11a0dab954986c39ca695e6dfb, type: 3}
-  m_Controller: {fileID: 9100000, guid: e776c3033464b064093060fe6ff3c1ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: caa1a0a498761b7459a204b6a08fb5aa, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -6241,6 +6243,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &298207841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298207836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27274b9389c640c4ebf40c66d0dea2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 120346, guid: b8f2fe1ee1a01724cb72f5b0e6bd2eef, type: 3}
+  recoilMetalFX: {fileID: 110090, guid: 04dd09560119f3c48ba23669eb660db1, type: 3}
+  rightWeaponFX: {fileID: 0}
+  leftWeaponFX: {fileID: 0}
+--- !u!114 &298207842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298207836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdaa700011bf4c247adc51bbb5e3e936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MagicBomb: {fileID: 8674307355007988442, guid: 8abf84fdda45bf34aaa06d118ee9a958, type: 3}
+  MagicArrow: {fileID: 0}
+  MagicBall: {fileID: 0}
 --- !u!1001 &306852215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10485,6 +10518,10 @@ PrefabInstance:
     - target: {fileID: 2843558290693091024, guid: 64a589a33da366047913b3420a026cac, type: 3}
       propertyPath: m_Name
       value: Camera Holder
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843558290693091025, guid: 64a589a33da366047913b3420a026cac, type: 3}
+      propertyPath: lookSpeed
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 2843558290693091026, guid: 64a589a33da366047913b3420a026cac, type: 3}
       propertyPath: m_RootOrder
@@ -28622,7 +28659,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.53900003, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30653,6 +30690,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1389515924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 263314670826900820, guid: ceb59301749c8354b86e884142b17d9f, type: 3}
+  m_PrefabInstance: {fileID: 1336693746}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199c7590ca82c948856321b902fa7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1389574612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31053,6 +31101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0046a0c47f0489d4bbbb28efb0b3de2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 1389515924}
   speed: 10
   strafingSpeed: 10
   angularSpeed: 20
@@ -31145,6 +31194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2091eada97135794897ad92cd0562fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreGravity: 0
   characterCollider: {fileID: 0}
   characterCollisionBlockerCollider: {fileID: 144226294}
   detectionLayer:
@@ -31162,6 +31212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e2d5b244edce8478669103ea58b23c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statCoefficient: 45
+  DefCoefficient: 45
   attackReaction: 0
   teamIDNumber: 0
   healthLevel: 30
@@ -31175,9 +31227,14 @@ MonoBehaviour:
   currentFocusPoint: 0
   soulCount: 0
   isDead: 0
+  poise: 0
   enemyHealthBar: {fileID: 1385329357}
   soulsAwardedOnDeath: 50
   isBoss: 0
+  atk: 0
+  def: 0
+  mov: 0
+  crit: 0
 --- !u!4 &1401294789
 Transform:
   m_ObjectHideFlags: 0
@@ -31186,7 +31243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401294782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.02, y: -0.8, z: 1.16}
+  m_LocalPosition: {x: -12.49, y: -0.14, z: -15.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 298207837}
@@ -53050,6 +53107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2091eada97135794897ad92cd0562fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreGravity: 0
   characterCollider: {fileID: 0}
   characterCollisionBlockerCollider: {fileID: 2862906455414480963}
   detectionLayer:
@@ -53067,6 +53125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e2d5b244edce8478669103ea58b23c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statCoefficient: 45
+  DefCoefficient: 45
   attackReaction: 0
   teamIDNumber: 0
   healthLevel: 30
@@ -53080,9 +53140,14 @@ MonoBehaviour:
   currentFocusPoint: 0
   soulCount: 0
   isDead: 0
+  poise: 0
   enemyHealthBar: {fileID: 1841410007}
   soulsAwardedOnDeath: 50
   isBoss: 0
+  atk: 0
+  def: 0
+  mov: 0
+  crit: 0
 --- !u!4 &2862906456413160597
 Transform:
   m_ObjectHideFlags: 0
@@ -53126,7 +53191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2862906456413160608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53139,6 +53204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0046a0c47f0489d4bbbb28efb0b3de2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
   speed: 10
   strafingSpeed: 10
   angularSpeed: 20
@@ -57223,6 +57289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 4933817436090874725}
+  equiped: {fileID: 0}
 --- !u!224 &4933817436251888559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61347,7 +61414,7 @@ Animator:
   m_GameObject: {fileID: 3132956753057279690}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 66d7f491725636e4dad5d0b70590f996, type: 3}
-  m_Controller: {fileID: 9100000, guid: e776c3033464b064093060fe6ff3c1ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: caa1a0a498761b7459a204b6a08fb5aa, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

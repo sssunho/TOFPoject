@@ -19,19 +19,31 @@ namespace TOF
         EnemyStats enemyStats;
         EnemyAnimationManager animatorManager;
 
-        CharacterManager currentTarget;
+        public CharacterManager currentTarget;
 
-        float delayTimer = 0.0f;
-        float stareTimer = 0.0f;
-        float strafingTimer = 0.0f;
-        float turnDelay = 0.0f;
+        #region Delays
+
+        public float delayTimer { get; protected set; }
+        public float stareTimer { get; protected set; }
+        public float strafingTimer { get; protected set; }
+        public float turnDelay { get; protected set; }
 
         bool IsDelayed
         {
             get => delayTimer > 0 || stareTimer > 0 || strafingTimer > 0;
         }
 
-        public bool isHit = false;
+        #endregion
+
+        #region State Machine Bools
+
+        [HideInInspector]
+        public bool isHit { get; protected set; }
+        public bool isEmptyState { get; protected set; }
+        public bool isEvadeAttack { get; protected set; }
+        public bool isHammerFall { get; protected set; }
+
+        #endregion
 
         public float speed = 10.0f;
         public float strafingSpeed = 10.0f;
@@ -68,7 +80,10 @@ namespace TOF
 
             var MeleeAttackNode = new BehaviorTreeBuilder(gameObject)
                 .Selector("Melee Attack")
-                    .Do("test", ()=> TaskStatus.Failure)
+                    .Sequence()
+                        .Condition("attack condition", () => !IsDelayed && isEmptyState)
+                        .AddNode(new EvadeAttack { Name = "Evade Attack" })
+                    .End()
                 .End();
 
             var RangeAttackNode = new BehaviorTreeBuilder(gameObject)
@@ -85,7 +100,7 @@ namespace TOF
                             .Do("Delay", DelayBehaviour)
                         .End()
                         .Selector("Special Attack")
-                            .Do("null", () => TaskStatus.Failure)
+                            .AddNode(new HammerFall { Name = "Hammer Fall"})
                         .End()
                         .Selector("Normal Attack")
                             .Splice(MeleeAttackNode.Build())
@@ -123,11 +138,14 @@ namespace TOF
             fullbodyInfo = animatorManager.anim.GetCurrentAnimatorStateInfo(5);
             upperbodyInfo = animatorManager.anim.GetCurrentAnimatorStateInfo(4);
             isHit = animatorManager.anim.GetBool("isHit");
+            isEvadeAttack = animatorManager.anim.GetBool("evadeAttack");
+            isEmptyState = animatorManager.anim.GetBool("isEmptyState");
+            isHammerFall = animatorManager.anim.GetBool("hammerFall");
         }
 
         #region General Methods
 
-        private void LookTarget(Vector3 target)
+        protected void LookTarget(Vector3 target)
         {
             Vector3 rel = target - transform.position;
             rel.y = 0;
@@ -135,7 +153,7 @@ namespace TOF
             transform.rotation = look;
         }
 
-        private void LookTargetWithLerp(Vector3 target)
+        protected void LookTargetWithLerp(Vector3 target)
         {
             Vector3 rel = target - transform.position;
             rel.y = 0;
@@ -143,7 +161,7 @@ namespace TOF
             transform.rotation = Quaternion.Slerp(transform.rotation, look, angularSpeed * Time.deltaTime);
         }
 
-        private void RotateWithRootmotion()
+        protected void RotateWithRootmotion()
         {
             Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
             rel.y = 0;
@@ -159,18 +177,64 @@ namespace TOF
                 animatorManager.PlayTargetAnimation("Turn Behind", true);
         }
 
-        private bool IsInRange(Vector3 target, float range)
+        protected bool IsInRange(Vector3 target, float range)
         {
             Vector3 rel = target - transform.position;
             rel.y = 0;
             return rel.magnitude < range;
         }
 
-        private bool IsInAngle(Vector3 target, float angle)
+        protected bool IsInAngle(Vector3 target, float angle)
         {
             Vector3 rel = target - transform.position;
             rel.y = 0;
             return Vector3.Angle(rel, transform.forward) < angle;
+        }
+
+        protected bool IsInEmptyState()
+        {
+            return isEmptyState && !animatorManager.anim.IsInTransition(5);
+        }
+
+        protected void MoveToDirection(Vector3 direction)
+        {
+            enemyManager.controller.Move(direction.normalized * speed * Time.deltaTime);
+            enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+        }
+
+        protected void MoveToDirection(Vector3 direction, float speed)
+        {
+            enemyManager.navMeshAgent.enabled = false;
+            enemyManager.controller.Move(direction.normalized * speed * Time.deltaTime);
+            //enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+        }
+
+        protected void ChasePosition(Vector3 dest)
+        {
+
+            animatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+
+            enemyManager.navMeshAgent.enabled = true;
+            enemyManager.navMeshAgent.SetDestination(dest);
+
+            enemyManager.navMeshAgent.updateRotation = false;
+            enemyManager.navMeshAgent.updatePosition = false;
+
+            Vector3 targetVelocity = enemyManager.navMeshAgent.desiredVelocity;
+            Vector3 lookPos = dest - transform.position;
+            targetVelocity.y -= 9.81f;
+            lookPos.y = 0;
+            Quaternion targetRot = Quaternion.LookRotation(lookPos);
+            enemyManager.controller.gameObject.transform.rotation = Quaternion.Slerp(enemyManager.controller.gameObject.transform.rotation, targetRot, Time.deltaTime * 10.0f);
+
+            enemyManager.controller.Move(targetVelocity * Time.deltaTime);
+            enemyManager.navMeshAgent.velocity = enemyManager.controller.velocity;
+
+        }
+
+        protected void StopMoveAnimation()
+        {
+            animatorManager.anim.SetFloat("Vertical", 0.0f);
         }
 
         #endregion

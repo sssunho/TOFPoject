@@ -31,8 +31,9 @@ namespace TOF
         {
             get
             {
-                if (weaponSlotManager.rightHandSlot.currentWeapon == null) return str;
-                return str + weaponSlotManager.rightHandSlot.currentWeapon.baseDamage;
+                int modifiedAtk = ModifyStatValue(str);
+                if (weaponSlotManager.rightHandSlot.currentWeapon == null) return modifiedAtk;
+                return modifiedAtk + weaponSlotManager.rightHandSlot.currentWeapon.baseDamage;
             }
         }
 
@@ -57,6 +58,11 @@ namespace TOF
             {
                 return (float)dex / 100.0f;
             }
+        }
+
+        private int ModifyStatValue(int value)
+        {
+            return Mathf.RoundToInt(100.0f * (float)value / (float)(value + statCoefficient));
         }
 
         private void Awake()

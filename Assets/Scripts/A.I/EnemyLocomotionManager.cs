@@ -8,6 +8,7 @@ namespace TOF
     {
         EnemyManager enemyManager;
         EnemyAnimationManager enemyAnimationManager;
+        public bool ignoreGravity = false;
 
         public CapsuleCollider characterCollider;
         public CapsuleCollider characterCollisionBlockerCollider;
@@ -23,6 +24,13 @@ namespace TOF
         private void Start()
         {
             //Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
+        }
+
+        private void Update()
+        {
+            if (!ignoreGravity && !enemyManager.isInteracting)
+                enemyManager.controller.Move(-9.81f * Vector3.up * Time.deltaTime);
+
         }
     }
 }
