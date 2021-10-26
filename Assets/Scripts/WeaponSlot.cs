@@ -11,6 +11,7 @@ namespace TOF
         WeaponSlotManager weaponSlotManager;
         UIManager uiManager;
         public Image icon;
+        public Image equiped;
         WeaponItem item;
         EquipmentUI equipmentUI;
 
@@ -40,48 +41,33 @@ namespace TOF
 
         public void EquipThisItem()
         {
-            Debug.Log("equipitem");
+            if (item.isEquiped) return;
             if (uiManager.rightHandSlot01Selected)
             {
-                if(playerInventory.weaponsInRightHandSlot[0]!=null)
-                    playerInventory.weaponsInventory.Add(playerInventory.weaponsInRightHandSlot[0]);
-                playerInventory.weaponsInRightHandSlot[0] = item;
-                playerInventory.weaponsInventory.Remove(item);
+                if (!item.isShieldWeapon)
+                    playerInventory.weaponsInRightHandSlot[0] = item;
             }
             else if (uiManager.rightHandSlot02Selected)
             {
-                if(playerInventory.weaponsInRightHandSlot[1]!=null)
-                    playerInventory.weaponsInventory.Add(playerInventory.weaponsInRightHandSlot[1]);
-                playerInventory.weaponsInRightHandSlot[1] = item;
-                playerInventory.weaponsInventory.Remove(item);
+                if (!item.isShieldWeapon)
+                    playerInventory.weaponsInRightHandSlot[1] = item;
             }
             else if (uiManager.rightHandSlot03Selected)
             {
-                if(playerInventory.weaponsInRightHandSlot[2]!=null)
-                    playerInventory.weaponsInventory.Add(playerInventory.weaponsInRightHandSlot[2]);
-                playerInventory.weaponsInRightHandSlot[2] = item;
-                playerInventory.weaponsInventory.Remove(item);
+                if (!item.isShieldWeapon)
+                    playerInventory.weaponsInRightHandSlot[2] = item;
             }
             else if (uiManager.leftHandSlot01Selected)
             {
-                if(playerInventory.weaponsInLeftHandSlot[0]!=null)
-                    playerInventory.weaponsInventory.Add(playerInventory.weaponsInLeftHandSlot[0]);
                 playerInventory.weaponsInLeftHandSlot[0] = item;
-                playerInventory.weaponsInventory.Remove(item);
             }
             else if (uiManager.leftHandSlot02Selected)
             {
-                if(playerInventory.weaponsInLeftHandSlot[1]!=null)
-                    playerInventory.weaponsInventory.Add(playerInventory.weaponsInLeftHandSlot[1]);
                 playerInventory.weaponsInLeftHandSlot[1] = item;
-                playerInventory.weaponsInventory.Remove(item);
             }
             else if (uiManager.leftHandSlot03Selected)
             {
-                if(playerInventory.weaponsInLeftHandSlot[2]!=null)
-                    playerInventory.weaponsInventory.Add(playerInventory.weaponsInLeftHandSlot[2]);
                 playerInventory.weaponsInLeftHandSlot[2] = item;
-                playerInventory.weaponsInventory.Remove(item);
             }
             else return;
 
@@ -89,6 +75,7 @@ namespace TOF
             playerInventory.leftWeapon = playerInventory.weaponsInLeftHandSlot[playerInventory.curLeftWeaponIndex];
             weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
             weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+            playerInventory.CheckEquiped();
 
             uiManager.equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
             uiManager.ResetAllSelectedSlots();

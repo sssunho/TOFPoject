@@ -40,6 +40,7 @@ namespace TOF
             rightWeapon = weaponsInRightHandSlot[0];
             leftWeapon = weaponsInLeftHandSlot[0];
             currentConsumable = consumablesSlot[0];
+            SetEquips();
             weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
             weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
             consumableSlotManager.LoadConsumableOnSlot(currentConsumable);
@@ -84,6 +85,45 @@ namespace TOF
                 }
                 else
                     curLeftWeaponIndex++;
+            }
+        }
+
+        public void SetEquips()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (weaponsInRightHandSlot[i] != null)
+                {
+                    weaponsInventory.Add(weaponsInRightHandSlot[i]);
+                }
+                if (weaponsInLeftHandSlot[i] != null)
+                {
+                    weaponsInventory.Add(weaponsInLeftHandSlot[i]);
+                }
+                if (consumablesSlot[i] != null)
+                {
+                    consumablesInventory.Add(consumablesSlot[i]);
+                }
+            }
+
+            CheckEquiped();
+        }
+
+        public void CheckEquiped()
+        {
+            for (int i = 0; i < weaponsInventory.Count; i++)
+                weaponsInventory[i].isEquiped = false;
+            for (int i = 0; i < consumablesInventory.Count; i++)
+                consumablesInventory[i].isEquiped = false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (weaponsInRightHandSlot[i] != null)
+                    weaponsInRightHandSlot[i].isEquiped = true;
+                if (weaponsInLeftHandSlot[i] != null)
+                    weaponsInLeftHandSlot[i].isEquiped = true;
+                if (consumablesSlot[i] != null)
+                    consumablesSlot[i].isEquiped = true;
             }
         }
     }

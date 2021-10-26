@@ -44,8 +44,6 @@ namespace TOF
         {
             weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
             consumableSlots = consumableInventorySlotParent.GetComponentsInChildren<ConsumableSlot>();
-            // #. 2021.10.15 DeadZone 체크하면서 에러 발견...
-            //equipmentUI.LoadWeaponsOnEquipmentScreen(playerInventory);
         }
 
         public void UpdateUI() 
@@ -62,6 +60,10 @@ namespace TOF
                         weaponSlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponSlot>();
                     }
                     weaponSlots[i].AddItem(playerInventory.weaponsInventory[i]);
+                    if (playerInventory.weaponsInventory[i].isEquiped)
+                        weaponSlots[i].equiped.gameObject.SetActive(true);
+                    else
+                        weaponSlots[i].equiped.gameObject.SetActive(false);
                 }
                 else
                 {

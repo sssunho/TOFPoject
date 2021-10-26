@@ -11,6 +11,7 @@ namespace TOF
         ConsumableSlotManager consumableSlotManager;
         UIManager uiManager;
         public Image icon;
+        public Image equiped;
         ConsumableItem item;
         EquipmentUI equipmentUI;
 
