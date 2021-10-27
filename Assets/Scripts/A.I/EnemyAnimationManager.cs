@@ -21,6 +21,23 @@ namespace TOF
             enemyEffectManager = GetComponent<EnemyEffectManager>();
             enemyLocomotion = GetComponentInParent<EnemyLocomotionManager>();
         }
+
+
+        #region Animation Events
+
+        public override void DamageToCone(float angle)
+        {
+            enemyStats.currentDamage.attackerPoint = transform.position;
+            AttackManager.DamageToCone(enemyStats.currentDamage, transform.forward, transform.position,
+                enemyStats.currentAttackRange, angle);
+        }
+
+        public override void DamageToSphere(float radius)
+        {
+            enemyStats.currentDamage.attackerPoint = transform.position;
+            AttackManager.DamageToSphere(enemyStats.currentDamage, transform.position, radius);
+        }
+
         public void CanRotate()
         {
             anim.SetBool("canRotate", true);
@@ -110,6 +127,8 @@ namespace TOF
         {
             enemyEffectManager.PlayWeaponFX(false);
         }
+
+        #endregion
 
         private void OnAnimatorMove()
         {

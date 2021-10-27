@@ -200,7 +200,7 @@ namespace TOF
             }
             else
             {
-                deltaPosition.y -= 9.81f * Time.deltaTime;
+                deltaPosition.y -= playerLocomotion.ignoreGravity ? 0 : 9.81f * Time.deltaTime;
             }
             playerLocomotion.controller.Move(deltaPosition);
         }

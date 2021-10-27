@@ -269,8 +269,8 @@ public partial class FirstBT : MonoBehaviour
             inst.transform.position = transform.position + 3.5f * Vector3.up;
             inst.transform.rotation = transform.rotation;
             magicMissile = inst.GetComponent<MagicMissile>();
-            magicMissile.target = enemyManager.currentTarget.gameObject;
-            magicMissile.owner = gameObject;
+            //magicMissile.target = enemyManager.currentTarget.gameObject;
+            //magicMissile.owner = gameObject;
             anim.PlayTargetAnimation("Cast Start", true);
             return TaskStatus.Continue;
         }
@@ -279,7 +279,7 @@ public partial class FirstBT : MonoBehaviour
             castTimer += Time.deltaTime;
             if (castTimer > 4.0f)
             {
-                magicMissile.Shoot();
+                //magicMissile.Shoot();
                 curPatternDelay += 2.0f;
                 anim.anim.SetTrigger("endOfCasting");
                 return TaskStatus.Success;
@@ -302,9 +302,9 @@ public partial class FirstBT : MonoBehaviour
             inst.transform.Rotate(transform.forward, (projAngle / 2.0f) - ((projAngle / 4.0f) * (float)i));
             inst.transform.parent = gameObject.transform;
             var proj = inst.GetComponent<Projectile>();
-            proj.owner = gameObject;
-            proj.velocity = new Vector3(0, 8, 0);
-            proj.running = true;
+            //proj.owner = gameObject;
+            //proj.velocity = new Vector3(0, 8, 0);
+            //proj.running = true;
             projectiles.Add(proj);
         }
 
@@ -318,8 +318,8 @@ public partial class FirstBT : MonoBehaviour
 
     private void StopProjectiles()
     {
-        foreach(Projectile proj in projectiles)
-            proj.running = false;
+        //foreach(Projectile proj in projectiles)
+        //    proj.running = false;
     }
 
     private void ShootProjectiles()
@@ -328,9 +328,9 @@ public partial class FirstBT : MonoBehaviour
         {
             if(enemyManager.currentTarget)
                 proj.transform.rotation = Quaternion.LookRotation(enemyManager.currentTarget.transform.position - proj.transform.position + 0.5f * Vector3.up);
-            proj.running = true;
-            proj.velocity = 20.0f * Vector3.forward;
-            proj.EnableDamageCollider();
+            //proj.running = true;
+            //proj.velocity = 20.0f * Vector3.forward;
+            //proj.EnableDamageCollider();
             Destroy(proj.gameObject, 3.0f);
         }
         projectiles.Clear();

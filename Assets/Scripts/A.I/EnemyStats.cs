@@ -11,6 +11,7 @@ namespace TOF
         public UIEnemyHealthBar enemyHealthBar;
 
         public int soulsAwardedOnDeath = 50;
+        public float currentAttackRange = 2.5f;
 
         public bool isBoss;
 
@@ -57,6 +58,7 @@ namespace TOF
         {
             if(!isBoss)
                 enemyHealthBar.SetMaxHealth(maxHealth);
+            currentDamage.teamID = teamIDNumber;
         }
 
         private int SetMaxHealthFromHealthLevel()

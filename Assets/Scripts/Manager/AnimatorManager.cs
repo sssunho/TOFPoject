@@ -36,6 +36,22 @@ namespace TOF
             anim.CrossFade(targetAnim, 0.2f);
         }
 
+        public virtual void DamageToCone(float angle)
+        {
+
+        }
+
+        public virtual void DamageToSphere(float radius)
+        {
+            
+        }
+
+        public virtual void PlayEffect(int idx)
+        {
+            EffectManager.PlayEffect(idx, transform.position);
+        }
+
+
         public virtual void TakeCriticalDamageAnimationEvent() { }
     }
 }

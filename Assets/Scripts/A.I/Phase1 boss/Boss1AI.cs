@@ -28,6 +28,8 @@ namespace TOF
         public float strafingTimer { get; protected set; }
         public float turnDelay { get; protected set; }
 
+        public float hammerfallDelay { get; protected set; }
+
         bool IsDelayed
         {
             get => delayTimer > 0 || stareTimer > 0 || strafingTimer > 0;
@@ -42,6 +44,7 @@ namespace TOF
         public bool isEmptyState { get; protected set; }
         public bool isEvadeAttack { get; protected set; }
         public bool isHammerFall { get; protected set; }
+        public bool isAttacking { get; protected set; }
 
         #endregion
 
@@ -61,6 +64,10 @@ namespace TOF
 
         private void OnDrawGizmos()
         {
+            UnityEditor.Handles.color = new Color(1, 0, 0, 0.3f);
+            UnityEditor.Handles.DrawSolidArc(transform.position + Vector3.up - 0.3f * transform.forward, Vector3.up, transform.forward, 60, 2.5f);
+            UnityEditor.Handles.DrawSolidArc(transform.position + Vector3.up - 0.3f * transform.forward, Vector3.up, transform.forward, -60, 2.5f);
+
             if (debug)
             {
                 UnityEditor.Handles.color = new Color(1, 0, 0, 0.3f);
@@ -78,11 +85,19 @@ namespace TOF
             enemyStats = GetComponent<EnemyStats>();
             animatorManager = GetComponentInChildren<EnemyAnimationManager>();
 
+
             var MeleeAttackNode = new BehaviorTreeBuilder(gameObject)
-                .Selector("Melee Attack")
-                    .Sequence()
-                        .Condition("attack condition", () => !IsDelayed && isEmptyState)
-                        .AddNode(new EvadeAttack { Name = "Evade Attack" })
+                .Sequence("Melee Attack")
+                    .Condition("Melee Attack Range", () => IsInRange(meleeAttackRange))
+                    .Selector()
+                        .Sequence()
+                            .Condition("Ready For Attack", () => !IsDelayed && isEmptyState)
+                            .AddNode(new NormalAttack { Name = "Normal Attack" })
+                        .End()
+                        .Sequence()
+                            .Condition("Ready For Attack", () => !IsDelayed && isEmptyState)
+                            .AddNode(new EvadeAttack { Name = "Evade Attack" })
+                        .End()
                     .End()
                 .End();
 
@@ -100,12 +115,20 @@ namespace TOF
                             .Do("Delay", DelayBehaviour)
                         .End()
                         .Selector("Special Attack")
-                            .AddNode(new HammerFall { Name = "Hammer Fall"})
+                            .Sequence("HammerFall")
+                                .Condition(() => hammerfallDelay <= 0)
+                                .AddNode(new HammerFall { Name = "Hammer Fall" })
+                            .End()
                         .End()
                         .Selector("Normal Attack")
                             .Splice(MeleeAttackNode.Build())
                             .Splice(RangeAttackNode.Build())
                         .End()
+                        .Do("Just Look",() =>
+                        {
+                            LookTargetWithLerp(currentTarget.transform.position, 8.0f);
+                            return TaskStatus.Success;
+                        })
                     .End()
                     .Selector("Idle State")
                         .Do("Detect", DetectPlayer)
@@ -131,6 +154,8 @@ namespace TOF
             strafingTimer = Mathf.Clamp(strafingTimer - delta, 0.0f, 30.0f);
 
             turnDelay = Mathf.Clamp(strafingTimer - delta, 0.0f, 30.0f);
+
+            hammerfallDelay = Mathf.Clamp(hammerfallDelay - delta, 0.0f, 30.0f);
         }
 
         private void UpdateAnimatorInfo()
@@ -141,6 +166,7 @@ namespace TOF
             isEvadeAttack = animatorManager.anim.GetBool("evadeAttack");
             isEmptyState = animatorManager.anim.GetBool("isEmptyState");
             isHammerFall = animatorManager.anim.GetBool("hammerFall");
+            isAttacking = animatorManager.anim.GetBool("isAttacking");
         }
 
         #region General Methods
@@ -160,10 +186,17 @@ namespace TOF
             Quaternion look = Quaternion.LookRotation(rel);
             transform.rotation = Quaternion.Slerp(transform.rotation, look, angularSpeed * Time.deltaTime);
         }
+        protected void LookTargetWithLerp(Vector3 target, float speed)
+        {
+            Vector3 rel = target - transform.position;
+            rel.y = 0;
+            Quaternion look = Quaternion.LookRotation(rel);
+            transform.rotation = Quaternion.Slerp(transform.rotation, look, speed * Time.deltaTime);
+        }
 
         protected void RotateWithRootmotion()
         {
-            Vector3 rel = enemyManager.currentTarget.transform.position - transform.position;
+            Vector3 rel = currentTarget.transform.position - transform.position;
             rel.y = 0;
             float angle = Vector3.Angle(rel, transform.forward);
             Vector3 cross = Vector3.Cross(rel, transform.forward);
@@ -177,6 +210,14 @@ namespace TOF
                 animatorManager.PlayTargetAnimation("Turn Behind", true);
         }
 
+        protected bool IsInRange(float range)
+        {
+            if (currentTarget == null) return false;
+
+            Vector3 rel = currentTarget.transform.position - transform.position;
+            rel.y = 0;
+            return rel.magnitude < range;
+        }
         protected bool IsInRange(Vector3 target, float range)
         {
             Vector3 rel = target - transform.position;
@@ -277,7 +318,7 @@ namespace TOF
             if (currentTarget == null) return TaskStatus.Failure;
             if (stareTimer <= 0.0f) return TaskStatus.Failure;
 
-            if(turnDelay <= 0.0f)
+            if(turnDelay <= 0.0f && !enemyManager.isInteracting)
             {
                 RotateWithRootmotion();
                 turnDelay += 1.0f;

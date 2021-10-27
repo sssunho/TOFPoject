@@ -11,6 +11,7 @@ namespace TOF
         protected AnimatorManager animatorManager;
         protected CharacterManager characterManager;
         protected CharacterEffectManager effectManager;
+        public Damage currentDamage = new Damage();
 
         public float statCoefficient = 45;
         public float DefCoefficient = 45;
@@ -67,11 +68,26 @@ namespace TOF
             }
         }
 
-        public int poise = 0;
+        public float maxPoise = 100;
+        public float curPoise = 100;
+        public float poiseRecoveryRate = 30;
+        bool poiseRecovery = true;
+        Coroutine poiseCoroutine = null;
 
         private void Awake()
         {
             effectManager = GetComponentInChildren<CharacterEffectManager>();
+        }
+
+        protected virtual void Update()
+        {
+            if (poiseRecovery)
+            {
+                if (curPoise < maxPoise)
+                {
+                    curPoise = Mathf.Clamp(curPoise + poiseRecoveryRate * Time.deltaTime, 0, maxPoise);
+                }
+            }
         }
 
         public virtual void TakeDamage(Damage damage)
@@ -85,7 +101,7 @@ namespace TOF
             if (cross.y > 0) angle = -angle;
             Direction4Way hitDirection = AngleToDirection4(angle);
 
-            if(hitDirection == Direction4Way.FORWARD && characterManager.isBlocking && !damage.ignoreGuard)
+            if (hitDirection == Direction4Way.FORWARD && characterManager.isBlocking && !damage.ignoreGuard)
             {
                 BlockingCollider shield = transform.GetComponentInChildren<BlockingCollider>();
                 if (shield != null)
@@ -102,9 +118,22 @@ namespace TOF
 
             currentHealth -= damage.value;
 
+            if (damage.poiseDamage > 0)
+            {
+                poiseRecovery = false;
+                curPoise = Mathf.Clamp(curPoise - damage.poiseDamage, 0, maxPoise);
+                curPoise = Mathf.Clamp(curPoise - 20, 0, maxPoise);
+                if (poiseCoroutine != null)
+                    StopCoroutine(ResetPoiseRecovery());
+                poiseCoroutine = StartCoroutine(ResetPoiseRecovery());
+            }
+
             PlayHitReaction(damage, hitDirection);
 
-            if(currentHealth <= 0)
+            if (damage.reaction == HitReaction.KNOCKBACK)
+                transform.rotation = Quaternion.LookRotation(rel);
+
+            if (currentHealth <= 0)
             {
                 animatorManager.PlayTargetAnimation("Dead_01", true);
                 isDead = true;
@@ -114,12 +143,22 @@ namespace TOF
         private void PlayHitReaction(Damage damage, Direction4Way hitDirection)
         {
             if (damage.reaction == HitReaction.NONE) return;
+            if (currentHealth <= 0) return;
+
+            //if (curPoise > 0)
+            //{
+            //    if (damage.reaction == HitReaction.NORMAL ||
+            //        damage.reaction == HitReaction.BIG)
+
+            //        return;
+            //}
 
             animatorManager.anim.SetInteger("reactionDirection", (int)hitDirection);
             animatorManager.anim.SetInteger("reactionID", (int)damage.reaction);
             animatorManager.anim.SetTrigger("reactionTrigger");
 
             animatorManager.SetInteraction(damage.reaction != HitReaction.SMALL);
+
         }
 
         private void PlayHitEffect(Damage damage)
@@ -137,6 +176,13 @@ namespace TOF
                 return Direction4Way.RIGHT;
             else
                 return Direction4Way.BEHIND;
+        }
+
+        IEnumerator ResetPoiseRecovery()
+        {
+            yield return new WaitForSeconds(1.0f);
+            poiseRecovery = true;
+            poiseCoroutine = null;
         }
     }
 }

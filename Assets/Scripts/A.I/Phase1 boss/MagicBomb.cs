@@ -23,9 +23,7 @@ namespace TOF
 
         private void Start()
         {
-            var inst = Instantiate(effect1, transform.position + Vector3.up, transform.rotation, null);
-            inst.transform.localScale = 1.5f * Vector3.one;
-            Destroy(inst, 2.0f);
+            EffectManager.PlayEffect(7, transform.position + Vector3.up, transform.rotation, 1.5f * Vector3.one);
         }
 
         private void Update()
@@ -34,9 +32,8 @@ namespace TOF
             if (_time > 1.5f && !active)
             {
                 active = true;
-                var inst = Instantiate(effect2, transform.position, Quaternion.LookRotation(Vector3.up), null);
-                inst.transform.localScale = 1.5f * Vector3.one;
-                Destroy(inst, 2.0f);
+
+                EffectManager.PlayEffect(0, transform.position, Quaternion.LookRotation(Vector3.up), 1.5f * Vector3.one);
                 DamageSphere();
                 Destroy(gameObject, 2.5f);
             }
@@ -51,7 +48,7 @@ namespace TOF
 
                 if (stat == null) continue;
                 Damage damage = new Damage();
-                damage.reaction = HitReaction.BIG;
+                damage.reaction = HitReaction.KNOCKBACK;
                 damage.value = 30;
                 damage.ignoreGuard = true;
                 damage.hitPoint = transform.position;

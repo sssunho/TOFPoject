@@ -13,6 +13,9 @@ namespace TOF
         InputHandler inputHandler;
         public Vector3 moveDirection;
 
+        [HideInInspector]
+        public bool ignoreGravity = false;
+
        [HideInInspector]
         public Transform myTransform;
         [HideInInspector]

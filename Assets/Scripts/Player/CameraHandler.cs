@@ -8,7 +8,7 @@ namespace TOF
     {
         InputHandler inputHandler;
         PlayerManager playerManager;
-        Camera camera;
+        Camera _camera;
         public Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
@@ -62,7 +62,7 @@ namespace TOF
             //targetTransform = FindObjectOfType<PlayerManager>().transform;
             //inputHandler = FindObjectOfType<InputHandler>();
             playerManager = FindObjectOfType<PlayerManager>();
-            camera = GetComponentInChildren<Camera>();
+            _camera = GetComponentInChildren<Camera>();
         }
 
         private void Start()
@@ -77,8 +77,8 @@ namespace TOF
             }
             else 
             {
-                camera.fieldOfView -= smooth;
-                camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, minSize, maxSize);
+                _camera.fieldOfView -= smooth;
+                _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, minSize, maxSize);
             }
         }
 
@@ -116,6 +116,8 @@ namespace TOF
             else if (currentLockOnTarget != null)
             {
                 Vector3 direction = currentLockOnTarget.transform.position - transform.position;
+                if ((direction.y > 1.5f))
+                    direction.y = 1.5f;
                 Vector3 right = Vector3.Cross(direction, Vector3.up).normalized;
                 Quaternion look = Quaternion.LookRotation(direction);
 
@@ -249,7 +251,7 @@ namespace TOF
         public void NormalShot()
         {
             playerManager.isPassing = false;
-            camera.fieldOfView = 40;
+            _camera.fieldOfView = 40;
             normal = true;
         }
 

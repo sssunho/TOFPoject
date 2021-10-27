@@ -19,5 +19,7 @@ namespace TOF
         public Vector3 attackerPoint;
         public Vector3 hitPoint;
         public bool ignoreGuard;
+        public float poiseDamage;
+        public int teamID = -1;
     }
 }
