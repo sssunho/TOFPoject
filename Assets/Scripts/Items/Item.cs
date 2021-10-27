@@ -10,6 +10,6 @@ namespace TOF
         [Header("Item Information")]
         public Sprite itemIcon;
         public string itemName;
-        public bool isEquiped;
+        public bool isEquiped = false;
     }
 }

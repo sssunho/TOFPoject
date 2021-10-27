@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: ad12c82038d4ff94b9c25fdcb46c55e5, type: 3}
   itemName: Shield
+  isEquiped: 1
   modelPrefab: {fileID: 653431418336139850, guid: 67c9ada43e5c56a4d96add3b9692c695, type: 3}
   inUnarmed: 0
   baseDamage: 25
@@ -22,6 +23,8 @@ MonoBehaviour:
   right_hand_idle: Right Arm Idle 01
   left_hand_idle: Left Arm Idle 01
   th_idle: Both Arm Idle 01
+  OnehandedWeaponID: 0
+  TwohandedWeaponID: 0
   OH_Light_Attack_1: 
   OH_Light_Attack_2: 
   TH_Light_Attack_1: 

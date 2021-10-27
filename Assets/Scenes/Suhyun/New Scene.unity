@@ -5204,6 +5204,17 @@ MonoBehaviour:
   weaponsInventory: []
   consumablesInventory: []
   spellsInventory: []
+  RightWeapons:
+  - {fileID: 11400000, guid: e148657c257a92e409f2388021e4f1af, type: 2}
+  - {fileID: 11400000, guid: 9d7dd98db2855ce44b8defe1e059fdd5, type: 2}
+  - {fileID: 11400000, guid: ac6285622a8ebf4458282c5bfc6417f4, type: 2}
+  - {fileID: 11400000, guid: ceaf6b39b8ef7ae4c8c6c1e2c1338d1b, type: 2}
+  LeftWeapons:
+  - {fileID: 11400000, guid: 722e1e73834b1f04fb13ac3b7b77536a, type: 2}
+  Consumables:
+  - {fileID: 11400000, guid: d42882863d1b68e47816ebef811da22e, type: 2}
+  Spells:
+  - {fileID: 11400000, guid: 71d21b90da069cd4aa8b55fd742250cd, type: 2}
 --- !u!114 &1236010054
 MonoBehaviour:
   m_ObjectHideFlags: 0

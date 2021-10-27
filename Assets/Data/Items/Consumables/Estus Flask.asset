@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Estus Flask
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: fdc2d1df0b3649b41bc241e1c7f956d9, type: 3}
-  itemName: 
+  itemName: Estus Flask
+  isEquiped: 1
   maxItemAmount: 10
   currentItemAmount: 10
   itemModel: {fileID: 9111867256295909055, guid: ccce2131d70609446bb67ae3a8045f19, type: 3}

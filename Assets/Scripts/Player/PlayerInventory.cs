@@ -29,20 +29,57 @@ namespace TOF
         public List<ConsumableItem> consumablesInventory;
         public List<SpellItem> spellsInventory;
 
-        //public list<weaponitem> getweaponslots() { return weaponsinventory; }
-        //public list<consumableitem> getconsumableslots() { return consumablesinventory; }
-        //public list<spellitem> getspellitems() { return spellsinventory; }
-        //[SerializeField] private Item[] items;
-        //[SerializeField] private Item[] items;
+        [HideInInspector]
+        public WeaponItem[] GetRightWeaponItems() { return weaponsInRightHandSlot; }
+        public WeaponItem[] GetLeftWeaponItems() { return weaponsInLeftHandSlot; }
+        public ConsumableItem[] GetConsumableItems() { return consumablesSlot; }
+        public SpellItem[] GetSpellItems() { return spellsSlot; }
+        public List<WeaponItem> GetWeaponInventory() { return weaponsInventory; }
+        public WeaponItem[] InvenWeapons;
 
-        //public void LoadToInven(int _arrayNum, string _itemName, int _itemNum)
-        //{
-        //    for(int i = 0; i < items.Length; i++)
-        //    {
-        //        if (items[i].itemName == _itemName)
+        [SerializeField] private WeaponItem[] ALLWeapons;
+        [SerializeField] private WeaponItem[] RightWeapons;
+        [SerializeField] private WeaponItem[] LeftWeapons;
+        [SerializeField] private ConsumableItem[] Consumables;
+        [SerializeField] private SpellItem[] Spells;
 
-        //    }
-        //}
+        public void LoadToRightWeapon(int _arrayNum, string _itemName)
+        {
+            // #. Weapon(Right)
+            for (int i = 0; i < RightWeapons.Length; i++)
+                if (RightWeapons[i].itemName == _itemName)
+                    weaponsInRightHandSlot[_arrayNum] = RightWeapons[i];
+        }
+        public void LoadToLefttWeapon(int _arrayNum, string _itemName)
+        {
+            // #. Weapon(Left)
+            for (int i = 0; i < LeftWeapons.Length; i++)
+                if (LeftWeapons[i].itemName == _itemName)
+                    weaponsInLeftHandSlot[_arrayNum] = LeftWeapons[i];
+        }
+        public void LoadToConsumableItem(int _arrayNum, string _itemName)
+        {
+            // #. ConsumableItem
+            for (int i = 0; i < Consumables.Length; i++)
+                if (Consumables[i].itemName == _itemName)
+                    consumablesSlot[_arrayNum] = Consumables[i];
+        }
+        public void LoadToSpellItem(int _arrayNum, string _itemName)
+        {
+            // #. SpellItem
+            for (int i = 0; i < Spells.Length; i++)
+                if (Spells[i].itemName == _itemName)
+                    spellsSlot[_arrayNum] = Spells[i];
+        }
+        public void LoadToInven(int _arrayNum, string _itemName)
+        {
+            // #. UnEquiped Items
+            for (int i = 0; i < ALLWeapons.Length; i++)
+                if (ALLWeapons[i].itemName == _itemName)
+                {
+                    InvenWeapons[_arrayNum] = ALLWeapons[i];
+                }
+        }
 
         private void Awake()
         {
@@ -120,6 +157,14 @@ namespace TOF
                 if (consumablesSlot[i] != null)
                 {
                     consumablesInventory.Add(consumablesSlot[i]);
+                }
+            }
+
+            if(InvenWeapons != null)
+            {
+                for (int i = 0; i < InvenWeapons.Length; i++)
+                {
+                    weaponsInventory.Add(InvenWeapons[i]);
                 }
             }
 

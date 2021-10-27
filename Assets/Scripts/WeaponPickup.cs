@@ -29,6 +29,7 @@ namespace TOF
             //playerLocomotion.rigidbody.velocity = Vector3.zero; // Strops the player from ice staking
             playerLocomotion.controller.Move(Vector3.zero);
             playerAnimationHandler.PlayTargetAnimation("Pick Up", true);
+            weapon.isEquiped = false;
             playerInventory.weaponsInventory.Add(weapon);
             playerManager.itemInteractableUIGameObject.GetComponentInChildren<Text>().text = weapon.itemName;
             playerManager.itemInteractableUIGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;

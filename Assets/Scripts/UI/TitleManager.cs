@@ -26,6 +26,7 @@ namespace TOF
         {
             Debug.Log("·Îµù");
             SceneManager.LoadScene(sceneName);
+            gameObject.SetActive(false);
         }
 
         public void ClickLoad()
